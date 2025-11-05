@@ -213,7 +213,26 @@ export default function Home() {
       </div>
         <div style={{ marginTop: 12 }}>
           {uid ? (
-            <button className="btn-3d" onClick={() => signOut(auth)}>Logout</button>
+            <button 
+              className="btn-3d" 
+              onClick={async () => {
+                try {
+                  // Imposta flag per evitare login anonimo automatico
+                  sessionStorage.setItem('skipAutoLogin', 'true');
+                  // Pulisci localStorage prima del logout
+                  localStorage.removeItem('playerName');
+                  localStorage.removeItem('playerAvatar');
+                  localStorage.removeItem('playerId');
+                  await signOut(auth);
+                  // Reindirizza alla pagina di autenticazione
+                  window.location.href = '/auth';
+                } catch (err) {
+                  console.error('Errore logout:', err);
+                }
+              }}
+            >
+              Logout
+            </button>
           ) : (
             <Link href="/auth" className="btn-3d" style={{ textDecoration: 'none' }}>Login / Registrati</Link>
           )}

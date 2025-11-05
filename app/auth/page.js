@@ -21,6 +21,8 @@ export default function AuthPage() {
       const cred = await createUserWithEmailAndPassword(auth, email, password);
       try { await sendEmailVerification(cred.user); } catch {}
       setMessage("Registrazione completata. Controlla la tua email per la verifica.");
+      // Rimuovi il flag per permettere il normale funzionamento
+      sessionStorage.removeItem('skipAutoLogin');
       // Create user profile if not present
       const userRef = ref(db, `users/${cred.user.uid}`);
       const snap = await get(userRef);
@@ -45,6 +47,8 @@ export default function AuthPage() {
         if (!snap.exists()) {
           await set(userRef, { id: cred.user.uid, uid: cred.user.uid, email: cred.user.email, name: cred.user.email?.split("@")[0] || "User", avatar: null, credits: 100, createdAt: Date.now() });
         }
+        // Rimuovi il flag per permettere il normale funzionamento
+        sessionStorage.removeItem('skipAutoLogin');
         router.push("/");
       }
     } catch (e) {
