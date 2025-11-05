@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { ref, onValue, update } from 'firebase/database';
-import { db, auth } from '../../lib/firebase';
+import { db, auth } from '@/lib/firebase';
 
 export default function GamePage() {
   const { roomCode } = useParams();
