@@ -5,7 +5,6 @@ import { useParams } from 'next/navigation';
 import { ref, onValue, update } from 'firebase/database';
 import { db, auth } from '../../lib/firebase';
 
-
 export default function GamePage() {
   const { roomCode } = useParams();
   const [roomData, setRoomData] = useState(null);

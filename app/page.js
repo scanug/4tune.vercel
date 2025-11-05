@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { ref, get, set, onValue, off, update, runTransaction } from "firebase/database";
-import { db, auth, storage } from "../lib/firebase";
+import { db, auth, storage } from '@/lib/firebase';
 import { v4 as uuidv4 } from "uuid";
 import { onAuthStateChanged, signOut, updateProfile, signInAnonymously } from "firebase/auth";
 import { ref as stRef, uploadBytes, getDownloadURL } from "firebase/storage";

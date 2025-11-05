@@ -2,7 +2,9 @@
 
 import { useState } from 'react';
 import { ref, get, set } from 'firebase/database';
-import { db, auth } from '../lib/firebase'; // assicurati che auth sia esportato in lib/firebase.js
+import { db, auth } from '../lib/firebase';
+
+ // assicurati che auth sia esportato in lib/firebase.js
 
 function generateRoomCode(length = 4) {
   const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
