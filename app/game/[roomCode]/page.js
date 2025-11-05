@@ -1,10 +1,34 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { ref, onValue, update } from 'firebase/database';
+import { ref, onValue, update, get, runTransaction } from 'firebase/database';
 import { db, auth } from '@/lib/firebase';
+import { updateMissionProgress } from '@/lib/missions';
+
+// Funzione helper per calcolare il range in base al round
+function getRangeForRound(round) {
+  if (round <= 2) return { min: 1, max: 10 };
+  if (round <= 4) return { min: 11, max: 25 };
+  if (round <= 7) return { min: 26, max: 50 };
+  if (round <= 10) return { min: 51, max: 100 };
+  return { min: 1, max: 10 };
+}
+
+// Funzione per verificare se un numero è primo
+function isPrime(n) {
+  if (n < 2) return false;
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (n % i === 0) return false;
+  }
+  return true;
+}
+
+// Funzione per verificare se un numero è multiplo di 10
+function isMultipleOf10(n) {
+  return n % 10 === 0;
+}
 
 export default function GamePage() {
   const { roomCode } = useParams();
@@ -13,6 +37,64 @@ export default function GamePage() {
   const [loading, setLoading] = useState(true);
   const [selectedBet, setSelectedBet] = useState(null);
   const [betting, setBetting] = useState(false);
+  const [betAmount, setBetAmount] = useState(10);
+  const [sideBets, setSideBets] = useState({});
+  const [userCredits, setUserCredits] = useState(null);
+  const [timeLeft, setTimeLeft] = useState(null);
+  const timerRef = useRef(null);
+
+  // Carica crediti utente
+  useEffect(() => {
+    const currentUser = auth.currentUser;
+    if (!currentUser) return;
+
+    const userRef = ref(db, `users/${currentUser.uid}`);
+    const unsubscribe = onValue(userRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data && typeof data.credits === 'number') {
+        setUserCredits(data.credits);
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
+
+  // Timer countdown per le scommesse
+  useEffect(() => {
+    if (!roomData || roomData.phase !== 'pre-bet' || !roomData.betTimeSeconds) {
+      setTimeLeft(null);
+      if (timerRef.current) {
+        clearInterval(timerRef.current);
+        timerRef.current = null;
+      }
+      return;
+    }
+
+    if (roomData.betEndTime) {
+      const updateTimer = () => {
+        const now = Date.now();
+        const remaining = Math.max(0, Math.floor((roomData.betEndTime - now) / 1000));
+        setTimeLeft(remaining);
+        
+        if (remaining <= 0) {
+          if (timerRef.current) {
+            clearInterval(timerRef.current);
+            timerRef.current = null;
+          }
+        }
+      };
+
+      updateTimer();
+      timerRef.current = setInterval(updateTimer, 1000);
+
+      return () => {
+        if (timerRef.current) {
+          clearInterval(timerRef.current);
+          timerRef.current = null;
+        }
+      };
+    }
+  }, [roomData?.phase, roomData?.betEndTime, roomData?.betTimeSeconds]);
 
   useEffect(() => {
     if (!roomCode) return;
@@ -36,7 +118,10 @@ export default function GamePage() {
       if (typeof window !== 'undefined') {
         const playerId = localStorage.getItem('playerId') || auth.currentUser?.uid;
         if (playerId && data.bets) {
-          setSelectedBet(data.bets[playerId] || null);
+          setSelectedBet(data.bets[playerId]?.number || null);
+        }
+        if (playerId && data.sideBets) {
+          setSideBets(data.sideBets[playerId] || {});
         }
       }
 
@@ -46,7 +131,7 @@ export default function GamePage() {
         const playerId = localStorage.getItem('playerId') || currentUser.uid;
         const players = data.players || {};
         if (!players[playerId]) {
-          const playerName = localStorage.getItem('playerName') || 'Host';
+          const playerName = localStorage.getItem('playerName') || currentUser.displayName || 'Player';
           try {
             await update(ref(db, `rooms/${roomCode}/players`), {
               [playerId]: {
@@ -81,15 +166,56 @@ export default function GamePage() {
         return;
       }
 
+      // Calcola range per round 1
+      const range = getRangeForRound(1);
+      const betTimeSeconds = roomData.betTimeSeconds || 15;
+      const betEndTime = Date.now() + (betTimeSeconds * 1000);
+
+      // Detrai crediti dalle side bets di tutti i giocatori
+      const players = roomData.players || {};
+      const sideBetsData = roomData.sideBets || {};
+      const creditUpdates = {};
+
+      for (const [playerId, bets] of Object.entries(sideBetsData)) {
+        let totalSideBetAmount = 0;
+        if (bets.evenHalf) totalSideBetAmount += bets.evenHalf;
+        if (bets.oddHalf) totalSideBetAmount += bets.oddHalf;
+        if (bets.twoPrimes) totalSideBetAmount += bets.twoPrimes;
+        if (bets.twoMultiplesOf10) totalSideBetAmount += bets.twoMultiplesOf10;
+
+        if (totalSideBetAmount > 0) {
+          const userRef = ref(db, `users/${playerId}`);
+          try {
+            const userSnap = await get(userRef);
+            const currentCredits = userSnap.val()?.credits || 0;
+            if (currentCredits >= totalSideBetAmount) {
+              creditUpdates[`users/${playerId}/credits`] = currentCredits - totalSideBetAmount;
+            }
+          } catch (err) {
+            console.error(`Errore detrazione crediti per ${playerId}:`, err);
+          }
+        }
+      }
+
+      // Aggiorna crediti e avvia partita
+      if (Object.keys(creditUpdates).length > 0) {
+        for (const [path, value] of Object.entries(creditUpdates)) {
+          const pathParts = path.split('/');
+          const refPath = ref(db, path);
+          await update(refPath, { credits: value });
+        }
+      }
+
       await update(ref(db, 'rooms/' + roomCode), {
         status: 'playing',
         startedAt: Date.now(),
         round: 1,
         phase: 'pre-bet',
-        currentRange: { min: 1, max: 10 },
+        currentRange: range,
         bets: {},
         winningNumber: null,
-        roundResults: null
+        roundResults: null,
+        betEndTime: betEndTime
       });
     } catch (err) {
       console.error('Errore Firebase:', err);
@@ -117,16 +243,78 @@ export default function GamePage() {
       return;
     }
 
+    if (timeLeft !== null && timeLeft <= 0) {
+      setError('Tempo scaduto per scommettere');
+      return;
+    }
+
+    if (!userCredits || userCredits < betAmount) {
+      setError('Crediti insufficienti');
+      return;
+    }
+
     setBetting(true);
     try {
-      const bets = roomData.bets || {};
       await update(ref(db, `rooms/${roomCode}/bets`), {
-        [playerId]: number
+        [playerId]: { number, amount: betAmount }
       });
       setSelectedBet(number);
+      
+      // Detrai crediti immediatamente
+      const userRef = ref(db, `users/${currentUser.uid}`);
+      await runTransaction(userRef, (current) => {
+        const cur = current || {};
+        const credits = Number(cur.credits || 0);
+        if (credits >= betAmount) {
+          return { ...cur, credits: credits - betAmount };
+        }
+        return cur; // Abort se non ha abbastanza crediti
+      });
     } catch (err) {
       console.error('Errore nel piazzare la scommessa:', err);
       setError('Errore nel piazzare la scommessa');
+    } finally {
+      setBetting(false);
+    }
+  }
+
+  async function placeSideBet(type, amount) {
+    if (!roomCode || !roomData || betting) return;
+
+    const currentUser = auth.currentUser;
+    if (!currentUser) {
+      setError('Utente non autenticato');
+      return;
+    }
+
+    const playerId = localStorage.getItem('playerId') || currentUser.uid;
+    
+    if (!userCredits || userCredits < amount) {
+      setError('Crediti insufficienti');
+      return;
+    }
+
+    if (amount < 1) {
+      setError('L\'importo minimo è 1 credito');
+      return;
+    }
+
+    setBetting(true);
+    try {
+      const currentSideBets = roomData.sideBets || {};
+      const mySideBets = currentSideBets[playerId] || {};
+      
+      await update(ref(db, `rooms/${roomCode}/sideBets`), {
+        [playerId]: {
+          ...mySideBets,
+          [type]: amount
+        }
+      });
+
+      setSideBets({ ...mySideBets, [type]: amount });
+    } catch (err) {
+      console.error('Errore nel piazzare la side bet:', err);
+      setError('Errore nel piazzare la side bet');
     } finally {
       setBetting(false);
     }
@@ -152,7 +340,7 @@ export default function GamePage() {
         return;
       }
 
-      const range = roomData.currentRange || { min: 1, max: 10 };
+      const range = roomData.currentRange || getRangeForRound(roomData.round || 1);
       const winningNumber = Math.floor(Math.random() * (range.max - range.min + 1)) + range.min;
 
       // Calcola risultati
@@ -161,28 +349,48 @@ export default function GamePage() {
       const roundResults = {};
       const playersUpdate = {};
       
-      Object.entries(bets).forEach(([playerId, bet]) => {
+      Object.entries(bets).forEach(([playerId, betData]) => {
+        const bet = betData?.number || betData; // Supporta vecchio formato
         const won = bet === winningNumber;
         const player = players[playerId];
         if (player) {
           const currentScore = player.score || 0;
-          const newScore = won ? currentScore + 10 : currentScore;
+          const creditsGained = won ? 50 : 0;
           roundResults[playerId] = {
             bet,
             won,
-            pointsGained: won ? 10 : 0,
-            newScore
+            creditsGained,
+            newScore: currentScore + (won ? 1 : 0)
           };
-          // Prepara aggiornamento score
-          playersUpdate[`players/${playerId}/score`] = newScore;
+          playersUpdate[`players/${playerId}/score`] = roundResults[playerId].newScore;
+
+          // Aggiorna crediti se ha vinto
+          if (won) {
+            const userRef = ref(db, `users/${playerId}`);
+            runTransaction(userRef, (current) => {
+              const cur = current || {};
+              const credits = Number(cur.credits || 0);
+              return { ...cur, credits: credits + creditsGained };
+            }).catch(err => console.error('Errore aggiornamento crediti:', err));
+
+            // Aggiorna missioni
+            updateMissionProgress(playerId, 'win_3_games').catch(err => 
+              console.error('Errore aggiornamento missioni:', err)
+            );
+          }
         }
       });
+
+      // Calcola risultati side bets (per ora salviamo solo i numeri estratti, calcoleremo alla fine)
+      const allWinningNumbers = roomData.winningNumbers || [];
+      allWinningNumbers.push(winningNumber);
 
       // Aggiorna prima i risultati e la fase
       await update(ref(db, `rooms/${roomCode}`), {
         phase: 'rolling',
         winningNumber,
-        roundResults
+        roundResults,
+        winningNumbers: allWinningNumbers
       });
 
       // Aggiorna gli score separatamente
@@ -213,14 +421,26 @@ export default function GamePage() {
       }
 
       const currentRound = roomData.round || 1;
-      const newRound = currentRound + 1;
-      const range = roomData.currentRange || { min: 1, max: 10 };
+      const maxRounds = roomData.maxRounds || 10;
       
-      // Espandi il range per il round successivo
-      const newRange = {
-        min: range.min,
-        max: Math.min(range.max + 5, 100) // Aumenta di 5 fino a max 100
-      };
+      if (currentRound >= maxRounds) {
+        // Fine partita - calcola risultati side bets
+        const winningNumbers = roomData.winningNumbers || [];
+        const sideBetsData = roomData.sideBets || {};
+        const sideBetResults = await calculateSideBetResults(winningNumbers, sideBetsData);
+
+        await update(ref(db, `rooms/${roomCode}`), {
+          status: 'finished',
+          phase: 'finished',
+          sideBetResults: sideBetResults
+        });
+        return;
+      }
+
+      const newRound = currentRound + 1;
+      const range = getRangeForRound(newRound);
+      const betTimeSeconds = roomData.betTimeSeconds || 15;
+      const betEndTime = Date.now() + (betTimeSeconds * 1000);
 
       await update(ref(db, `rooms/${roomCode}`), {
         round: newRound,
@@ -228,12 +448,62 @@ export default function GamePage() {
         bets: {},
         winningNumber: null,
         roundResults: null,
-        currentRange: newRange
+        currentRange: range,
+        betEndTime: betEndTime
       });
     } catch (err) {
       console.error('Errore nel round successivo:', err);
       setError(`Errore: ${err.message}`);
     }
+  }
+
+  // Calcola risultati side bets alla fine della partita
+  async function calculateSideBetResults(winningNumbers, sideBetsData) {
+    if (!winningNumbers || winningNumbers.length === 0) return {};
+
+    const results = {};
+    const totalRounds = winningNumbers.length;
+    const evenCount = winningNumbers.filter(n => n % 2 === 0).length;
+    const oddCount = winningNumbers.filter(n => n % 2 !== 0).length;
+    const primeCount = winningNumbers.filter(n => isPrime(n)).length;
+    const multiplesOf10Count = winningNumbers.filter(n => isMultipleOf10(n)).length;
+
+    for (const [playerId, bets] of Object.entries(sideBetsData)) {
+      results[playerId] = {};
+      let totalWinnings = 0;
+
+      if (bets.evenHalf && evenCount >= totalRounds / 2) {
+        results[playerId].evenHalf = { won: true, amount: bets.evenHalf * 2 };
+        totalWinnings += bets.evenHalf * 2;
+      }
+      if (bets.oddHalf && oddCount >= totalRounds / 2) {
+        results[playerId].oddHalf = { won: true, amount: bets.oddHalf * 2 };
+        totalWinnings += bets.oddHalf * 2;
+      }
+      if (bets.twoPrimes && primeCount >= 2) {
+        results[playerId].twoPrimes = { won: true, amount: bets.twoPrimes * 2 };
+        totalWinnings += bets.twoPrimes * 2;
+      }
+      if (bets.twoMultiplesOf10 && multiplesOf10Count >= 2) {
+        results[playerId].twoMultiplesOf10 = { won: true, amount: bets.twoMultiplesOf10 * 2 };
+        totalWinnings += bets.twoMultiplesOf10 * 2;
+      }
+
+      if (totalWinnings > 0) {
+        try {
+          const userRef = ref(db, `users/${playerId}`);
+          await runTransaction(userRef, (current) => {
+            const cur = current || {};
+            const credits = Number(cur.credits || 0);
+            return { ...cur, credits: credits + totalWinnings };
+          });
+        } catch (err) {
+          console.error('Errore aggiornamento crediti side bet:', err);
+        }
+      }
+    }
+
+    return results;
   }
 
   if (loading) {
@@ -264,9 +534,9 @@ export default function GamePage() {
   const playerId = typeof window !== 'undefined' ? (localStorage.getItem('playerId') || currentUser?.uid) : null;
   const isHost = currentUser && roomData.hostId === currentUser.uid;
   const playersCount = Object.keys(roomData.players || {}).length;
-  const statusText = roomData.status === 'waiting' ? 'In attesa' : roomData.status === 'playing' ? 'In corso' : roomData.status;
+  const statusText = roomData.status === 'waiting' ? 'In attesa' : roomData.status === 'playing' ? 'In corso' : roomData.status === 'finished' ? 'Terminata' : roomData.status;
   const phase = roomData.phase || null;
-  const range = roomData.currentRange || { min: 1, max: 10 };
+  const range = roomData.currentRange || getRangeForRound(roomData.round || 1);
   const bets = roomData.bets || {};
   const myBet = playerId ? bets[playerId] : null;
   const roundResults = roomData.roundResults || {};
@@ -285,7 +555,11 @@ export default function GamePage() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
           <Link href="/" className="btn-3d" style={{ textDecoration: 'none' }}>Home</Link>
           <h1 className="text-2xl font-bold" style={{ margin: 0, color: '#111827' }}>Partita: {roomCode}</h1>
-          <span style={{ width: '80px' }}></span>
+          {userCredits !== null && (
+            <span style={{ padding: '6px 12px', borderRadius: 999, background: 'rgba(99,102,241,0.1)', color: '#6366f1', fontWeight: 700 }}>
+              {userCredits} 💰
+            </span>
+          )}
         </div>
 
         {error && (
@@ -296,9 +570,14 @@ export default function GamePage() {
 
         <div style={{ marginBottom: 20 }}>
           <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, padding: '8px 16px', borderRadius: 999, background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.3)', marginBottom: 16 }}>
-            <span className="bubble" style={{ background: roomData.status === 'waiting' ? 'rgba(234,179,8,0.18)' : 'rgba(16,185,129,0.18)', color: roomData.status === 'waiting' ? '#f59e0b' : '#10b981', border: `1px solid ${roomData.status === 'waiting' ? 'rgba(234,179,8,0.35)' : 'rgba(16,185,129,0.35)'}` }}>
+            <span className="bubble" style={{ background: roomData.status === 'waiting' ? 'rgba(234,179,8,0.18)' : roomData.status === 'playing' ? 'rgba(16,185,129,0.18)' : 'rgba(156,163,175,0.18)', color: roomData.status === 'waiting' ? '#f59e0b' : roomData.status === 'playing' ? '#10b981' : '#9ca3af', border: `1px solid ${roomData.status === 'waiting' ? 'rgba(234,179,8,0.35)' : roomData.status === 'playing' ? 'rgba(16,185,129,0.35)' : 'rgba(156,163,175,0.35)'}` }}>
               Stato: {statusText}
             </span>
+            {phase === 'pre-bet' && timeLeft !== null && (
+              <span className="bubble" style={{ background: timeLeft <= 5 ? 'rgba(239,68,68,0.18)' : 'rgba(99,102,241,0.18)', color: timeLeft <= 5 ? '#dc2626' : '#6366f1' }}>
+                ⏱️ {timeLeft}s
+              </span>
+            )}
           </div>
         </div>
 
@@ -318,27 +597,130 @@ export default function GamePage() {
                     alignItems: 'center', 
                     padding: '12px 16px', 
                     borderRadius: 10, 
-                    background: id === currentUser?.uid ? 'rgba(99,102,241,0.1)' : 'rgba(0,0,0,0.05)', 
-                    border: `1px solid ${id === currentUser?.uid ? 'rgba(99,102,241,0.3)' : 'rgba(0,0,0,0.1)'}`,
+                    background: id === playerId ? 'rgba(99,102,241,0.1)' : 'rgba(0,0,0,0.05)', 
+                    border: `1px solid ${id === playerId ? 'rgba(99,102,241,0.3)' : 'rgba(0,0,0,0.1)'}`,
                     color: '#111827'
                   }}
                 >
-                  <span style={{ fontWeight: 700 }}>{player.name || 'Guest'}</span>
-                  {id === roomData.hostId && (
-                    <span className="bubble" style={{ background: 'rgba(99,102,241,0.18)', color: '#6366f1', border: '1px solid rgba(99,102,241,0.35)' }}>
-                      Host
-                    </span>
-                  )}
-                  {id === currentUser?.uid && id !== roomData.hostId && (
-                    <span className="bubble" style={{ background: 'rgba(16,185,129,0.18)', color: '#10b981', border: '1px solid rgba(16,185,129,0.35)' }}>
-                      Tu
-                    </span>
-                  )}
+                  <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                    <span style={{ fontWeight: 700 }}>{player.name || 'Guest'}</span>
+                    {id === roomData.hostId && (
+                      <span style={{ fontSize: '1.2rem' }} title="Host">👑</span>
+                    )}
+                  </div>
+                  <span style={{ fontWeight: 700, color: '#111827' }}>
+                    Score: {player.score || 0}
+                  </span>
                 </li>
-              ))}
-            </ul>
+          ))}
+      </ul>
           )}
         </div>
+
+        {/* Side Bets */}
+        {roomData.status === 'waiting' && (
+          <div style={{ marginBottom: 20, textAlign: 'left', padding: '16px', borderRadius: 10, background: 'rgba(99,102,241,0.05)', border: '1px solid rgba(99,102,241,0.2)' }}>
+            <h3 style={{ marginBottom: 12, color: '#111827', fontSize: '1.1rem' }}>Side Bets (crediti verranno detratti all'avvio):</h3>
+            <div style={{ display: 'grid', gap: 8 }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+                <span style={{ flex: 1, minWidth: 200 }}>Almeno metà numeri pari</span>
+                <input 
+                  type="number" 
+                  min="1" 
+                  max={userCredits || 0}
+                  value={sideBets.evenHalf || ''}
+                  onChange={(e) => {
+                    const val = e.target.value ? Number(e.target.value) : '';
+                    setSideBets({ ...sideBets, evenHalf: val });
+                  }}
+                  className="input-modern"
+                  style={{ width: '100px' }}
+                  placeholder="Crediti"
+                />
+                <button 
+                  className="btn-3d" 
+                  onClick={() => sideBets.evenHalf && placeSideBet('evenHalf', sideBets.evenHalf)}
+                  disabled={!sideBets.evenHalf || sideBets.evenHalf < 1}
+                  style={{ padding: '6px 12px', fontSize: '0.9rem' }}
+                >
+                  Scommetti
+                </button>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+                <span style={{ flex: 1, minWidth: 200 }}>Almeno metà numeri dispari</span>
+                <input 
+                  type="number" 
+                  min="1"
+                  max={userCredits || 0}
+                  value={sideBets.oddHalf || ''}
+                  onChange={(e) => {
+                    const val = e.target.value ? Number(e.target.value) : '';
+                    setSideBets({ ...sideBets, oddHalf: val });
+                  }}
+                  className="input-modern"
+                  style={{ width: '100px' }}
+                  placeholder="Crediti"
+                />
+                <button 
+                  className="btn-3d" 
+                  onClick={() => sideBets.oddHalf && placeSideBet('oddHalf', sideBets.oddHalf)}
+                  disabled={!sideBets.oddHalf || sideBets.oddHalf < 1}
+                  style={{ padding: '6px 12px', fontSize: '0.9rem' }}
+                >
+                  Scommetti
+                </button>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+                <span style={{ flex: 1, minWidth: 200 }}>Almeno due numeri primi</span>
+                <input 
+                  type="number" 
+                  min="1"
+                  max={userCredits || 0}
+                  value={sideBets.twoPrimes || ''}
+                  onChange={(e) => {
+                    const val = e.target.value ? Number(e.target.value) : '';
+                    setSideBets({ ...sideBets, twoPrimes: val });
+                  }}
+                  className="input-modern"
+                  style={{ width: '100px' }}
+                  placeholder="Crediti"
+                />
+                <button 
+                  className="btn-3d" 
+                  onClick={() => sideBets.twoPrimes && placeSideBet('twoPrimes', sideBets.twoPrimes)}
+                  disabled={!sideBets.twoPrimes || sideBets.twoPrimes < 1}
+                  style={{ padding: '6px 12px', fontSize: '0.9rem' }}
+                >
+                  Scommetti
+                </button>
+              </div>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
+                <span style={{ flex: 1, minWidth: 200 }}>Almeno due multipli di 10</span>
+                <input 
+                  type="number" 
+                  min="1"
+                  max={userCredits || 0}
+                  value={sideBets.twoMultiplesOf10 || ''}
+                  onChange={(e) => {
+                    const val = e.target.value ? Number(e.target.value) : '';
+                    setSideBets({ ...sideBets, twoMultiplesOf10: val });
+                  }}
+                  className="input-modern"
+                  style={{ width: '100px' }}
+                  placeholder="Crediti"
+                />
+                <button 
+                  className="btn-3d" 
+                  onClick={() => sideBets.twoMultiplesOf10 && placeSideBet('twoMultiplesOf10', sideBets.twoMultiplesOf10)}
+                  disabled={!sideBets.twoMultiplesOf10 || sideBets.twoMultiplesOf10 < 1}
+                  style={{ padding: '6px 12px', fontSize: '0.9rem' }}
+                >
+                  Scommetti
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
 
         {/* Fase Pre-Bet */}
         {phase === 'pre-bet' && (
@@ -349,40 +731,58 @@ export default function GamePage() {
               
               {myBet ? (
                 <div style={{ padding: '16px', borderRadius: 10, background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.3)', marginBottom: 16 }}>
-                  <p style={{ color: '#10b981', fontWeight: 700, margin: 0 }}>✓ Hai scommesso sul numero: <strong>{myBet}</strong></p>
+                  <p style={{ color: '#10b981', fontWeight: 700, margin: 0 }}>✓ Hai scommesso sul numero: <strong>{myBet.number || myBet}</strong> ({myBet.amount || betAmount} crediti)</p>
                 </div>
               ) : (
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(60px, 1fr))', gap: 8, marginBottom: 16 }}>
-                  {numbersInRange.map(num => (
-                    <button
-                      key={num}
-                      className="btn-3d"
-                      onClick={() => placeBet(num)}
-                      disabled={betting}
-                      style={{ 
-                        minWidth: '60px', 
-                        padding: '12px',
-                        fontSize: '1.2rem',
-                        fontWeight: 700
-                      }}
-                    >
-                      {num}
-                    </button>
-                  ))}
-                </div>
+                <>
+                  <div style={{ marginBottom: 12 }}>
+                    <label style={{ display: 'block', marginBottom: 8, color: '#111827', fontWeight: 700 }}>
+                      Importo scommessa (crediti): {betAmount}
+                    </label>
+                    <input 
+                      type="range" 
+                      min="1" 
+                      max={Math.min(userCredits || 100, 100)}
+                      value={betAmount} 
+                      onChange={(e) => setBetAmount(Number(e.target.value))}
+                      style={{ width: '100%' }}
+                    />
+                  </div>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(60px, 1fr))', gap: 8, marginBottom: 16 }}>
+                    {numbersInRange.map(num => (
+                      <button
+                        key={num}
+                        className="btn-3d"
+                        onClick={() => placeBet(num)}
+                        disabled={betting || (timeLeft !== null && timeLeft <= 0) || !userCredits || userCredits < betAmount}
+                        style={{ 
+                          minWidth: '60px', 
+                          padding: '12px',
+                          fontSize: '1.2rem',
+                          fontWeight: 700
+                        }}
+                      >
+                        {num}
+                      </button>
+                    ))}
+                  </div>
+                </>
               )}
 
               <div style={{ marginBottom: 16 }}>
                 <h3 style={{ fontSize: '1rem', color: '#111827', marginBottom: 8 }}>Scommesse dei giocatori:</h3>
                 <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 6 }}>
-                  {Object.entries(roomData.players || {}).map(([id, player]) => (
-                    <li key={id} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', borderRadius: 8, background: 'rgba(0,0,0,0.05)' }}>
-                      <span style={{ color: '#111827' }}>{player.name || 'Guest'}</span>
-                      <span style={{ fontWeight: 700, color: bets[id] ? '#6366f1' : '#9ca3af' }}>
-                        {bets[id] ? `Numero: ${bets[id]}` : 'In attesa...'}
-                      </span>
-                    </li>
-                  ))}
+                  {Object.entries(roomData.players || {}).map(([id, player]) => {
+                    const bet = bets[id];
+                    return (
+                      <li key={id} style={{ display: 'flex', justifyContent: 'space-between', padding: '8px 12px', borderRadius: 8, background: 'rgba(0,0,0,0.05)' }}>
+                        <span style={{ color: '#111827' }}>{player.name || 'Guest'}</span>
+                        <span style={{ fontWeight: 700, color: bet ? '#6366f1' : '#9ca3af' }}>
+                          {bet ? `Numero: ${bet.number || bet} (${bet.amount || betAmount} crediti)` : 'In attesa...'}
+                        </span>
+                      </li>
+                    );
+                  })}
                 </ul>
               </div>
 
@@ -393,7 +793,7 @@ export default function GamePage() {
                   style={{ minWidth: 200 }}
                   disabled={Object.keys(bets).length === 0}
                 >
-                  Avvia Round
+                  Estrai Numero
                 </button>
               )}
             </div>
@@ -451,10 +851,10 @@ export default function GamePage() {
                         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
                           {won ? (
                             <span className="bubble success" style={{ fontSize: '1rem' }}>
-                              ✓ +{result?.pointsGained || 0} punti
+                              ✓ +{result?.creditsGained || 0} crediti
                             </span>
                           ) : (
-                            <span style={{ color: '#9ca3af' }}>✗ 0 punti</span>
+                            <span style={{ color: '#9ca3af' }}>✗ 0 crediti</span>
                           )}
                           <span style={{ fontWeight: 700, color: '#111827' }}>
                             Score: {player.score || 0}
@@ -466,7 +866,7 @@ export default function GamePage() {
                 </ul>
               </div>
 
-              {isHost && (
+              {isHost && round < (roomData.maxRounds || 10) && (
                 <button 
                   className="btn-3d" 
                   onClick={nextRound}
@@ -475,12 +875,17 @@ export default function GamePage() {
                   Round Successivo
                 </button>
               )}
+              {isHost && round >= (roomData.maxRounds || 10) && (
+                <div style={{ padding: '16px', borderRadius: 10, background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.3)' }}>
+                  <p style={{ color: '#dc2626', fontWeight: 700, margin: 0 }}>Partita terminata!</p>
+                </div>
+              )}
             </div>
           </div>
         )}
 
         <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
-          {isHost && roomData.status === 'waiting' && (
+      {isHost && roomData.status === 'waiting' && (
             <button className="btn-3d" onClick={startGame} style={{ minWidth: 200 }}>
               Avvia Partita
             </button>
@@ -492,7 +897,7 @@ export default function GamePage() {
             </div>
           )}
         </div>
-      </div>
+    </div>
     </main>
   );
 }

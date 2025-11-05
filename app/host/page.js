@@ -18,10 +18,24 @@ export default function HostPage() {
   const [roomCode, setRoomCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [maxRounds, setMaxRounds] = useState(5);
+  const [betTimeSeconds, setBetTimeSeconds] = useState(15);
 
   async function createRoom() {
     setLoading(true);
     setError('');
+
+    if (maxRounds < 1 || maxRounds > 10) {
+      setError('Il numero di round deve essere tra 1 e 10');
+      setLoading(false);
+      return;
+    }
+
+    if (betTimeSeconds < 1 || betTimeSeconds > 20) {
+      setError('Il tempo per scommettere deve essere tra 1 e 20 secondi');
+      setLoading(false);
+      return;
+    }
 
     let code = generateRoomCode();
 
@@ -49,7 +63,10 @@ export default function HostPage() {
         status: 'waiting',
         hostId: currentUser.uid,
         round: 0,
-        currentRange: { min: 1, max: 10 }
+        maxRounds: maxRounds,
+        betTimeSeconds: betTimeSeconds,
+        currentRange: { min: 1, max: 10 },
+        sideBets: {}
       });
 
       setRoomCode(code);
@@ -92,7 +109,38 @@ export default function HostPage() {
           </div>
         ) : (
           <div>
-            <p style={{ marginBottom: 20, color: '#111827' }}>Crea una nuova stanza multiplayer per giocare con i tuoi amici.</p>
+            <p style={{ marginBottom: 20, color: '#111827' }}>Configura la partita prima di creare la stanza.</p>
+            
+            <div style={{ display: 'grid', gap: 16, marginBottom: 20, textAlign: 'left' }}>
+              <div>
+                <label style={{ display: 'block', marginBottom: 8, color: '#111827', fontWeight: 700 }}>
+                  Numero di Round (max 10): {maxRounds}
+                </label>
+                <input 
+                  type="range" 
+                  min="1" 
+                  max="10" 
+                  value={maxRounds} 
+                  onChange={(e) => setMaxRounds(Number(e.target.value))}
+                  style={{ width: '100%' }}
+                />
+              </div>
+
+              <div>
+                <label style={{ display: 'block', marginBottom: 8, color: '#111827', fontWeight: 700 }}>
+                  Tempo per scommettere (secondi, max 20): {betTimeSeconds}
+                </label>
+                <input 
+                  type="range" 
+                  min="1" 
+                  max="20" 
+                  value={betTimeSeconds} 
+                  onChange={(e) => setBetTimeSeconds(Number(e.target.value))}
+                  style={{ width: '100%' }}
+                />
+              </div>
+            </div>
+
             <button 
               className="btn-3d" 
               onClick={createRoom} 
