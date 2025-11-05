@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { ref, get, set } from 'firebase/database';
-import { db, auth } from '../lib/firebase';
+import { db, auth } from '@/lib/firebase';
 
  // assicurati che auth sia esportato in lib/firebase.js
 
