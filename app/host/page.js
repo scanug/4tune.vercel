@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ref, get, set } from 'firebase/database';
+import { signInAnonymously } from 'firebase/auth';
 import { db, auth } from '@/lib/firebase';
 
 function generateRoomCode(length = 4) {
@@ -50,12 +51,28 @@ export default function HostPage() {
         return;
       }
 
-      const currentUser = auth.currentUser;
+      let currentUser = auth.currentUser;
+      if (!currentUser) {
+        // Prova a fare login anonimo se non c'è utente
+        try {
+          await signInAnonymously(auth);
+          currentUser = auth.currentUser;
+        } catch (authErr) {
+          console.error('Errore login anonimo:', authErr);
+          setError('Utente non autenticato. Riprova.');
+          setLoading(false);
+          return;
+        }
+      }
+
       if (!currentUser) {
         setError('Utente non autenticato. Riprova.');
         setLoading(false);
         return;
       }
+
+      // Debug: verifica che l'hostId sia corretto
+      console.log('Creazione stanza → hostId:', currentUser.uid);
 
       await set(roomRef, {
         createdAt: Date.now(),

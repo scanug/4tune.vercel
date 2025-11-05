@@ -161,8 +161,15 @@ export default function GamePage() {
         return;
       }
 
+      // Debug utilissimo: verifica UID vs hostId
+      console.log('Avvio partita → uid:', currentUser.uid, 'hostId:', roomData.hostId);
+
       if (currentUser.uid !== roomData.hostId) {
         setError('Solo l\'host può avviare la partita');
+        console.error('PERMISSION_DENIED: uid non corrisponde a hostId', {
+          uid: currentUser.uid,
+          hostId: roomData.hostId
+        });
         return;
       }
 
@@ -218,8 +225,8 @@ export default function GamePage() {
         betEndTime: betEndTime
       });
     } catch (err) {
-      console.error('Errore Firebase:', err);
-      setError(`Errore nell'avviare la partita: ${err.message}`);
+      console.error('Errore Firebase:', err?.code, err?.message, err);
+      setError(`Errore nell'avviare la partita: ${err?.code || ''} ${err?.message || ''}`);
     }
   }
 
@@ -330,8 +337,11 @@ export default function GamePage() {
         return;
       }
 
+      console.log('Avvio round → uid:', currentUser.uid, 'hostId:', roomData.hostId);
+
       if (currentUser.uid !== roomData.hostId) {
         setError('Solo l\'host può avviare il round');
+        console.error('PERMISSION_DENIED: uid non corrisponde a hostId nel round');
         return;
       }
 
@@ -415,8 +425,16 @@ export default function GamePage() {
 
     try {
       const currentUser = auth.currentUser;
-      if (!currentUser || currentUser.uid !== roomData.hostId) {
+      if (!currentUser) {
+        setError('Utente non autenticato');
+        return;
+      }
+
+      console.log('Round successivo → uid:', currentUser.uid, 'hostId:', roomData.hostId);
+
+      if (currentUser.uid !== roomData.hostId) {
         setError('Solo l\'host può procedere');
+        console.error('PERMISSION_DENIED: uid non corrisponde a hostId nel nextRound');
         return;
       }
 
