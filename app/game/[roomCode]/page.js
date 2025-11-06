@@ -223,12 +223,12 @@ export default function GamePage() {
 
       // Aggiorna selectedBet se presente
       if (typeof window !== 'undefined') {
-        const playerId = localStorage.getItem('playerId') || auth.currentUser?.uid;
-        if (playerId && data.bets) {
-          setSelectedBet(data.bets[playerId]?.number || null);
+        const uid = auth.currentUser?.uid || localStorage.getItem('playerId');
+        if (uid && data.bets) {
+          setSelectedBet(data.bets[uid]?.number || null);
         }
-        if (playerId && data.sideBets) {
-          setSideBets(data.sideBets[playerId] || {});
+        if (uid && data.sideBets) {
+          setSideBets(data.sideBets[uid] || {});
         }
       }
 
@@ -317,7 +317,7 @@ export default function GamePage() {
       return;
     }
 
-    const playerId = localStorage.getItem('playerId') || currentUser.uid;
+    const playerId = currentUser.uid;
     if (!roomData.players || !roomData.players[playerId]) {
       setError('Non sei un giocatore in questa stanza');
       return;
@@ -630,7 +630,7 @@ export default function GamePage() {
   if (!roomData) return null;
 
   const currentUser = auth.currentUser;
-  const playerId = typeof window !== 'undefined' ? (localStorage.getItem('playerId') || currentUser?.uid) : null;
+  const playerId = typeof window !== 'undefined' ? (currentUser?.uid || localStorage.getItem('playerId')) : null;
   const isHost = currentUser && roomData.hostId === currentUser.uid;
   const playersCount = Object.keys(roomData.players || {}).length;
   const statusText = roomData.status === 'waiting' ? 'In attesa' : roomData.status === 'playing' ? 'In corso' : roomData.status === 'finished' ? 'Terminata' : roomData.status;

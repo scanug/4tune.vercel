@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import { ref, get, update } from 'firebase/database';
-import { db } from '../../lib/firebase';
+import { db, auth } from '../../lib/firebase';
+import { signInAnonymously } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -69,11 +70,14 @@ export default function JoinPage() {
         return;
       }
 
-      let playerId = localStorage.getItem('playerId');
-      if (!playerId) {
-        playerId = uuidv4();
-        localStorage.setItem('playerId', playerId);
+      // Assicurati di avere un utente e usa SEMPRE auth.uid come playerId
+      let currentUser = auth.currentUser;
+      if (!currentUser) {
+        try { await signInAnonymously(auth); currentUser = auth.currentUser; } catch {}
       }
+      if (!currentUser) { setError('Autenticazione necessaria, riprova'); setLoading(false); return; }
+      const playerId = currentUser.uid;
+      try { localStorage.setItem('playerId', playerId); } catch {}
 
       const existing = players[playerId];
       const preservedScore = typeof existing?.score === 'number' ? existing.score : 0;
