@@ -42,6 +42,7 @@ export default function GamePage() {
   const [userCredits, setUserCredits] = useState(null);
   const [timeLeft, setTimeLeft] = useState(null);
   const timerRef = useRef(null);
+  const autoStartRef = useRef({ lastRoundAutoStarted: 0 });
 
   // Carica crediti utente
   useEffect(() => {
@@ -95,6 +96,22 @@ export default function GamePage() {
       };
     }
   }, [roomData?.phase, roomData?.betEndTime, roomData?.betTimeSeconds]);
+
+  // Auto-estrazione: quando il countdown finisce, l'host avvia automaticamente il round
+  useEffect(() => {
+    if (!roomData) return;
+    const isHost = auth.currentUser && roomData.hostId === auth.currentUser.uid;
+    if (!isHost) return;
+    if (roomData.phase !== 'pre-bet') return;
+    if (typeof timeLeft !== 'number') return;
+    if (timeLeft > 0) return;
+
+    // Evita doppi avvii nello stesso round
+    const round = roomData.round || 1;
+    if (autoStartRef.current.lastRoundAutoStarted === round) return;
+    autoStartRef.current.lastRoundAutoStarted = round;
+    startRound();
+  }, [timeLeft, roomData]);
 
   useEffect(() => {
     if (!roomCode) return;
@@ -899,6 +916,45 @@ export default function GamePage() {
                 </div>
               )}
             </div>
+          </div>
+        )}
+
+        {/* Fine partita: classifica finale */}
+        {roomData.status === 'finished' && (
+          <div className="fade-up" style={{ marginTop: 16 }}>
+            <h2 style={{ color: '#111827', marginBottom: 12 }}>Classifica finale</h2>
+            {(() => {
+              const players = roomData.players || {};
+              const sideRes = roomData.sideBetResults || {};
+              const rows = Object.entries(players).map(([id, p]) => {
+                const score = Number(p.score || 0);
+                const mainWin = score * 50;
+                const side = sideRes[id] || {};
+                const sideWin = Object.values(side).reduce((acc, r) => acc + (r?.amount || 0), 0);
+                const total = mainWin + sideWin;
+                return { id, name: p.name || 'Guest', score, mainWin, sideWin, total };
+              });
+              rows.sort((a, b) => b.total - a.total || b.score - a.score);
+              return (
+                <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 8 }}>
+                  {rows.map((r, idx) => (
+                    <li key={r.id} className="fade-up" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 16px', borderRadius: 10, border: '1px solid rgba(99,102,241,0.25)', background: '#fff' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+                        <span style={{ width: 28, textAlign: 'center', fontWeight: 800 }}>{idx + 1}</span>
+                        <span style={{ fontWeight: 800, color: '#111827' }}>{r.name}</span>
+                        {r.id === roomData.hostId && <span title="Host">👑</span>}
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                        <span className="bubble">Score: {r.score}</span>
+                        <span className="bubble" title="Vincite principali">+{r.mainWin} 💰</span>
+                        {r.sideWin > 0 && <span className="bubble success" title="Vincite side bets">+{r.sideWin} 💰</span>}
+                        <span className="bubble" style={{ fontWeight: 800 }}>Totale: {r.total} 💰</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              );
+            })()}
           </div>
         )}
 
