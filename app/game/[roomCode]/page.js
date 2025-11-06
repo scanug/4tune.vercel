@@ -121,6 +121,60 @@ export default function GamePage() {
     startRound();
   }, [timeLeft, roomData]);
 
+  // Al termine del round (fase results), ogni giocatore accredita autonomamente la propria vincita del round
+  useEffect(() => {
+    const pid = (typeof window !== 'undefined') ? (localStorage.getItem('playerId') || auth.currentUser?.uid) : null;
+    if (!roomData || roomData.phase !== 'results' || !pid) return;
+    const res = roomData.roundResults?.[pid];
+    if (!res || !res.creditsGained || res.creditsGained <= 0) return;
+
+    const flagPath = `rooms/${roomCode}/payoutApplied/results/${roomData.round || 1}/${pid}`;
+    const flagRef = ref(db, flagPath);
+    const userRef = ref(db, `users/${pid}`);
+    (async () => {
+      try {
+        const flagSnap = await get(flagRef);
+        if (flagSnap.exists()) return; // già applicato
+        await runTransaction(userRef, (current) => {
+          const cur = current || {};
+          const credits = Number(cur.credits || 0);
+          return { ...cur, credits: credits + Number(res.creditsGained || 0) };
+        });
+        await update(flagRef, { at: Date.now(), amount: Number(res.creditsGained || 0) });
+      } catch (e) {
+        console.error('Errore accredito vincita round:', e);
+      }
+    })();
+  }, [roomData?.phase, roomData?.round, roomData?.roundResults]);
+
+  // A fine partita, ogni giocatore accredita autonomamente vincite side bets e bonus all-wins
+  useEffect(() => {
+    const pid = (typeof window !== 'undefined') ? (localStorage.getItem('playerId') || auth.currentUser?.uid) : null;
+    if (!roomData || roomData.status !== 'finished' || !pid) return;
+    const side = roomData.sideBetResults?.[pid];
+    const sideWin = side ? Object.values(side).reduce((acc, r) => acc + (r?.amount || 0), 0) : 0;
+    const bonus = Number(roomData.allWinsBonus?.[pid] || 0);
+    const total = Number(sideWin + bonus);
+    if (total <= 0) return;
+
+    const flagPath = `rooms/${roomCode}/payoutApplied/final/${pid}`;
+    const flagRef = ref(db, flagPath);
+    const userRef = ref(db, `users/${pid}`);
+    (async () => {
+      try {
+        const flagSnap = await get(flagRef);
+        if (flagSnap.exists()) return;
+        await runTransaction(userRef, (current) => {
+          const cur = current || {};
+          const credits = Number(cur.credits || 0);
+          return { ...cur, credits: credits + total };
+        });
+        await update(flagRef, { at: Date.now(), amount: total });
+      } catch (e) {
+        console.error('Errore accredito vincite finali:', e);
+      }
+    })();
+  }, [roomData?.status, roomData?.sideBetResults, roomData?.allWinsBonus]);
   useEffect(() => {
     if (!roomCode) return;
 

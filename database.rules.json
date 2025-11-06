@@ -84,8 +84,18 @@
           "roundResults": {
             ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
           },
+          "resultsHistory": {
+            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
+          },
+          "allWinsBonus": {
+            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
+          },
           "sideBetResults": {
             ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
+          },
+          "payoutApplied": {
+            ".read": "auth != null",
+            ".write": "auth != null"
           },
   
          
