@@ -175,6 +175,34 @@ export default function GamePage() {
       }
     })();
   }, [roomData?.status, roomData?.sideBetResults, roomData?.allWinsBonus]);
+
+  // All'avvio partita (status: playing) ogni client detrae le proprie side bets una sola volta
+  useEffect(() => {
+    const pid = (typeof window !== 'undefined') ? (localStorage.getItem('playerId') || auth.currentUser?.uid) : null;
+    if (!roomData || roomData.status !== 'playing' || !pid) return;
+    const myBets = roomData.sideBets?.[pid];
+    if (!myBets) return;
+    const total = Number(myBets.evenHalf || 0) + Number(myBets.oddHalf || 0) + Number(myBets.twoPrimes || 0) + Number(myBets.twoMultiplesOf10 || 0);
+    if (total <= 0) return;
+
+    const flagRef = ref(db, `rooms/${roomCode}/payoutApplied/sideDebit/${pid}`);
+    const userRef = ref(db, `users/${pid}`);
+    (async () => {
+      try {
+        const flagSnap = await get(flagRef);
+        if (flagSnap.exists()) return;
+        await runTransaction(userRef, (current) => {
+          const cur = current || {};
+          const credits = Number(cur.credits || 0);
+          const newCredits = Math.max(0, credits - total);
+          return { ...cur, credits: newCredits };
+        });
+        await update(flagRef, { at: Date.now(), amount: total });
+      } catch (e) {
+        console.error('Errore detrazione side bets (client):', e);
+      }
+    })();
+  }, [roomData?.status, roomData?.sideBets]);
   useEffect(() => {
     if (!roomCode) return;
 
@@ -257,40 +285,7 @@ export default function GamePage() {
       const betTimeSeconds = roomData.betTimeSeconds || 15;
       const betEndTime = Date.now() + (betTimeSeconds * 1000);
 
-      // Detrai crediti dalle side bets di tutti i giocatori
-      const players = roomData.players || {};
-      const sideBetsData = roomData.sideBets || {};
-      const creditUpdates = {};
-
-      for (const [playerId, bets] of Object.entries(sideBetsData)) {
-        let totalSideBetAmount = 0;
-        if (bets.evenHalf) totalSideBetAmount += bets.evenHalf;
-        if (bets.oddHalf) totalSideBetAmount += bets.oddHalf;
-        if (bets.twoPrimes) totalSideBetAmount += bets.twoPrimes;
-        if (bets.twoMultiplesOf10) totalSideBetAmount += bets.twoMultiplesOf10;
-
-        if (totalSideBetAmount > 0) {
-          const userRef = ref(db, `users/${playerId}`);
-          try {
-            const userSnap = await get(userRef);
-            const currentCredits = userSnap.val()?.credits || 0;
-            if (currentCredits >= totalSideBetAmount) {
-              creditUpdates[`users/${playerId}/credits`] = currentCredits - totalSideBetAmount;
-            }
-          } catch (err) {
-            console.error(`Errore detrazione crediti per ${playerId}:`, err);
-          }
-        }
-      }
-
-      // Aggiorna crediti e avvia partita
-      if (Object.keys(creditUpdates).length > 0) {
-        for (const [path, value] of Object.entries(creditUpdates)) {
-          const pathParts = path.split('/');
-          const refPath = ref(db, path);
-          await update(refPath, { credits: value });
-        }
-      }
+      // La detrazione delle side bets viene fatta da ogni client sul proprio account
 
       await update(ref(db, 'rooms/' + roomCode), {
         status: 'playing',
