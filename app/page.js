@@ -110,15 +110,7 @@ export default function Home() {
       });
       try { console.log('[HOME] spinWheel:tx', { committed: result?.committed, now }); } catch {}
       if (!result.committed) { setWheelWinMsg('Torna domani'); return; }
-      // Mission progress: spin_wheel
-      try { 
-        if (userKey) {
-          await updateMissionProgress(userKey, 'spin_wheel');
-          console.log('[HOME] mission spin_wheel: OK');
-        }
-      } catch (e) {
-        console.error('[HOME] mission spin_wheel: ERROR', e);
-      }
+      // (Missione spostata a onWheelDone per evitare race)
       // refresh local lastSpin immediately
       setLastSpin(now);
       const idx = Math.floor(Math.random() * wheelSegments.length);
@@ -135,6 +127,12 @@ export default function Home() {
           await update(userRef, { credits: current + reward });
           try { console.log('[HOME] spinWheel:onDone', { current, reward, newCredits: current + reward }); } catch {}
           setWheelWinMsg(`Hai vinto ${reward} crediti!`);
+          // Mission progress: spin_wheel (qui, dopo esito spin)
+          try {
+            if (userKey) await updateMissionProgress(userKey, 'spin_wheel');
+          } catch (e) {
+            console.error('[HOME] mission spin_wheel: ERROR(onDone)', e);
+          }
         } catch {}
         finally {
           setWheelSpinning(false);
@@ -266,6 +264,10 @@ function ProfileModal({ onClose, uid }) {
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState("");
   const [missions, setMissions] = useState(null);
+  const [iconCategories, setIconCategories] = useState(null);
+  const [activeCategory, setActiveCategory] = useState(0);
+  // elenco icone built-in (metti i file SVG in /icons/heads/)
+  const BUILT_IN_AVATARS = Array.from({ length: 24 }, (_, i) => `/icons/heads/${String(i + 1).padStart(2,'0')}.svg`);
 
   useEffect(() => {
     if (!uid) return;
@@ -278,6 +280,21 @@ function ProfileModal({ onClose, uid }) {
     onValue(r, handler);
     return () => off(r, 'value', handler);
   }, [uid]);
+
+  // Carica icone dinamicamente dall'API
+  useEffect(() => {
+    let aborted = false;
+    (async () => {
+      try {
+        const res = await fetch('/api/icons');
+        const data = await res.json();
+        if (!aborted && data && Array.isArray(data.categories)) {
+          setIconCategories(data.categories);
+        }
+      } catch {}
+    })();
+    return () => { aborted = true; };
+  }, []);
 
   // Subscribe to missions stored under players/{playerId}
   useEffect(() => {
@@ -318,7 +335,7 @@ function ProfileModal({ onClose, uid }) {
 
   return (
     <div className="overlay-backdrop" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}>
-      <div className="overlay-content" style={{ width: 'min(520px, 92vw)', textAlign: 'left' }}>
+      <div className="overlay-content" style={{ width: 'min(860px, 96vw)', textAlign: 'left' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
           <h2 style={{ margin: 0 }}>Profilo utente</h2>
           <button className="btn-3d" onClick={onClose} aria-label="Chiudi" title="Chiudi">✕</button>
@@ -330,12 +347,49 @@ function ProfileModal({ onClose, uid }) {
           </div>
           <div>
             <label>Avatar</label>
-            <div style={{ display: 'flex', gap: 8, alignItems: 'center', flexWrap: 'wrap' }}>
-              {["/file.svg","/globe.svg","/next.svg","/vercel.svg","/window.svg"].map((src) => (
-                <button key={src} type="button" className="btn-3d" onClick={() => setAvatar(src)} style={{ padding: '6px 10px' }}>{src.endsWith('.svg') ? 'SVG' : 'IMG'}</button>
-              ))}
-            </div>
-            <div style={{ marginTop: 8 }}>
+            {/* Tabs categorie + griglia */}
+            {iconCategories && iconCategories.length > 0 ? (
+              <div style={{ marginTop: 8 }}>
+                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 10 }}>
+                  {iconCategories.map((c, idx) => (
+                    <button key={c.name+idx} type="button" className="btn-3d" onClick={() => setActiveCategory(idx)} style={{ padding: '6px 10px', background: activeCategory===idx? '#4f46e5':'', filter: activeCategory===idx? '':'grayscale(0.1)' }}>
+                      {c.name}
+                    </button>
+                  ))}
+                </div>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(72px, 1fr))', gap: 10 }}>
+                  {(iconCategories[activeCategory]?.icons || []).map((src) => (
+                    <button
+                      key={src}
+                      type="button"
+                      onClick={() => setAvatar(src)}
+                      style={{
+                        padding: 0,
+                        border: avatar === src ? '2px solid #6366f1' : '1px solid rgba(0,0,0,0.1)',
+                        borderRadius: 12,
+                        background: '#fff',
+                        boxShadow: avatar === src ? '0 0 0 4px rgba(99,102,241,0.15)' : 'none',
+                        overflow: 'hidden',
+                        cursor: 'pointer',
+                        height: 72
+                      }}
+                      aria-label={`Seleziona avatar ${src}`}
+                    >
+                      <Image src={src} alt="avatar" width={72} height={72} unoptimized style={{ objectFit: 'contain', background: '#fff' }} />
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(72px, 1fr))', gap: 10, marginTop: 8 }}>
+                {BUILT_IN_AVATARS.map((src) => (
+                  <button key={src} type="button" onClick={() => setAvatar(src)} style={{ padding: 0, border: avatar === src ? '2px solid #6366f1' : '1px solid rgba(0,0,0,0.1)', borderRadius: 12, background: '#fff', boxShadow: avatar === src ? '0 0 0 4px rgba(99,102,241,0.15)' : 'none', overflow: 'hidden', cursor: 'pointer', height: 72 }} aria-label={`Seleziona avatar ${src}`}>
+                    <Image src={src} alt="avatar" width={72} height={72} unoptimized style={{ objectFit: 'contain', background: '#fff' }} />
+                  </button>
+                ))}
+              </div>
+            )}
+            <div style={{ marginTop: 10 }}>
               <input type="file" accept="image/*" onChange={(e) => handleUpload(e.target.files?.[0])} />
             </div>
             {avatar && (
