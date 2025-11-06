@@ -111,7 +111,14 @@ export default function Home() {
       try { console.log('[HOME] spinWheel:tx', { committed: result?.committed, now }); } catch {}
       if (!result.committed) { setWheelWinMsg('Torna domani'); return; }
       // Mission progress: spin_wheel
-      try { if (userKey) await updateMissionProgress(userKey, 'spin_wheel'); } catch {}
+      try { 
+        if (userKey) {
+          await updateMissionProgress(userKey, 'spin_wheel');
+          console.log('[HOME] mission spin_wheel: OK');
+        }
+      } catch (e) {
+        console.error('[HOME] mission spin_wheel: ERROR', e);
+      }
       // refresh local lastSpin immediately
       setLastSpin(now);
       const idx = Math.floor(Math.random() * wheelSegments.length);

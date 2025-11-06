@@ -11,9 +11,16 @@ import { updateMissionProgress } from '@/lib/missions';
 function getRangeForRound(round) {
   if (round <= 2) return { min: 1, max: 10 };
   if (round <= 4) return { min: 11, max: 25 };
-  if (round <= 7) return { min: 26, max: 50 };
+  if (round <= 9) return { min: 26, max: 50 };
   if (round <= 10) return { min: 51, max: 100 };
   return { min: 1, max: 10 };
+}
+
+function getRoundPayoutMultiplier(round) {
+  if (round <= 2) return 2;      // 2x
+  if (round <= 4) return 4;      // 4x
+  if (round <= 9) return 10;     // 10x
+  return 25;                      // round 10 => 25x
 }
 
 // Funzione per verificare se un numero è primo
@@ -43,6 +50,7 @@ export default function GamePage() {
   const [timeLeft, setTimeLeft] = useState(null);
   const timerRef = useRef(null);
   const autoStartRef = useRef({ lastRoundAutoStarted: 0 });
+  const [pendingBetNumber, setPendingBetNumber] = useState(null);
 
   // Carica crediti utente
   useEffect(() => {
@@ -247,6 +255,10 @@ export default function GamePage() {
     }
   }
 
+  function chooseBet(number) {
+    setPendingBetNumber(number);
+  }
+
   async function placeBet(number) {
     if (!roomCode || !roomData || betting) return;
 
@@ -283,6 +295,7 @@ export default function GamePage() {
         [playerId]: { number, amount: betAmount }
       });
       setSelectedBet(number);
+      setPendingBetNumber(null);
       
       // Detrai crediti immediatamente
       const userRef = ref(db, `users/${currentUser.uid}`);
@@ -382,7 +395,9 @@ export default function GamePage() {
         const player = players[playerId];
         if (player) {
           const currentScore = player.score || 0;
-          const creditsGained = won ? 50 : 0;
+          const amount = Number(betData?.amount || 0);
+          const multiplier = getRoundPayoutMultiplier(roomData.round || 1);
+          const creditsGained = won ? Math.floor(amount * multiplier) : 0;
           roundResults[playerId] = {
             bet,
             won,
@@ -508,20 +523,20 @@ export default function GamePage() {
       let totalWinnings = 0;
 
       if (bets.evenHalf && evenCount >= totalRounds / 2) {
-        results[playerId].evenHalf = { won: true, amount: bets.evenHalf * 2 };
-        totalWinnings += bets.evenHalf * 2;
+        results[playerId].evenHalf = { won: true, amount: bets.evenHalf * 4 };
+        totalWinnings += bets.evenHalf * 4;
       }
       if (bets.oddHalf && oddCount >= totalRounds / 2) {
-        results[playerId].oddHalf = { won: true, amount: bets.oddHalf * 2 };
-        totalWinnings += bets.oddHalf * 2;
+        results[playerId].oddHalf = { won: true, amount: bets.oddHalf * 4 };
+        totalWinnings += bets.oddHalf * 4;
       }
       if (bets.twoPrimes && primeCount >= 2) {
-        results[playerId].twoPrimes = { won: true, amount: bets.twoPrimes * 2 };
-        totalWinnings += bets.twoPrimes * 2;
+        results[playerId].twoPrimes = { won: true, amount: bets.twoPrimes * 4 };
+        totalWinnings += bets.twoPrimes * 4;
       }
       if (bets.twoMultiplesOf10 && multiplesOf10Count >= 2) {
-        results[playerId].twoMultiplesOf10 = { won: true, amount: bets.twoMultiplesOf10 * 2 };
-        totalWinnings += bets.twoMultiplesOf10 * 2;
+        results[playerId].twoMultiplesOf10 = { won: true, amount: bets.twoMultiplesOf10 * 4 };
+        totalWinnings += bets.twoMultiplesOf10 * 4;
       }
 
       if (totalWinnings > 0) {
@@ -658,7 +673,7 @@ export default function GamePage() {
             <h3 style={{ marginBottom: 12, color: '#111827', fontSize: '1.1rem' }}>Side Bets (crediti verranno detratti all'avvio):</h3>
             <div style={{ display: 'grid', gap: 8 }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
-                <span style={{ flex: 1, minWidth: 200 }}>Almeno metà numeri pari</span>
+                <span style={{ flex: 1, minWidth: 200, color: '#111827' }}>Almeno metà numeri pari</span>
                 <input 
                   type="number" 
                   min="1" 
@@ -682,7 +697,7 @@ export default function GamePage() {
                 </button>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
-                <span style={{ flex: 1, minWidth: 200 }}>Almeno metà numeri dispari</span>
+                <span style={{ flex: 1, minWidth: 200, color: '#111827' }}>Almeno metà numeri dispari</span>
                 <input 
                   type="number" 
                   min="1"
@@ -706,7 +721,7 @@ export default function GamePage() {
                 </button>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
-                <span style={{ flex: 1, minWidth: 200 }}>Almeno due numeri primi</span>
+                <span style={{ flex: 1, minWidth: 200, color: '#111827' }}>Almeno due numeri primi</span>
                 <input 
                   type="number" 
                   min="1"
@@ -730,7 +745,7 @@ export default function GamePage() {
                 </button>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 8 }}>
-                <span style={{ flex: 1, minWidth: 200 }}>Almeno due multipli di 10</span>
+                <span style={{ flex: 1, minWidth: 200, color: '#111827' }}>Almeno due multipli di 10</span>
                 <input 
                   type="number" 
                   min="1"
@@ -783,17 +798,17 @@ export default function GamePage() {
                       style={{ width: '100%' }}
                     />
                   </div>
-                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(60px, 1fr))', gap: 8, marginBottom: 16 }}>
+                  <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(48px, 1fr))', gap: 6, marginBottom: 12 }}>
                     {numbersInRange.map(num => (
                       <button
                         key={num}
                         className="btn-3d"
-                        onClick={() => placeBet(num)}
+                        onClick={() => chooseBet(num)}
                         disabled={betting || (timeLeft !== null && timeLeft <= 0) || !userCredits || userCredits < betAmount}
                         style={{ 
-                          minWidth: '60px', 
-                          padding: '12px',
-                          fontSize: '1.2rem',
+                          minWidth: '48px', 
+                          padding: '10px',
+                          fontSize: '1rem',
                           fontWeight: 700
                         }}
                       >
@@ -801,6 +816,13 @@ export default function GamePage() {
                       </button>
                     ))}
                   </div>
+                  {pendingBetNumber != null && (
+                    <div className="fade-up" style={{ display: 'flex', gap: 8, alignItems: 'center', justifyContent: 'center', marginBottom: 12 }}>
+                      <span style={{ color: '#111827', fontWeight: 700 }}>Confermi il numero {pendingBetNumber} per {betAmount} crediti?</span>
+                      <button className="btn-3d" style={{ padding: '6px 10px' }} onClick={() => placeBet(pendingBetNumber)}>Conferma</button>
+                      <button className="btn-3d" style={{ padding: '6px 10px', background: '#6b7280' }} onClick={() => setPendingBetNumber(null)}>Annulla</button>
+                    </div>
+                  )}
                 </>
               )}
 
