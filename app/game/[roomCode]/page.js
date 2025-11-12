@@ -595,8 +595,8 @@ export default function GamePage() {
             const cur = current || {};
             const credits = Number(cur.credits || 0);
             return { ...cur, credits: credits + totalWinnings };
-          });
-        } catch (err) {
+      });
+    } catch (err) {
           console.error('Errore aggiornamento crediti side bet:', err);
         }
       }
@@ -1022,8 +1022,8 @@ export default function GamePage() {
                         <span className="bubble" style={{ fontWeight: 800 }}>Totale: {r.total} 💰</span>
                       </div>
                     </li>
-                  ))}
-                </ul>
+          ))}
+      </ul>
               );
             })()}
           </div>
