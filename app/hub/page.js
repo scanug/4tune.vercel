@@ -13,7 +13,7 @@ export default function HubPage() {
         </div>
 
         <div style={{ padding: 16, textAlign: 'left' }}>
-          <p style={{ marginTop: 0, color: '#111827' }}>Seleziona un gioco dalla lista. Altri giochi arriveranno presto!</p>
+          <p style={{ marginTop: 0, color: '#111827' }}>Scegli il tuo party-game preferito: 4Tune per i numeri, GTS per la musica.</p>
 
           <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 12 }}>
             <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid rgba(17,24,39,0.2)', borderRadius: 10, padding: '10px 12px', background: '#fff' }}>
@@ -22,6 +22,13 @@ export default function HubPage() {
                 <div style={{ fontSize: 13, opacity: 0.85, color: '#111827' }}>Scommetti sui numeri, gira la ruota, vinci crediti!</div>
               </div>
               <Link href="/" className="btn-3d" style={{ textDecoration: 'none' }}>Vai a 4Tune</Link>
+            </li>
+            <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid rgba(17,24,39,0.2)', borderRadius: 10, padding: '10px 12px', background: '#fdf4ff' }}>
+              <div>
+                <div style={{ fontWeight: 800, color: '#111827' }}>GTS - Guess the Song</div>
+                <div style={{ fontSize: 13, opacity: 0.85, color: '#111827' }}>Indovina il brano prima degli altri con clip sincronizzate e buzzer.</div>
+              </div>
+              <Link href="/music" className="btn-3d" style={{ textDecoration: 'none' }}>Vai a GTS</Link>
             </li>
 
             <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px dashed rgba(17,24,39,0.2)', borderRadius: 10, padding: '10px 12px', background: 'rgba(255,255,255,0.6)' }}>

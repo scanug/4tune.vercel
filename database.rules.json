@@ -1,126 +1,95 @@
 {
-    "rules": {
-    
-      ".read": "auth != null",
-  
+  "rules": {
+    ".read": "auth != null",
 
-      "users": {
-        "$userId": {
-    
-          ".read": "auth.uid == $userId || root.child('users/'+auth.uid+'/role').val() == 'admin'",
-          ".write": "auth.uid == $userId",
-  
-          
-          "credits": {
-            ".validate": "newData.isNumber() && newData.val() >= 0"
+    "users": {
+      "$userId": {
+        ".read": "auth.uid == $userId || root.child('users/'+auth.uid+'/role').val() == 'admin'",
+        ".write": "auth.uid == $userId",
+
+        "credits": {
+          ".validate": "newData.isNumber() && newData.val() >= 0"
+        },
+
+        "lastSpin": {
+          ".validate": "newData.isNumber() && (!data.exists() || newData.val() == data.val() || (newData.val() - data.val() > 86400000))"
+        },
+
+        "missions": {
+          ".read": "auth.uid == $userId",
+          "win_3_games": {
+            ".validate": "newData.hasChildren(['progress','goal','reward','completed']) && newData.child('goal').val() == 3 && newData.child('reward').val() == 50 && newData.child('progress').isNumber() && newData.child('completed').isBoolean()"
           },
-  
-         
-          "lastSpin": {
-            ".validate": "newData.isNumber() && (!data.exists() || (newData.val() - data.val() > 86400000))"
+          "spin_wheel": {
+            ".validate": "newData.hasChildren(['progress','goal','reward','completed']) && newData.child('goal').val() == 1 && newData.child('reward').val() == 20 && newData.child('progress').isNumber() && newData.child('completed').isBoolean()"
           },
-  
-        
-          "missions": {
-            ".read": "auth.uid == $userId",
-            "win_3_games": {
-              ".validate": "newData.hasChildren(['progress','goal','reward','completed']) && newData.child('goal').val() == 3 && newData.child('reward').val() == 50 && newData.child('progress').isNumber() && newData.child('completed').isBoolean()"
-            },
-            "spin_wheel": {
-              ".validate": "newData.hasChildren(['progress','goal','reward','completed']) && newData.child('goal').val() == 1 && newData.child('reward').val() == 20 && newData.child('progress').isNumber() && newData.child('completed').isBoolean()"
-            },
-            "$other": { ".validate": false }
-          }
+          "$other": { ".validate": false }
         }
-      },
-  
+      }
+    },
 
-      "rooms": {
-        "$roomCode": {
+    "rooms": {
+      "$roomCode": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+
+        "hostId": { ".read": true },
+
+        "status": { ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid" },
+        "round": { ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid" },
+        "currentRange": { ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid" },
+        "startedAt": {
+          ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
+          ".validate": "newData.isNumber()"
+        },
+        "phase": { ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid" },
+        "betEndTime": {
+          ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
+          ".validate": "newData.isNumber()"
+        },
+        "maxRounds": {
+          ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
+          ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 20"
+        },
+        "betTimeSeconds": {
+          ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
+          ".validate": "newData.isNumber() && newData.val() >= 5 && newData.val() <= 120"
+        },
+        "winningNumber": {
+          ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
+          ".validate": "newData.isNumber()"
+        },
+        "winningNumbers": { ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid" },
+        "roundResults": { ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid" },
+        "resultsHistory": { ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid" },
+        "allWinsBonus": { ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid" },
+        "sideBetResults": { ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid" },
+        "payoutApplied": {
           ".read": "auth != null",
-  
-        
-          ".write": "auth != null && (!data.exists() || root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid)",
-  
-          
-          "hostId": { ".read": true },
-  
-          
-          "status": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "round": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "currentRange": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "startedAt": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.isNumber()"
-          },
-          "phase": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "betEndTime": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.isNumber()"
-          },
-          "maxRounds": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 20"
-          },
-          "betTimeSeconds": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.isNumber() && newData.val() >= 5 && newData.val() <= 120"
-          },
-          "winningNumber": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.isNumber()"
-          },
-          "winningNumbers": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "roundResults": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "resultsHistory": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "allWinsBonus": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "sideBetResults": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "payoutApplied": {
-            ".read": "auth != null",
-            ".write": "auth != null"
-          },
-  
-         
-          "players": {
-            ".read": true,
-            "$playerId": {
-              ".write": "auth != null && ( !data.exists() ? auth.uid == $playerId : (auth.uid == $playerId || root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid) )"
-            }
-          },
-  
+          ".write": "auth != null"
+        },
 
-          "bets": {
-            "$playerId": {
-              ".write": "auth.uid == $playerId"
-            }
-          },
-  
+        "players": {
+          ".read": true,
+          "$playerId": {
+            ".write": "auth != null && ( !data.exists() ? auth.uid == $playerId : (auth.uid == $playerId || root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid) )"
+          }
+        },
 
-          "sideBets": {
-            "$playerId": {
-              ".write": "auth.uid == $playerId"
-            }
+        "bets": {
+          "$playerId": {
+            ".write": "auth.uid == $playerId",
+            ".validate": "newData.hasChildren(['number','amount']) && newData.child('number').isNumber() && newData.child('amount').isNumber() && newData.child('amount').val() >= 1"
+          }
+        },
+
+        "sideBets": {
+          "$playerId": {
+            ".write": "auth.uid == $playerId",
+            ".validate": "newData.val() == null || ((!newData.child('evenHalf').exists() || (newData.child('evenHalf').isNumber() && newData.child('evenHalf').val() >= 0)) && (!newData.child('oddHalf').exists() || (newData.child('oddHalf').isNumber() && newData.child('oddHalf').val() >= 0)) && (!newData.child('twoPrimes').exists() || (newData.child('twoPrimes').isNumber() && newData.child('twoPrimes').val() >= 0)) && (!newData.child('twoMultiplesOf10').exists() || (newData.child('twoMultiplesOf10').isNumber() && newData.child('twoMultiplesOf10').val() >= 0)))"
           }
         }
       }
     }
   }
-  
+}
