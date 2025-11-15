@@ -90,6 +90,44 @@
           }
         }
       }
+    },
+
+    "rooms_music": {
+      "$roomCode": {
+        ".read": "auth != null",
+        ".write": "auth != null && (!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid)",
+
+        "hostId": { ".read": true },
+
+        "status":     { ".write": "root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid" },
+        "roundIndex": { ".write": "root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid" },
+        "maxRounds":  { ".write": "root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid", ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 50" },
+        "roundMs":    { ".write": "root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid", ".validate": "newData.isNumber() && newData.val() >= 5000 && newData.val() <= 30000" },
+        "prepMs":     { ".write": "root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid", ".validate": "newData.isNumber() && newData.val() >= 1000 && newData.val() <= 10000" },
+        "startAt":    { ".write": "root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid", ".validate": "newData.isNumber()" },
+
+        "playlist":   { ".write": "root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid" },
+        "scoreboard": { ".write": "root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid" },
+
+        "players": {
+          ".read": true,
+          "$playerId": {
+            ".write": "auth != null && ( !data.exists() ? auth.uid == $playerId : (auth.uid == $playerId || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid) )"
+          }
+        },
+
+        "current": {
+          ".write": "root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
+          "answers": {
+            "$playerId": {
+              ".write": "auth.uid == $playerId"
+            }
+          },
+          "firstCorrect": {
+            ".write": "root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid"
+          }
+        }
+      }
     }
   }
 }
