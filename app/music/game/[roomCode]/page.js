@@ -138,6 +138,8 @@ export default function GuessTheSongGamePage() {
   const playingMs = Math.max(0, (room?.startAt || 0) + (room?.roundMs || 15000) - serverNow);
   const isCountdown = room?.status === 'countdown' && countdownMs > 0;
   const isPlaying = room?.status === 'playing' || (room?.status === 'countdown' && countdownMs === 0 && playingMs > 0);
+  const playersCount = Object.keys(room?.players || {}).length;
+  const answersCount = Object.keys(room?.current?.answers || {}).length;
 
   useEffect(() => {
     if (!room || !isHost || !room.startAt) return;
@@ -181,6 +183,16 @@ export default function GuessTheSongGamePage() {
       }
     }).catch(() => {});
   }, [room?.current?.answers, room?.current?.firstCorrect, room?.current?.correctIndex, room?.players, room?.startAt, isHost, roomCode]);
+
+  // Chiudi il round se tutti hanno risposto (host)
+  useEffect(() => {
+    if (!room || !isHost) return;
+    if (room.status !== 'playing') return;
+    if (playersCount === 0) return;
+    if (answersCount >= playersCount) {
+      update(ref(db, `rooms_music/${roomCode}`), { status: 'reveal' }).catch(() => {});
+    }
+  }, [answersCount, playersCount, room?.status, isHost, roomCode]);
 
   async function startRound() {
     if (!room || !isHost) return;
@@ -236,12 +248,24 @@ export default function GuessTheSongGamePage() {
   }, [room?.scoreboard]);
 
   if (loading) {
-    return <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Caricamento stanza...</main>;
+    return (
+      <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+        <video autoPlay muted loop playsInline className="fixed top-0 left-0 w-full h-full object-cover -z-10">
+          <source src="/videos/gts-background.mp4" type="video/mp4" />
+        </video>
+        <div className="fixed inset-0 bg-black/60 -z-10"></div>
+        Caricamento stanza...
+      </main>
+    );
   }
 
   if (error) {
     return (
-      <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+      <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, position: 'relative' }}>
+        <video autoPlay muted loop playsInline className="fixed top-0 left-0 w-full h-full object-cover -z-10">
+          <source src="/videos/gts-background.mp4" type="video/mp4" />
+        </video>
+        <div className="fixed inset-0 bg-black/60 -z-10"></div>
         <div style={{ border: '2px solid rgba(239,68,68,0.4)', borderRadius: 16, padding: 24, background: '#fff' }}>
           <h1 style={{ color: '#dc2626' }}>Errore</h1>
           <p>{error}</p>
@@ -258,8 +282,13 @@ export default function GuessTheSongGamePage() {
   const firstCorrect = room.current?.firstCorrect;
 
   return (
-    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-      <div style={{ width: 'min(1100px, 98vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 18, background: '#fff', padding: 28, boxShadow: '0 20px 50px rgba(0,0,0,0.12)' }}>
+    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, position: 'relative' }}>
+      <video autoPlay muted loop playsInline className="fixed top-0 left-0 w-full h-full object-cover -z-10">
+        <source src="/videos/gts-background.mp4" type="video/mp4" />
+      </video>
+      <div className="fixed inset-0 bg-black/60 -z-10"></div>
+
+      <div style={{ width: 'min(1100px, 98vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 18, background: 'rgba(255,255,255,0.92)', padding: 28, boxShadow: '0 20px 50px rgba(0,0,0,0.25)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <Link href="/music" className="btn-3d" style={{ textDecoration: 'none' }}> Menu</Link>
           <h1 style={{ margin: 0, color: '#111827' }}>Room: {roomCode}</h1>
@@ -288,15 +317,43 @@ export default function GuessTheSongGamePage() {
                 const disabled = !isPlaying || answerIndex !== null;
                 const isMine = answerIndex === idx;
                 const isCorrectReveal = room.status === 'reveal' && idx === room.current?.correctIndex;
+                const isWrongReveal = room.status === 'reveal' && answerIndex === idx && idx !== room.current?.correctIndex;
+                const mutedReveal = room.status === 'reveal' && !isCorrectReveal && !isWrongReveal;
+
+                let background = '#111827';
+                let color = '#fff';
+                let border = '1px solid rgba(255,255,255,0.12)';
+                let boxShadow = '0 8px 20px rgba(0,0,0,0.25)';
+
+                if (room.status === 'reveal') {
+                  if (isCorrectReveal) {
+                    background = '#16a34a';
+                    border = '1px solid #15803d';
+                  } else if (isWrongReveal) {
+                    background = '#dc2626';
+                    border = '1px solid #b91c1c';
+                  } else if (mutedReveal) {
+                    background = '#1f2937';
+                    color = '#e5e7eb';
+                    border = '1px solid rgba(255,255,255,0.08)';
+                  }
+                } else if (isMine) {
+                  border = '2px solid #60a5fa';
+                  boxShadow = '0 0 0 3px rgba(96,165,250,0.35)';
+                }
+
                 return (
                   <button
                     key={idx}
-                    className="btn-3d"
+                    className="btn-3d btn-option"
                     onClick={() => sendAnswer(idx)}
                     disabled={disabled}
                     style={{
                       justifyContent: 'flex-start',
-                      background: isCorrectReveal ? 'rgba(16,185,129,0.2)' : isMine ? 'rgba(59,130,246,0.15)' : undefined,
+                      background,
+                      color,
+                      border,
+                      boxShadow,
                     }}
                   >
                     {option}
@@ -304,7 +361,7 @@ export default function GuessTheSongGamePage() {
                 );
               })}
             </div>
-            {firstCorrect && (
+            {firstCorrect && room.status === 'reveal' && (
               <div style={{ marginTop: 12, padding: 12, borderRadius: 12, background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.3)', color: '#065f46' }}>
                 <p style={{ margin: 0, fontWeight: 700 }}>Prima risposta corretta: {room.players?.[firstCorrect.playerId]?.name || firstCorrect.playerId}</p>
                 <p style={{ margin: 0 }}>Tempo: {(firstCorrect.deltaMs / 1000).toFixed(2)}s  +{firstCorrect.points} punti</p>
@@ -318,7 +375,7 @@ export default function GuessTheSongGamePage() {
               {scoreboard.length === 0 && <li style={{ color: '#6b7280' }}>Ancora nessun punto</li>}
               {scoreboard.map((row, idx) => (
                 <li key={row.id} style={{ color: row.id === playerId ? '#4f46e5' : '#111827', fontWeight: row.id === playerId ? 700 : 500 }}>
-                  {idx + 1}. {row.name || 'Player'}  {row.points || 0} pt
+                  {idx + 1}. {row.id === room.hostId ? '👑 ' : ''}{row.name || 'Player'}  {row.points || 0} pt
                 </li>
               ))}
             </ol>
@@ -350,7 +407,7 @@ export default function GuessTheSongGamePage() {
               {scoreboard.slice(0, 3).map((row, idx) => (
                 <div key={row.id} style={{ flex: '1 1 200px', border: '1px solid rgba(17,24,39,0.12)', borderRadius: 12, padding: 16, background: idx === 0 ? 'rgba(251,191,36,0.2)' : 'rgba(209,213,219,0.3)' }}>
                   <h3 style={{ margin: 0 }}>{idx + 1}</h3>
-                  <p style={{ margin: '4px 0', fontWeight: 700 }}>{row.name || 'Player'}</p>
+                  <p style={{ margin: '4px 0', fontWeight: 700 }}>{row.id === room.hostId ? '👑 ' : ''}{row.name || 'Player'}</p>
                   <p style={{ margin: 0 }}>{row.points || 0} punti</p>
                 </div>
               ))}

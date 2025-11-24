@@ -58,7 +58,7 @@ export default function MusicJoinPage() {
       const snap = await get(roomRef);
       if (!snap.exists()) throw new Error('Stanza non trovata');
       const data = snap.val();
-      if (data.status === 'finished') throw new Error('Partita gia conclusa');
+      if (data.status === 'finished') throw new Error('Partita già conclusa');
 
       await update(ref(db, `rooms_music/${roomCode}/players`), {
         [user.uid]: { name: name.trim(), avatar },
@@ -76,8 +76,19 @@ export default function MusicJoinPage() {
   }
 
   return (
-    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-      <div style={{ width: 'min(520px, 92vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 16, background: '#fff', padding: 28, boxShadow: '0 16px 40px rgba(0,0,0,0.08)' }}>
+    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, position: 'relative' }}>
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="fixed top-0 left-0 w-full h-full object-cover -z-10"
+      >
+        <source src="/videos/gts-background.mp4" type="video/mp4" />
+      </video>
+      <div className="fixed inset-0 bg-black/60 -z-10"></div>
+
+      <div style={{ width: 'min(520px, 92vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 16, background: 'rgba(255,255,255,0.92)', padding: 28, boxShadow: '0 16px 40px rgba(0,0,0,0.2)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
           <Link href="/music" className="btn-3d" style={{ textDecoration: 'none' }}>Landing</Link>
           <h1 style={{ margin: 0, color: '#111827' }}>Entra nella stanza GTS</h1>

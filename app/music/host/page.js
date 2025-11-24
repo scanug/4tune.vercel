@@ -123,8 +123,19 @@ function MusicHostInner() {
   }
 
   return (
-    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-      <div style={{ width: 'min(720px, 94vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 18, background: '#fff', padding: 28, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}>
+    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, position: 'relative' }}>
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="fixed top-0 left-0 w-full h-full object-cover -z-10"
+      >
+        <source src="/videos/gts-background.mp4" type="video/mp4" />
+      </video>
+      <div className="fixed inset-0 bg-black/60 -z-10"></div>
+
+      <div style={{ width: 'min(720px, 94vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 18, background: 'rgba(255,255,255,0.92)', padding: 28, boxShadow: '0 20px 40px rgba(0,0,0,0.2)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
           <Link href="/music/categories" className="btn-3d" style={{ textDecoration: 'none' }}>Categorie</Link>
           <h1 style={{ margin: 0, color: '#111827' }}>Crea stanza musicale</h1>
@@ -187,3 +198,4 @@ export default function MusicHostPage() {
     </Suspense>
   );
 }
+
