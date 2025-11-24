@@ -1,8 +1,8 @@
 'use client';
 
+import { Suspense, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
 import { ref, get, set, update } from 'firebase/database';
 import { signInAnonymously } from 'firebase/auth';
 import { auth, db } from '@/lib/firebase';
@@ -16,7 +16,7 @@ function generateRoomCode(length = 4) {
   return code;
 }
 
-export default function MusicHostPage() {
+function MusicHostInner() {
   const params = useSearchParams();
   const playlistId = params.get('playlist');
   const playlistTitle = params.get('title') || 'Playlist personalizzata';
@@ -177,5 +177,13 @@ export default function MusicHostPage() {
         )}
       </div>
     </main>
+  );
+}
+
+export default function MusicHostPage() {
+  return (
+    <Suspense fallback={<main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>Caricamento...</main>}>
+      <MusicHostInner />
+    </Suspense>
   );
 }
