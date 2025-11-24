@@ -151,39 +151,6 @@ export default function GuessTheSongGamePage() {
     }
   }, [room?.status, room?.startAt, countdownMs, playingMs, isHost, roomCode]);
 
-  useEffect(() => {
-    if (!room || !isHost) return;
-    const answers = room.current?.answers;
-    if (!answers || room.current?.firstCorrect) return;
-    const entries = Object.entries(answers);
-    if (!entries.length) return;
-    const correctIndex = room.current?.correctIndex;
-    if (typeof correctIndex !== 'number') return;
-    const correctAnswers = entries.filter(([_, ans]) => ans && ans.choice === correctIndex);
-    if (!correctAnswers.length) return;
-    correctAnswers.sort((a, b) => (a[1].at || Infinity) - (b[1].at || Infinity));
-    const [winnerId, ans] = correctAnswers[0];
-    const deltaMs = Math.max(0, (ans.at || 0) - (room.startAt || 0));
-    const points = Math.max(30, 100 - Math.floor(deltaMs / 100));
-    const firstCorrectRef = ref(db, `rooms_music/${roomCode}/current/firstCorrect`);
-    runTransaction(firstCorrectRef, (current) => {
-      if (current) return current;
-      return { playerId: winnerId, at: ans.at || Date.now(), deltaMs, points };
-    }).then((result) => {
-      if (result.committed) {
-        const boardRef = ref(db, `rooms_music/${roomCode}/scoreboard/${winnerId}`);
-        runTransaction(boardRef, (current) => {
-          const prev = Number(current?.points || 0);
-          return {
-            name: room.players?.[winnerId]?.name || current?.name || 'Player',
-            avatar: room.players?.[winnerId]?.avatar || current?.avatar || null,
-            points: prev + points,
-          };
-        }).catch(() => {});
-      }
-    }).catch(() => {});
-  }, [room?.current?.answers, room?.current?.firstCorrect, room?.current?.correctIndex, room?.players, room?.startAt, isHost, roomCode]);
-
   // Chiudi il round se tutti hanno risposto (host)
   useEffect(() => {
     if (!room || !isHost) return;
@@ -211,10 +178,11 @@ export default function GuessTheSongGamePage() {
     }
 
     const startAt = room.startAt || 0;
+    const bonuses = [30, 15, 5];
     const updates = correctAnswers.map(async ([playerId, ans], idx) => {
       const deltaMs = Math.max(0, (ans.at || 0) - startAt);
       const base = Math.max(30, 100 - Math.floor(deltaMs / 100));
-      const bonus = Math.max(0, 30 - idx * 20);
+      const bonus = bonuses[idx] || 0;
       const points = Math.max(10, base + bonus);
       const boardRef = ref(db, `rooms_music/${roomCode}/scoreboard/${playerId}`);
       await runTransaction(boardRef, (current) => {
