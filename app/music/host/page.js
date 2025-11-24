@@ -33,7 +33,7 @@ export default function MusicHostPage() {
   useEffect(() => {
     if (!playlistId) return;
     setPlaylistLoading(true);
-    fetch(`/api/spotify/playlist?id=${encodeURIComponent(playlistId)}`)
+    fetch(`/api/deezer/playlist?id=${encodeURIComponent(playlistId)}`)
       .then((res) => res.json())
       .then((data) => {
         if (data?.tracks?.length >= 4) {
@@ -42,7 +42,7 @@ export default function MusicHostPage() {
           setError('La playlist selezionata non ha abbastanza preview audio.');
         }
       })
-      .catch(() => setError('Errore nel recuperare la playlist da Spotify'))
+      .catch(() => setError('Errore nel recuperare la playlist da Deezer'))
       .finally(() => setPlaylistLoading(false));
   }, [playlistId]);
 
@@ -105,6 +105,7 @@ export default function MusicHostPage() {
           id: playlistData.id,
           name: playlistData.name,
           image: playlistData.image,
+          provider: 'deezer',
           tracks,
         },
         scoreboard: {},
