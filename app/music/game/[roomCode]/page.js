@@ -173,7 +173,7 @@ export default function GuessTheSongGamePage() {
       .filter(([_, ans]) => ans && ans.choice === correctIndex)
       .sort((a, b) => (a[1].at || Infinity) - (b[1].at || Infinity));
     if (!correctAnswers.length) {
-      update(ref(db, `rooms_music/${roomCode}/current/scored`), true).catch(() => {});
+      set(ref(db, `rooms_music/${roomCode}/current/scored`), true).catch(() => {});
       return;
     }
 
@@ -204,7 +204,7 @@ export default function GuessTheSongGamePage() {
         const [winnerId, ans] = correctAnswers[0];
         const deltaMs = Math.max(0, (ans.at || 0) - startAt);
         const points = Math.max(10, 100 - Math.floor(deltaMs / 100));
-        await update(ref(db, `rooms_music/${roomCode}/current/firstCorrect`), {
+        await set(ref(db, `rooms_music/${roomCode}/current/firstCorrect`), {
           playerId: winnerId,
           at: ans.at || Date.now(),
           deltaMs,
