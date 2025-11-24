@@ -161,7 +161,7 @@ export default function GuessTheSongGamePage() {
     }
   }, [answersCount, playersCount, room?.status, isHost, roomCode]);
 
-  // Assegna punteggi a tutti i giocatori che hanno risposto correttamente, con bonus decrescente per posizione
+  // Assegna punteggi a tutti i giocatori che hanno risposto correttamente, una sola volta per round
   useEffect(() => {
     if (!room || !isHost) return;
     if (room.status !== 'reveal') return;
@@ -178,32 +178,40 @@ export default function GuessTheSongGamePage() {
     }
 
     const startAt = room.startAt || 0;
-    const updates = correctAnswers.map(async ([playerId, ans], idx) => {
-      const deltaMs = Math.max(0, (ans.at || 0) - startAt);
-      const points = Math.max(10, 100 - Math.floor(deltaMs / 100));
-      const boardRef = ref(db, `rooms_music/${roomCode}/scoreboard/${playerId}`);
-      await runTransaction(boardRef, (current) => {
-        const prev = Number(current?.points || 0);
-        return {
-          name: room.players?.[playerId]?.name || current?.name || 'Player',
-          avatar: room.players?.[playerId]?.avatar || current?.avatar || null,
-          points: prev + points,
-        };
-      });
-      // Aggiorna firstCorrect se non presente
-      if (idx === 0 && !room.current?.firstCorrect) {
+    const scoredRef = ref(db, `rooms_music/${roomCode}/current/scored`);
+
+    runTransaction(scoredRef, (current) => {
+      if (current === true) return current;
+      return true;
+    }).then(async (res) => {
+      if (!res.committed) return; // qualcuno ha già segnato
+
+      for (const [playerId, ans] of correctAnswers) {
+        const deltaMs = Math.max(0, (ans.at || 0) - startAt);
+        const points = Math.max(10, 100 - Math.floor(deltaMs / 100));
+        const boardRef = ref(db, `rooms_music/${roomCode}/scoreboard/${playerId}`);
+        await runTransaction(boardRef, (current) => {
+          const prev = Number(current?.points || 0);
+          return {
+            name: room.players?.[playerId]?.name || current?.name || 'Player',
+            avatar: room.players?.[playerId]?.avatar || current?.avatar || null,
+            points: prev + points,
+          };
+        });
+      }
+
+      if (correctAnswers.length && !room.current?.firstCorrect) {
+        const [winnerId, ans] = correctAnswers[0];
+        const deltaMs = Math.max(0, (ans.at || 0) - startAt);
+        const points = Math.max(10, 100 - Math.floor(deltaMs / 100));
         await update(ref(db, `rooms_music/${roomCode}/current/firstCorrect`), {
-          playerId,
+          playerId: winnerId,
           at: ans.at || Date.now(),
           deltaMs,
           points,
         }).catch(() => {});
       }
-    });
-
-    Promise.allSettled(updates).finally(() => {
-      update(ref(db, `rooms_music/${roomCode}/current/scored`), true).catch(() => {});
-    });
+    }).catch(() => {});
   }, [room?.status, room?.current?.answers, room?.current?.correctIndex, room?.current?.firstCorrect, room?.current?.scored, room?.players, room?.startAt, isHost, roomCode]);
 
   async function startRound() {
