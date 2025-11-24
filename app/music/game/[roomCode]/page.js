@@ -399,6 +399,11 @@ export default function GuessTheSongGamePage() {
 
           <div style={{ flex: '1 1 260px', border: '1px solid rgba(17,24,39,0.12)', borderRadius: 14, padding: 16 }}>
             <h3 style={{ marginTop: 0, color: '#111827' }}>Classifica</h3>
+            {room.playlist?.name && (
+              <p style={{ margin: '4px 0 12px', color: '#111827', fontWeight: 600 }}>
+                Playlist: {room.playlist.name}
+              </p>
+            )}
             <ol style={{ paddingLeft: 18, margin: 0, display: 'grid', gap: 8 }}>
               {scoreboard.length === 0 && <li style={{ color: '#6b7280' }}>Ancora nessun punto</li>}
               {scoreboard.map((row, idx) => (

@@ -97,6 +97,12 @@ export default function CategoriesPage() {
         <p style={{ marginTop: 16, color: '#6b7280' }}>Ogni categoria cerca una playlist Deezer e la usa per il quiz musicale.</p>
         {error && <p style={{ color: '#dc2626', marginTop: 8 }}>{error}</p>}
 
+        <div style={{ marginTop: 10, marginBottom: 14, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+          <Link href="/music/join" className="btn-3d" style={{ textDecoration: 'none' }}>
+            Entra con codice stanza
+          </Link>
+        </div>
+
         <form onSubmit={handleSearch} style={{ marginTop: 12, marginBottom: 18, display: 'grid', gap: 10 }}>
           <label style={{ fontWeight: 600, color: '#111827' }}>Cerca una playlist (artista, genere...)</label>
           <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
@@ -105,7 +111,7 @@ export default function CategoriesPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="es. Dua Lipa, 80s, rock workout"
-              style={{ flex: '1 1 240px', padding: '0.6rem 0.8rem', borderRadius: 10, border: '1px solid rgba(17,24,39,0.2)' }}
+              style={{ flex: '1 1 240px', padding: '0.6rem 0.8rem', borderRadius: 10, border: '1px solid rgba(17,24,39,0.2)', color: '#111827' }}
             />
             <button className="btn-3d" type="submit" style={{ minWidth: 120 }} disabled={searchLoading}>
               {searchLoading ? 'Cerca...' : 'Cerca'}
