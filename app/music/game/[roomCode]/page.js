@@ -45,6 +45,7 @@ export default function GuessTheSongGamePage() {
   const [audioUnlocked, setAudioUnlocked] = useState(false);
   const [uid, setUid] = useState(null);
   const audioRef = useRef(null);
+  const playTimeoutRef = useRef(null);
 
   useEffect(() => {
     const unsub = auth.onAuthStateChanged((u) => {
@@ -94,42 +95,41 @@ export default function GuessTheSongGamePage() {
     setAnswerIndex(null);
   }, [room?.current?.trackId, room?.roundIndex]);
 
+  // Crea una sola istanza Audio per tutta la partita
   useEffect(() => {
-    const clipUrl = room?.current?.clipUrl;
-    if (!clipUrl) {
+    audioRef.current = new Audio();
+    return () => {
+      if (playTimeoutRef.current) clearTimeout(playTimeoutRef.current);
       if (audioRef.current) {
         audioRef.current.pause();
         audioRef.current = null;
       }
-      return;
-    }
-    const audio = new Audio(clipUrl);
-    audio.preload = 'auto';
-    audioRef.current = audio;
-    return () => {
-      audio.pause();
-      audioRef.current = null;
     };
-  }, [room?.current?.clipUrl]);
+  }, []);
 
+  // Sincronizza audio solo all'inizio di ogni round
   useEffect(() => {
-    if (!room || !room.startAt || !audioUnlocked) return;
+    if (playTimeoutRef.current) clearTimeout(playTimeoutRef.current);
+    const clipUrl = room?.current?.clipUrl;
+    const startAt = room?.startAt;
+    if (!clipUrl || !startAt || !audioUnlocked || !audioRef.current) return;
+
     const audio = audioRef.current;
-    if (!audio) return;
-    const serverNow = now + serverOffset;
-    const delay = (room.startAt || 0) - serverNow;
-    let timeout;
+    audio.src = clipUrl;
+    audio.currentTime = 0;
+
+    const serverNow = Date.now() + serverOffset;
+    const delay = startAt - serverNow;
+
     if (delay > 0) {
-      timeout = setTimeout(() => {
-        audio.currentTime = 0;
+      playTimeoutRef.current = setTimeout(() => {
         audio.play().catch(() => {});
       }, delay);
     } else {
       audio.currentTime = Math.max(0, Math.abs(delay) / 1000);
       audio.play().catch(() => {});
     }
-    return () => timeout && clearTimeout(timeout);
-  }, [room?.startAt, room?.current?.clipUrl, audioUnlocked, now, serverOffset]);
+  }, [room?.current?.clipUrl, room?.startAt, audioUnlocked, serverOffset]);
 
   const playerId = uid;
   const isHost = playerId && room?.hostId === playerId;
