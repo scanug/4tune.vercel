@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
-import { ref, onValue, update, runTransaction } from 'firebase/database';
+import { ref, onValue, update, runTransaction, set } from 'firebase/database';
 import { auth, db } from '@/lib/firebase';
 import { signInAnonymously } from 'firebase/auth';
 
