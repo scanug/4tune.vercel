@@ -194,6 +194,53 @@ export default function GuessTheSongGamePage() {
     }
   }, [answersCount, playersCount, room?.status, isHost, roomCode]);
 
+  // Assegna punteggi a tutti i giocatori che hanno risposto correttamente, con bonus decrescente per posizione
+  useEffect(() => {
+    if (!room || !isHost) return;
+    if (room.status !== 'reveal') return;
+    if (room.current?.scored) return;
+    const answers = room.current?.answers;
+    const correctIndex = room.current?.correctIndex;
+    if (!answers || typeof correctIndex !== 'number') return;
+    const correctAnswers = Object.entries(answers)
+      .filter(([_, ans]) => ans && ans.choice === correctIndex)
+      .sort((a, b) => (a[1].at || Infinity) - (b[1].at || Infinity));
+    if (!correctAnswers.length) {
+      update(ref(db, `rooms_music/${roomCode}/current/scored`), true).catch(() => {});
+      return;
+    }
+
+    const startAt = room.startAt || 0;
+    const updates = correctAnswers.map(async ([playerId, ans], idx) => {
+      const deltaMs = Math.max(0, (ans.at || 0) - startAt);
+      const base = Math.max(30, 100 - Math.floor(deltaMs / 100));
+      const bonus = Math.max(0, 30 - idx * 20);
+      const points = Math.max(10, base + bonus);
+      const boardRef = ref(db, `rooms_music/${roomCode}/scoreboard/${playerId}`);
+      await runTransaction(boardRef, (current) => {
+        const prev = Number(current?.points || 0);
+        return {
+          name: room.players?.[playerId]?.name || current?.name || 'Player',
+          avatar: room.players?.[playerId]?.avatar || current?.avatar || null,
+          points: prev + points,
+        };
+      });
+      // Aggiorna firstCorrect se non presente
+      if (idx === 0 && !room.current?.firstCorrect) {
+        await update(ref(db, `rooms_music/${roomCode}/current/firstCorrect`), {
+          playerId,
+          at: ans.at || Date.now(),
+          deltaMs,
+          points,
+        }).catch(() => {});
+      }
+    });
+
+    Promise.allSettled(updates).finally(() => {
+      update(ref(db, `rooms_music/${roomCode}/current/scored`), true).catch(() => {});
+    });
+  }, [room?.status, room?.current?.answers, room?.current?.correctIndex, room?.current?.firstCorrect, room?.current?.scored, room?.players, room?.startAt, isHost, roomCode]);
+
   async function startRound() {
     if (!room || !isHost) return;
     if (!room.playlist?.tracks?.length) {
@@ -241,17 +288,25 @@ export default function GuessTheSongGamePage() {
   }
 
   const scoreboard = useMemo(() => {
-    const data = room?.scoreboard || {};
-    return Object.entries(data)
-      .map(([id, entry]) => ({ id, ...entry }))
-      .sort((a, b) => (b.points || 0) - (a.points || 0));
-  }, [room?.scoreboard]);
+    const board = room?.scoreboard || {};
+    const players = room?.players || {};
+    const merged = Object.entries(players).map(([id, player]) => {
+      const base = board[id] || {};
+      return {
+        id,
+        name: player.name || base.name || 'Player',
+        avatar: player.avatar || base.avatar || null,
+        points: Number(base.points || 0),
+      };
+    });
+    return merged.sort((a, b) => (b.points || 0) - (a.points || 0));
+  }, [room?.scoreboard, room?.players]);
 
   if (loading) {
     return (
       <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
         <video autoPlay muted loop playsInline className="fixed top-0 left-0 w-full h-full object-cover -z-10">
-          <source src="/videos/gts-background.mp4" type="video/mp4" />
+          <source src="/background_gts.mp4" type="video/mp4" />
         </video>
         <div className="fixed inset-0 bg-black/60 -z-10"></div>
         Caricamento stanza...
@@ -263,7 +318,7 @@ export default function GuessTheSongGamePage() {
     return (
       <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, position: 'relative' }}>
         <video autoPlay muted loop playsInline className="fixed top-0 left-0 w-full h-full object-cover -z-10">
-          <source src="/videos/gts-background.mp4" type="video/mp4" />
+          <source src="/background_gts.mp4" type="video/mp4" />
         </video>
         <div className="fixed inset-0 bg-black/60 -z-10"></div>
         <div style={{ border: '2px solid rgba(239,68,68,0.4)', borderRadius: 16, padding: 24, background: '#fff' }}>
@@ -284,7 +339,7 @@ export default function GuessTheSongGamePage() {
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, position: 'relative' }}>
       <video autoPlay muted loop playsInline className="fixed top-0 left-0 w-full h-full object-cover -z-10">
-        <source src="/videos/gts-background.mp4" type="video/mp4" />
+        <source src="/background_gts.mp4" type="video/mp4" />
       </video>
       <div className="fixed inset-0 bg-black/60 -z-10"></div>
 
@@ -375,10 +430,20 @@ export default function GuessTheSongGamePage() {
               {scoreboard.length === 0 && <li style={{ color: '#6b7280' }}>Ancora nessun punto</li>}
               {scoreboard.map((row, idx) => (
                 <li key={row.id} style={{ color: row.id === playerId ? '#4f46e5' : '#111827', fontWeight: row.id === playerId ? 700 : 500 }}>
-                  {idx + 1}. {row.id === room.hostId ? '👑 ' : ''}{row.name || 'Player'}  {row.points || 0} pt
+                  {idx + 1}. {row.id === room.hostId ? '👑 ' : ''}{row.name || 'Player'} — {row.points || 0} pt
                 </li>
               ))}
             </ol>
+            <div style={{ marginTop: 12 }}>
+              <h4 style={{ margin: '6px 0', color: '#111827' }}>Giocatori</h4>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 6 }}>
+                {Object.entries(room?.players || {}).map(([id, p]) => (
+                  <li key={id} style={{ color: '#111827', fontWeight: id === room.hostId ? 700 : 500 }}>
+                    {id === room.hostId ? '👑 ' : ''}{p.name || 'Player'}
+                  </li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
 
@@ -419,3 +484,4 @@ export default function GuessTheSongGamePage() {
     </main>
   );
 }
+

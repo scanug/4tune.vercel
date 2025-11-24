@@ -84,7 +84,7 @@ export default function CategoriesPage() {
         playsInline
         className="fixed top-0 left-0 w-full h-full object-cover -z-10"
       >
-        <source src="/videos/gts-background.mp4" type="video/mp4" />
+        <source src="/background_gts.mp4" type="video/mp4" />
       </video>
       <div className="fixed inset-0 bg-black/60 -z-10"></div>
 

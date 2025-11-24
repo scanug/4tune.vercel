@@ -84,7 +84,7 @@ export default function MusicJoinPage() {
         playsInline
         className="fixed top-0 left-0 w-full h-full object-cover -z-10"
       >
-        <source src="/videos/gts-background.mp4" type="video/mp4" />
+        <source src="/background_gts.mp4" type="video/mp4" />
       </video>
       <div className="fixed inset-0 bg-black/60 -z-10"></div>
 
@@ -102,7 +102,7 @@ export default function MusicJoinPage() {
             value={name}
             maxLength={20}
             onChange={(e) => setName(e.target.value)}
-            style={{ fontSize: '1.1rem', padding: '0.5rem', borderRadius: 10, border: '1px solid rgba(17,24,39,0.2)' }}
+            style={{ fontSize: '1.1rem', padding: '0.5rem', borderRadius: 10, border: '1px solid rgba(17,24,39,0.2)', color: '#111827' }}
           />
           <label style={{ fontWeight: 600, color: '#111827' }}>Codice stanza</label>
           <input
@@ -110,7 +110,7 @@ export default function MusicJoinPage() {
             maxLength={4}
             value={code}
             onChange={(e) => setCode(e.target.value.toUpperCase())}
-            style={{ fontSize: '2rem', textAlign: 'center', padding: '0.5rem', borderRadius: 10, border: '1px solid rgba(17,24,39,0.2)' }}
+            style={{ fontSize: '2rem', textAlign: 'center', padding: '0.5rem', borderRadius: 10, border: '1px solid rgba(17,24,39,0.2)', color: '#111827' }}
           />
           <button className="btn-3d" onClick={handleJoin} style={{ minWidth: 160 }} disabled={loading}>
             {loading ? 'Accesso...' : 'Entra'}
