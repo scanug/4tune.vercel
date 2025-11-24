@@ -178,12 +178,9 @@ export default function GuessTheSongGamePage() {
     }
 
     const startAt = room.startAt || 0;
-    const bonuses = [30, 15, 5];
     const updates = correctAnswers.map(async ([playerId, ans], idx) => {
       const deltaMs = Math.max(0, (ans.at || 0) - startAt);
-      const base = Math.max(30, 100 - Math.floor(deltaMs / 100));
-      const bonus = bonuses[idx] || 0;
-      const points = Math.max(10, base + bonus);
+      const points = Math.max(10, 100 - Math.floor(deltaMs / 100));
       const boardRef = ref(db, `rooms_music/${roomCode}/scoreboard/${playerId}`);
       await runTransaction(boardRef, (current) => {
         const prev = Number(current?.points || 0);
