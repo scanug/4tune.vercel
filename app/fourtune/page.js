@@ -7,8 +7,8 @@ import { db, auth, storage } from '@/lib/firebase';
 import { v4 as uuidv4 } from "uuid";
 import { onAuthStateChanged, signOut, updateProfile, signInAnonymously } from "firebase/auth";
 import { ref as stRef, uploadBytes, getDownloadURL } from "firebase/storage";
-import Wheel from "../components/Wheel";
-import { ensurePlayerMissions, resetMissionsIfNeeded, updateMissionProgress, subscribeToPlayerMissions, MISSION_DEFS } from "../lib/missions";
+import Wheel from "../../components/Wheel";
+import { ensurePlayerMissions, resetMissionsIfNeeded, updateMissionProgress, subscribeToPlayerMissions, MISSION_DEFS } from "../../lib/missions";
 
 export default function Home() {
   const [ready, setReady] = useState(false);
