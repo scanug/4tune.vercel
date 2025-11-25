@@ -1,8 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import { auth, db, storage } from "../../lib/firebase";
-import { onAuthStateChanged, updateProfile } from "firebase/auth";
+import { onAuthStateChanged, updateProfile, signInAnonymously } from "firebase/auth";
 import { ref as dbRef, onValue, off, update } from "firebase/database";
 import { ref as stRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -11,18 +10,19 @@ const PRESET_AVATARS = [
 ];
 
 export default function ProfilePage() {
-  const router = useRouter();
   const [uid, setUid] = useState(null);
   const [profile, setProfile] = useState(null);
   const [name, setName] = useState("");
   const [avatar, setAvatar] = useState("");
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
       if (!u) {
-        router.push("/auth");
+        signInAnonymously(auth).catch(() => {});
+        setLoading(false);
       } else {
         setUid(u.uid);
         const r = dbRef(db, `users/${u.uid}`);
@@ -31,11 +31,12 @@ export default function ProfilePage() {
           setProfile(val);
           setName(val?.name || "");
           setAvatar(val?.avatar || "");
+          setLoading(false);
         });
       }
     });
     return () => unsub();
-  }, [router]);
+  }, []);
 
   async function handleUpload(file) {
     if (!file || !uid) return;
@@ -61,12 +62,18 @@ export default function ProfilePage() {
     } finally { setSaving(false); }
   }
 
-  if (!uid || !profile) return <p style={{ padding: 20 }}>Caricamento profilo...</p>;
+  if (loading) return <p style={{ padding: 20 }}>Caricamento profilo...</p>;
+  if (!uid || !profile) return <p style={{ padding: 20 }}>Autenticazione necessaria. Riprova a fare login.</p>;
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ padding: 24, width: 'min(520px, 92vw)', border: '2px solid rgba(99,102,241,0.4)', borderRadius: 16, background: 'rgba(255,255,255,0.04)', boxShadow: '0 10px 30px rgba(0,0,0,0.15)' }}>
         <h1 style={{ textAlign: 'center' }}>Profilo utente</h1>
+        {typeof profile?.credits === 'number' && (
+          <div style={{ textAlign: 'center', marginBottom: 10, fontWeight: 700, color: '#111827' }}>
+            Crediti: {profile.credits}
+          </div>
+        )}
         <div style={{ display: 'grid', gap: 12, marginTop: 12 }}>
           <div>
             <label>Nickname</label>
