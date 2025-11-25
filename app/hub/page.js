@@ -1,15 +1,44 @@
 'use client';
 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { ref, onValue } from 'firebase/database';
+import { auth, db } from '@/lib/firebase';
 
 export default function HubPage() {
+  const [credits, setCredits] = useState(null);
+
+  useEffect(() => {
+    const unsubAuth = onAuthStateChanged(auth, (u) => {
+      if (!u) {
+        setCredits(null);
+        return;
+      }
+      const userRef = ref(db, `users/${u.uid}`);
+      const unsub = onValue(userRef, (snap) => {
+        const val = snap.val();
+        if (val && typeof val.credits === 'number') setCredits(val.credits);
+      });
+      return () => unsub();
+    });
+    return () => unsubAuth();
+  }, []);
+
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
       <div style={{ width: 'min(800px, 94vw)', textAlign: 'center', border: '2px solid #111827', borderRadius: 12, background: 'rgba(255,255,255,0.9)', boxShadow: '0 12px 0 #111827, 0 12px 24px rgba(0,0,0,0.2)' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: 12 }}>
           <Link href="/" className="btn-3d" style={{ textDecoration: 'none' }}>Home</Link>
           <h1 style={{ margin: 0, letterSpacing: 1, textTransform: 'uppercase', color: '#111827' }}>Hub Giochi</h1>
-          <span />
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+            {credits != null && (
+              <span style={{ padding: '6px 10px', borderRadius: 999, background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.3)', fontWeight: 700, color: '#111827' }}>
+                {credits} 🪙
+              </span>
+            )}
+            <Link href="/profile" className="btn-3d" style={{ textDecoration: 'none' }}>Profilo</Link>
+          </div>
         </div>
 
         <div style={{ padding: 16, textAlign: 'left' }}>
@@ -21,7 +50,7 @@ export default function HubPage() {
                 <div style={{ fontWeight: 800, color: '#111827' }}>4Tune - Your Lucky Numbers</div>
                 <div style={{ fontSize: 13, opacity: 0.85, color: '#111827' }}>Scommetti sui numeri, gira la ruota, vinci crediti!</div>
               </div>
-              <Link href="/" className="btn-3d" style={{ textDecoration: 'none' }}>Vai a 4Tune</Link>
+              <Link href="/fourtune" className="btn-3d" style={{ textDecoration: 'none' }}>Vai a 4Tune</Link>
             </li>
             <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid rgba(17,24,39,0.2)', borderRadius: 10, padding: '10px 12px', background: '#fdf4ff' }}>
               <div>

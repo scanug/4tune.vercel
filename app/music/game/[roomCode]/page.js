@@ -44,6 +44,7 @@ export default function GuessTheSongGamePage() {
   const [answerIndex, setAnswerIndex] = useState(null);
   const [audioUnlocked, setAudioUnlocked] = useState(false);
   const [uid, setUid] = useState(null);
+  const [userCredits, setUserCredits] = useState(null);
   const audioRef = useRef(null);
   const playTimeoutRef = useRef(null);
 
@@ -58,6 +59,16 @@ export default function GuessTheSongGamePage() {
     });
     return () => unsub();
   }, []);
+
+  useEffect(() => {
+    if (!uid) return;
+    const userRef = ref(db, `users/${uid}`);
+    const unsub = onValue(userRef, (snap) => {
+      const val = snap.val();
+      if (val && typeof val.credits === 'number') setUserCredits(val.credits);
+    });
+    return () => unsub();
+  }, [uid]);
 
   useEffect(() => {
     const offsetRef = ref(db, '.info/serverTimeOffset');
@@ -320,7 +331,15 @@ export default function GuessTheSongGamePage() {
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <Link href="/music" className="btn-3d" style={{ textDecoration: 'none' }}> Menu</Link>
           <h1 style={{ margin: 0, color: '#111827' }}>Room: {roomCode}</h1>
-          <span className="bubble">Status: {room.status}</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
+            {userCredits != null && (
+              <span className="bubble" style={{ background: 'rgba(99,102,241,0.12)', color: '#111827' }}>
+                Crediti: {userCredits}
+              </span>
+            )}
+            <Link href="/profile" className="btn-3d" style={{ textDecoration: 'none' }}>Profilo</Link>
+            <span className="bubble">Status: {room.status}</span>
+          </div>
         </div>
 
         <div style={{ marginTop: 16, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
