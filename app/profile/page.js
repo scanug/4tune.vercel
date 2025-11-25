@@ -17,14 +17,17 @@ export default function ProfilePage() {
   const [saving, setSaving] = useState(false);
   const [msg, setMsg] = useState("");
   const [loading, setLoading] = useState(true);
+  const [isLogged, setIsLogged] = useState(false);
 
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
       if (!u) {
         signInAnonymously(auth).catch(() => {});
         setLoading(false);
+        setIsLogged(false);
       } else {
         setUid(u.uid);
+        setIsLogged(true);
         const r = dbRef(db, `users/${u.uid}`);
         onValue(r, (snap) => {
           const val = snap.val();
@@ -68,12 +71,21 @@ export default function ProfilePage() {
   return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
       <div style={{ padding: 24, width: 'min(520px, 92vw)', border: '2px solid rgba(99,102,241,0.4)', borderRadius: 16, background: 'rgba(255,255,255,0.04)', boxShadow: '0 10px 30px rgba(0,0,0,0.15)' }}>
-        <h1 style={{ textAlign: 'center' }}>Profilo utente</h1>
-        {typeof profile?.credits === 'number' && (
-          <div style={{ textAlign: 'center', marginBottom: 10, fontWeight: 700, color: '#111827' }}>
-            Crediti: {profile.credits}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 8 }}>
+          <h1 style={{ margin: 0 }}>Profilo utente</h1>
+          <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+            {typeof profile?.credits === 'number' && (
+              <span className="bubble" style={{ background: 'rgba(99,102,241,0.12)', color: '#111827' }}>
+                Crediti: {profile.credits}
+              </span>
+            )}
+            {!isLogged && (
+              <a href="/auth" className="btn-3d" style={{ textDecoration: 'none' }}>
+                Login
+              </a>
+            )}
           </div>
-        )}
+        </div>
         <div style={{ display: 'grid', gap: 12, marginTop: 12 }}>
           <div>
             <label>Nickname</label>
