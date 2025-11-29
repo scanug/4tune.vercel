@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
-import { ref, get, update } from 'firebase/database';
+import { ref, get, update, runTransaction, onValue } from 'firebase/database';
 import { signInAnonymously } from 'firebase/auth';
 import { auth, db } from '@/lib/firebase';
 
@@ -13,11 +13,20 @@ export default function MusicJoinPage() {
   const [name, setName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
+  const [credits, setCredits] = useState(0);
+  const [wager, setWager] = useState(10);
 
   useEffect(() => {
     const unsub = auth.onAuthStateChanged((u) => {
       if (!u) {
         signInAnonymously(auth).catch(() => {});
+      } else {
+        const r = ref(db, `users/${u.uid}`);
+        const off = onValue(r, (snap) => {
+          const val = snap.val();
+          if (val && typeof val.credits === 'number') setCredits(val.credits);
+        });
+        return () => off();
       }
     });
     return () => unsub();
@@ -44,6 +53,7 @@ export default function MusicJoinPage() {
       setError('Inserisci un nickname');
       return;
     }
+    if (wager < 10) { setError('Scommessa minima 10 crediti'); return; }
     setLoading(true);
     setError('');
     try {
@@ -54,14 +64,29 @@ export default function MusicJoinPage() {
       }
       if (!user) throw new Error('Autenticazione fallita, riprova');
 
+      if (credits < wager) { throw new Error('Crediti insufficienti per la scommessa'); }
+
       const roomRef = ref(db, `rooms_music/${roomCode}`);
       const snap = await get(roomRef);
       if (!snap.exists()) throw new Error('Stanza non trovata');
       const data = snap.val();
       if (data.status === 'finished') throw new Error('Partita già conclusa');
 
+      const wagerAmount = Math.min(wager, credits);
+      const userRef = ref(db, `users/${user.uid}`);
+      const wagerOk = await runTransaction(userRef, (current) => {
+        const cur = current || {};
+        const c = Number(cur.credits || 0);
+        if (c < wagerAmount) return cur;
+        return { ...cur, credits: c - wagerAmount };
+      });
+      if (!wagerOk.committed) throw new Error('Crediti insufficienti per la scommessa');
+
       await update(ref(db, `rooms_music/${roomCode}/players`), {
         [user.uid]: { name: name.trim(), avatar },
+      });
+      await update(ref(db, `rooms_music/${roomCode}/wagers`), {
+        [user.uid]: wagerAmount,
       });
       try {
         localStorage.setItem('playerName', name.trim());
@@ -112,6 +137,18 @@ export default function MusicJoinPage() {
             onChange={(e) => setCode(e.target.value.toUpperCase())}
             style={{ fontSize: '2rem', textAlign: 'center', padding: '0.5rem', borderRadius: 10, border: '1px solid rgba(17,24,39,0.2)', color: '#111827' }}
           />
+          <div>
+            <label style={{ fontWeight: 600, color: '#111827' }}>Scommessa (min 10, max {credits})</label>
+            <input
+              type="range"
+              min={10}
+              max={Math.max(10, credits)}
+              value={wager}
+              onChange={(e) => setWager(Math.min(Math.max(10, Number(e.target.value)), credits))}
+              style={{ width: '100%' }}
+            />
+            <div style={{ color: '#111827' }}>{wager} crediti</div>
+          </div>
           <button className="btn-3d" onClick={handleJoin} style={{ minWidth: 160 }} disabled={loading}>
             {loading ? 'Accesso...' : 'Entra'}
           </button>

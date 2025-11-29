@@ -151,6 +151,7 @@ export default function GuessTheSongGamePage() {
   const isPlaying = room?.status === 'playing' || (room?.status === 'countdown' && countdownMs === 0 && playingMs > 0);
   const playersCount = Object.keys(room?.players || {}).length;
   const answersCount = Object.keys(room?.current?.answers || {}).length;
+  const wagerMap = room?.wagers || {};
 
   useEffect(() => {
     if (!room || !isHost || !room.startAt) return;
@@ -257,6 +258,42 @@ export default function GuessTheSongGamePage() {
   async function finishGame() {
     await update(ref(db, `rooms_music/${roomCode}`), { status: 'finished', startAt: null }).catch(() => {});
   }
+
+  // Payout scommessa: ogni client applica solo la propria
+  useEffect(() => {
+    if (room?.status !== 'finished' || !playerId) return;
+    const payoutFlag = ref(db, `rooms_music/${roomCode}/payoutApplied/${playerId}`);
+    const wager = Number(wagerMap[playerId] || 0);
+    if (wager <= 0) return;
+    const offFlag = onValue(payoutFlag, (snap) => {
+      if (snap.exists()) return;
+      const playersArr = scoreboard.slice().sort((a, b) => (b.points || 0) - (a.points || 0));
+      const placements = playersArr.map((p) => p.id);
+      const firstId = placements[0];
+      const secondId = placements[1];
+      const hasSecond = placements.length >= 3;
+
+      let prize = 0;
+      if (playerId === firstId) {
+        prize = wager * 2;
+      } else if (hasSecond && playerId === secondId) {
+        prize = wager; // ritorno puntata
+      }
+      if (prize <= 0) return;
+
+      const userRef = ref(db, `users/${playerId}`);
+      runTransaction(userRef, (current) => {
+        const cur = current || {};
+        const c = Number(cur.credits || 0);
+        return { ...cur, credits: c + prize };
+      }).then((res) => {
+        if (res.committed) {
+          update(payoutFlag, { amount: prize, at: Date.now() }).catch(() => {});
+        }
+      }).catch(() => {});
+    });
+    return () => offFlag();
+  }, [room?.status, playerId, wagerMap, scoreboard, roomCode]);
 
   async function sendAnswer(idx) {
     if (!room || !playerId || !isPlaying) return;

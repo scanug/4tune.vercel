@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { ref, get, set, update } from 'firebase/database';
+import { ref, get, set, update, runTransaction, onValue } from 'firebase/database';
 import { signInAnonymously } from 'firebase/auth';
 import { auth, db } from '@/lib/firebase';
 
@@ -29,6 +29,8 @@ function MusicHostInner() {
   const [roomCode, setRoomCode] = useState('');
   const [playlistData, setPlaylistData] = useState(null);
   const [playlistLoading, setPlaylistLoading] = useState(false);
+  const [credits, setCredits] = useState(0);
+  const [wager, setWager] = useState(10);
 
   useEffect(() => {
     if (!playlistId) return;
@@ -55,6 +57,20 @@ function MusicHostInner() {
     return () => unsub();
   }, []);
 
+  useEffect(() => {
+    const unsub = auth.onAuthStateChanged((u) => {
+      if (u) {
+        const r = ref(db, `users/${u.uid}`);
+        const off = onValue(r, (snap) => {
+          const val = snap.val();
+          if (val && typeof val.credits === 'number') setCredits(val.credits);
+        });
+        return () => off();
+      }
+    });
+    return () => {};
+  }, []);
+
   const hostProfile = useMemo(() => {
     if (typeof window === 'undefined') return { name: 'Host', avatar: null };
     return {
@@ -70,6 +86,14 @@ function MusicHostInner() {
     }
     if (!playlistData || playlistLoading) {
       setError('Playlist in caricamento, riprova tra poco');
+      return;
+    }
+    if (wager < 10) {
+      setError('Scommessa minima 10 crediti');
+      return;
+    }
+    if (credits < wager) {
+      setError('Crediti insufficienti per la scommessa');
       return;
     }
     setLoading(true);
@@ -92,6 +116,16 @@ function MusicHostInner() {
         createRoom();
         return;
       }
+      // Detrai la scommessa dall'host
+      const userRef = ref(db, `users/${user.uid}`);
+      const wagerAmount = Math.min(wager, credits);
+      await runTransaction(userRef, (current) => {
+        const cur = current || {};
+        const c = Number(cur.credits || 0);
+        if (c < wagerAmount) return cur;
+        return { ...cur, credits: c - wagerAmount };
+      });
+
       await set(roomRef, {
         hostId: user.uid,
         createdAt: Date.now(),
@@ -110,6 +144,9 @@ function MusicHostInner() {
         },
         scoreboard: {},
         current: null,
+        wagers: {
+          [user.uid]: wagerAmount,
+        },
         players: {
           [user.uid]: { name: hostProfile.name, avatar: hostProfile.avatar },
         },
@@ -151,6 +188,18 @@ function MusicHostInner() {
         </div>
 
         <div style={{ marginTop: 20, display: 'grid', gap: 16 }}>
+          <div>
+            <span style={{ display: 'block', marginBottom: 6, color: '#111827', fontWeight: 600 }}>Scommessa (min 10, max {credits})</span>
+            <input
+              type="range"
+              min={10}
+              max={Math.max(10, credits)}
+              value={wager}
+              onChange={(e) => setWager(Math.min(Math.max(10, Number(e.target.value)), credits))}
+              style={{ width: '100%' }}
+            />
+            <div style={{ marginTop: 4, color: '#111827' }}>{wager} crediti</div>
+          </div>
           <label>
             <span style={{ display: 'block', marginBottom: 6, color: '#111827', fontWeight: 600 }}>Numero di round: {maxRounds}</span>
             <input type="range" min={1} max={20} value={maxRounds} onChange={(e) => setMaxRounds(Number(e.target.value))} style={{ width: '100%' }} />
