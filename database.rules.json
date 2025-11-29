@@ -146,11 +146,11 @@
       },
 
 
-      "rooms_music": {
-        "$roomCode": {
-          ".read": "auth != null",
+    "rooms_music": {
+      "$roomCode": {
+        ".read": "auth != null",
 
-          ".write": "auth != null && (!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid)",
+        ".write": "auth != null",
 
           "hostId": {
             ".read": true,
