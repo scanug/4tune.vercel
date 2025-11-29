@@ -7,6 +7,14 @@
         ".read": "auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin'",
         ".write": "auth.uid == $uid",
 
+        "credits": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000000" },
+        "name": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32" },
+        "avatar": { ".validate": "newData.isString() || newData.val() == null" },
+        "winsWeek": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+        "winsMonth": { ".validate": "newData.isNumber() && newData.val() >= 0" },
+        "lastWinAt": { ".validate": "newData.isNumber() || newData.val() == null" },
+        "createdAt": { ".validate": "newData.isNumber()" },
+
         "profile": {
           ".read": "auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin'",
           ".write": "auth.uid == $uid",
