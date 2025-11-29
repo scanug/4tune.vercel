@@ -192,9 +192,9 @@
           }
         },
 
-          "payoutApplied": {
-            "$playerId": { ".write": "auth.uid == $playerId && !data.exists()", ".validate": "newData.val() === true" }
-          },
+        "payoutApplied": {
+          "$playerId": { ".write": "auth.uid == $playerId && !data.exists()", ".validate": "newData.val() === true" }
+        },
 
 
         "players": {
@@ -205,25 +205,25 @@
         },
 
 
-          "current": {
-            ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
+        "current": {
+          ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
 
-            "answers": {
-              "$playerId": {
-                ".write": "auth.uid == $playerId"
-              }
-            },
-
-            "firstCorrect": {
-              ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid"
-            },
-
-            "scored": {
-              ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
-              ".validate": "newData.val() === true || newData.val() === false"
+          "answers": {
+            "$playerId": {
+              ".write": "auth.uid == $playerId"
             }
+          },
+
+          "firstCorrect": {
+            ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid"
+          },
+
+          "scored": {
+            ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
+            ".validate": "newData.val() === true || newData.val() === false"
           }
         }
       }
     }
   }
+}
