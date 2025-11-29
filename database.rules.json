@@ -24,7 +24,7 @@
 
         "wallet": {
           ".read": "auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin'",
-          ".write": "false",
+          ".write": "auth.uid == $uid",
           "credits": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000000" },
           "bonusCredits": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000000" },
           "totalPurchasedEur": { ".validate": "newData.isNumber() && newData.val() >= 0" }
