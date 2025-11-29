@@ -117,13 +117,12 @@ function MusicHostInner() {
         return;
       }
       // Detrai la scommessa dall'host
-      const userRef = ref(db, `users/${user.uid}`);
       const wagerAmount = Math.min(wager, credits);
-      await runTransaction(userRef, (current) => {
-        const cur = current || {};
-        const c = Number(cur.credits || 0);
-        if (c < wagerAmount) return cur;
-        return { ...cur, credits: c - wagerAmount };
+      const credRef = ref(db, `users/${user.uid}/credits`);
+      await runTransaction(credRef, (current) => {
+        const c = Number(current || 0);
+        if (c < wagerAmount) return; // abort
+        return c - wagerAmount;
       });
 
       await set(roomRef, {

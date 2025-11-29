@@ -73,12 +73,11 @@ export default function MusicJoinPage() {
       if (data.status === 'finished') throw new Error('Partita già conclusa');
 
       const wagerAmount = Math.min(wager, credits);
-      const userRef = ref(db, `users/${user.uid}`);
-      const wagerOk = await runTransaction(userRef, (current) => {
-        const cur = current || {};
-        const c = Number(cur.credits || 0);
-        if (c < wagerAmount) return cur;
-        return { ...cur, credits: c - wagerAmount };
+      const credRef = ref(db, `users/${user.uid}/credits`);
+      const wagerOk = await runTransaction(credRef, (current) => {
+        const c = Number(current || 0);
+        if (c < wagerAmount) return; // abort
+        return c - wagerAmount;
       });
       if (!wagerOk.committed) throw new Error('Crediti insufficienti per la scommessa');
 

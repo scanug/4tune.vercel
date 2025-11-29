@@ -281,11 +281,10 @@ export default function GuessTheSongGamePage() {
       }
       if (prize <= 0) return;
 
-      const userRef = ref(db, `users/${playerId}`);
-      runTransaction(userRef, (current) => {
-        const cur = current || {};
-        const c = Number(cur.credits || 0);
-        return { ...cur, credits: c + prize };
+      const credRef = ref(db, `users/${playerId}/credits`);
+      runTransaction(credRef, (current) => {
+        const c = Number(current || 0);
+        return c + prize;
       }).then((res) => {
         if (res.committed) {
           update(payoutFlag, { amount: prize, at: Date.now() }).catch(() => {});
