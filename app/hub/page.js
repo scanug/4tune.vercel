@@ -8,13 +8,16 @@ import { auth, db } from '@/lib/firebase';
 
 export default function HubPage() {
   const [credits, setCredits] = useState(null);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
     const unsubAuth = onAuthStateChanged(auth, (u) => {
       if (!u) {
         setCredits(null);
+        setLoggedIn(false);
         return;
       }
+      setLoggedIn(true);
       const userRef = ref(db, `users/${u.uid}`);
       const unsub = onValue(userRef, (snap) => {
         const val = snap.val();
@@ -37,7 +40,11 @@ export default function HubPage() {
                 {credits} 🪙
               </span>
             )}
-            <Link href="/profile" className="btn-3d" style={{ textDecoration: 'none' }}>Profilo</Link>
+            {loggedIn ? (
+              <Link href="/profile" className="btn-3d" style={{ textDecoration: 'none' }}>Profilo</Link>
+            ) : (
+              <Link href="/auth" className="btn-3d" style={{ textDecoration: 'none' }}>Login</Link>
+            )}
           </div>
         </div>
 
