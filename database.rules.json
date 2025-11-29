@@ -5,7 +5,7 @@
     "users": {
       "$uid": {
         ".read": "auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin'",
-        ".write": "false",
+        ".write": "auth.uid == $uid",
 
         "profile": {
           ".read": "auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin'",
