@@ -296,6 +296,7 @@ export default function GuessTheSongGamePage() {
     return () => offFlag();
   }, [room?.status, playerId, wagerMap, scoreboard, roomCode]);
 
+
   async function sendAnswer(idx) {
     if (!room || !playerId || !isPlaying) return;
     if (answerIndex !== null) return;
@@ -308,21 +309,6 @@ export default function GuessTheSongGamePage() {
       at: serverNowValue,
     }).catch(() => {});
   }
-
-  const scoreboard = useMemo(() => {
-    const board = room?.scoreboard || {};
-    const players = room?.players || {};
-    const merged = Object.entries(players).map(([id, player]) => {
-      const base = board[id] || {};
-      return {
-        id,
-        name: player.name || base.name || 'Player',
-        avatar: player.avatar || base.avatar || null,
-        points: Number(base.points || 0),
-      };
-    });
-    return merged.sort((a, b) => (b.points || 0) - (a.points || 0));
-  }, [room?.scoreboard, room?.players]);
 
   if (pageLoading) {
     return (
