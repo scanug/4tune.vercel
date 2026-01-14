@@ -61,7 +61,6 @@ export default function GuessTheSongGamePage() {
     });
     return () => unsub();
   }, [router]);
-  }, []);
 
   useEffect(() => {
     if (!uid) return;
