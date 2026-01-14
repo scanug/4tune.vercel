@@ -222,6 +222,111 @@
           }
         }
       }
+    },
+
+    "rooms_liar": {
+      "$roomCode": {
+        ".read": "auth != null",
+        ".write": "auth != null",
+
+        "hostId": {
+          ".read": true,
+          ".write": "!data.exists() && auth != null",
+          ".validate": "newData.isString()"
+        },
+
+        "createdAt": {
+          ".write": "auth != null"
+        },
+
+        "status": {
+          ".write": "auth != null",
+          ".validate": "newData.val() == 'waiting' || newData.val() == 'playing' || newData.val() == 'finished'"
+        },
+
+        "roundIndex": {
+          ".write": "auth != null",
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100"
+        },
+
+        "maxRounds": {
+          ".write": "auth != null",
+          ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 50"
+        },
+
+        "declarationMode": {
+          ".write": "auth != null",
+          ".validate": "newData.val() == 'free' || newData.val() == 'assisted'"
+        },
+
+        "wager": {
+          ".write": "auth != null",
+          ".validate": "newData.isNumber() && newData.val() >= 10 && newData.val() <= 500"
+        },
+
+        "players": {
+          ".read": true,
+          "$playerId": {
+            ".write": "auth != null"
+          }
+        },
+
+        "scoreboard": { ".write": "auth != null" },
+        "payoutApplied": {
+          "$playerId": {
+            ".read": "auth.uid == $playerId",
+            ".write": "auth.uid == $playerId && !data.exists()",
+            ".validate": "newData.val() === true"
+          }
+        },
+
+        "current": {
+          ".write": "auth != null",
+
+          "roundNumber": { ".write": "auth != null" },
+          "phase": { ".write": "auth != null" },
+
+          "turn": {
+            ".write": "auth != null",
+            "currentPlayerId": { ".write": "auth != null" },
+            "currentPlayerIndex": { ".write": "auth != null" },
+            "lastClaim": { ".write": "auth != null" },
+            "claimHistory": { ".write": "auth != null" },
+            "canChallenge": { ".write": "auth != null" }
+          },
+
+          "playerHands": {
+            ".write": "auth != null"
+          },
+
+          "wildcards": {
+            ".write": "auth != null",
+            "$wildcardIndex": {
+              ".write": "auth != null",
+              "playerId": { ".write": "auth != null" },
+              "playerName": { ".write": "auth != null" },
+              "state": { ".write": "auth != null" },
+              "isUsedInChallenge": { ".write": "auth != null" },
+              "activatedAt": { ".write": "auth != null" }
+            }
+          },
+
+          "challenge": {
+            ".write": "auth != null",
+            "challengerId": { ".write": "auth != null" },
+            "claimerId": { ".write": "auth != null" },
+            "claim": { ".write": "auth != null" },
+            "timestamp": { ".write": "auth != null" },
+            "state": { ".write": "auth != null" },
+            "result": { ".write": "auth != null" },
+            "wildcardActivatedBy": { ".write": "auth != null" },
+            "wildcardEffect": { ".write": "auth != null" }
+          },
+
+          "roundResults": { ".write": "auth != null" }
+        }
+      }
     }
   }
 }
+
