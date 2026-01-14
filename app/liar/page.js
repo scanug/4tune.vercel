@@ -26,6 +26,18 @@ export default function LiarPage() {
 
   return (
     <div className="liar-home">
+      {/* VIDEO BACKGROUND */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="video-background"
+      >
+        <source src="/background_ll.mp4" type="video/mp4" />
+      </video>
+      <div className="video-overlay"></div>
+
       {/* BACKGROUND DECORATIVE ELEMENTS */}
       <div className="background-blur blur-1"></div>
       <div className="background-blur blur-2"></div>
@@ -166,19 +178,41 @@ export default function LiarPage() {
       <style jsx>{`
         .liar-home {
           min-height: 100vh;
-          background: linear-gradient(135deg, #1a1f35 0%, #0f172a 50%, #1a0f2e 100%);
           color: #f1f5f9;
-          font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+          font-family: 'Press Start 2P', 'Courier New', monospace;
           position: relative;
           overflow: hidden;
+          display: flex;
+          flex-direction: column;
+        }
+
+        /* VIDEO BACKGROUND */
+        .video-background {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          z-index: 0;
+        }
+
+        .video-overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          z-index: 1;
         }
 
         /* BACKGROUND DECORATIVE BLURS */
         .background-blur {
           position: fixed;
           border-radius: 50%;
-          opacity: 0.1;
-          z-index: 0;
+          opacity: 0.05;
+          z-index: 2;
           pointer-events: none;
         }
 
