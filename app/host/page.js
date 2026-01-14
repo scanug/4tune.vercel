@@ -75,20 +75,7 @@ export default function HostPage() {
 
       let currentUser = auth.currentUser;
       if (!currentUser) {
-        // Prova a fare login anonimo se non c'è utente
-        try {
-          await signInAnonymously(auth);
-          currentUser = auth.currentUser;
-        } catch (authErr) {
-          console.error('Errore login anonimo:', authErr);
-          setError('Utente non autenticato. Riprova.');
-          setLoading(false);
-          return;
-        }
-      }
-
-      if (!currentUser) {
-        setError('Utente non autenticato. Riprova.');
+        setError('Utente non autenticato. Accedi per creare una stanza.');
         setLoading(false);
         return;
       }

@@ -52,10 +52,11 @@
         "$roomCode": {
           ".read": "auth != null",
 
-          ".write": "auth != null && (!data.exists() || root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid)",
+          ".write": "auth != null",
 
           "hostId": {
             ".read": true,
+            ".write": "!data.exists() && auth != null",
             ".validate": "newData.isString()"
           },
 
