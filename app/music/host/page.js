@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useEffect, useMemo, useState } from 'react';
+import { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { ref, get, set, update, runTransaction, onValue } from 'firebase/database';
@@ -33,6 +33,7 @@ function MusicHostInner() {
   const [playlistLoading, setPlaylistLoading] = useState(false);
   const [credits, setCredits] = useState(0);
   const [wager, setWager] = useState(10);
+  const unsubscribeUserRef = useRef(null);
 
   useEffect(() => {
     if (!playlistId) return;
@@ -54,17 +55,23 @@ function MusicHostInner() {
     const unsub = onAuthStateChanged(auth, (u) => {
       if (!u) {
         router.push("/");
+        setPageLoading(false);
         return;
       }
       setPageLoading(false);
       const r = ref(db, `users/${u.uid}`);
-      const off = onValue(r, (snap) => {
+      const unsubscribeUser = onValue(r, (snap) => {
         const val = snap.val();
         if (val && typeof val.credits === 'number') setCredits(val.credits);
       });
-      return () => off();
+      unsubscribeUserRef.current = unsubscribeUser;
     });
-    return () => unsub();
+    return () => {
+      unsub();
+      if (unsubscribeUserRef.current) {
+        unsubscribeUserRef.current();
+      }
+    };
   }, [router]);
 
   const hostProfile = useMemo(() => {
