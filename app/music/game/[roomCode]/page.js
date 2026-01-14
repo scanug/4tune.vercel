@@ -50,6 +50,21 @@ export default function GuessTheSongGamePage() {
   const audioRef = useRef(null);
   const playTimeoutRef = useRef(null);
 
+  const scoreboard = useMemo(() => {
+    const board = room?.scoreboard || {};
+    const players = room?.players || {};
+    const merged = Object.entries(players).map(([id, player]) => {
+      const base = board[id] || {};
+      return {
+        id,
+        name: player.name || base.name || 'Player',
+        avatar: player.avatar || base.avatar || null,
+        points: Number(base.points || 0),
+      };
+    });
+    return merged.sort((a, b) => (b.points || 0) - (a.points || 0));
+  }, [room?.scoreboard, room?.players]);
+
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
       if (!u) {
