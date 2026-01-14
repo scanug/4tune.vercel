@@ -1,10 +1,10 @@
 'use client';
 
 import { Suspense, useEffect, useMemo, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { ref, get, set, update, runTransaction, onValue } from 'firebase/database';
-import { signInAnonymously } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { auth, db } from '@/lib/firebase';
 
 function generateRoomCode(length = 4) {
@@ -17,10 +17,12 @@ function generateRoomCode(length = 4) {
 }
 
 function MusicHostInner() {
+  const router = useRouter();
   const params = useSearchParams();
   const playlistId = params.get('playlist');
   const playlistTitle = params.get('title') || 'Playlist personalizzata';
 
+  const [pageLoading, setPageLoading] = useState(true);
   const [maxRounds, setMaxRounds] = useState(5);
   const [roundMs, setRoundMs] = useState(15000);
   const [prepMs, setPrepMs] = useState(3000);
@@ -49,27 +51,21 @@ function MusicHostInner() {
   }, [playlistId]);
 
   useEffect(() => {
-    const unsub = auth.onAuthStateChanged((u) => {
+    const unsub = onAuthStateChanged(auth, (u) => {
       if (!u) {
-        signInAnonymously(auth).catch(() => {});
+        router.push("/");
+        return;
       }
+      setPageLoading(false);
+      const r = ref(db, `users/${u.uid}`);
+      const off = onValue(r, (snap) => {
+        const val = snap.val();
+        if (val && typeof val.credits === 'number') setCredits(val.credits);
+      });
+      return () => off();
     });
     return () => unsub();
-  }, []);
-
-  useEffect(() => {
-    const unsub = auth.onAuthStateChanged((u) => {
-      if (u) {
-        const r = ref(db, `users/${u.uid}`);
-        const off = onValue(r, (snap) => {
-          const val = snap.val();
-          if (val && typeof val.credits === 'number') setCredits(val.credits);
-        });
-        return () => off();
-      }
-    });
-    return () => {};
-  }, []);
+  }, [router]);
 
   const hostProfile = useMemo(() => {
     if (typeof window === 'undefined') return { name: 'Host', avatar: null };
@@ -99,12 +95,12 @@ function MusicHostInner() {
     setLoading(true);
     setError('');
     try {
-      let user = auth.currentUser;
+      const user = auth.currentUser;
       if (!user) {
-        await signInAnonymously(auth);
-        user = auth.currentUser;
+        setError('Utente non autenticato. Accedi per creare una stanza.');
+        setLoading(false);
+        return;
       }
-      if (!user) throw new Error('Impossibile autenticare l’host');
 
       const tracks = playlistData.tracks.slice(0, 80);
       if (tracks.length < 4) throw new Error('La playlist ha meno di 4 brani utilizzabili');
@@ -156,6 +152,14 @@ function MusicHostInner() {
     } finally {
       setLoading(false);
     }
+  }
+
+  if (pageLoading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div>Caricamento...</div>
+      </div>
+    );
   }
 
   return (

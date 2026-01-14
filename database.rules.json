@@ -153,10 +153,11 @@
 
         ".write": "auth != null",
 
-          "hostId": {
-            ".read": true,
-            ".validate": "newData.isString()"
-          },
+        "hostId": {
+          ".read": true,
+          ".write": "!data.exists() && auth != null",
+          ".validate": "newData.isString()"
+        },
 
         "status": {
           ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
