@@ -156,37 +156,30 @@
         "hostId": {
           ".read": true,
           ".write": "auth != null",
-          ".validate": "newData.isString() && newData.val() == auth.uid"
+          ".validate": "newData.isString()"
         },
 
         "createdAt": {
-          ".write": "auth != null",
-          ".validate": "newData.isNumber()"
+          ".write": "auth != null"
         },
 
         "status": {
-          ".write": "auth != null",
-          ".validate": "newData.val() == 'lobby' || newData.val() == 'countdown' || newData.val() == 'playing' || newData.val() == 'reveal' || newData.val() == 'finished'"
+          ".write": "auth != null"
         },
         "roundIndex": {
-          ".write": "auth != null",
-          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 200"
+          ".write": "auth != null"
         },
         "maxRounds": {
-          ".write": "auth != null",
-          ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 50"
+          ".write": "auth != null"
         },
         "roundMs": {
-          ".write": "auth != null",
-          ".validate": "newData.isNumber() && newData.val() >= 5000 && newData.val() <= 30000"
+          ".write": "auth != null"
         },
         "prepMs": {
-          ".write": "auth != null",
-          ".validate": "newData.isNumber() && newData.val() >= 1000 && newData.val() <= 10000"
+          ".write": "auth != null"
         },
         "startAt": {
-          ".write": "auth != null",
-          ".validate": "newData.isNumber() || newData.val() == null"
+          ".write": "auth != null"
         },
 
         "playlist": { ".write": "auth != null" },
@@ -194,20 +187,19 @@
 
         "wagers": {
           "$playerId": {
-            ".write": "!data.exists() || auth.uid == $playerId || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.isNumber() && newData.val() >= 10"
+            ".write": "auth != null"
           }
         },
 
         "payoutApplied": {
-          "$playerId": { ".write": "auth.uid == $playerId && !data.exists()", ".validate": "newData.val() === true" }
+          "$playerId": { ".write": "auth.uid == $playerId && !data.exists()" }
         },
 
 
         "players": {
           ".read": true,
           "$playerId": {
-            ".write": "!data.exists() || auth.uid == $playerId || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid"
+            ".write": "auth != null"
           }
         },
 
@@ -217,7 +209,7 @@
 
           "answers": {
             "$playerId": {
-              ".write": "auth.uid == $playerId"
+              ".write": "auth != null"
             }
           },
 
@@ -226,8 +218,7 @@
           },
 
           "scored": {
-            ".write": "auth != null",
-            ".validate": "newData.val() === true || newData.val() === false"
+            ".write": "auth != null"
           }
         }
       }
