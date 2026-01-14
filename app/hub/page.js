@@ -92,12 +92,12 @@ export default function HubPage() {
               <Link href="/music" className="btn-3d" style={{ textDecoration: 'none' }}>Vai a GTS</Link>
             </li>
 
-            <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px dashed rgba(17,24,39,0.2)', borderRadius: 10, padding: '10px 12px', background: 'rgba(255,255,255,0.6)' }}>
+            <li style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '1px solid rgba(17,24,39,0.2)', borderRadius: 10, padding: '10px 12px', background: '#f0f9ff' }}>
               <div>
-                <div style={{ fontWeight: 800, color: '#111827' }}>Prossimamente...</div>
-                <div style={{ fontSize: 13, opacity: 0.85, color: '#111827' }}>Nuovi giochi in arrivo nell'hub.</div>
+                <div style={{ fontWeight: 800, color: '#111827' }}>🎭 Lucky Liar</div>
+                <div style={{ fontSize: 13, opacity: 0.85, color: '#111827' }}>Il gioco della menzogna psicologica: dichiarazioni, sfide e wildcard!</div>
               </div>
-              <button className="btn-3d" disabled>In arrivo</button>
+              <Link href="/liar" className="btn-3d" style={{ textDecoration: 'none' }}>Vai a Lucky Liar</Link>
             </li>
           </ul>
         </div>
