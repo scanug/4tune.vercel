@@ -87,6 +87,26 @@ export default function LiarLobbyPage() {
   };
 
   // ========================================
+  // ADD AI PLAYER (TESTING ONLY)
+  // ========================================
+  const handleAddAIPlayer = async () => {
+    if (!isHost || !roomCode) return;
+
+    try {
+      const aiId = `ai_${Date.now()}`;
+      const aiRef = ref(db, `rooms_liar/${roomCode}/players/${aiId}`);
+      await update(aiRef, {
+        name: 'Bot AI',
+        credits: 200,
+        isReady: true,
+        isAI: true,
+      });
+    } catch (err) {
+      console.error('Error adding AI:', err);
+    }
+  };
+
+  // ========================================
   // START GAME (HOST ONLY)
   // ========================================
   const handleStartGame = async () => {
@@ -188,17 +208,25 @@ export default function LiarLobbyPage() {
         )}
 
         {isHost && (
-          <button
-            className="btn-start"
-            onClick={handleStartGame}
-            disabled={!canStartGame || startingGame}
-            style={{
-              opacity: canStartGame ? 1 : 0.5,
-              cursor: canStartGame ? 'pointer' : 'not-allowed',
-            }}
-          >
-            {startingGame ? 'Avvio...' : '🎬 Inizia Partita'}
-          </button>
+          <>
+            <button
+              className="btn-ai"
+              onClick={handleAddAIPlayer}
+            >
+              🤖 Aggiungi AI (Test)
+            </button>
+            <button
+              className="btn-start"
+              onClick={handleStartGame}
+              disabled={!canStartGame || startingGame}
+              style={{
+                opacity: canStartGame ? 1 : 0.5,
+                cursor: canStartGame ? 'pointer' : 'not-allowed',
+              }}
+            >
+              {startingGame ? 'Avvio...' : '🎬 Inizia Partita'}
+            </button>
+          </>
         )}
       </section>
 
@@ -333,12 +361,12 @@ export default function LiarLobbyPage() {
         /* ACTIONS */
         .actions {
           display: flex;
-          gap: 1rem;
+          flex-direction: column;
+          gap: 0.75rem;
           padding: 1.5rem;
         }
 
         button {
-          flex: 1;
           padding: 0.75rem 1.5rem;
           font-size: 1rem;
           font-weight: 600;
@@ -355,6 +383,14 @@ export default function LiarLobbyPage() {
 
         .btn-ready:hover:not(:disabled) {
           background: #475569;
+        }
+
+        .btn-ai {
+          background: #8b5cf6;
+        }
+
+        .btn-ai:hover:not(:disabled) {
+          background: #7c3aed;
         }
 
         .btn-start {
