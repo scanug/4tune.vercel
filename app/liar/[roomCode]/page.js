@@ -158,8 +158,6 @@ export default function LiarLobbyPage() {
       </header>
 
       <main className="lobby-main">
-
-      <main className="lobby-main">
         {/* CONFIG */}
         <section className="config">
         <h2>Configurazione</h2>
@@ -246,6 +244,7 @@ export default function LiarLobbyPage() {
           </>
         )}
       </section>
+
       </main>
 
       <style jsx>{`
