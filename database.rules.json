@@ -159,33 +159,38 @@
           ".validate": "newData.isString()"
         },
 
+        "createdAt": {
+          ".write": "!data.exists() && auth != null",
+          ".validate": "newData.isNumber()"
+        },
+
         "status": {
-          ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
+          ".write": "!data.exists() && auth != null || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
           ".validate": "newData.val() == 'lobby' || newData.val() == 'countdown' || newData.val() == 'playing' || newData.val() == 'reveal' || newData.val() == 'finished'"
         },
         "roundIndex": {
-          ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
+          ".write": "!data.exists() && auth != null || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
           ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 200"
         },
         "maxRounds": {
-          ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
+          ".write": "!data.exists() && auth != null || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
           ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 50"
         },
         "roundMs": {
-          ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
+          ".write": "!data.exists() && auth != null || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
           ".validate": "newData.isNumber() && newData.val() >= 5000 && newData.val() <= 30000"
         },
         "prepMs": {
-          ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
+          ".write": "!data.exists() && auth != null || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
           ".validate": "newData.isNumber() && newData.val() >= 1000 && newData.val() <= 10000"
         },
         "startAt": {
-          ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
+          ".write": "!data.exists() && auth != null || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
           ".validate": "newData.isNumber() || newData.val() == null"
         },
 
-        "playlist": { ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid" },
-        "scoreboard": { ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid" },
+        "playlist": { ".write": "!data.exists() && auth != null || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid" },
+        "scoreboard": { ".write": "!data.exists() && auth != null || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid" },
 
         "wagers": {
           "$playerId": {
@@ -208,7 +213,7 @@
 
 
         "current": {
-          ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
+          ".write": "!data.exists() && auth != null || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
 
           "answers": {
             "$playerId": {
@@ -217,11 +222,11 @@
           },
 
           "firstCorrect": {
-            ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid"
+            ".write": "!data.exists() && auth != null || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid"
           },
 
           "scored": {
-            ".write": "!data.exists() || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
+            ".write": "!data.exists() && auth != null || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid",
             ".validate": "newData.val() === true || newData.val() === false"
           }
         }
