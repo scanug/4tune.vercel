@@ -109,6 +109,12 @@ function MusicHostInner() {
         return;
       }
 
+      // Recupera il nome dell'utente dal database
+      const userSnap = await get(ref(db, `users/${user.uid}`));
+      const userData = userSnap.val() || {};
+      const userName = userData.name || localStorage.getItem('playerName') || 'Player';
+      const userAvatar = userData.avatar || localStorage.getItem('playerAvatar') || null;
+
       const tracks = playlistData.tracks.slice(0, 80);
       if (tracks.length < 4) throw new Error('La playlist ha meno di 4 brani utilizzabili');
       const code = generateRoomCode();
@@ -150,7 +156,7 @@ function MusicHostInner() {
           [user.uid]: wagerAmount,
         },
         players: {
-          [user.uid]: { name: hostProfile.name, avatar: hostProfile.avatar },
+          [user.uid]: { name: userName, avatar: userAvatar },
         },
       });
       setRoomCode(code);
