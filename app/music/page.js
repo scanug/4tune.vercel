@@ -1,10 +1,35 @@
 'use client';
 
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { onAuthStateChanged } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
+import { auth } from '@/lib/firebase';
 
 export default function MusicLandingPage() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
   const [showRules, setShowRules] = useState(false);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        // Nessun utente → torna alla landing
+        router.push("/");
+        return;
+      }
+      setLoading(false);
+    });
+    return () => unsub();
+  }, [router]);
+
+  if (loading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div>Caricamento...</div>
+      </div>
+    );
+  }
 
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, position: 'relative' }}>

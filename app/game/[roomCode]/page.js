@@ -1,10 +1,11 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ref, onValue, update, get, runTransaction } from 'firebase/database';
 import { db, auth } from '@/lib/firebase';
+import { onAuthStateChanged } from 'firebase/auth';
 import { updateMissionProgress } from '@/lib/missions';
 
 // Funzione helper per calcolare il range in base al round
@@ -38,7 +39,9 @@ function isMultipleOf10(n) {
 }
 
 export default function GamePage() {
+  const router = useRouter();
   const { roomCode } = useParams();
+  const [pageLoading, setPageLoading] = useState(true);
   const [roomData, setRoomData] = useState(null);
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(true);
@@ -47,6 +50,18 @@ export default function GamePage() {
   const [betAmount, setBetAmount] = useState(10);
   const [sideBets, setSideBets] = useState({});
   const [userCredits, setUserCredits] = useState(null);
+
+  // Verifica autenticazione
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push("/");
+        return;
+      }
+      setPageLoading(false);
+    });
+    return () => unsub();
+  }, [router]);
   const [timeLeft, setTimeLeft] = useState(null);
   const timerRef = useRef(null);
   const autoStartRef = useRef({ lastRoundAutoStarted: 0 });
@@ -612,6 +627,14 @@ export default function GamePage() {
           <p style={{ color: '#111827' }}>Caricamento stanza...</p>
         </div>
       </main>
+    );
+  }
+
+  if (pageLoading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div>Caricamento...</div>
+      </div>
     );
   }
 

@@ -3,24 +3,37 @@
 import { useState, useEffect } from 'react';
 import { ref, get, update } from 'firebase/database';
 import { db, auth } from '../../lib/firebase';
-import { signInAnonymously } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { useRouter } from 'next/navigation';
 import { v4 as uuidv4 } from 'uuid';
 
 export default function JoinPage() {
+  const router = useRouter();
+  const [pageLoading, setPageLoading] = useState(true);
   const [inputCode, setInputCode] = useState('');
   const [playerName, setPlayerName] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push("/");
+        return;
+      }
+      setPageLoading(false);
+    });
+    return () => unsub();
+  }, [router]);
 
   // preload name from localStorage
   useEffect(() => {
+    if (pageLoading) return;
     try {
       const saved = localStorage.getItem('playerName');
       if (saved) setPlayerName(saved);
     } catch {}
-  }, []);
+  }, [pageLoading]);
 
   function handleNameChange(value) {
     setPlayerName(value);
@@ -93,6 +106,14 @@ export default function JoinPage() {
       setError('Errore nella connessione a Firebase');
       setLoading(false);
     }
+  }
+
+  if (pageLoading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div>Caricamento...</div>
+      </div>
+    );
   }
 
   return (

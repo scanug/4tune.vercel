@@ -1,18 +1,32 @@
 "use client";
 import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ref, query, orderByChild, limitToLast, onValue, off } from "firebase/database";
 import { db, auth } from "../../lib/firebase";
 import { onAuthStateChanged } from "firebase/auth";
 
 export default function LeaderboardPage() {
+  const router = useRouter();
+  const [pageLoading, setPageLoading] = useState(true);
   const [mode, setMode] = useState("week"); // "week" | "month"
   const [rows, setRows] = useState([]);
   const [uid, setUid] = useState(null);
   const [playerId, setPlayerId] = useState(null);
 
   useEffect(() => { try { const id = localStorage.getItem('playerId'); if (id) setPlayerId(id); } catch {} }, []);
-  useEffect(() => { const unsub = onAuthStateChanged(auth, (u) => setUid(u?.uid || null)); return () => unsub(); }, []);
+  
+  useEffect(() => { 
+    const unsub = onAuthStateChanged(auth, (u) => {
+      if (!u) {
+        router.push("/");
+        return;
+      }
+      setPageLoading(false);
+      setUid(u?.uid || null);
+    }); 
+    return () => unsub(); 
+  }, [router]);
 
   useEffect(() => {
     const field = mode === 'week' ? 'winsWeek' : 'winsMonth';
@@ -28,6 +42,14 @@ export default function LeaderboardPage() {
   }, [mode]);
 
   const currentId = uid || playerId;
+
+  if (pageLoading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div>Caricamento...</div>
+      </div>
+    );
+  }
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>

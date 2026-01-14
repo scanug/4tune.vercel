@@ -2,15 +2,18 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ref, get, set, onValue, off, update, runTransaction } from "firebase/database";
 import { db, auth, storage } from '@/lib/firebase';
 import { v4 as uuidv4 } from "uuid";
-import { onAuthStateChanged, signOut, updateProfile, signInAnonymously } from "firebase/auth";
+import { onAuthStateChanged, signOut, updateProfile } from "firebase/auth";
 import { ref as stRef, uploadBytes, getDownloadURL } from "firebase/storage";
 import Wheel from "../../components/Wheel";
 import { ensurePlayerMissions, resetMissionsIfNeeded, updateMissionProgress, subscribeToPlayerMissions, MISSION_DEFS } from "../../lib/missions";
 
 export default function Home() {
+  const router = useRouter();
+  const [loading, setLoading] = useState(true);
   const [ready, setReady] = useState(false);
   const [userName, setUserName] = useState("");
   const [userAvatar, setUserAvatar] = useState("");
@@ -28,18 +31,20 @@ export default function Home() {
   const [missionsState, setMissionsState] = useState({ missions: null, credits: 0, lastMissionReset: null });
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, async (u) => {
+    const unsub = onAuthStateChanged(auth, (u) => {
       if (!u) {
-        try { await signInAnonymously(auth); } catch {}
-      } else {
-        setUid(u.uid);
+        // Nessun utente → torna alla landing
+        router.push("/");
+        return;
       }
+      setLoading(false);
+      setUid(u.uid);
     });
     return () => unsub();
-  }, []);
+  }, [router]);
 
   useEffect(() => {
-    if (!uid) return; // attendi uid da auth anonima o login
+    if (!uid) return; // attendi uid da login
     async function boot() {
       const key = uid;
       setUserKey(key);
@@ -142,6 +147,14 @@ export default function Home() {
     } catch (e) {
       try { console.error('[HOME] spinWheel:error', e); } catch {}
     }
+  }
+
+  if (loading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div>Caricamento...</div>
+      </div>
+    );
   }
 
   return (

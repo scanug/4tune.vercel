@@ -1,9 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { ref, get, set } from 'firebase/database';
-import { signInAnonymously } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 import { db, auth } from '@/lib/firebase';
 
 function generateRoomCode(length = 4) {
@@ -16,11 +17,32 @@ function generateRoomCode(length = 4) {
 }
 
 export default function HostPage() {
+  const router = useRouter();
+  const [pageLoading, setPageLoading] = useState(true);
   const [roomCode, setRoomCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [maxRounds, setMaxRounds] = useState(5);
   const [betTimeSeconds, setBetTimeSeconds] = useState(15);
+
+  useEffect(() => {
+    const unsub = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        router.push("/");
+        return;
+      }
+      setPageLoading(false);
+    });
+    return () => unsub();
+  }, [router]);
+
+  if (pageLoading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div>Caricamento...</div>
+      </div>
+    );
+  }
 
   async function createRoom() {
     setLoading(true);

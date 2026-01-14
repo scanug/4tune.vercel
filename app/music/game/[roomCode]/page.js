@@ -1,11 +1,11 @@
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ref, onValue, update, runTransaction, set } from 'firebase/database';
 import { auth, db } from '@/lib/firebase';
-import { signInAnonymously } from 'firebase/auth';
+import { onAuthStateChanged } from 'firebase/auth';
 
 function shuffle(array) {
   const arr = [...array];
@@ -35,7 +35,9 @@ function buildRoundPayload(tracks) {
 }
 
 export default function GuessTheSongGamePage() {
+  const router = useRouter();
   const { roomCode } = useParams();
+  const [pageLoading, setPageLoading] = useState(true);
   const [room, setRoom] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -49,15 +51,16 @@ export default function GuessTheSongGamePage() {
   const playTimeoutRef = useRef(null);
 
   useEffect(() => {
-    const unsub = auth.onAuthStateChanged((u) => {
+    const unsub = onAuthStateChanged(auth, (u) => {
       if (!u) {
-        setUid(null);
-        signInAnonymously(auth).catch(() => {});
-      } else {
-        setUid(u.uid);
+        router.push("/");
+        return;
       }
+      setPageLoading(false);
+      setUid(u.uid);
     });
     return () => unsub();
+  }, [router]);
   }, []);
 
   useEffect(() => {
@@ -321,6 +324,14 @@ export default function GuessTheSongGamePage() {
     });
     return merged.sort((a, b) => (b.points || 0) - (a.points || 0));
   }, [room?.scoreboard, room?.players]);
+
+  if (pageLoading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div>Caricamento...</div>
+      </div>
+    );
+  }
 
   if (loading) {
     return (

@@ -1,7 +1,8 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 import { auth, db, storage } from "../../lib/firebase";
-import { onAuthStateChanged, updateProfile, signInAnonymously } from "firebase/auth";
+import { onAuthStateChanged, updateProfile } from "firebase/auth";
 import { ref as dbRef, onValue, off, update } from "firebase/database";
 import { ref as stRef, uploadBytes, getDownloadURL } from "firebase/storage";
 
@@ -10,6 +11,7 @@ const PRESET_AVATARS = [
 ];
 
 export default function ProfilePage() {
+  const router = useRouter();
   const [uid, setUid] = useState(null);
   const [profile, setProfile] = useState(null);
   const [name, setName] = useState("");
@@ -22,24 +24,23 @@ export default function ProfilePage() {
   useEffect(() => {
     const unsub = onAuthStateChanged(auth, (u) => {
       if (!u) {
-        signInAnonymously(auth).catch(() => {});
-        setLoading(false);
-        setIsLogged(false);
-      } else {
-        setUid(u.uid);
-        setIsLogged(true);
-        const r = dbRef(db, `users/${u.uid}`);
-        onValue(r, (snap) => {
-          const val = snap.val();
-          setProfile(val);
-          setName(val?.name || "");
-          setAvatar(val?.avatar || "");
-          setLoading(false);
-        });
+        // Nessun utente → torna alla landing
+        router.push("/");
+        return;
       }
+      setUid(u.uid);
+      setIsLogged(true);
+      const r = dbRef(db, `users/${u.uid}`);
+      onValue(r, (snap) => {
+        const val = snap.val();
+        setProfile(val);
+        setName(val?.name || "");
+        setAvatar(val?.avatar || "");
+        setLoading(false);
+      });
     });
     return () => unsub();
-  }, []);
+  }, [router]);
 
   async function handleUpload(file) {
     if (!file || !uid) return;

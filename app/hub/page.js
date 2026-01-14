@@ -2,22 +2,29 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { onAuthStateChanged } from 'firebase/auth';
+import { onAuthStateChanged, signOut } from 'firebase/auth';
+import { useRouter } from 'next/navigation';
 import { ref, onValue } from 'firebase/database';
 import { auth, db } from '@/lib/firebase';
 
 export default function HubPage() {
+  const router = useRouter();
   const [credits, setCredits] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const unsubAuth = onAuthStateChanged(auth, (u) => {
       if (!u) {
         setCredits(null);
         setLoggedIn(false);
+        setLoading(false);
+        // Utente non loggato → torna alla landing
+        router.push("/");
         return;
       }
       setLoggedIn(true);
+      setLoading(false);
       const userRef = ref(db, `users/${u.uid}`);
       const unsub = onValue(userRef, (snap) => {
         const val = snap.val();
@@ -26,7 +33,24 @@ export default function HubPage() {
       return () => unsub();
     });
     return () => unsubAuth();
-  }, []);
+  }, [router]);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+      router.push("/");
+    } catch (error) {
+      console.error("Errore logout:", error);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div>Caricamento...</div>
+      </div>
+    );
+  }
 
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
@@ -40,10 +64,11 @@ export default function HubPage() {
                 {credits} 🪙
               </span>
             )}
-            {loggedIn ? (
-              <Link href="/profile" className="btn-3d" style={{ textDecoration: 'none' }}>Profilo</Link>
-            ) : (
-              <Link href="/auth" className="btn-3d" style={{ textDecoration: 'none' }}>Login</Link>
+            {loggedIn && (
+              <>
+                <Link href="/profile" className="btn-3d" style={{ textDecoration: 'none' }}>Profilo</Link>
+                <button className="btn-3d" onClick={handleLogout}>Logout</button>
+              </>
             )}
           </div>
         </div>
