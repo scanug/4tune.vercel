@@ -43,8 +43,7 @@ export default function LiarJoinPage() {
       const playersRef = ref(db, `rooms_liar/${code}/players/${auth.currentUser.uid}`);
       await update(playersRef, {
         name: auth.currentUser.displayName || 'Player',
-        credits: 200,
-        isReady: false,
+        alive: true,
       });
 
       // Naviga alla lobby

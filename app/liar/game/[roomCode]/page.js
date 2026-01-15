@@ -59,6 +59,7 @@ export default function LiarGamePage() {
   const [animatingWildcard, setAnimatingWildcard] = useState(false);
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
+  const [turnToken, setTurnToken] = useState(null); // UUID per anti-doppio input
 
   // Subscriptions
   const unsubscribesRef = useRef([]);
@@ -125,6 +126,35 @@ export default function LiarGamePage() {
       unsubscribesRef.current.forEach((unsub) => unsub());
     };
   }, [userId, roomCode]);
+
+  // ========================================
+  // DEBUG LOGGING
+  // ========================================
+  useEffect(() => {
+    if (!gameState?.current) return;
+    
+    console.log('🎮 GAME STATE UPDATE:', {
+      round: gameState.round,
+      phase: gameState.current.phase,
+      currentPlayerId: gameState.current.turn?.currentPlayerId,
+      timelineLength: gameState.current.timeline?.length || 0,
+      playersCount: Object.keys(gameState.players || {}).length,
+      lastClaim: gameState.current.turn?.lastClaim || null,
+      timestamp: new Date().toLocaleTimeString(),
+    });
+  }, [gameState?.round, gameState?.current?.phase, gameState?.current?.turn?.currentPlayerId]);
+
+  // ========================================
+  // TURN TOKEN MANAGER (Anti-doppio input)
+  // ========================================
+  useEffect(() => {
+    // Genera nuovo token quando fase cambia
+    if (gameState?.current?.phase) {
+      const newToken = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+      setTurnToken(newToken);
+      console.log('🔐 NEW TURN TOKEN:', newToken, { phase: gameState.current.phase });
+    }
+  }, [gameState?.current?.phase]);
 
   // ========================================
   // HANDLE BOT TURN
@@ -223,6 +253,36 @@ export default function LiarGamePage() {
   const validDeclarations = lastClaim
     ? generateValidDeclarations(lastClaim, gameState?.current?.declarationMode)
     : [];
+
+  // ========================================
+  // SAFETY GUARDS
+  // ========================================
+  if (!gameState?.current) {
+    return (
+      <div className="error">
+        <h2>⏳ Caricamento stato gioco...</h2>
+        <p>Se questo messaggio persiste, ricarica la pagina</p>
+      </div>
+    );
+  }
+
+  if (!gameState.current.phase) {
+    return (
+      <div className="error">
+        <h2>⚠️ Fase di gioco non definita</h2>
+        <p>Contatta il supporto</p>
+      </div>
+    );
+  }
+
+  if (!gameState.current.turn?.currentPlayerId) {
+    return (
+      <div className="error">
+        <h2>⚠️ Turno non inizializzato</h2>
+        <p>Il gioco non è ancora iniziato correttamente</p>
+      </div>
+    );
+  }
 
   // ========================================
   // SUBMIT DECLARATION
@@ -333,6 +393,97 @@ export default function LiarGamePage() {
   };
 
   // ========================================
+  // RESET ROUND (NEW ROUND INIT)
+  // ========================================
+  const handleResetRound = async () => {
+    try {
+      console.log('🔄 RESETTING ROUND', { round: gameState.round });
+      
+      const playerIds = Object.keys(gameState.players || {});
+      const firstTurnPlayerId = playerIds[0];
+      
+      const roomRef = ref(db, `rooms_liar/${roomCode}`);
+      
+      await update(roomRef, {
+        round: (gameState.round || 0) + 1,
+        current: {
+          phase: 'turn',
+          turn: {
+            currentPlayerId: firstTurnPlayerId,
+            lastClaim: null,
+          },
+          hands: gameState.current.hands, // Keep hands from previous round for now
+          wildcards: [],
+          timeline: [],
+          declarationMode: gameState.current.declarationMode,
+        },
+      });
+      
+      console.log('✅ ROUND RESET COMPLETE', { newRound: (gameState.round || 0) + 1 });
+    } catch (err) {
+      console.error('❌ Error resetting round:', err);
+      setError('Errore nel reset del round');
+    }
+  };
+
+  // ========================================
+  // END GAME
+  // ========================================
+  const handleEndGame = async () => {
+    try {
+      console.log('🏆 ENDING GAME', { round: gameState.round, maxRounds: gameState.maxRounds });
+      
+      const winner = determineWinner(gameState.players || {});
+      
+      const roomRef = ref(db, `rooms_liar/${roomCode}`);
+      await update(roomRef, {
+        status: 'finished',
+        current: {
+          ...gameState.current,
+          phase: 'finished',
+        },
+        winner: winner,
+        finishedAt: Date.now(),
+      });
+      
+      console.log('✅ GAME ENDED', { winner });
+    } catch (err) {
+      console.error('❌ Error ending game:', err);
+      setError('Errore nella conclusione della partita');
+    }
+  };
+
+  // ========================================
+  // AUTO-TRIGGER: END ROUND WHEN CONDITIONS MET
+  // ========================================
+  useEffect(() => {
+    if (!gameState?.current || !gameState?.round !== undefined || !gameState?.maxRounds) return;
+    
+    // Check if all players have passed and challenge is resolved
+    // For simplicity: if 30+ seconds have passed and no active turn, move to next round
+    const now = Date.now();
+    const turnEndTime = gameState.turnEndTime || 0;
+    
+    // If turn time exceeded and no one is declaring
+    if (now > turnEndTime + 5000 && gameState.current.phase === 'turn' && !gameState.current.turn?.lastClaim) {
+      console.log('⏱️ AUTO-ADVANCE: No declaration, moving to next round');
+      handleResetRound();
+    }
+  }, [gameState?.round, gameState?.current?.turn?.lastClaim, gameState?.turnEndTime]);
+
+  // ========================================
+  // AUTO-TRIGGER: END GAME WHEN ROUND LIMIT REACHED
+  // ========================================
+  useEffect(() => {
+    if (!gameState?.round !== undefined || !gameState?.maxRounds) return;
+    
+    if (gameState.round >= gameState.maxRounds) {
+      console.log('🎯 ROUND LIMIT REACHED, ENDING GAME');
+      handleEndGame();
+    }
+  }, [gameState?.round, gameState?.maxRounds]);
+
+  // ========================================
   // RENDER
   // ========================================
   return (
@@ -358,6 +509,80 @@ export default function LiarGamePage() {
         <div className="error-banner">
           <span>{error}</span>
           <button onClick={() => setError(null)}>×</button>
+        </div>
+      )}
+
+      {/* GAME FINISHED OVERLAY */}
+      {gameState?.status === 'finished' && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(0, 0, 0, 0.85)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 1000,
+          backdropFilter: 'blur(5px)',
+        }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+            border: '3px solid #8b5cf6',
+            borderRadius: '16px',
+            padding: '3rem 2rem',
+            textAlign: 'center',
+            maxWidth: '500px',
+            color: '#f1f5f9',
+          }}>
+            <h1 style={{
+              fontSize: '2.5rem',
+              marginBottom: '0.5rem',
+              background: 'linear-gradient(135deg, #a78bfa, #60a5fa)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+            }}>
+              🏆 Partita Conclusa!
+            </h1>
+            {gameState.winner && (
+              <>
+                <p style={{ fontSize: '1.2rem', marginBottom: '1rem', color: '#c4b5fd' }}>
+                  Vincitore: <strong>{gameState.players?.[gameState.winner]?.name || 'Unknown'}</strong>
+                </p>
+                <div style={{
+                  background: 'rgba(139, 92, 246, 0.2)',
+                  border: '2px solid #8b5cf6',
+                  borderRadius: '8px',
+                  padding: '1.5rem',
+                  marginBottom: '1.5rem',
+                }}>
+                  <p style={{ margin: 0, fontSize: '0.9rem', color: '#e2e8f0' }}>
+                    📊 Statistiche finali disponibili nella leaderboard
+                  </p>
+                </div>
+              </>
+            )}
+            <button
+              onClick={() => router.push('/liar')}
+              style={{
+                background: 'linear-gradient(135deg, #8b5cf6, #6366f1)',
+                border: 'none',
+                color: '#fff',
+                padding: '0.75rem 2rem',
+                borderRadius: '8px',
+                fontSize: '1rem',
+                fontWeight: '700',
+                cursor: 'pointer',
+                transition: 'all 0.3s ease',
+              }}
+              onMouseEnter={(e) => e.target.style.transform = 'translateY(-2px)'}
+              onMouseLeave={(e) => e.target.style.transform = 'translateY(0)'}
+            >
+              ← Torna alla Lobby
+            </button>
+          </div>
         </div>
       )}
 
