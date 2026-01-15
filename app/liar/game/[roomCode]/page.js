@@ -225,7 +225,7 @@ export default function LiarGamePage() {
   }, [gameState?.current?.phase]);
 
   // ========================================
-  // TIMEOUT SYSTEM (30s per phase)
+  // TIMEOUT SYSTEM (30s phase timer - UI only for now)
   // ========================================
   useEffect(() => {
     // Non eseguire se roundResetting è true
@@ -236,10 +236,6 @@ export default function LiarGamePage() {
     const PHASE_TIMEOUT_MS = 30000; // 30 secondi
     const roundStartedAt = gameState?.current?.roundStartedAt || Date.now();
     
-    const now = Date.now();
-    const elapsedMs = now - roundStartedAt;
-    const remainingMs = Math.max(0, PHASE_TIMEOUT_MS - elapsedMs);
-    
     // Aggiorna il timer UI ogni secondo
     const timerInterval = setInterval(() => {
       const currentElapsedMs = Date.now() - roundStartedAt;
@@ -247,40 +243,10 @@ export default function LiarGamePage() {
       setPhaseTimeLeft(Math.ceil(currentRemainingMs / 1000));
     }, 1000);
 
-    // Se il timeout è scaduto, auto-action
-    if (remainingMs <= 0) {
-      clearInterval(timerInterval);
-      
-      // AUTO-ACTION in base alla fase
-      if (isDeclarationPhase && isMyTurn) {
-        // Se è il mio turno e scade il timeout, auto-pass
-        console.log('⏱️ TIMEOUT: Auto-pass on declaration phase');
-        handleSubmitPass();
-      } else if (isChallengePhase && !isMyTurn) {
-        // Se posso sfidare e scade il timeout, auto-pass
-        console.log('⏱️ TIMEOUT: Auto-pass on challenge phase');
-        handleSubmitPass();
-      }
-    } else {
-      // Imposta il timeout per quando scade
-      if (timeoutTimerRef.current) clearTimeout(timeoutTimerRef.current);
-      
-      timeoutTimerRef.current = setTimeout(async () => {
-        if (isDeclarationPhase && isMyTurn) {
-          console.log('⏱️ TIMEOUT: Auto-pass on declaration phase');
-          handleSubmitPass();
-        } else if (isChallengePhase && !isMyTurn) {
-          console.log('⏱️ TIMEOUT: Auto-pass on challenge phase');
-          handleSubmitPass();
-        }
-      }, remainingMs);
-    }
-
     return () => {
       clearInterval(timerInterval);
-      if (timeoutTimerRef.current) clearTimeout(timeoutTimerRef.current);
     };
-  }, [gameState?.current?.roundStartedAt, gameState?.current?.phase, gameState?.current?.roundResetting, isMyTurn, isDeclarationPhase, isChallengePhase, roomCode]);
+  }, [gameState?.current?.roundStartedAt, gameState?.current?.phase, gameState?.current?.roundResetting]);
 
   // ========================================
   // HANDLE BOT TURN
