@@ -65,6 +65,7 @@ export default function LiarGamePage() {
   // Subscriptions
   const unsubscribesRef = useRef([]);
   const timeoutTimerRef = useRef(null);
+  const roundStartedAtRef = useRef(null);
 
   // ========================================
   // AUTH CHECK
@@ -233,12 +234,15 @@ export default function LiarGamePage() {
     // Non eseguire se è fase resolve o finished
     if (!gameState?.current?.phase || gameState?.current?.phase === 'resolve' || gameState?.current?.phase === 'finished') return;
 
+    // Aggiorna la ref quando roundStartedAt cambia
+    roundStartedAtRef.current = gameState?.current?.roundStartedAt || Date.now();
+
     const PHASE_TIMEOUT_MS = 30000; // 30 secondi
-    const roundStartedAt = gameState?.current?.roundStartedAt || Date.now();
     
     // Aggiorna il timer UI ogni secondo
     const timerInterval = setInterval(() => {
-      const currentElapsedMs = Date.now() - roundStartedAt;
+      const startTime = roundStartedAtRef.current;
+      const currentElapsedMs = Date.now() - startTime;
       const currentRemainingMs = Math.max(0, PHASE_TIMEOUT_MS - currentElapsedMs);
       setPhaseTimeLeft(Math.ceil(currentRemainingMs / 1000));
     }, 1000);
