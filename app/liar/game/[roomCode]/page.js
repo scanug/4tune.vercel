@@ -92,7 +92,7 @@ export default function LiarGamePage() {
       }
     });
 
-    const handsRef = ref(db, `rooms_liar/${roomCode}/current/playerHands/${userId}`);
+    const handsRef = ref(db, `rooms_liar/${roomCode}/current/hands/${userId}`);
     const unsubHands = onValue(handsRef, (snapshot) => {
       if (snapshot.exists()) {
         setPlayerHands(snapshot.val());
@@ -202,7 +202,7 @@ export default function LiarGamePage() {
   // SUBMIT CHALLENGE
   // ========================================
   const handleSubmitChallenge = async () => {
-    if (!lastClaim || !gameState?.currentTurn) {
+    if (!lastClaim || !gameState?.current?.turn?.currentPlayerId) {
       setError('Nessuna dichiarazione da sfidare');
       return;
     }
@@ -213,7 +213,7 @@ export default function LiarGamePage() {
 
       const challenge = {
         challengerId: userId,
-        targetPlayerId: gameState.currentTurn,
+        targetPlayerId: gameState?.current?.turn?.currentPlayerId,
         claimId: lastClaim?.id,
         timestamp: Date.now(),
         wildcardActivated: wildcardActivationRequested && wildcardAvailable,
@@ -246,12 +246,12 @@ export default function LiarGamePage() {
 
       // Prendi il turno successivo
       const players = Object.keys(gameState?.players || {});
-      const currentIndex = players.indexOf(gameState.currentTurn);
+      const currentIndex = players.indexOf(gameState?.current?.turn?.currentPlayerId);
       const nextPlayerId = players[(currentIndex + 1) % players.length];
 
-      const turnRef = ref(db, `rooms_liar/${roomCode}`);
+      const turnRef = ref(db, `rooms_liar/${roomCode}/current/turn`);
       await update(turnRef, {
-        currentTurn: nextPlayerId,
+        currentPlayerId: nextPlayerId,
       });
     } catch (err) {
       setError(err.message);
@@ -273,7 +273,7 @@ export default function LiarGamePage() {
         </div>
         <div className="header-center">
           <div className="round-badge">
-            Round {gameState?.roundIndex + 1} di {gameState?.maxRounds}
+            Round {gameState?.round + 1} di {gameState?.maxRounds}
           </div>
         </div>
         <div className="header-right">
@@ -310,7 +310,7 @@ export default function LiarGamePage() {
                 player={{
                   id,
                   name: player.name,
-                  isActive: id === gameState.currentTurn,
+                  isActive: id === gameState?.current?.turn?.currentPlayerId,
                   alive: player.alive,
                 }}
               />

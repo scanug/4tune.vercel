@@ -119,10 +119,26 @@ export default function LiarLobbyPage() {
       const playerIds = players.map(p => p.id);
       const firstTurnPlayerId = playerIds[0];
       
+      // Inizializza le mani (vuote per ora, Cloud Functions popoleranno con le carte)
+      const initialHands = {};
+      playerIds.forEach(playerId => {
+        initialHands[playerId] = [];
+      });
+      
       await update(roomRef, {
         status: 'playing',
         round: 0,
-        currentTurn: firstTurnPlayerId,
+        current: {
+          phase: 'turn',
+          turn: {
+            currentPlayerId: firstTurnPlayerId,
+            lastClaim: null,
+          },
+          hands: initialHands,
+          wildcards: [],
+          timeline: [],
+          declarationMode: roomData.declarationMode,
+        },
         turnEndTime: Date.now() + 60000, // 1 minuto per dichiarare
       });
       
