@@ -16,6 +16,7 @@ export default function LiarGamePage() {
   const [gamePhase, setGamePhase] = useState('init'); // 'init', 'declare', 'challenge', 'resolve'
   const [selectedCard, setSelectedCard] = useState(null);
   const [error, setError] = useState(null);
+  const [phaseTimeLeft, setPhaseTimeLeft] = useState(PHASE_TIME);
 
   // Mock data for demo
   const currentPlayer = 'Player 1';
