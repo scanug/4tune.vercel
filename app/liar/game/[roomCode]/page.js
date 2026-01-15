@@ -450,10 +450,42 @@ export default function LiarGamePage() {
     if (!challengeResult) return;
 
     // Mostra il risultato per 3 secondi, poi fa il reset del round
-    const resolveTimer = setTimeout(() => {
-      console.log('✅ CHALLENGE RESOLVED, AUTO-ADVANCING ROUND');
-      handleResetRound();
-    }, 3000); // 3 secondi di delay per animazione
+    const resolveTimer = setTimeout(async () => {
+      try {
+        console.log('✅ CHALLENGE RESOLVED, AUTO-ADVANCING ROUND');
+        
+        const playerIds = Object.keys(gameState.players || {});
+        const firstTurnPlayerId = playerIds[0];
+        const nowTimestamp = Date.now();
+        const roomRef = ref(db, `rooms_liar/${roomCode}`);
+        const nextRound = (gameState.round || 0) + 1;
+        
+        await update(roomRef, {
+          round: nextRound,
+          current: {
+            phase: 'turn',
+            turn: {
+              currentPlayerId: firstTurnPlayerId,
+              lastClaim: null,
+            },
+            hands: gameState.current.hands,
+            wildcards: [],
+            timeline: [],
+            challenge: null,
+            declarationMode: gameState.current.declarationMode,
+            roundStartedAt: nowTimestamp,
+            roundResetting: false,
+          },
+        });
+        
+        setChallengeResult(null);
+        setCurrentChallenge(null);
+        setDeclarationInput('');
+        setSelectedCard(null);
+      } catch (err) {
+        console.error('Error auto-advancing after resolve:', err);
+      }
+    }, 3000);
 
     return () => clearTimeout(resolveTimer);
   }, [gameState?.current?.phase, challengeResult]);
@@ -709,18 +741,10 @@ export default function LiarGamePage() {
   // AUTO-TRIGGER: END ROUND WHEN CONDITIONS MET
   // ========================================
   useEffect(() => {
-    if (!gameState?.current || !gameState?.round !== undefined || !gameState?.maxRounds) return;
+    if (!gameState?.current || gameState?.round === undefined || !gameState?.maxRounds) return;
     
-    // Check if all players have passed and challenge is resolved
-    // For simplicity: if 30+ seconds have passed and no active turn, move to next round
-    const now = Date.now();
-    const turnEndTime = gameState.turnEndTime || 0;
-    
-    // If turn time exceeded and no one is declaring
-    if (now > turnEndTime + 5000 && gameState.current.phase === 'turn' && !gameState.current.turn?.lastClaim) {
-      console.log('⏱️ AUTO-ADVANCE: No declaration, moving to next round');
-      handleResetRound();
-    }
+    // Se timeout di fase supera limit e nessuno dichiara, auto-advance
+    // Questo è gestito separatamente nel timeout system
   }, [gameState?.round, gameState?.current?.turn?.lastClaim, gameState?.turnEndTime]);
 
   // ========================================
