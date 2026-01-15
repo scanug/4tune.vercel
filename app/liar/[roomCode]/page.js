@@ -125,6 +125,11 @@ export default function LiarLobbyPage() {
         initialHands[playerId] = [];
       });
       
+      // Inizializza wildcards (Cloud Function assegnerà 0-2 per player)
+      const initialWildcards = [];
+      
+      const nowTimestamp = Date.now();
+      
       await update(roomRef, {
         status: 'playing',
         round: 0,
@@ -135,11 +140,13 @@ export default function LiarLobbyPage() {
             lastClaim: null,
           },
           hands: initialHands,
-          wildcards: [],
+          wildcards: initialWildcards,
           timeline: [],
           declarationMode: roomData.declarationMode,
+          roundStartedAt: nowTimestamp,
+          roundResetting: false,
         },
-        turnEndTime: Date.now() + 60000, // 1 minuto per dichiarare
+        turnEndTime: nowTimestamp + 60000, // 1 minuto per dichiarare
       });
       
       // Router redirect happens automatically via onValue subscription

@@ -82,11 +82,6 @@ export default function LiarPage() {
                 <h3>Wildcard</h3>
                 <p>Usa power-up per stravolgere il gioco</p>
               </div>
-              <div className="feature">
-                <div className="feature-icon">💰</div>
-                <h3>Crediti</h3>
-                <p>Vinci e perdi crediti ad ogni round</p>
-              </div>
             </div>
           </div>
 

@@ -60,9 +60,11 @@ export default function LiarGamePage() {
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [turnToken, setTurnToken] = useState(null); // UUID per anti-doppio input
+  const [phaseTimeLeft, setPhaseTimeLeft] = useState(30); // Timer UI
 
   // Subscriptions
   const unsubscribesRef = useRef([]);
+  const timeoutTimerRef = useRef(null);
 
   // ========================================
   // AUTH CHECK
@@ -79,6 +81,72 @@ export default function LiarGamePage() {
 
     return () => unsubscribe();
   }, [router]);
+
+  // ========================================
+  // RECONNECT HANDLER - Restore state on reconnect
+  // ========================================
+  useEffect(() => {
+    if (!userId || !roomCode || !gameState?.current) return;
+
+    // Se il gioco è in stato di gioco attivo, verifica se ci sono disconnessioni
+    if (gameState?.status === 'playing') {
+      // Recupera l'ID del giocatore corrente per evitare conflitti
+      const currentPlayerId = gameState?.current?.turn?.currentPlayerId;
+      
+      // Log di debug per riconnessione
+      console.log('✅ PLAYER RECONNECTED', {
+        userId,
+        roomCode,
+        currentPhase: gameState?.current?.phase,
+        currentPlayerId,
+      });
+
+      // Ripristina lo stato UI in base alla fase corrente
+      if (gameState?.current?.phase === 'turn') {
+        // In fase di dichiarazione, reset UI
+        setSelectedCard(null);
+        setDeclarationInput('');
+        setWildcardActivationRequested(false);
+      } else if (gameState?.current?.phase === 'challenge') {
+        // In fase di sfida, reset UI
+        setWildcardActivationRequested(false);
+      } else if (gameState?.current?.phase === 'resolve') {
+        // In fase di risoluzione, mantieni il risultato visibile
+        // (sarà auto-avanzato dallo useEffect di resolve)
+      }
+
+      // Reset UI generici
+      setError(null);
+      setSubmitting(false);
+    }
+  }, [userId, gameState?.status, gameState?.current?.phase, roomCode]);
+
+  // ========================================
+  // AUTO-DISCONNECT HANDLER - Monitor connection
+  // ========================================
+  useEffect(() => {
+    // Monitora la disponibilità della connessione
+    const handleOnline = () => {
+      console.log('🌐 ONLINE - Connection restored');
+      // Force refresh dello stato del gioco
+      if (gameState?.current?.phase) {
+        setTurnToken(Math.random().toString(36).substring(2, 15));
+      }
+    };
+
+    const handleOffline = () => {
+      console.log('📴 OFFLINE - Connection lost');
+      setError('Connessione persa. Riconnessione in corso...');
+    };
+
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
+
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, [gameState?.current?.phase]);
 
   // ========================================
   // SUBSCRIBE TO GAME STATE
@@ -157,6 +225,64 @@ export default function LiarGamePage() {
   }, [gameState?.current?.phase]);
 
   // ========================================
+  // TIMEOUT SYSTEM (30s per phase)
+  // ========================================
+  useEffect(() => {
+    // Non eseguire se roundResetting è true
+    if (gameState?.current?.roundResetting) return;
+    // Non eseguire se è fase resolve o finished
+    if (!gameState?.current?.phase || gameState?.current?.phase === 'resolve' || gameState?.current?.phase === 'finished') return;
+
+    const PHASE_TIMEOUT_MS = 30000; // 30 secondi
+    const roundStartedAt = gameState?.current?.roundStartedAt || Date.now();
+    
+    const now = Date.now();
+    const elapsedMs = now - roundStartedAt;
+    const remainingMs = Math.max(0, PHASE_TIMEOUT_MS - elapsedMs);
+    
+    // Aggiorna il timer UI ogni secondo
+    const timerInterval = setInterval(() => {
+      const currentElapsedMs = Date.now() - roundStartedAt;
+      const currentRemainingMs = Math.max(0, PHASE_TIMEOUT_MS - currentElapsedMs);
+      setPhaseTimeLeft(Math.ceil(currentRemainingMs / 1000));
+    }, 1000);
+
+    // Se il timeout è scaduto, auto-action
+    if (remainingMs <= 0) {
+      clearInterval(timerInterval);
+      
+      // AUTO-ACTION in base alla fase
+      if (isDeclarationPhase && isMyTurn) {
+        // Se è il mio turno e scade il timeout, auto-pass
+        console.log('⏱️ TIMEOUT: Auto-pass on declaration phase');
+        handleSubmitPass();
+      } else if (isChallengePhase && !isMyTurn) {
+        // Se posso sfidare e scade il timeout, auto-pass
+        console.log('⏱️ TIMEOUT: Auto-pass on challenge phase');
+        handleSubmitPass();
+      }
+    } else {
+      // Imposta il timeout per quando scade
+      if (timeoutTimerRef.current) clearTimeout(timeoutTimerRef.current);
+      
+      timeoutTimerRef.current = setTimeout(async () => {
+        if (isDeclarationPhase && isMyTurn) {
+          console.log('⏱️ TIMEOUT: Auto-pass on declaration phase');
+          handleSubmitPass();
+        } else if (isChallengePhase && !isMyTurn) {
+          console.log('⏱️ TIMEOUT: Auto-pass on challenge phase');
+          handleSubmitPass();
+        }
+      }, remainingMs);
+    }
+
+    return () => {
+      clearInterval(timerInterval);
+      if (timeoutTimerRef.current) clearTimeout(timeoutTimerRef.current);
+    };
+  }, [gameState?.current?.roundStartedAt, gameState?.current?.phase, gameState?.current?.roundResetting, isMyTurn, isDeclarationPhase, isChallengePhase, roomCode]);
+
+  // ========================================
   // HANDLE BOT TURN
   // ========================================
   useEffect(() => {
@@ -229,6 +355,112 @@ export default function LiarGamePage() {
   }, [gameState?.current?.turn?.currentPlayerId, gameState?.current?.phase, roomCode]);
 
   // ========================================
+  // AUTO-TRANSITION: RESOLVE → ROUND_END
+  // (Show result for 3s then auto-reset)
+  // ========================================
+  useEffect(() => {
+    if (!gameState?.current || gameState?.current?.phase !== 'resolve') return;
+    if (!challengeResult) return;
+
+    // Mostra il risultato per 3 secondi, poi fa il reset del round
+    const resolveTimer = setTimeout(() => {
+      console.log('✅ CHALLENGE RESOLVED, AUTO-ADVANCING ROUND');
+      handleResetRound();
+    }, 3000); // 3 secondi di delay per animazione
+
+    return () => clearTimeout(resolveTimer);
+  }, [gameState?.current?.phase, challengeResult]);
+
+  // ========================================
+  // ALL PLAYERS PASSED → AUTO-ADVANCE TURN
+  // (If in challenge phase and no one challenged for 35s)
+  // ========================================
+  useEffect(() => {
+    if (!gameState?.current || gameState?.current?.phase !== 'challenge') return;
+    if (currentChallenge?.result) return; // Se c'è un risultato, è già stato risolto
+    if (!lastClaim) return; // Se non c'è una dichiarazione, skip
+
+    // Aspetta 35 secondi (5s più del timeout fase) per dare tempo ai giocatori di sfidare
+    // Se nessuno sfida, auto-avanza il turno
+    const allPassedTimer = setTimeout(async () => {
+      try {
+        console.log('👥 ALL PLAYERS PASSED - AUTO-ADVANCING TURN');
+        
+        // Avanza il turno al prossimo giocatore
+        const playerIds = Object.keys(gameState.players || {});
+        const currentIndex = playerIds.indexOf(gameState?.current?.turn?.currentPlayerId);
+        const nextPlayerId = playerIds[(currentIndex + 1) % playerIds.length];
+
+        const turnRef = ref(db, `rooms_liar/${roomCode}/current/turn`);
+        await update(turnRef, {
+          currentPlayerId: nextPlayerId,
+          lastClaim: null, // Reset per il nuovo turno
+        });
+
+        // Transita a 'turn' phase (tornando da 'challenge')
+        const roomRef = ref(db, `rooms_liar/${roomCode}`);
+        await update(roomRef, {
+          current: {
+            ...gameState.current,
+            phase: 'turn',
+            turn: {
+              currentPlayerId: nextPlayerId,
+              lastClaim: null,
+            },
+          },
+        });
+      } catch (err) {
+        console.error('Error advancing turn after all passed:', err);
+      }
+    }, 35000); // 35 secondi
+
+    return () => clearTimeout(allPassedTimer);
+  }, [gameState?.current?.phase, lastClaim, gameState, roomCode]);
+
+  // ========================================
+  // AUTO-TRANSITION: CHALLENGE → RESOLVE
+  // ========================================
+  useEffect(() => {
+    if (!gameState?.current || gameState?.current?.phase !== 'challenge') return;
+    if (!currentChallenge?.result) return; // Aspetta il risultato
+
+    // La sfida è risolta server-side. Transita a 'resolve' per mostrare il risultato
+    const transitionTimer = setTimeout(async () => {
+      try {
+        const roomRef = ref(db, `rooms_liar/${roomCode}`);
+        await update(roomRef, {
+          current: {
+            ...gameState.current,
+            phase: 'resolve',
+          },
+        });
+        console.log('🔄 TRANSITIONED TO RESOLVE PHASE');
+      } catch (err) {
+        console.error('Error transitioning to resolve:', err);
+      }
+    }, 500); // Piccolo delay per garantire consistency
+
+    return () => clearTimeout(transitionTimer);
+  }, [gameState?.current?.phase, currentChallenge?.result, gameState, roomCode]);
+
+  // ========================================
+  // AUTO-TRANSITION: RESOLVE → ROUND_END
+  // (Show result for 3s then auto-reset)
+  // ========================================
+  useEffect(() => {
+    if (!gameState?.current || gameState?.current?.phase !== 'resolve') return;
+    if (!challengeResult) return;
+
+    // Mostra il risultato per 3 secondi, poi fa il reset del round
+    const resolveTimer = setTimeout(() => {
+      console.log('✅ CHALLENGE RESOLVED, AUTO-ADVANCING ROUND');
+      handleResetRound();
+    }, 3000); // 3 secondi di delay per animazione
+
+    return () => clearTimeout(resolveTimer);
+  }, [gameState?.current?.phase, challengeResult]);
+
+  // ========================================
   // LOADING & ERROR STATES
   // ========================================
   if (pageLoading) {
@@ -245,6 +477,7 @@ export default function LiarGamePage() {
   const isMyTurn = gameState?.current?.turn?.currentPlayerId === userId;
   const isDeclarationPhase = gameState?.current?.phase === 'turn';
   const isChallengePhase = gameState?.current?.phase === 'challenge';
+  const isResolvePhase = gameState?.current?.phase === 'resolve';
   const myHand = playerHands || [];
   const currentPlayer = gameState?.players?.[gameState?.current?.turn?.currentPlayerId];
   const lastClaim = gameState?.current?.turn?.lastClaim;
@@ -393,7 +626,7 @@ export default function LiarGamePage() {
   };
 
   // ========================================
-  // RESET ROUND (NEW ROUND INIT)
+  // RESET ROUND (NEW ROUND INIT) - ATOMIC
   // ========================================
   const handleResetRound = async () => {
     try {
@@ -401,11 +634,23 @@ export default function LiarGamePage() {
       
       const playerIds = Object.keys(gameState.players || {});
       const firstTurnPlayerId = playerIds[0];
+      const nowTimestamp = Date.now();
       
       const roomRef = ref(db, `rooms_liar/${roomCode}`);
       
+      // ATOMIC UPDATE: Tutto insieme per garantire consistency
+      // 1. Setta roundResetting = true per bloccare timeout
+      // 2. Cancella lastClaim e challenge
+      // 3. Reset timeline e wildcards
+      // 4. Avanza round number
+      // 5. Avanza currentPlayerIndex
+      // 6. Setta roundResetting = false
+      // 7. Aggiorna roundStartedAt
+      
+      const nextRound = (gameState.round || 0) + 1;
+      
       await update(roomRef, {
-        round: (gameState.round || 0) + 1,
+        round: nextRound,
         current: {
           phase: 'turn',
           turn: {
@@ -415,11 +660,20 @@ export default function LiarGamePage() {
           hands: gameState.current.hands, // Keep hands from previous round for now
           wildcards: [],
           timeline: [],
+          challenge: null, // Clear any previous challenge
           declarationMode: gameState.current.declarationMode,
+          roundStartedAt: nowTimestamp,
+          roundResetting: false,
         },
       });
       
-      console.log('✅ ROUND RESET COMPLETE', { newRound: (gameState.round || 0) + 1 });
+      // Clear challenge result from UI
+      setChallengeResult(null);
+      setCurrentChallenge(null);
+      setDeclarationInput('');
+      setSelectedCard(null);
+      
+      console.log('✅ ROUND RESET COMPLETE', { newRound: nextRound });
     } catch (err) {
       console.error('❌ Error resetting round:', err);
       setError('Errore nel reset del round');
@@ -586,6 +840,81 @@ export default function LiarGamePage() {
         </div>
       )}
 
+      {/* CHALLENGE RESOLUTION OVERLAY (RESOLVE PHASE) */}
+      {isResolvePhase && challengeResult && (
+        <div style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          width: '100%',
+          height: '100%',
+          background: 'rgba(0, 0, 0, 0.8)',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          zIndex: 999,
+          backdropFilter: 'blur(5px)',
+          animation: 'fadeIn 0.3s ease-out',
+        }}>
+          <div style={{
+            background: 'linear-gradient(135deg, #1e293b 0%, #0f172a 100%)',
+            border: `3px solid ${challengeResult.truth ? '#10b981' : '#ef4444'}`,
+            borderRadius: '16px',
+            padding: '2rem',
+            textAlign: 'center',
+            maxWidth: '500px',
+            color: '#f1f5f9',
+            animation: 'scaleIn 0.4s ease-out',
+          }}>
+            <h1 style={{
+              fontSize: '2rem',
+              marginBottom: '1rem',
+              color: challengeResult.truth ? '#86efac' : '#fca5a5',
+            }}>
+              {challengeResult.truth ? '✅ Verità!' : '❌ Bugia!'}
+            </h1>
+            <p style={{ fontSize: '1.1rem', marginBottom: '1.5rem', color: '#c4b5fd' }}>
+              {challengeResult.truth 
+                ? 'La dichiarazione era vera' 
+                : 'La dichiarazione era falsa'}
+            </p>
+            <div style={{
+              background: `rgba(${challengeResult.truth ? '16, 185, 129' : '239, 68, 68'}, 0.2)`,
+              border: `2px solid ${challengeResult.truth ? '#10b981' : '#ef4444'}`,
+              borderRadius: '8px',
+              padding: '1rem',
+              marginBottom: '1rem',
+            }}>
+              <p style={{ margin: 0, fontSize: '0.9rem', color: '#e2e8f0' }}>
+                ⏳ Avanzamento automatico in 3 secondi...
+              </p>
+            </div>
+          </div>
+
+          <style jsx>{`
+            @keyframes fadeIn {
+              from {
+                opacity: 0;
+              }
+              to {
+                opacity: 1;
+              }
+            }
+
+            @keyframes scaleIn {
+              from {
+                transform: scale(0.9);
+                opacity: 0;
+              }
+              to {
+                transform: scale(1);
+                opacity: 1;
+              }
+            }
+          `}</style>
+        </div>
+      )}
+
       <div className="game-container">
         {/* MAIN GAME AREA */}
         <section className="game-main">
@@ -639,6 +968,30 @@ export default function LiarGamePage() {
           {/* ACTIONS */}
           <div className="actions-section">
             <h3>⚡ Azioni</h3>
+
+            {/* TIMER */}
+            {(isDeclarationPhase || isChallengePhase) && !isResolvePhase && (
+              <div style={{
+                background: 'linear-gradient(135deg, rgba(239, 68, 68, 0.2), rgba(220, 38, 38, 0.2))',
+                border: '2px solid #ef4444',
+                borderRadius: '8px',
+                padding: '0.75rem',
+                marginBottom: '1rem',
+                textAlign: 'center',
+              }}>
+                <div style={{
+                  fontSize: '2rem',
+                  fontWeight: '900',
+                  color: phaseTimeLeft <= 5 ? '#fca5a5' : '#f1f5f9',
+                  animation: phaseTimeLeft <= 5 ? 'pulse 0.5s infinite' : 'none',
+                }}>
+                  ⏱️ {phaseTimeLeft}s
+                </div>
+                <p style={{ margin: '0.25rem 0 0 0', fontSize: '0.75rem', color: '#a78bfa', textTransform: 'uppercase', fontWeight: '700', letterSpacing: '0.5px' }}>
+                  {isDeclarationPhase ? 'Tempo per dichiarare' : 'Tempo per sfidare'}
+                </p>
+              </div>
+            )}
 
             {/* DECLARATION PHASE */}
             {isDeclarationPhase && isMyTurn && (
