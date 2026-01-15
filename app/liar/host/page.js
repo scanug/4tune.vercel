@@ -11,7 +11,6 @@ export default function LiarHostPage() {
   const [loading, setLoading] = useState(false);
   const [maxRounds, setMaxRounds] = useState(7);
   const [declarationMode, setDeclarationMode] = useState('assisted');
-  const [wager, setWager] = useState(50);
   const [error, setError] = useState(null);
 
   const handleCreateRoom = async () => {
@@ -35,12 +34,10 @@ export default function LiarHostPage() {
         createdAt: Date.now(),
         maxRounds,
         declarationMode,
-        wager,
         players: {
           [auth.currentUser.uid]: {
             name: auth.currentUser.displayName || 'Player',
-            credits: 200,
-            isReady: true,
+            alive: true,
           },
         },
       });
@@ -114,22 +111,6 @@ export default function LiarHostPage() {
               </select>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="wager">
-                <span className="label-text">Posta:</span>
-              </label>
-              <input
-                id="wager"
-                type="number"
-                min="10"
-                max="500"
-                value={wager}
-                onChange={(e) => setWager(parseInt(e.target.value))}
-                disabled={loading}
-                className="form-input"
-              />
-            </div>
-
             <button 
               type="submit"
               className="btn-create"
@@ -151,12 +132,6 @@ export default function LiarHostPage() {
               <span className="hint-icon">ℹ️</span>
               <div className="hint-text">
                 <strong>Modalità:</strong> Guidata per principianti, Libera per esperti
-              </div>
-            </div>
-            <div className="hint">
-              <span className="hint-icon">ℹ️</span>
-              <div className="hint-text">
-                <strong>Posta:</strong> Crediti scommessi inizialmente
               </div>
             </div>
           </div>
