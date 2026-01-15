@@ -471,6 +471,33 @@ export default function LiarGamePage() {
     return <div className="error">Stanza non trovata</div>;
   }
 
+  // CRITICAL: Verifica che gameState.current sia completamente inizializzato
+  if (!gameState?.current || !gameState?.current?.phase || !gameState?.current?.turn) {
+    console.warn('⚠️ GAME STATE NOT READY YET:', {
+      hasCurrent: !!gameState?.current,
+      hasPhase: !!gameState?.current?.phase,
+      hasTurn: !!gameState?.current?.turn,
+      gameState: JSON.stringify(gameState).slice(0, 500),
+    });
+    return (
+      <div style={{
+        padding: '2rem',
+        color: '#a78bfa',
+        background: '#1a1f35',
+        textAlign: 'center',
+        minHeight: '100vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}>
+        <div>
+          <h2>⏳ Caricamento stato di gioco...</h2>
+          <p>Attendere che il server sincronizzi lo stato.</p>
+        </div>
+      </div>
+    );
+  }
+
   // ========================================
   // STATE SHORTCUTS (only used in render, not in effects)
   // ========================================
@@ -531,60 +558,8 @@ export default function LiarGamePage() {
     );
   }
 
-  if (!gameState.current.turn?.currentPlayerId) {
-    return (
-      <div className="error">
-        <h2>⚠️ Turno non inizializzato</h2>
-        <p>Il gioco non è ancora iniziato correttamente</p>
-      </div>
-    );
-  }
-
-  // ========================================
-  // SUBMIT DECLARATION
-  // ========================================
-  const handleSubmitDeclaration = async () => {
-    if (!isMyTurn || !isDeclarationPhase || !selectedCard) {
-      setError('Seleziona una carta prima di dichiarare');
-      return;
-    }
-
-    try {
-      setSubmitting(true);
-      setError(null);
-
-      const declaration = {
-        suit: selectedCard.suit,
-        value: selectedCard.value,
-        player: userId,
-        timestamp: Date.now(),
-      };
-
-      // Valida declarazione
-      if (!validateDeclarationProgression(
-        declaration,
-        lastClaim,
-        gameState?.current?.declarationMode
-      )) {
-        setError('Dichiarazione non valida');
-        setSubmitting(false);
-        return;
-      }
-
-      // Scrivi dichiarazione su Firebase
-      const turnRef = ref(db, `rooms_liar/${roomCode}/current/turn`);
-      await update(turnRef, {
-        lastClaim: declaration,
-      });
-
-      setDeclarationInput('');
-      setSelectedCard(null);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setSubmitting(false);
-    }
-  };
+try {
+    isMyTurn = gameState?.current?.turn?.currentPlayerId === userId;
 
   // ========================================
   // SUBMIT CHALLENGE
