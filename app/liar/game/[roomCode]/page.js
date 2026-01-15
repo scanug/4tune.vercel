@@ -127,6 +127,78 @@ export default function LiarGamePage() {
   }, [userId, roomCode]);
 
   // ========================================
+  // HANDLE BOT TURN
+  // ========================================
+  useEffect(() => {
+    if (!gameState?.current || !gameState?.current?.turn?.currentPlayerId) return;
+
+    const currentTurnPlayerId = gameState.current.turn.currentPlayerId;
+    const currentTurnPlayer = gameState.players?.[currentTurnPlayerId];
+
+    // Check if it's a bot's turn and it's the declaration phase
+    if (currentTurnPlayer?.isAI && gameState.current.phase === 'turn') {
+      // Delay per evitare race conditions e fare sembrare più naturale
+      const timeout = setTimeout(async () => {
+        try {
+          const botCards = gameState.current.hands?.[currentTurnPlayerId] || [];
+          if (botCards.length === 0) return;
+
+          const lastClaim = gameState.current.turn.lastClaim;
+          let declaration = null;
+
+          // Se non c'è un'ultima dichiarazione, il bot dichiara una carta a caso
+          if (!lastClaim) {
+            const randomCard = botCards[Math.floor(Math.random() * botCards.length)];
+            declaration = {
+              suit: randomCard.suit,
+              value: randomCard.value,
+              player: currentTurnPlayerId,
+              timestamp: Date.now(),
+            };
+          } else {
+            // Cerca una dichiarazione valida incrementando il valore
+            const suits = ['spades', 'hearts', 'diamonds', 'clubs'];
+            const values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
+            
+            for (const suit of suits) {
+              for (const value of values) {
+                const testDeclaration = {
+                  suit,
+                  value,
+                  player: currentTurnPlayerId,
+                  timestamp: Date.now(),
+                };
+
+                if (validateDeclarationProgression(
+                  testDeclaration,
+                  lastClaim,
+                  gameState.current.declarationMode
+                )) {
+                  declaration = testDeclaration;
+                  break;
+                }
+              }
+              if (declaration) break;
+            }
+          }
+
+          if (!declaration) return; // Non è riuscito a trovare una dichiarazione valida
+
+          // Scrivi la dichiarazione
+          const turnRef = ref(db, `rooms_liar/${roomCode}/current/turn`);
+          await update(turnRef, {
+            lastClaim: declaration,
+          });
+        } catch (err) {
+          console.error('Error in bot turn:', err);
+        }
+      }, 2000); // 2 secondi di delay
+
+      return () => clearTimeout(timeout);
+    }
+  }, [gameState?.current?.turn?.currentPlayerId, gameState?.current?.phase, roomCode]);
+
+  // ========================================
   // LOADING & ERROR STATES
   // ========================================
   if (pageLoading) {
