@@ -8,6 +8,8 @@ export default function LiarGamePage() {
   const params = useParams();
   const roomCode = params?.roomCode;
 
+  const PHASE_TIME = 30; // seconds
+
   // State
   const [userId, setUserId] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -19,14 +21,43 @@ export default function LiarGamePage() {
   const currentPlayer = 'Player 1';
   const isMyTurn = true;
 
+  // Auth check
   useEffect(() => {
-    // Simulate auth check
     const timer = setTimeout(() => {
       setUserId('demo-user');
       setIsLoading(false);
     }, 500);
     return () => clearTimeout(timer);
   }, []);
+
+  // Timer countdown
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setPhaseTimeLeft(prev => {
+        const newTime = Math.max(0, prev - 1);
+        
+        // Auto-advance when timer reaches 0
+        if (newTime === 0) {
+          setTimeout(() => {
+            setGamePhase(current => {
+              if (current === 'declare') return 'challenge';
+              if (current === 'challenge') return 'resolve';
+              if (current === 'resolve') return 'declare';
+              return current;
+            });
+          }, 500);
+        }
+        
+        return newTime;
+      });
+    }, 1000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Reset timer on phase change
+  useEffect(() => {
+    setPhaseTimeLeft(PHASE_TIME);
+  }, [gamePhase]);
 
   if (isLoading) {
     return (
@@ -84,7 +115,7 @@ export default function LiarGamePage() {
               {['♠A', '❤️5', '♦️10', '♣️K'].map((card, i) => (
                 <button
                   key={i}
-                  onClick={() => setSelectedCard(card)}
+                  onClick={() => setSelectedCard(selectedCard === card ? null : card)}
                   style={{
                     ...styles.card,
                     ...(selectedCard === card ? styles.cardSelected : {}),
@@ -109,6 +140,10 @@ export default function LiarGamePage() {
             {gamePhase === 'declare' && isMyTurn && (
               <button
                 onClick={() => {
+                  if (!selectedCard) {
+                    setError('🎴 Select a card first!');
+                    return;
+                  }
                   setGamePhase('challenge');
                   setSelectedCard(null);
                 }}
@@ -126,7 +161,13 @@ export default function LiarGamePage() {
                 >
                   ⚔️ CHALLENGE
                 </button>
-                <button onClick={() => console.log('pass')} style={styles.buttonPass}>
+                <button 
+                  onClick={() => {
+                    // Skip to next player
+                    setGamePhase('declare');
+                  }} 
+                  style={styles.buttonPass}
+                >
                   ⏭️ PASS
                 </button>
               </>
@@ -136,6 +177,15 @@ export default function LiarGamePage() {
               <div style={styles.resultBox}>
                 <h2 style={{ color: '#00FF00', fontSize: '2rem' }}>✅ TRUTH!</h2>
                 <p>Declaration was valid</p>
+                <button
+                  onClick={() => {
+                    setGamePhase('declare');
+                    setError(null);
+                  }}
+                  style={{ ...styles.button, marginTop: '0.5rem', fontSize: '0.9rem' }}
+                >
+                  NEXT ROUND
+                </button>
               </div>
             )}
           </div>
