@@ -329,13 +329,45 @@ export default function LiarGamePage() {
     if (!challengeResult) return;
 
     // Mostra il risultato per 3 secondi, poi fa il reset del round
-    const resolveTimer = setTimeout(() => {
-      console.log('✅ CHALLENGE RESOLVED, AUTO-ADVANCING ROUND');
-      handleResetRound();
-    }, 3000); // 3 secondi di delay per animazione
+    const resolveTimer = setTimeout(async () => {
+      try {
+        console.log('✅ CHALLENGE RESOLVED, AUTO-ADVANCING ROUND');
+        
+        const playerIds = Object.keys(gameState.players || {});
+        const firstTurnPlayerId = playerIds[0];
+        const nowTimestamp = Date.now();
+        const roomRef = ref(db, `rooms_liar/${roomCode}`);
+        const nextRound = (gameState.round || 0) + 1;
+        
+        await update(roomRef, {
+          round: nextRound,
+          current: {
+            phase: 'turn',
+            turn: {
+              currentPlayerId: firstTurnPlayerId,
+              lastClaim: null,
+            },
+            hands: gameState.current.hands,
+            wildcards: [],
+            timeline: [],
+            challenge: null,
+            declarationMode: gameState.current.declarationMode,
+            roundStartedAt: nowTimestamp,
+            roundResetting: false,
+          },
+        });
+        
+        setChallengeResult(null);
+        setCurrentChallenge(null);
+        setDeclarationInput('');
+        setSelectedCard(null);
+      } catch (err) {
+        console.error('Error auto-advancing after resolve:', err);
+      }
+    }, 3000);
 
     return () => clearTimeout(resolveTimer);
-  }, [gameState?.current?.phase, challengeResult]);
+  }, [gameState?.current?.phase, challengeResult, gameState, roomCode]);
 
   // ========================================
   // ALL PLAYERS PASSED → AUTO-ADVANCE TURN
