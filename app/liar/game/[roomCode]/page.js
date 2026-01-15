@@ -890,28 +890,6 @@ export default function LiarGamePage() {
               </p>
             </div>
           </div>
-
-          <style jsx>{`
-            @keyframes fadeIn {
-              from {
-                opacity: 0;
-              }
-              to {
-                opacity: 1;
-              }
-            }
-
-            @keyframes scaleIn {
-              from {
-                transform: scale(0.9);
-                opacity: 0;
-              }
-              to {
-                transform: scale(1);
-                opacity: 1;
-              }
-            }
-          `}</style>
         </div>
       )}
 
@@ -1065,6 +1043,27 @@ export default function LiarGamePage() {
           color: #f1f5f9;
           font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
           padding-bottom: 2rem;
+        }
+
+        /* ANIMATIONS */
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        @keyframes scaleIn {
+          from {
+            transform: scale(0.9);
+            opacity: 0;
+          }
+          to {
+            transform: scale(1);
+            opacity: 1;
+          }
         }
 
         /* HEADER */
