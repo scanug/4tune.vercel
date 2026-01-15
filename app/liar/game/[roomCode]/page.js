@@ -506,7 +506,7 @@ export default function LiarGamePage() {
   }
 
   // ========================================
-  // STATE SHORTCUTS
+  // STATE SHORTCUTS (only used in render, not in effects)
   // ========================================
   const isMyTurn = gameState?.current?.turn?.currentPlayerId === userId;
   const isDeclarationPhase = gameState?.current?.phase === 'turn';
