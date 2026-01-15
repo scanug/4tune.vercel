@@ -1,332 +1,381 @@
-  {
-    "rules": {
-      ".read": "auth != null",
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
 
-      "users": {
-        "$uid": {
-          ".read": "auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin'",
-          ".write": "auth.uid == $uid",
+    "users": {
+      "$uid": {
+        ".read": "auth != null && (auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin')",
+        ".write": "auth != null && auth.uid == $uid",
 
-          "credits": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000000" },
-          "name": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32" },
-          "avatar": { ".validate": "newData.isString() || newData.val() == null" },
-          "winsWeek": { ".validate": "newData.isNumber() && newData.val() >= 0" },
-          "winsMonth": { ".validate": "newData.isNumber() && newData.val() >= 0" },
-          "lastWinAt": { ".validate": "newData.isNumber() || newData.val() == null" },
-          "createdAt": { ".validate": "newData.isNumber()" },
+        "credits": { 
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000000" 
+        },
+        "name": { 
+          ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32" 
+        },
+        "avatar": { 
+          ".validate": "newData.isString() || newData.val() == null" 
+        },
+        "winsWeek": { 
+          ".validate": "newData.isNumber() && newData.val() >= 0" 
+        },
+        "winsMonth": { 
+          ".validate": "newData.isNumber() && newData.val() >= 0" 
+        },
+        "lastWinAt": { 
+          ".validate": "newData.isNumber() || newData.val() == null" 
+        },
+        "createdAt": { 
+          ".validate": "newData.isNumber()" 
+        },
 
-          "profile": {
-            ".read": "auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin'",
-            ".write": "auth.uid == $uid",
-            "name": { ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32" },
-            "avatar": { ".validate": "newData.isString() || newData.val() == null" }
+        "profile": {
+          ".read": "auth != null && (auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin')",
+          ".write": "auth != null && auth.uid == $uid",
+          "name": { 
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 32" 
           },
-
-          "wallet": {
-            ".read": "auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin'",
-            ".write": "auth.uid == $uid",
-            "credits": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000000" },
-            "bonusCredits": { ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000000" },
-            "totalPurchasedEur": { ".validate": "newData.isNumber() && newData.val() >= 0" }
-          },
-
-          "lastSpin": {
-            ".read": "auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin'",
-            ".write": "auth.uid == $uid",
-            ".validate": "newData.isNumber() && (!data.exists() || newData.val() - data.val() > 86400000)"
-          },
-
-          "missions": {
-            ".read": "auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin'",
-            ".write": "auth.uid == $uid",
-            "$missionKey": {
-              ".validate": "newData.hasChildren(['progress','goal','reward','completed']) && newData.child('progress').isNumber() && newData.child('goal').isNumber() && newData.child('reward').isNumber() && newData.child('progress').val() >= 0 && newData.child('goal').val() >= 0 && newData.child('reward').val() >= 0 && newData.child('completed').isBoolean()"
-            }
-          },
-
-          "role": { ".read": "root.child('users/'+auth.uid+'/role').val() == 'admin'", ".write": "false" }
-        }
-      },
-
-      "rooms": {
-        "$roomCode": {
-          ".read": "auth != null",
-
-          ".write": "auth != null",
-
-          "hostId": {
-            ".read": true,
-            ".write": "!data.exists() && auth != null",
-            ".validate": "newData.isString()"
-          },
-
-          "status": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.val() == 'waiting' || newData.val() == 'playing' || newData.val() == 'finished'"
-          },
-          "round": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100"
-          },
-          "currentRange": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.hasChildren(['min','max']) && newData.child('min').isNumber() && newData.child('max').isNumber() && newData.child('min').val() < newData.child('max').val()"
-          },
-          "startedAt": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.isNumber()"
-          },
-          "phase": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.val() == 'lobby' || newData.val() == 'betting' || newData.val() == 'reveal' || newData.val() == 'finished'"
-          },
-          "betEndTime": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.isNumber()"
-          },
-          "maxRounds": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 50"
-          },
-          "betTimeSeconds": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.isNumber() && newData.val() >= 5 && newData.val() <= 120"
-          },
-          "winningNumber": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid",
-            ".validate": "newData.isNumber()"
-          },
-
-          "winningNumbers": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "roundResults": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "resultsHistory": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "allWinsBonus": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-          "sideBetResults": {
-            ".write": "root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-          },
-
-          "payoutApplied": {
-            "$playerId": {
-              ".read": "auth.uid == $playerId",
-              ".write": "auth.uid == $playerId && !data.exists()",
-              ".validate": "newData.val() === true"
-            }
-          },
-
-
-          "players": {
-            ".read": true,
-            "$playerId": {
-              ".write": "auth.uid == $playerId || root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid"
-            }
-          },
-
-
-          "bets": {
-            "$playerId": {
-              ".write": "auth.uid == $playerId",
-              ".validate": "newData.hasChildren(['number','amount']) && newData.child('number').isNumber() && newData.child('amount').isNumber() && newData.child('amount').val() >= 1"
-            }
-          },
-
-          "sideBets": {
-            "$playerId": {
-              ".write": "auth.uid == $playerId",
-              ".validate": "newData.val() == null || ((!newData.child('evenHalf').exists() || (newData.child('evenHalf').isNumber() && newData.child('evenHalf').val() >= 0)) && (!newData.child('oddHalf').exists() || (newData.child('oddHalf').isNumber() && newData.child('oddHalf').val() >= 0)) && (!newData.child('twoPrimes').exists() || (newData.child('twoPrimes').isNumber() && newData.child('twoPrimes').val() >= 0)) && (!newData.child('twoMultiplesOf10').exists() || (newData.child('twoMultiplesOf10').isNumber() && newData.child('twoMultiplesOf10').val() >= 0)))"
-            }
+          "avatar": { 
+            ".validate": "newData.isString() || newData.val() == null" 
           }
+        },
+
+        "wallet": {
+          ".read": "auth != null && (auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin')",
+          ".write": "auth != null && (auth.uid == $uid || auth.token.admin == true)",
+          "credits": { 
+            ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000000" 
+          },
+          "bonusCredits": { 
+            ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000000" 
+          },
+          "totalPurchasedEur": { 
+            ".validate": "newData.isNumber() && newData.val() >= 0" 
+          }
+        },
+
+        "lastSpin": {
+          ".read": "auth != null && (auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin')",
+          ".write": "auth != null && auth.uid == $uid",
+          ".validate": "newData.isNumber() && (!data.exists() || newData.val() - data.val() >= 86400000)"
+        },
+
+        "missions": {
+          ".read": "auth != null && (auth.uid == $uid || root.child('users/'+auth.uid+'/role').val() == 'admin')",
+          ".write": "auth != null && auth.uid == $uid",
+          "$missionKey": {
+            ".validate": "newData.hasChildren(['progress','goal','reward','completed']) && newData.child('progress').isNumber() && newData.child('goal').isNumber() && newData.child('reward').isNumber() && newData.child('progress').val() >= 0 && newData.child('goal').val() >= 0 && newData.child('reward').val() >= 0 && newData.child('completed').isBoolean()"
+          }
+        },
+
+        "role": { 
+          ".read": "auth != null && root.child('users/'+auth.uid+'/role').val() == 'admin'", 
+          ".write": "auth != null && auth.token.admin == true" 
         }
-      },
+      }
+    },
 
-
-    "rooms_music": {
+    "rooms": {
       "$roomCode": {
         ".read": "auth != null",
-
-        ".write": "auth != null",
+        
+        ".write": "(auth != null && !data.exists() && newData.child('hostId').val() == auth.uid) || (data.exists() && root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid)",
 
         "hostId": {
-          ".read": true,
-          ".write": "auth != null",
+          ".write": "!data.exists()",
           ".validate": "newData.isString()"
         },
 
-        "createdAt": {
-          ".write": "auth != null"
-        },
-
         "status": {
-          ".write": "auth != null"
+          ".validate": "newData.isString() && (newData.val() == 'waiting' || newData.val() == 'playing' || newData.val() == 'finished')"
         },
-        "roundIndex": {
-          ".write": "auth != null"
+
+        "round": {
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100"
         },
+
+        "currentRange": {
+          ".validate": "newData.hasChildren(['min','max']) && newData.child('min').isNumber() && newData.child('max').isNumber() && newData.child('min').val() < newData.child('max').val()"
+        },
+
+        "startedAt": {
+          ".validate": "newData.isNumber()"
+        },
+
+        "phase": {
+          ".validate": "newData.isString() && (newData.val() == 'lobby' || newData.val() == 'betting' || newData.val() == 'reveal' || newData.val() == 'finished')"
+        },
+
+        "betEndTime": {
+          ".validate": "newData.isNumber()"
+        },
+
         "maxRounds": {
-          ".write": "auth != null"
-        },
-        "roundMs": {
-          ".write": "auth != null"
-        },
-        "prepMs": {
-          ".write": "auth != null"
-        },
-        "startAt": {
-          ".write": "auth != null"
+          ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 50"
         },
 
-        "playlist": { ".write": "auth != null" },
-        "scoreboard": { ".write": "auth != null" },
+        "betTimeSeconds": {
+          ".validate": "newData.isNumber() && newData.val() >= 5 && newData.val() <= 120"
+        },
 
-        "wagers": {
-          "$playerId": {
-            ".write": "auth != null"
-          }
+        "winningNumber": {
+          ".validate": "newData.isNumber()"
+        },
+
+        "winningNumbers": {
+          ".validate": "newData.val() != null"
+        },
+
+        "roundResults": {
+          ".validate": "newData.val() != null"
+        },
+
+        "resultsHistory": {
+          ".validate": "newData.val() != null"
+        },
+
+        "allWinsBonus": {
+          ".validate": "newData.val() != null"
+        },
+
+        "sideBetResults": {
+          ".validate": "newData.val() != null"
         },
 
         "payoutApplied": {
-          "$playerId": { ".write": "auth.uid == $playerId && !data.exists()" }
-        },
-
-
-        "players": {
-          ".read": true,
           "$playerId": {
-            ".write": "auth != null"
+            ".read": "auth != null && auth.uid == $playerId",
+            ".write": "auth != null && auth.uid == $playerId && !data.exists()",
+            ".validate": "newData.val() === true"
           }
         },
 
+        "players": {
+          ".read": "auth != null",
+          "$playerId": {
+            ".write": "auth != null && (auth.uid == $playerId || root.child('rooms/'+$roomCode+'/hostId').val() == auth.uid)",
+            ".validate": "newData.hasChildren(['name']) && newData.child('name').isString()"
+          }
+        },
 
-        "current": {
-          ".write": "auth != null",
+        "bets": {
+          "$playerId": {
+            ".write": "auth != null && auth.uid == $playerId",
+            ".validate": "newData.hasChildren(['number','amount']) && newData.child('number').isNumber() && newData.child('amount').isNumber() && newData.child('amount').val() >= 1 && newData.child('amount').val() <= 50000"
+          }
+        },
 
-          "answers": {
-            "$playerId": {
-              ".write": "auth != null"
-            }
-          },
-
-          "firstCorrect": {
-            ".write": "auth != null"
-          },
-
-          "scored": {
-            ".write": "auth != null"
+        "sideBets": {
+          "$playerId": {
+            ".write": "auth != null && auth.uid == $playerId",
+            ".validate": "newData.val() == null || ((!newData.child('evenHalf').exists() || (newData.child('evenHalf').isNumber() && newData.child('evenHalf').val() >= 0 && newData.child('evenHalf').val() <= 50000)) && (!newData.child('oddHalf').exists() || (newData.child('oddHalf').isNumber() && newData.child('oddHalf').val() >= 0 && newData.child('oddHalf').val() <= 50000)) && (!newData.child('twoPrimes').exists() || (newData.child('twoPrimes').isNumber() && newData.child('twoPrimes').val() >= 0 && newData.child('twoPrimes').val() <= 50000)) && (!newData.child('twoMultiplesOf10').exists() || (newData.child('twoMultiplesOf10').isNumber() && newData.child('twoMultiplesOf10').val() >= 0 && newData.child('twoMultiplesOf10').val() <= 50000)))"
           }
         }
       }
     },
 
-    "rooms_liar": {
+    "rooms_music": {
       "$roomCode": {
         ".read": "auth != null",
-        ".write": "auth != null",
+        
+        ".write": "(auth != null && !data.exists() && newData.child('hostId').val() == auth.uid) || (data.exists() && root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid)",
 
         "hostId": {
-          ".read": true,
-          ".write": "!data.exists() && auth != null",
+          ".write": "!data.exists()",
           ".validate": "newData.isString()"
         },
 
         "createdAt": {
-          ".write": "auth != null"
+          ".validate": "newData.isNumber()"
         },
 
         "status": {
-          ".write": "auth != null",
-          ".validate": "newData.val() == 'waiting' || newData.val() == 'playing' || newData.val() == 'finished'"
+          ".validate": "newData.isString() && (newData.val() == 'lobby' || newData.val() == 'playing' || newData.val() == 'finished')"
         },
 
         "roundIndex": {
-          ".write": "auth != null",
           ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100"
         },
 
         "maxRounds": {
-          ".write": "auth != null",
           ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 50"
         },
 
-        "declarationMode": {
-          ".write": "auth != null",
-          ".validate": "newData.val() == 'free' || newData.val() == 'assisted'"
+        "roundMs": {
+          ".validate": "newData.isNumber() && newData.val() >= 10000 && newData.val() <= 60000"
         },
 
-        "wager": {
-          ".write": "auth != null",
-          ".validate": "newData.isNumber() && newData.val() >= 10 && newData.val() <= 500"
+        "prepMs": {
+          ".validate": "newData.isNumber() && newData.val() >= 3000 && newData.val() <= 15000"
         },
 
-        "players": {
-          ".read": true,
+        "startAt": {
+          ".validate": "newData.isNumber()"
+        },
+
+        "playlist": {
+          ".validate": "newData.hasChildren(['id','title'])"
+        },
+
+        "scoreboard": {
+          ".validate": "newData.val() != null"
+        },
+
+        "wagers": {
           "$playerId": {
-            ".write": "auth != null"
+            ".write": "auth != null && auth.uid == $playerId && !data.exists()",
+            ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 50000"
           }
         },
 
-        "scoreboard": { ".write": "auth != null" },
         "payoutApplied": {
           "$playerId": {
-            ".read": "auth.uid == $playerId",
-            ".write": "auth.uid == $playerId && !data.exists()",
+            ".read": "auth != null && auth.uid == $playerId",
+            ".write": "auth != null && auth.uid == $playerId && !data.exists()",
             ".validate": "newData.val() === true"
           }
         },
 
+        "players": {
+          ".read": "auth != null",
+          "$playerId": {
+            ".write": "auth != null && (auth.uid == $playerId || root.child('rooms_music/'+$roomCode+'/hostId').val() == auth.uid)",
+            ".validate": "newData.hasChildren(['name']) && newData.child('name').isString()"
+          }
+        },
+
         "current": {
-          ".write": "auth != null",
+          ".validate": "newData.val() != null",
 
-          "roundNumber": { ".write": "auth != null" },
-          "phase": { ".write": "auth != null" },
-
-          "turn": {
-            ".write": "auth != null",
-            "currentPlayerId": { ".write": "auth != null" },
-            "currentPlayerIndex": { ".write": "auth != null" },
-            "lastClaim": { ".write": "auth != null" },
-            "claimHistory": { ".write": "auth != null" },
-            "canChallenge": { ".write": "auth != null" }
-          },
-
-          "playerHands": {
-            ".write": "auth != null"
-          },
-
-          "wildcards": {
-            ".write": "auth != null",
-            "$wildcardIndex": {
-              ".write": "auth != null",
-              "playerId": { ".write": "auth != null" },
-              "playerName": { ".write": "auth != null" },
-              "state": { ".write": "auth != null" },
-              "isUsedInChallenge": { ".write": "auth != null" },
-              "activatedAt": { ".write": "auth != null" }
+          "answers": {
+            "$playerId": {
+              ".write": "auth != null && auth.uid == $playerId",
+              ".validate": "newData.hasChildren(['choice','timestamp']) && newData.child('choice').isNumber() && newData.child('timestamp').isNumber()"
             }
           },
 
-          "challenge": {
-            ".write": "auth != null",
-            "challengerId": { ".write": "auth != null" },
-            "claimerId": { ".write": "auth != null" },
-            "claim": { ".write": "auth != null" },
-            "timestamp": { ".write": "auth != null" },
-            "state": { ".write": "auth != null" },
-            "result": { ".write": "auth != null" },
-            "wildcardActivatedBy": { ".write": "auth != null" },
-            "wildcardEffect": { ".write": "auth != null" }
+          "firstCorrect": {
+            ".validate": "newData.isString() || newData.val() == null"
           },
 
-          "roundResults": { ".write": "auth != null" }
+          "scored": {
+            ".validate": "newData.isBoolean()"
+          }
+        }
+      }
+    },
+
+    "rooms_bluff": {
+      "$roomCode": {
+        ".read": "auth != null",
+        
+        ".write": "(auth != null && !data.exists() && newData.child('hostId').val() == auth.uid) || (data.exists() && root.child('rooms_bluff/'+$roomCode+'/hostId').val() == auth.uid)",
+
+        "hostId": {
+          ".write": "!data.exists()",
+          ".validate": "newData.isString()"
+        },
+
+        "createdAt": {
+          ".validate": "newData.isNumber()"
+        },
+
+        "status": {
+          ".validate": "newData.isString() && (newData.val() == 'lobby' || newData.val() == 'playing' || newData.val() == 'finished')"
+        },
+
+        "round": {
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100"
+        },
+
+        "maxRounds": {
+          ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 20"
+        },
+
+        "cardsPerPlayer": {
+          ".validate": "newData.isNumber() && newData.val() >= 3 && newData.val() <= 6"
+        },
+
+        "currentTurn": {
+          ".validate": "newData.isString()"
+        },
+
+        "turnEndTime": {
+          ".validate": "newData.isNumber()"
+        },
+
+        "declarationMode": {
+          ".validate": "newData.isString() && (newData.val() == 'free' || newData.val() == 'assisted')"
+        },
+
+        "entryBet": {
+          ".validate": "newData.isNumber() && newData.val() >= 10 && newData.val() <= 5000"
+        },
+
+        "players": {
+          ".read": "auth != null",
+          "$playerId": {
+            ".write": "auth != null && (auth.uid == $playerId || root.child('rooms_bluff/'+$roomCode+'/hostId').val() == auth.uid)",
+            ".validate": "newData.hasChildren(['name','alive']) && newData.child('name').isString() && newData.child('alive').isBoolean()"
+          }
+        },
+
+        "hands": {
+          "$playerId": {
+            ".read": "auth != null && auth.uid == $playerId",
+            ".write": "auth.token.admin == true",
+            ".validate": "newData.val() != null"
+          }
+        },
+
+        "wildcards": {
+          "$playerId": {
+            ".read": "auth != null && auth.uid == $playerId",
+            ".write": "auth.token.admin == true",
+            ".validate": "newData.isString() && newData.val().length >= 1 && newData.val().length <= 5"
+          }
+        },
+
+        "currentDeclaration": {
+          ".write": "auth != null && (root.child('rooms_bluff/'+$roomCode+'/hostId').val() == auth.uid || auth.token.admin == true)",
+          ".validate": "newData.val() == null || (newData.hasChildren(['playerId','quantity','value']) && newData.child('playerId').isString() && newData.child('quantity').isNumber() && newData.child('quantity').val() >= 1 && newData.child('quantity').val() <= 30 && newData.child('value').isString())"
+        },
+
+        "actions": {
+          "$playerId": {
+            ".write": "auth != null && (auth.uid == $playerId || auth.token.admin == true)",
+            ".validate": "newData.hasChildren(['type','timestamp']) && (newData.child('type').val() == 'declare' || newData.child('type').val() == 'challenge' || newData.child('type').val() == 'pass') && newData.child('timestamp').isNumber()"
+          }
+        },
+
+        "timeline": {
+          ".read": "auth != null",
+          ".write": "auth.token.admin == true",
+          ".validate": "newData.val() != null"
+        },
+
+        "challengeResult": {
+          ".write": "auth.token.admin == true",
+          ".validate": "newData.val() == null || (newData.hasChildren(['winner','loser','penalty']) && newData.child('winner').isString() && newData.child('loser').isString() && newData.child('penalty').isNumber())"
+        },
+
+        "gameCredits": {
+          "$playerId": {
+            ".read": "auth != null && auth.uid == $playerId",
+            ".write": "auth.token.admin == true",
+            ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() <= 100000"
+          }
+        },
+
+        "payoutApplied": {
+          "$playerId": {
+            ".read": "auth != null && auth.uid == $playerId",
+            ".write": "auth != null && auth.uid == $playerId && !data.exists()",
+            ".validate": "newData.val() === true"
+          }
         }
       }
     }
   }
 }
-
