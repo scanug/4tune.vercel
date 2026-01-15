@@ -33,7 +33,6 @@ import { generateBehaviorIndicators } from '@/lib/luckyLiarBehaviorMetrics';
 import {
   PlayerHand,
   GamePlayerCard,
-  CreditDisplay,
 } from '@/components/liar/UIComponents';
 import {
   DeclarationTimeline,
@@ -203,7 +202,7 @@ export default function LiarGamePage() {
   // SUBMIT CHALLENGE
   // ========================================
   const handleSubmitChallenge = async () => {
-    if (!lastClaim || !gameState?.current?.turn?.currentPlayerId) {
+    if (!lastClaim || !gameState?.currentTurn) {
       setError('Nessuna dichiarazione da sfidare');
       return;
     }
@@ -214,7 +213,7 @@ export default function LiarGamePage() {
 
       const challenge = {
         challengerId: userId,
-        targetPlayerId: gameState.current.turn.currentPlayerId,
+        targetPlayerId: gameState.currentTurn,
         claimId: lastClaim?.id,
         timestamp: Date.now(),
         wildcardActivated: wildcardActivationRequested && wildcardAvailable,
@@ -247,13 +246,12 @@ export default function LiarGamePage() {
 
       // Prendi il turno successivo
       const players = Object.keys(gameState?.players || {});
-      const currentIndex = players.indexOf(gameState.current.turn.currentPlayerId);
+      const currentIndex = players.indexOf(gameState.currentTurn);
       const nextPlayerId = players[(currentIndex + 1) % players.length];
 
-      const turnRef = ref(db, `rooms_liar/${roomCode}/current/turn`);
+      const turnRef = ref(db, `rooms_liar/${roomCode}`);
       await update(turnRef, {
-        currentPlayerId: nextPlayerId,
-        lastClaim: null,
+        currentTurn: nextPlayerId,
       });
     } catch (err) {
       setError(err.message);
@@ -279,7 +277,7 @@ export default function LiarGamePage() {
           </div>
         </div>
         <div className="header-right">
-          <CreditDisplay credits={gameState?.players?.[userId]?.credits || 0} />
+          <span className="round-badge">Giocatori: {Object.keys(gameState?.players || {}).length}</span>
         </div>
       </header>
 
@@ -312,9 +310,8 @@ export default function LiarGamePage() {
                 player={{
                   id,
                   name: player.name,
-                  credits: player.credits,
-                  isActive: id === gameState.current.turn.currentPlayerId,
-                  isEliminated: player.isEliminated,
+                  isActive: id === gameState.currentTurn,
+                  alive: player.alive,
                 }}
               />
             ))}

@@ -97,8 +97,7 @@ export default function LiarLobbyPage() {
       const aiRef = ref(db, `rooms_liar/${roomCode}/players/${aiId}`);
       await update(aiRef, {
         name: 'Bot AI',
-        credits: 200,
-        isReady: true,
+        alive: true,
         isAI: true,
       });
     } catch (err) {
@@ -115,9 +114,18 @@ export default function LiarLobbyPage() {
     try {
       setStartingGame(true);
       const roomRef = ref(db, `rooms_liar/${roomCode}`);
+      
+      // Inizializza il primo round
+      const playerIds = players.map(p => p.id);
+      const firstTurnPlayerId = playerIds[0];
+      
       await update(roomRef, {
         status: 'playing',
+        round: 0,
+        currentTurn: firstTurnPlayerId,
+        turnEndTime: Date.now() + 60000, // 1 minuto per dichiarare
       });
+      
       // Router redirect happens automatically via onValue subscription
     } catch (err) {
       console.error('Error starting game:', err);
