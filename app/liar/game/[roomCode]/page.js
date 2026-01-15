@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { db, auth } from '@/lib/firebase';
+import { ErrorBoundary } from '@/components/ErrorBoundary';
 import {
   ref,
   onValue,
@@ -256,10 +257,21 @@ export default function LiarGamePage() {
   // HANDLE BOT TURN
   // ========================================
   useEffect(() => {
+    console.log('🤖 BOT TURN EFFECT triggered', {
+      hasGameState: !!gameState?.current,
+      currentPlayerId: gameState?.current?.turn?.currentPlayerId,
+      phase: gameState?.current?.phase,
+    });
+    
     if (!gameState?.current || !gameState?.current?.turn?.currentPlayerId) return;
 
     const currentTurnPlayerId = gameState.current.turn.currentPlayerId;
     const currentTurnPlayer = gameState.players?.[currentTurnPlayerId];
+    console.log('🤖 BOT TURN INFO', {
+      currentTurnPlayerId,
+      isAI: currentTurnPlayer?.isAI,
+      phase: gameState.current.phase,
+    });
 
     // Check if it's a bot's turn and it's the declaration phase
     if (currentTurnPlayer?.isAI && gameState.current.phase === 'turn') {
@@ -325,62 +337,16 @@ export default function LiarGamePage() {
   }, [gameState?.current?.turn?.currentPlayerId, gameState?.current?.phase, roomCode]);
 
   // ========================================
-  // AUTO-TRANSITION: RESOLVE → ROUND_END
-  // (Show result for 3s then auto-reset)
-  // ========================================
-  useEffect(() => {
-    if (!gameState?.current || gameState?.current?.phase !== 'resolve') return;
-    if (!challengeResult) return;
-
-    // Mostra il risultato per 3 secondi, poi fa il reset del round
-    const resolveTimer = setTimeout(async () => {
-      try {
-        console.log('✅ CHALLENGE RESOLVED, AUTO-ADVANCING ROUND');
-        
-        const playerIds = Object.keys(gameState.players || {});
-        const firstTurnPlayerId = playerIds[0];
-        const nowTimestamp = Date.now();
-        const roomRef = ref(db, `rooms_liar/${roomCode}`);
-        const nextRound = (gameState.round || 0) + 1;
-        
-        await update(roomRef, {
-          round: nextRound,
-          current: {
-            phase: 'turn',
-            turn: {
-              currentPlayerId: firstTurnPlayerId,
-              lastClaim: null,
-            },
-            hands: gameState.current.hands,
-            wildcards: [],
-            timeline: [],
-            challenge: null,
-            declarationMode: gameState.current.declarationMode,
-            roundStartedAt: nowTimestamp,
-            roundResetting: false,
-          },
-        });
-        
-        setChallengeResult(null);
-        setCurrentChallenge(null);
-        setDeclarationInput('');
-        setSelectedCard(null);
-      } catch (err) {
-        console.error('Error auto-advancing after resolve:', err);
-      }
-    }, 3000);
-
-    return () => clearTimeout(resolveTimer);
-  }, [gameState?.current?.phase, challengeResult, gameState, roomCode]);
-
-  // ========================================
   // ALL PLAYERS PASSED → AUTO-ADVANCE TURN
   // (If in challenge phase and no one challenged for 35s)
   // ========================================
   useEffect(() => {
     if (!gameState?.current || gameState?.current?.phase !== 'challenge') return;
     if (currentChallenge?.result) return; // Se c'è un risultato, è già stato risolto
-    if (!lastClaim) return; // Se non c'è una dichiarazione, skip
+    
+    // Use a mutable ref to store lastClaim to avoid stale closure
+    const lastClaimRef = { current: gameState?.current?.turn?.lastClaim };
+    if (!lastClaimRef.current) return; // Se non c'è una dichiarazione, skip
 
     // Aspetta 35 secondi (5s più del timeout fase) per dare tempo ai giocatori di sfidare
     // Se nessuno sfida, auto-avanza il turno
@@ -508,18 +474,41 @@ export default function LiarGamePage() {
   // ========================================
   // STATE SHORTCUTS (only used in render, not in effects)
   // ========================================
-  const isMyTurn = gameState?.current?.turn?.currentPlayerId === userId;
-  const isDeclarationPhase = gameState?.current?.phase === 'turn';
-  const isChallengePhase = gameState?.current?.phase === 'challenge';
-  const isResolvePhase = gameState?.current?.phase === 'resolve';
-  const myHand = playerHands || [];
-  const currentPlayer = gameState?.players?.[gameState?.current?.turn?.currentPlayerId];
-  const lastClaim = gameState?.current?.turn?.lastClaim;
-  const wildcardAvailable = hasAvailableWildcard(userId, wildcards || []);
+  let isMyTurn, isDeclarationPhase, isChallengePhase, isResolvePhase, myHand, currentPlayer, lastClaim, wildcardAvailable, validDeclarations;
+  
+  try {
+    isMyTurn = gameState?.current?.turn?.currentPlayerId === userId;
+    isDeclarationPhase = gameState?.current?.phase === 'turn';
+    isChallengePhase = gameState?.current?.phase === 'challenge';
+    isResolvePhase = gameState?.current?.phase === 'resolve';
+    myHand = playerHands || [];
+    currentPlayer = gameState?.players?.[gameState?.current?.turn?.currentPlayerId];
+    lastClaim = gameState?.current?.turn?.lastClaim;
+    wildcardAvailable = hasAvailableWildcard(userId, wildcards || []);
 
-  const validDeclarations = lastClaim
-    ? generateValidDeclarations(lastClaim, gameState?.current?.declarationMode)
-    : [];
+    validDeclarations = lastClaim
+      ? generateValidDeclarations(lastClaim, gameState?.current?.declarationMode)
+      : [];
+  } catch (shortcutErr) {
+    console.error('❌ ERROR COMPUTING SHORTCUTS:', shortcutErr);
+    console.error('gameState:', gameState);
+    console.error('userId:', userId);
+    console.error('playerHands:', playerHands);
+    console.error('wildcards:', wildcards);
+    
+    return (
+      <div style={{ padding: '2rem', color: 'red', background: '#000' }}>
+        <h2>⚠️ Errore nel calcolo dello stato</h2>
+        <p>{shortcutErr.message}</p>
+        <pre style={{ fontSize: '12px', overflow: 'auto', maxHeight: '200px' }}>
+          {shortcutErr.stack}
+        </pre>
+        <button onClick={() => window.location.reload()}>
+          Ricarica pagina
+        </button>
+      </div>
+    );
+  }
 
   // ========================================
   // SAFETY GUARDS
@@ -766,7 +755,7 @@ export default function LiarGamePage() {
   // ========================================
   // RENDER
   // ========================================
-  return (
+  const renderContent = () => (
     <div className="liar-game">
       {/* HEADER */}
       <header className="game-header">
@@ -1527,5 +1516,11 @@ export default function LiarGamePage() {
         }
       `}</style>
     </div>
+  );
+
+  return (
+    <ErrorBoundary>
+      {renderContent()}
+    </ErrorBoundary>
   );
 }
