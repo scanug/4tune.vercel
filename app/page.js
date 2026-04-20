@@ -1,9 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { onAuthStateChanged } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { auth } from "@/lib/firebase";
+import { supabase } from "@/lib/supabase";
 import Link from "next/link";
 
 export default function LandingPage() {
@@ -11,16 +10,17 @@ export default function LandingPage() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsub = onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // Utente loggato → vai all'hub
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      if (session) {
         router.push("/hub");
       } else {
-        // Nessun utente → rimani sulla landing
         setLoading(false);
       }
     });
-    return () => unsub();
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      if (session) router.push("/hub");
+    });
+    return () => subscription.unsubscribe();
   }, [router]);
 
   if (loading) {
@@ -45,12 +45,12 @@ export default function LandingPage() {
         }}
       >
         <h1 style={{ margin: "0 0 12px 0", letterSpacing: 2, textTransform: "uppercase", color: "#111827", fontSize: "2.5rem" }}>
-          🎲 4Tune & GTS 🎵
+          🎲 4Tune 🎵
         </h1>
         <p style={{ margin: "12px 0 24px 0", fontSize: "1.1rem", color: "#111827", opacity: 0.85 }}>
-          Scommetti sui numeri con la Ruota della Fortuna<br />
+          Indovina la canzone prima dei tuoi avversari<br />
           oppure<br />
-          Indovina la canzone prima dei tuoi avversari!
+          Scopri l'impostore tra i tuoi amici!
         </p>
 
         <div style={{ display: "grid", gap: 12, marginTop: 32 }}>
@@ -67,13 +67,13 @@ export default function LandingPage() {
                 letterSpacing: 1,
               }}
             >
-              🔓 Accedi / Registrati
+              Accedi / Registrati
             </button>
           </Link>
         </div>
 
         <p style={{ marginTop: 24, fontSize: "0.9rem", color: "#111827", opacity: 0.7 }}>
-          💡 Accedi per giocare e accumulare crediti!
+          Accedi per giocare e accumulare crediti!
         </p>
       </div>
     </main>
