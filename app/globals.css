@@ -1,8 +1,9 @@
+@import "tailwindcss";
+
 /* Responsive base sizing */
 html {
   font-size: clamp(13px, 1.1vw + 10px, 16px);
 }
-@import "tailwindcss";
 
 :root {
   --background: #ffffff;
@@ -79,6 +80,16 @@ h1, h2, h3 {
 .btn-3d:focus-visible {
   outline: 3px solid rgba(99, 102, 241, 0.5);
   outline-offset: 3px;
+}
+
+/* Opzioni di risposta del GTS: testo a sinistra, a tutta larghezza */
+.btn-option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  font-size: clamp(13px, 1.6vw, 16px);
+  line-height: 1.3;
+  padding: clamp(0.7rem, 1.4vw, 0.95rem) clamp(1rem, 2vw, 1.3rem);
 }
 
 .btn-3d:disabled {

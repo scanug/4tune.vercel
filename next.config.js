@@ -1,9 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    eslint: {
-      ignoreDuringBuilds: true,
-    },
-  };
-  
-  module.exports = nextConfig;
-  
+  async redirects() {
+    return [{ source: '/hub', destination: '/', permanent: true }];
+  },
+};
+
+module.exports = nextConfig;

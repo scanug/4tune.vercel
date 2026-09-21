@@ -1,525 +1,467 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { supabase } from '@/lib/supabase';
+import {
+  emitAck, getNickname, getSocket, getStoredPlayer, setNickname, storePlayer, syncClock,
+} from '@/lib/gameClient';
 
-function shuffle(array) {
-  const arr = [...array];
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
-}
+// Un wav silenzioso di pochi byte: serve solo a "sbloccare" l'audio con un
+// gesto dell'utente (Safari iOS vuole play() dentro il click) quando non c'è
+// ancora una clip da suonare.
+const SILENT_WAV = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
 
-function buildRoundPayload(tracks) {
-  if (!tracks || tracks.length < 4) throw new Error('Tracce insufficienti per il round');
-  const track = tracks[Math.floor(Math.random() * tracks.length)];
-  const distractors = shuffle(tracks.filter((t) => t.id !== track.id));
-  const choices = [track.title, ...distractors.slice(0, 3).map((t) => t.title)];
-  const shuffled = shuffle(choices);
-  const correctIndex = shuffled.indexOf(track.title);
-  return {
-    trackId: track.id,
-    trackTitle: track.title,
-    trackArtist: track.artist,
-    clipUrl: track.previewUrl,
-    cover: track.cover || null,
-    options: shuffled,
-    correctIndex,
-  };
+const STATUS_LABEL = {
+  lobby: 'In attesa',
+  countdown: 'Preparati',
+  playing: 'In gioco',
+  reveal: 'Risultato',
+  finished: 'Finita',
+};
+
+function formatSeconds(ms) {
+  return Math.max(0, Math.ceil(ms / 1000));
 }
 
 export default function GTSGamePage() {
   const router = useRouter();
-  const { roomCode } = useParams();
+  const params = useParams();
+  const roomCode = String(params.roomCode || '').toUpperCase();
 
-  const [room, setRoom] = useState(null);
-  const [players, setPlayers] = useState([]);
-  const [roundAnswers, setRoundAnswers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [phase, setPhase] = useState('connecting'); // connecting | joining | need-name | ready | error
   const [error, setError] = useState('');
-  const [serverOffset, setServerOffset] = useState(0);
-  const [now, setNow] = useState(Date.now());
-  const [answerIndex, setAnswerIndex] = useState(null);
+  const [state, setState] = useState(null);
+  const [playerId, setPlayerId] = useState(null);
+  const [offset, setOffset] = useState(0);
+  const [now, setNow] = useState(() => Date.now());
+  const [myAnswer, setMyAnswer] = useState(null);
+  const [sending, setSending] = useState(false);
   const [audioUnlocked, setAudioUnlocked] = useState(false);
-  const [uid, setUid] = useState(null);
+  const [online, setOnline] = useState(true);
+  const [nameInput, setNameInput] = useState('');
+  const [actionError, setActionError] = useState('');
+  const [copied, setCopied] = useState(false);
+
   const audioRef = useRef(null);
-  const playTimeoutRef = useRef(null);
-  const revealingRef = useRef(false);
+  const playTimerRef = useRef(null);
+  const scheduledRef = useRef(''); // chiave dell'ultima clip programmata
 
-  // Scoreboard from room.scoreboard JSONB
-  const scoreboard = useMemo(() => {
-    const board = room?.scoreboard || {};
-    return players.map((p) => {
-      const entry = board[p.user_id] || {};
-      return {
-        id: p.user_id,
-        name: entry.name || p.name || 'Player',
-        points: Number(entry.points || 0),
-      };
-    }).sort((a, b) => b.points - a.points);
-  }, [room?.scoreboard, players]);
+  // ---------- connessione e ingresso ----------
 
-  // Auth + server time sync
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      if (!session) { router.push('/'); return; }
-      setUid(session.user.id);
-    });
-    supabase.rpc('server_now').then(({ data }) => {
-      if (data) setServerOffset(data - Date.now());
-    });
-  }, [router]);
-
-  // Ticker
-  useEffect(() => {
-    const timer = setInterval(() => setNow(Date.now()), 300);
-    return () => clearInterval(timer);
-  }, []);
-
-  // Fetch room + subscribe
-  useEffect(() => {
-    if (!roomCode) return;
-    let cancelled = false;
-    const suffix = roomCode + '-' + Date.now();
-    const channels = [];
-
-    async function init() {
-      const { data: roomData, error: roomErr } = await supabase
-        .from('rooms').select('*').eq('code', roomCode).single();
-      if (cancelled) return;
-      if (roomErr || !roomData) { setError('Stanza non trovata'); setLoading(false); return; }
-      setRoom(roomData);
-      const roomId = roomData.id;
-
-      const { data: playerData } = await supabase
-        .from('room_players').select('*').eq('room_id', roomId);
-      if (cancelled) return;
-      setPlayers(playerData || []);
-      setLoading(false);
-
-      // Subscribe to room changes
-      // Merge with previous state to preserve TOAST-ed JSONB columns (playlist)
-      // that PostgreSQL logical replication omits when they weren't part of the UPDATE
-      const chRoom = supabase.channel('room-' + suffix)
-        .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'rooms', filter: `id=eq.${roomId}` },
-          (payload) => {
-            if (cancelled) return;
-            setRoom((prev) => {
-              if (!prev) return payload.new;
-              const merged = { ...prev, ...payload.new };
-              if (!merged.playlist && prev.playlist) merged.playlist = prev.playlist;
-              return merged;
-            });
-          });
-      channels.push(chRoom);
-
-      // Subscribe to player changes
-      const chPlayers = supabase.channel('players-' + suffix)
-        .on('postgres_changes', { event: '*', schema: 'public', table: 'room_players', filter: `room_id=eq.${roomId}` },
-          () => {
-            if (cancelled) return;
-            supabase.from('room_players').select('*').eq('room_id', roomId)
-              .then(({ data }) => { if (!cancelled) setPlayers(data || []); });
-          });
-      channels.push(chPlayers);
-
-      // Subscribe to answers
-      const chAnswers = supabase.channel('answers-' + suffix)
-        .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'answers', filter: `room_id=eq.${roomId}` },
-          (payload) => {
-            if (cancelled) return;
-            setRoundAnswers((prev) => {
-              if (prev.some((a) => a.user_id === payload.new.user_id && a.round_number === payload.new.round_number)) return prev;
-              return [...prev, payload.new];
-            });
-          });
-      channels.push(chAnswers);
-
-      // Subscribe all at once after .on() is set up
-      channels.forEach((ch) => ch.subscribe());
+  const join = useCallback(async () => {
+    const storedId = getStoredPlayer(roomCode);
+    const nick = getNickname();
+    if (!storedId && !nick) { setPhase('need-name'); return; }
+    setPhase((p) => (p === 'ready' ? p : 'joining'));
+    try {
+      const res = await emitAck('room:join', { code: roomCode, name: nick || undefined, playerId: storedId || undefined });
+      storePlayer(res.code, res.playerId);
+      setPlayerId(res.playerId);
+      setState(res.state);
+      setPhase('ready');
+      setError('');
+    } catch (err) {
+      if (err.code === 'name') { setPhase('need-name'); return; }
+      setError(err.message || 'Impossibile entrare nella stanza');
+      setPhase('error');
     }
-    init();
-
-    return () => {
-      cancelled = true;
-      channels.forEach((ch) => supabase.removeChannel(ch));
-    };
   }, [roomCode]);
 
-  // Reset answer when round changes
   useEffect(() => {
-    revealingRef.current = false;
-    setAnswerIndex(null);
-    setRoundAnswers([]);
-    if (room?.id && room?.round_index > 0) {
-      supabase.from('answers').select('*').eq('room_id', room.id).eq('round_number', room.round_index)
-        .then(({ data }) => setRoundAnswers(data || []));
-    }
-  }, [room?.current_round?.trackId, room?.round_index]);
+    if (!roomCode) return undefined;
+    const socket = getSocket();
 
-  // Audio instance
-  useEffect(() => {
-    audioRef.current = new Audio();
+    const onState = (s) => setState(s);
+    const onConnect = () => {
+      setOnline(true);
+      syncClock().then(setOffset);
+      join();
+    };
+    const onDisconnect = () => setOnline(false);
+
+    socket.on('room:state', onState);
+    socket.on('connect', onConnect);
+    socket.on('disconnect', onDisconnect);
+    if (socket.connected) onConnect();
+
     return () => {
-      if (playTimeoutRef.current) clearTimeout(playTimeoutRef.current);
-      if (audioRef.current) { audioRef.current.pause(); audioRef.current = null; }
+      socket.off('room:state', onState);
+      socket.off('connect', onConnect);
+      socket.off('disconnect', onDisconnect);
+      // Non "leave": il posto resta, così un refresh o un ritorno indietro
+      // riprende la stessa identità. Il server ci segna solo come disconnessi.
+      socket.emit('room:detach');
+    };
+  }, [roomCode, join]);
+
+  async function submitName(e) {
+    e?.preventDefault();
+    const nick = nameInput.trim();
+    if (!nick) return;
+    setNickname(nick);
+    await join();
+  }
+
+  // ---------- orologio ----------
+
+  const active = state && ['countdown', 'playing', 'reveal'].includes(state.status);
+  useEffect(() => {
+    if (!active) return undefined;
+    const t = setInterval(() => setNow(Date.now()), 250);
+    return () => clearInterval(t);
+  }, [active]);
+
+  const serverNow = now + offset;
+
+  // Nuovo round (o ritorno in lobby) → si azzera la risposta locale.
+  const roundIndex = state?.roundIndex ?? 0;
+  const inLobby = state?.status === 'lobby';
+  useEffect(() => {
+    setMyAnswer(null);
+    setActionError('');
+  }, [roundIndex, inLobby]);
+
+  // ---------- audio ----------
+
+  useEffect(() => {
+    const audio = new Audio();
+    audio.preload = 'auto';
+    audioRef.current = audio;
+    return () => {
+      if (playTimerRef.current) clearTimeout(playTimerRef.current);
+      audio.pause();
+      audio.src = '';
+      audioRef.current = null;
     };
   }, []);
 
-  // Audio sync
-  useEffect(() => {
-    if (playTimeoutRef.current) clearTimeout(playTimeoutRef.current);
-    const clipUrl = room?.current_round?.clipUrl;
-    const startAt = room?.start_at;
-    if (!clipUrl || !startAt || !audioUnlocked || !audioRef.current) return;
+  const clipUrl = state?.round?.clipUrl || null;
+  const startAt = state?.startAt || null;
+  const status = state?.status;
 
+  useEffect(() => {
     const audio = audioRef.current;
-    audio.src = clipUrl;
-    audio.currentTime = 0;
+    if (!audio) return;
 
-    const serverNow = Date.now() + serverOffset;
-    const delay = startAt - serverNow;
-
-    if (delay > 0) {
-      playTimeoutRef.current = setTimeout(() => { audio.play().catch(() => {}); }, delay);
-    } else {
-      audio.currentTime = Math.max(0, Math.abs(delay) / 1000);
-      audio.play().catch(() => {});
-    }
-  }, [room?.current_round?.clipUrl, room?.start_at, audioUnlocked, serverOffset]);
-
-  const isHost = uid && room?.host_id === uid;
-  const serverNow = now + serverOffset;
-  const countdownMs = Math.max(0, (room?.start_at || 0) - serverNow);
-  const playingMs = Math.max(0, (room?.start_at || 0) + (room?.round_ms || 15000) - serverNow);
-  const isCountdown = room?.status === 'countdown' && countdownMs > 0;
-  const isPlaying = room?.status === 'playing' || (room?.status === 'countdown' && countdownMs === 0 && playingMs > 0);
-  const playersCount = players.length;
-  const currentRoundAnswers = roundAnswers.filter((a) => a.round_number === room?.round_index);
-  const answersCount = currentRoundAnswers.length;
-
-  // Host: transition countdown→playing
-  useEffect(() => {
-    if (!room || !isHost || !room.start_at) return;
-    if (room.status === 'countdown' && countdownMs === 0) {
-      setRoom((prev) => prev ? { ...prev, status: 'playing' } : prev);
-      supabase.from('rooms').update({ status: 'playing' }).eq('id', room.id);
-    }
-  }, [room?.status, room?.start_at, countdownMs, isHost]);
-
-  // Host: time expired → reveal
-  useEffect(() => {
-    if (!room || !isHost || !isPlaying || revealingRef.current) return;
-    if (playingMs === 0) {
-      handleReveal();
-    }
-  }, [playingMs, isPlaying, isHost]);
-
-  // Host: all answered → reveal
-  useEffect(() => {
-    if (!room || !isHost || !isPlaying || playersCount === 0 || revealingRef.current) return;
-    if (answersCount >= playersCount) {
-      handleReveal();
-    }
-  }, [answersCount, playersCount, isPlaying, isHost]);
-
-  // Auto-advance after reveal
-  useEffect(() => {
-    if (!room || !isHost || room.status !== 'reveal') return;
-    const delay = room.round_index >= room.max_rounds ? 6000 : 4000;
-    const timer = setTimeout(() => { startRound(); }, delay);
-    return () => clearTimeout(timer);
-  }, [room?.status, room?.round_index, isHost]);
-
-  async function handleReveal() {
-    if (!room || !isHost || revealingRef.current) return;
-    revealingRef.current = true;
-
-    const correctIdx = room.current_round?.correctIndex;
-    if (typeof correctIdx !== 'number') {
-      setRoom((prev) => prev ? { ...prev, status: 'reveal' } : prev);
-      await supabase.from('rooms').update({ status: 'reveal' }).eq('id', room.id);
+    const shouldPlay = clipUrl && startAt && ['countdown', 'playing', 'reveal'].includes(status);
+    if (!shouldPlay) {
+      scheduledRef.current = '';
+      if (playTimerRef.current) { clearTimeout(playTimerRef.current); playTimerRef.current = null; }
+      audio.pause();
       return;
     }
+    if (!audioUnlocked) return;
 
-    // Fetch answers for this round
-    const { data: allAnswers } = await supabase.from('answers')
-      .select('*').eq('room_id', room.id).eq('round_number', room.round_index)
-      .order('answered_at', { ascending: true });
+    const key = `${clipUrl}|${startAt}`;
+    if (scheduledRef.current === key) return;
+    scheduledRef.current = key;
 
-    const correctAnswers = (allAnswers || []).filter((a) => a.choice === correctIdx);
-    const startAt = room.start_at || 0;
-    const roundMs = room.round_ms || 15000;
-    const newScoreboard = { ...(room.scoreboard || {}) };
+    if (playTimerRef.current) { clearTimeout(playTimerRef.current); playTimerRef.current = null; }
+    audio.pause();
+    audio.src = clipUrl;
+    audio.load();
 
-    // Ensure every player has a scoreboard entry
-    for (const p of players) {
-      if (!newScoreboard[p.user_id]) {
-        newScoreboard[p.user_id] = { name: p.name || 'Player', points: 0 };
+    const startPlayback = () => {
+      const elapsed = Date.now() + offset - startAt;
+      if (elapsed <= 0) {
+        audio.currentTime = 0;
+        audio.play().catch(() => {});
+        return;
       }
-    }
-
-    let firstCorrect = null;
-    const BASE_POINTS = 50;
-    const MAX_SPEED_BONUS = 50;
-
-    for (const ans of correctAnswers) {
-      const deltaMs = Math.max(0, (ans.answered_at || 0) - startAt);
-      // Speed bonus: linear from MAX_SPEED_BONUS (instant) to 0 (at round end)
-      const speedBonus = Math.max(0, Math.round(MAX_SPEED_BONUS * (1 - deltaMs / roundMs)));
-      const points = BASE_POINTS + speedBonus;
-      const player = players.find((p) => p.user_id === ans.user_id);
-      const prev = newScoreboard[ans.user_id] || { name: player?.name || 'Player', points: 0 };
-      newScoreboard[ans.user_id] = { name: prev.name, points: prev.points + points };
-
-      if (!firstCorrect) {
-        firstCorrect = { playerId: ans.user_id, at: ans.answered_at, deltaMs, basePoints: BASE_POINTS, speedBonus, points };
-      }
-    }
-
-    const updateData = { status: 'reveal', scoreboard: newScoreboard };
-    if (firstCorrect) {
-      updateData.current_round = { ...room.current_round, firstCorrect };
-    }
-    setRoom((prev) => prev ? { ...prev, ...updateData } : prev);
-    await supabase.from('rooms').update(updateData).eq('id', room.id);
-  }
-
-  async function startRound() {
-    if (!room || !isHost) return;
-    if (!room.playlist?.tracks?.length) { setError('Playlist non disponibile'); return; }
-    const nextIndex = (room.round_index || 0) + 1;
-    if (nextIndex > room.max_rounds) { await finishGame(); return; }
-    try {
-      const payload = buildRoundPayload(room.playlist.tracks);
-      const { data: serverTime } = await supabase.rpc('server_now');
-      const startAt = serverTime + (room.prep_ms || 3000);
-      const roundData = {
-        status: 'countdown',
-        round_index: nextIndex,
-        start_at: startAt,
-        current_round: { ...payload, firstCorrect: null },
+      // Ingresso a round già iniziato: si salta avanti di quanto è passato,
+      // ma solo dopo che il browser conosce la durata (altrimenti Safari ignora il seek).
+      const seekAndPlay = () => {
+        const target = (Date.now() + offset - startAt) / 1000;
+        if (Number.isFinite(audio.duration) && target >= audio.duration) return;
+        try { audio.currentTime = Math.max(0, target); } catch { /* ignora */ }
+        audio.play().catch(() => {});
       };
-      setRoom((prev) => prev ? { ...prev, ...roundData } : prev);
-      await supabase.from('rooms').update(roundData).eq('id', room.id);
-    } catch (err) {
-      setError(err.message || 'Errore nel preparare il round');
-    }
+      if (audio.readyState >= 1) seekAndPlay();
+      else audio.addEventListener('loadedmetadata', seekAndPlay, { once: true });
+    };
+
+    const delay = startAt - (Date.now() + offset);
+    if (delay > 0) playTimerRef.current = setTimeout(startPlayback, delay);
+    else startPlayback();
+  }, [clipUrl, startAt, status, audioUnlocked, offset]);
+
+  function unlockAudio() {
+    const audio = audioRef.current;
+    if (!audio) return;
+    if (!audio.src) audio.src = SILENT_WAV;
+    audio.play().then(() => {
+      if (audio.src === SILENT_WAV) audio.pause();
+    }).catch(() => {});
+    setAudioUnlocked(true);
   }
 
-  async function finishGame() {
-    setRoom((prev) => prev ? { ...prev, status: 'finished', start_at: null } : prev);
-    await supabase.from('rooms').update({ status: 'finished', start_at: null }).eq('id', room.id);
+  // ---------- azioni ----------
+
+  async function act(event, payload) {
+    setActionError('');
+    try { await emitAck(event, payload); } catch (err) { setActionError(err.message); }
   }
 
   async function sendAnswer(idx) {
-    if (!room || !uid || !isPlaying) return;
-    if (answerIndex !== null) return;
-    if ((room.start_at || 0) - (Date.now() + serverOffset) > 0) return;
-    setAnswerIndex(idx);
-    const serverNowValue = Date.now() + serverOffset;
-    const answerObj = {
-      room_id: room.id,
-      round_number: room.round_index,
-      user_id: uid,
-      choice: idx,
-      answered_at: serverNowValue,
-    };
-    setRoundAnswers((prev) => {
-      if (prev.some((a) => a.user_id === uid && a.round_number === room.round_index)) return prev;
-      return [...prev, answerObj];
-    });
-    await supabase.from('answers').insert(answerObj);
+    if (!state || state.status !== 'playing' || myAnswer !== null || sending) return;
+    setSending(true);
+    setMyAnswer(idx);
+    try {
+      await emitAck('game:answer', { choice: idx });
+    } catch (err) {
+      setMyAnswer(null);
+      setActionError(err.message);
+    } finally {
+      setSending(false);
+    }
   }
 
-  if (loading) {
+  async function leaveRoom() {
+    try { await emitAck('room:leave'); } catch { /* usciamo comunque */ }
+    router.push('/gts');
+  }
+
+  function copyCode() {
+    navigator.clipboard?.writeText(roomCode).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1500);
+    }).catch(() => {});
+  }
+
+  // ---------- derivati ----------
+
+  const me = useMemo(() => state?.players.find((p) => p.id === playerId) || null, [state, playerId]);
+  const isHost = !!me?.isHost;
+  const standings = useMemo(
+    () => [...(state?.players || [])].sort((a, b) => b.score - a.score || a.name.localeCompare(b.name)),
+    [state],
+  );
+  const connectedCount = state?.players.filter((p) => p.connected).length || 0;
+  const answeredCount = state?.players.filter((p) => p.connected && p.answered).length || 0;
+  const phaseLeftMs = state?.phaseEndsAt ? state.phaseEndsAt - serverNow : 0;
+  const answered = myAnswer !== null || !!me?.answered;
+  const reveal = state?.reveal;
+  const myResult = reveal?.results.find((r) => r.playerId === playerId) || null;
+  const nameOf = (id) => state?.players.find((p) => p.id === id)?.name || 'Giocatore';
+
+  // ---------- render: stati speciali ----------
+
+  if (phase === 'connecting' || phase === 'joining') {
     return (
       <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-        Caricamento stanza...
-      </main>
-    );
-  }
-
-  if (error) {
-    return (
-      <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-        <div style={{ border: '2px solid rgba(239,68,68,0.4)', borderRadius: 16, padding: 24, background: '#fff' }}>
-          <h1 style={{ color: '#dc2626' }}>Errore</h1>
-          <p>{error}</p>
-          <Link href="/gts" className="btn-3d" style={{ textDecoration: 'none' }}>Torna al menu</Link>
+        <div style={{ color: '#fff', textShadow: '0 2px 8px rgba(0,0,0,0.6)' }}>
+          {online ? 'Entro nella stanza...' : 'Connessione al server...'}
         </div>
       </main>
     );
   }
 
-  if (!room) return null;
+  if (phase === 'need-name') {
+    return (
+      <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+        <form onSubmit={submitName} style={{ width: 'min(420px, 92vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 16, padding: 24, background: 'rgba(255,255,255,0.95)', display: 'grid', gap: 12 }}>
+          <h1 style={{ margin: 0, color: '#111827', fontSize: '1.3rem' }}>Stanza {roomCode}</h1>
+          <p style={{ margin: 0, color: '#6b7280' }}>Come ti chiami?</p>
+          <input className="input-modern" autoFocus maxLength={20} value={nameInput} onChange={(e) => setNameInput(e.target.value)} placeholder="Nickname" />
+          <button className="btn-3d" type="submit" disabled={!nameInput.trim()}>Entra</button>
+          <Link href="/gts" style={{ color: '#6b7280', fontSize: 13, textAlign: 'center' }}>Torna al menu</Link>
+        </form>
+      </main>
+    );
+  }
 
-  const roundNumber = room.round_index || 0;
-  const options = room.current_round?.options || [];
-  const firstCorrect = room.current_round?.firstCorrect;
+  if (phase === 'error' || !state) {
+    return (
+      <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
+        <div style={{ border: '2px solid rgba(239,68,68,0.4)', borderRadius: 16, padding: 24, background: '#fff', display: 'grid', gap: 12 }}>
+          <h1 style={{ color: '#dc2626', margin: 0 }}>Ops</h1>
+          <p style={{ margin: 0, color: '#111827' }}>{error || 'Stanza non disponibile'}</p>
+          <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            <button className="btn-3d" onClick={() => { setPhase('connecting'); join(); }}>Riprova</button>
+            <Link href="/gts/join" className="btn-3d" style={{ textDecoration: 'none' }}>Altro codice</Link>
+            <Link href="/gts" className="btn-3d" style={{ textDecoration: 'none', background: '#374151' }}>Menu</Link>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  // ---------- render: partita ----------
+
+  const options = state.round?.options || [];
 
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-      <div style={{ width: 'min(1100px, 98vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 18, background: 'rgba(255,255,255,0.92)', padding: 28, boxShadow: '0 20px 50px rgba(0,0,0,0.25)' }}>
+      <div style={{ width: 'min(1100px, 98vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 18, background: 'rgba(255,255,255,0.92)', padding: 24, boxShadow: '0 20px 50px rgba(0,0,0,0.25)' }}>
+
+        {!online && (
+          <div style={{ marginBottom: 12, padding: '8px 12px', borderRadius: 10, background: 'rgba(234,179,8,0.2)', color: '#92400e', fontSize: 13 }}>
+            Connessione persa, riconnessione in corso...
+          </div>
+        )}
+
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
-          <Link href="/gts" className="btn-3d" style={{ textDecoration: 'none' }}>Menu</Link>
-          <h1 style={{ margin: 0, color: '#111827' }}>Room: {roomCode}</h1>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10, flexWrap: 'wrap' }}>
-            <span className="bubble">Status: {room.status}</span>
-          </div>
+          <button className="btn-3d" onClick={leaveRoom} style={{ background: '#374151' }}>Esci</button>
+          <h1 style={{ margin: 0, color: '#111827', fontSize: '1.4rem' }}>Stanza {roomCode}</h1>
+          <span className="bubble" style={{ background: 'rgba(99,102,241,0.15)', color: '#312e81' }}>{STATUS_LABEL[state.status] || state.status}</span>
         </div>
 
-        {/* Game area */}
         <div style={{ marginTop: 16, display: 'flex', gap: 16, flexWrap: 'wrap' }}>
-          {/* Main panel */}
+          {/* Pannello principale */}
           <div style={{ flex: '2 1 480px', border: '1px solid rgba(17,24,39,0.12)', borderRadius: 14, padding: 20, background: 'rgba(99,102,241,0.04)' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-              <div>
-                <p style={{ margin: 0, color: '#6b7280' }}>Round</p>
-                <h2 style={{ margin: 0, color: '#111827' }}>{roundNumber}/{room.max_rounds}</h2>
-              </div>
-              <div>
-                {isCountdown && <span className="bubble" style={{ background: 'rgba(234,179,8,0.2)', color: '#92400e' }}>Parte in {Math.ceil(countdownMs / 1000)}s</span>}
-                {!isCountdown && isPlaying && <span className="bubble" style={{ background: 'rgba(16,185,129,0.2)', color: '#065f46' }}>Tempo: {Math.ceil(playingMs / 1000)}s</span>}
-              </div>
-            </div>
 
-            {!audioUnlocked && (
-              <button className="btn-3d" style={{ marginBottom: 12 }} onClick={() => { setAudioUnlocked(true); audioRef.current?.play().catch(() => {}); }}>
-                Abilita audio
-              </button>
-            )}
-
-            <div style={{ display: 'grid', gap: 10 }}>
-              {options.map((option, idx) => {
-                const disabled = !isPlaying || answerIndex !== null;
-                const isMine = answerIndex === idx;
-                const isCorrectReveal = room.status === 'reveal' && idx === room.current_round?.correctIndex;
-                const isWrongReveal = room.status === 'reveal' && answerIndex === idx && idx !== room.current_round?.correctIndex;
-                const mutedReveal = room.status === 'reveal' && !isCorrectReveal && !isWrongReveal;
-
-                let background = '#111827';
-                let color = '#fff';
-                let border = '1px solid rgba(255,255,255,0.12)';
-                let boxShadow = '0 8px 20px rgba(0,0,0,0.25)';
-
-                if (room.status === 'reveal') {
-                  if (isCorrectReveal) { background = '#16a34a'; border = '1px solid #15803d'; }
-                  else if (isWrongReveal) { background = '#dc2626'; border = '1px solid #b91c1c'; }
-                  else if (mutedReveal) { background = '#1f2937'; color = '#e5e7eb'; border = '1px solid rgba(255,255,255,0.08)'; }
-                } else if (isMine) {
-                  border = '2px solid #60a5fa';
-                  boxShadow = '0 0 0 3px rgba(96,165,250,0.35)';
-                }
-
-                return (
-                  <button
-                    key={idx}
-                    className="btn-3d btn-option"
-                    onClick={() => sendAnswer(idx)}
-                    disabled={disabled}
-                    style={{ justifyContent: 'flex-start', background, color, border, boxShadow }}
-                  >
-                    {option}
-                  </button>
-                );
-              })}
-            </div>
-
-            {room.status === 'reveal' && (
-              <div style={{ marginTop: 12, display: 'grid', gap: 10 }}>
-                {room.current_round?.trackTitle && (
-                  <div style={{ padding: 12, borderRadius: 12, background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.3)', color: '#312e81' }}>
-                    <p style={{ margin: 0, fontWeight: 700 }}>
-                      {room.current_round.trackTitle} — {room.current_round.trackArtist}
-                    </p>
-                  </div>
-                )}
-                {firstCorrect && (
-                  <div style={{ padding: 12, borderRadius: 12, background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.3)', color: '#065f46' }}>
-                    <p style={{ margin: 0, fontWeight: 700 }}>
-                      Prima risposta corretta: {players.find((p) => p.user_id === firstCorrect.playerId)?.name || firstCorrect.playerId}
-                    </p>
-                    <p style={{ margin: 0 }}>
-                      Tempo: {(firstCorrect.deltaMs / 1000).toFixed(2)}s — Base: +{firstCorrect.basePoints || 50}  Velocità: +{firstCorrect.speedBonus || 0}  Totale: +{firstCorrect.points} pt
-                    </p>
-                  </div>
-                )}
-                <p style={{ margin: 0, fontSize: 13, color: '#6b7280', textAlign: 'center' }}>
-                  {room.round_index >= room.max_rounds ? 'Risultati finali tra pochi secondi...' : 'Prossimo round tra pochi secondi...'}
+            {state.status === 'lobby' && (
+              <div style={{ display: 'grid', gap: 16, textAlign: 'center' }}>
+                <p style={{ margin: 0, color: '#6b7280' }}>Condividi il codice con gli amici</p>
+                <button onClick={copyCode} title="Copia" style={{ background: 'none', border: 0, cursor: 'pointer' }}>
+                  <span style={{ fontSize: '3rem', letterSpacing: '0.25em', color: '#4f46e5', fontWeight: 800 }}>{roomCode}</span>
+                  <span style={{ display: 'block', fontSize: 12, color: '#6b7280' }}>{copied ? 'Copiato!' : 'tocca per copiare'}</span>
+                </button>
+                <p style={{ margin: 0, color: '#111827' }}>
+                  {state.settings.maxRounds} round · {state.settings.roundMs / 1000}s a round · playlist <strong>{state.playlist.name}</strong>
                 </p>
+                {!audioUnlocked && (
+                  <button className="btn-3d" onClick={unlockAudio} style={{ justifySelf: 'center' }}>🔊 Abilita audio</button>
+                )}
+                {isHost ? (
+                  <button className="btn-3d" onClick={() => act('game:start')} style={{ justifySelf: 'center', minWidth: 220, fontSize: '1.1rem' }}>
+                    Avvia partita
+                  </button>
+                ) : (
+                  <p style={{ margin: 0, color: '#6b7280', fontSize: 13 }}>In attesa che {nameOf(state.hostId)} avvii la partita...</p>
+                )}
               </div>
             )}
+
+            {state.status !== 'lobby' && state.status !== 'finished' && (
+              <>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
+                  <div>
+                    <p style={{ margin: 0, color: '#6b7280', fontSize: 13 }}>Round</p>
+                    <h2 style={{ margin: 0, color: '#111827' }}>{state.roundIndex}/{state.totalRounds}</h2>
+                  </div>
+                  <div>
+                    {state.status === 'countdown' && <span className="bubble" style={{ background: 'rgba(234,179,8,0.2)', color: '#92400e', fontSize: 16 }}>Parte in {formatSeconds(phaseLeftMs)}s</span>}
+                    {state.status === 'playing' && <span className="bubble" style={{ background: 'rgba(16,185,129,0.2)', color: '#065f46', fontSize: 16 }}>Tempo: {formatSeconds(phaseLeftMs)}s</span>}
+                    {state.status === 'reveal' && <span className="bubble" style={{ background: 'rgba(99,102,241,0.15)', color: '#312e81', fontSize: 16 }}>{reveal?.isLast ? 'Podio' : 'Prossimo round'} tra {formatSeconds(phaseLeftMs)}s</span>}
+                  </div>
+                </div>
+
+                {!audioUnlocked && (
+                  <button className="btn-3d" style={{ marginBottom: 12 }} onClick={unlockAudio}>🔊 Abilita audio</button>
+                )}
+
+                <div style={{ display: 'grid', gap: 10 }}>
+                  {options.map((option, idx) => {
+                    const isReveal = state.status === 'reveal';
+                    const isCorrect = isReveal && idx === reveal?.correctIndex;
+                    const mine = myAnswer === idx || myResult?.choice === idx;
+                    const isWrongMine = isReveal && mine && !isCorrect;
+                    const disabled = state.status !== 'playing' || answered || sending;
+
+                    let background = '#111827';
+                    let color = '#fff';
+                    let border = '1px solid rgba(255,255,255,0.12)';
+                    let boxShadow = '0 8px 20px rgba(0,0,0,0.25)';
+                    if (isReveal) {
+                      if (isCorrect) { background = '#16a34a'; border = '1px solid #15803d'; }
+                      else if (isWrongMine) { background = '#dc2626'; border = '1px solid #b91c1c'; }
+                      else { background = '#1f2937'; color = '#9ca3af'; }
+                    } else if (mine) {
+                      border = '2px solid #60a5fa';
+                      boxShadow = '0 0 0 3px rgba(96,165,250,0.35)';
+                    }
+
+                    return (
+                      <button
+                        key={idx}
+                        className="btn-3d btn-option"
+                        onClick={() => sendAnswer(idx)}
+                        disabled={disabled}
+                        style={{ background, color, border, boxShadow }}
+                      >
+                        {option}
+                      </button>
+                    );
+                  })}
+                </div>
+
+                {state.status === 'playing' && answered && (
+                  <p style={{ margin: '12px 0 0', color: '#4f46e5', fontWeight: 600, textAlign: 'center' }}>Risposta inviata, aspetta gli altri...</p>
+                )}
+
+                {state.status === 'reveal' && reveal && (
+                  <div style={{ marginTop: 14, display: 'grid', gap: 10 }}>
+                    <div style={{ display: 'flex', gap: 12, alignItems: 'center', padding: 12, borderRadius: 12, background: 'rgba(99,102,241,0.1)', border: '1px solid rgba(99,102,241,0.3)', color: '#312e81' }}>
+                      {reveal.cover && <img src={reveal.cover} alt="" style={{ width: 56, height: 56, borderRadius: 8 }} />}
+                      <div>
+                        <p style={{ margin: 0, fontWeight: 700 }}>{reveal.title}</p>
+                        <p style={{ margin: 0, fontSize: 13 }}>{reveal.artist}</p>
+                      </div>
+                    </div>
+                    {myResult ? (
+                      <p style={{ margin: 0, textAlign: 'center', fontWeight: 700, color: myResult.correct ? '#065f46' : '#991b1b' }}>
+                        {myResult.correct ? `Giusto! +${myResult.points} punti in ${(myResult.deltaMs / 1000).toFixed(2)}s` : 'Sbagliato, 0 punti'}
+                      </p>
+                    ) : (
+                      <p style={{ margin: 0, textAlign: 'center', color: '#6b7280' }}>Non hai risposto</p>
+                    )}
+                    {reveal.firstCorrect && (
+                      <p style={{ margin: 0, fontSize: 13, color: '#065f46', textAlign: 'center' }}>
+                        Più veloce: {nameOf(reveal.firstCorrect.playerId)} in {(reveal.firstCorrect.deltaMs / 1000).toFixed(2)}s (+{reveal.firstCorrect.points})
+                      </p>
+                    )}
+                  </div>
+                )}
+              </>
+            )}
+
+            {state.status === 'finished' && (
+              <div className="fade-up" style={{ textAlign: 'center' }}>
+                <h2 style={{ color: '#111827', marginTop: 0 }}>🏆 Podio finale</h2>
+                <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', justifyContent: 'center' }}>
+                  {standings.slice(0, 3).map((row, idx) => (
+                    <div key={row.id} style={{ flex: '1 1 160px', maxWidth: 220, border: '1px solid rgba(17,24,39,0.12)', borderRadius: 12, padding: 16, background: idx === 0 ? 'rgba(251,191,36,0.25)' : idx === 1 ? 'rgba(209,213,219,0.4)' : 'rgba(205,127,50,0.2)' }}>
+                      <div style={{ fontSize: '1.6rem' }}>{['🥇', '🥈', '🥉'][idx]}</div>
+                      <p style={{ margin: '4px 0', fontWeight: 700, color: '#111827' }}>{row.name}{row.id === playerId ? ' (tu)' : ''}</p>
+                      <p style={{ margin: 0, color: '#111827' }}>{row.score} punti</p>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ marginTop: 20, display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
+                  {isHost && <button className="btn-3d" onClick={() => act('game:restart')}>Rigioca con gli stessi</button>}
+                  <button className="btn-3d" onClick={leaveRoom} style={{ background: '#374151' }}>Esci</button>
+                </div>
+              </div>
+            )}
+
+            {actionError && <p style={{ marginTop: 12, color: '#dc2626', fontSize: 13, textAlign: 'center' }}>{actionError}</p>}
           </div>
 
           {/* Sidebar */}
-          <div style={{ flex: '1 1 260px', border: '1px solid rgba(17,24,39,0.12)', borderRadius: 14, padding: 16 }}>
-            <h3 style={{ marginTop: 0, color: '#111827' }}>Classifica</h3>
-            {room.playlist?.name && (
-              <p style={{ margin: '4px 0 12px', color: '#111827', fontWeight: 600 }}>
-                Playlist: {room.playlist.name}
-              </p>
-            )}
-            <ol style={{ paddingLeft: 18, margin: 0, display: 'grid', gap: 8 }}>
-              {scoreboard.length === 0 && <li style={{ color: '#6b7280' }}>Ancora nessun punto</li>}
-              {scoreboard.map((row, idx) => (
-                <li key={row.id} style={{ color: row.id === uid ? '#4f46e5' : '#111827', fontWeight: row.id === uid ? 700 : 500 }}>
-                  {idx + 1}. {row.id === room.host_id ? '👑 ' : ''}{row.name} — {row.points} pt
+          <div style={{ flex: '1 1 240px', border: '1px solid rgba(17,24,39,0.12)', borderRadius: 14, padding: 16 }}>
+            <h3 style={{ marginTop: 0, color: '#111827' }}>Giocatori ({connectedCount}/{state.players.length})</h3>
+            <ol style={{ paddingLeft: 0, margin: 0, listStyle: 'none', display: 'grid', gap: 8 }}>
+              {standings.map((row, idx) => (
+                <li key={row.id} style={{ display: 'flex', justifyContent: 'space-between', gap: 8, color: row.id === playerId ? '#4f46e5' : '#111827', fontWeight: row.id === playerId ? 700 : 500, opacity: row.connected ? 1 : 0.5 }}>
+                  <span>
+                    {state.status === 'lobby' ? '' : `${idx + 1}. `}
+                    {row.isHost ? '👑 ' : ''}{row.name}
+                    {!row.connected ? ' ⚠️' : ''}
+                    {state.status === 'playing' && row.answered ? ' ✅' : ''}
+                  </span>
+                  {state.status !== 'lobby' && <span>{row.score} pt</span>}
                 </li>
               ))}
             </ol>
-            <div style={{ marginTop: 12 }}>
-              <h4 style={{ margin: '6px 0', color: '#111827' }}>Giocatori ({playersCount})</h4>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 6 }}>
-                {players.map((p) => (
-                  <li key={p.user_id} style={{ color: '#111827', fontWeight: p.user_id === room.host_id ? 700 : 500 }}>
-                    {p.user_id === room.host_id ? '👑 ' : ''}{p.name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            {isPlaying && (
-              <p style={{ marginTop: 8, fontSize: 12, color: '#6b7280' }}>
-                Risposte: {answersCount}/{playersCount}
-              </p>
+            {state.status === 'playing' && (
+              <p style={{ marginTop: 12, fontSize: 12, color: '#6b7280' }}>Risposte: {answeredCount}/{connectedCount}</p>
             )}
+            <p style={{ marginTop: 12, fontSize: 12, color: '#6b7280' }}>Playlist: {state.playlist.name}</p>
           </div>
         </div>
-
-        {/* Controls */}
-        <div style={{ marginTop: 20, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-          {isHost && room.status === 'waiting' && (
-            <button className="btn-3d" onClick={startRound}>Avvia partita</button>
-          )}
-          {isHost && room.status === 'reveal' && room.round_index < room.max_rounds && (
-            <button className="btn-3d" onClick={startRound}>Prossimo round</button>
-          )}
-          {isHost && room.status === 'reveal' && room.round_index >= room.max_rounds && (
-            <button className="btn-3d" onClick={finishGame}>Concludi partita</button>
-          )}
-        </div>
-
-        {/* Final podium */}
-        {room.status === 'finished' && (
-          <div className="fade-up" style={{ marginTop: 30, borderTop: '1px solid rgba(17,24,39,0.1)', paddingTop: 20 }}>
-            <h2 style={{ color: '#111827' }}>Podio finale</h2>
-            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-              {scoreboard.slice(0, 3).map((row, idx) => (
-                <div key={row.id} style={{ flex: '1 1 200px', border: '1px solid rgba(17,24,39,0.12)', borderRadius: 12, padding: 16, background: idx === 0 ? 'rgba(251,191,36,0.2)' : 'rgba(209,213,219,0.3)' }}>
-                  <h3 style={{ margin: 0 }}>{idx + 1}</h3>
-                  <p style={{ margin: '4px 0', fontWeight: 700 }}>{row.id === room.host_id ? '👑 ' : ''}{row.name}</p>
-                  <p style={{ margin: 0 }}>{row.points} punti</p>
-                </div>
-              ))}
-              {scoreboard.length === 0 && <p style={{ color: '#6b7280' }}>Nessun punteggio registrato.</p>}
-            </div>
-          </div>
-        )}
       </div>
     </main>
   );

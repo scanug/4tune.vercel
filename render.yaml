@@ -1,0 +1,16 @@
+# Blueprint Render: https://render.com/docs/blueprint-spec
+# Da Render: New → Blueprint → seleziona il repo. Dopo il deploy imposta
+# CLIENT_ORIGIN con l'origin del frontend Vercel.
+services:
+  - type: web
+    name: 4tune-server
+    runtime: node
+    plan: free
+    rootDir: server
+    buildCommand: npm ci --omit=dev
+    startCommand: npm start
+    healthCheckPath: /health
+    autoDeploy: true
+    envVars:
+      - key: CLIENT_ORIGIN
+        sync: false

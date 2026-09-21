@@ -7,7 +7,7 @@ export default function ImpostorePage() {
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
       <div style={{ width: 'min(700px, 94vw)', textAlign: 'center', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 18, background: 'rgba(255,255,255,0.92)', boxShadow: '0 20px 50px rgba(0,0,0,0.2)', padding: 40 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24 }}>
-          <Link href="/hub" className="btn-3d" style={{ textDecoration: 'none' }}>Hub Giochi</Link>
+          <Link href="/" className="btn-3d" style={{ textDecoration: 'none' }}>Hub Giochi</Link>
           <span />
         </div>
 

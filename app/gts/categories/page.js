@@ -1,67 +1,44 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { api } from '@/lib/gameClient';
 
-const CATEGORY_PRESETS = [
-  { slug: 'rap-hiphop', title: 'Rap / Hip-hop', query: 'rap' },
-  { slug: '2000s', title: '2000s Throwback', query: '2000s hits' },
-  { slug: '2010s', title: '2010s Bangers', query: '2010s hits' },
-  { slug: '2020s', title: '2020s Fresh', query: '2020s hits' },
-  { slug: 'hits-5y', title: 'Hits ultimi 5 anni', query: 'top hits' },
-  { slug: 'rock', title: 'Rock Classics', query: 'rock classics' },
-  { slug: 'metal', title: 'Metal', query: 'metal' },
-  { slug: 'tiktok', title: 'TikTok Songs', query: 'tiktok songs' },
-];
+function hostHref(playlist) {
+  return { pathname: '/gts/host', query: { playlist: playlist.id, title: playlist.title } };
+}
 
 export default function CategoriesPage() {
-  const [resolved, setResolved] = useState([]);
+  const [presets, setPresets] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [searchLoading, setSearchLoading] = useState(false);
   const [searchError, setSearchError] = useState('');
-  const categories = useMemo(() => CATEGORY_PRESETS, []);
 
   useEffect(() => {
-    let aborted = false;
-    async function fetchPlaylists() {
-      try {
-        const results = await Promise.all(
-          categories.map(async (cat) => {
-            const res = await fetch(`/api/deezer/search?type=playlist&q=${encodeURIComponent(cat.query)}`);
-            const json = await res.json();
-            const first = Array.isArray(json.data) ? json.data[0] : null;
-            return {
-              ...cat,
-              playlistId: first?.id || null,
-              playlistTitle: first?.title || cat.title,
-              provider: 'deezer',
-            };
-          })
-        );
-        if (!aborted) { setResolved(results); setLoading(false); }
-      } catch {
-        if (!aborted) { setError('Errore nel recuperare le playlist Deezer'); setLoading(false); }
-      }
-    }
-    fetchPlaylists();
-    return () => { aborted = true; };
-  }, [categories]);
+    let cancelled = false;
+    api.presets()
+      .then((json) => { if (!cancelled) setPresets(json.data || []); })
+      .catch((err) => { if (!cancelled) setError(err.message || 'Errore nel recuperare le playlist'); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, []);
 
   async function handleSearch(e) {
     e.preventDefault();
+    const q = searchTerm.trim();
+    if (!q) return;
     setSearchError('');
     setSearchLoading(true);
     setSearchResults([]);
     try {
-      const res = await fetch(`/api/deezer/search?type=playlist&q=${encodeURIComponent(searchTerm)}`);
-      const json = await res.json();
-      if (json.error) throw new Error(json.error);
-      setSearchResults(Array.isArray(json.data) ? json.data : []);
-    } catch {
-      setSearchError('Errore nella ricerca playlist');
+      const json = await api.search(q);
+      setSearchResults(json.data || []);
+      if (!json.data?.length) setSearchError('Nessuna playlist trovata');
+    } catch (err) {
+      setSearchError(err.message || 'Errore nella ricerca playlist');
     } finally {
       setSearchLoading(false);
     }
@@ -72,17 +49,10 @@ export default function CategoriesPage() {
       <div style={{ width: 'min(980px, 96vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 18, background: 'rgba(255,255,255,0.92)', boxShadow: '0 20px 40px rgba(0,0,0,0.3)', padding: 28 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <Link href="/gts" className="btn-3d" style={{ textDecoration: 'none' }}>Torna</Link>
-          <h1 style={{ margin: 0, color: '#111827' }}>Seleziona la categoria</h1>
-          <Link href="/hub" className="btn-3d" style={{ textDecoration: 'none' }}>Hub</Link>
+          <h1 style={{ margin: 0, color: '#111827' }}>Scegli la playlist</h1>
+          <Link href="/gts/join" className="btn-3d" style={{ textDecoration: 'none' }}>Ho un codice</Link>
         </div>
-        <p style={{ marginTop: 16, color: '#6b7280' }}>Ogni categoria cerca una playlist Deezer e la usa per il quiz musicale.</p>
-        {error && <p style={{ color: '#dc2626', marginTop: 8 }}>{error}</p>}
-
-        <div style={{ marginTop: 10, marginBottom: 14, display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-          <Link href="/gts/join" className="btn-3d" style={{ textDecoration: 'none' }}>
-            Entra con codice stanza
-          </Link>
-        </div>
+        <p style={{ marginTop: 16, color: '#6b7280' }}>Le categorie usano playlist pubbliche di Deezer. Puoi anche cercarne una tua.</p>
 
         <form onSubmit={handleSearch} style={{ marginTop: 12, marginBottom: 18, display: 'grid', gap: 10 }}>
           <label style={{ fontWeight: 600, color: '#111827' }}>Cerca una playlist (artista, genere...)</label>
@@ -92,7 +62,8 @@ export default function CategoriesPage() {
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               placeholder="es. Dua Lipa, 80s, rock workout"
-              style={{ flex: '1 1 240px', padding: '0.6rem 0.8rem', borderRadius: 10, border: '1px solid rgba(17,24,39,0.2)', color: '#111827' }}
+              className="input-modern"
+              style={{ flex: '1 1 240px', width: 'auto' }}
             />
             <button className="btn-3d" type="submit" style={{ minWidth: 120 }} disabled={searchLoading}>
               {searchLoading ? 'Cerca...' : 'Cerca'}
@@ -107,12 +78,12 @@ export default function CategoriesPage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 12 }}>
               {searchResults.map((res) => (
                 <div key={res.id} style={{ border: '1px solid rgba(17,24,39,0.15)', borderRadius: 12, padding: 12, background: 'rgba(59,130,246,0.05)' }}>
-                  {res.picture && <img src={res.picture} alt={res.title} style={{ width: '100%', borderRadius: 10, marginBottom: 8 }} />}
+                  {res.picture && <img src={res.picture} alt="" style={{ width: '100%', borderRadius: 10, marginBottom: 8 }} />}
                   <div style={{ fontWeight: 700, color: '#111827' }}>{res.title || 'Playlist Deezer'}</div>
                   <div style={{ fontSize: 12, color: '#6b7280' }}>{res.creator || ''}</div>
                   {res.trackCount && <div style={{ fontSize: 12, color: '#6b7280' }}>{res.trackCount} tracce</div>}
                   <Link
-                    href={{ pathname: '/gts/host', query: { playlist: res.id, title: res.title || 'Playlist Deezer' } }}
+                    href={hostHref({ id: res.id, title: res.title || 'Playlist Deezer' })}
                     className="btn-3d"
                     style={{ textDecoration: 'none', marginTop: 8, display: 'inline-block', textAlign: 'center', width: '100%' }}
                   >
@@ -124,20 +95,23 @@ export default function CategoriesPage() {
           </div>
         )}
 
-        <div style={{ marginTop: 18, display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
-          {(resolved.length ? resolved : categories).map((cat) => (
+        <h3 style={{ margin: '18px 0 8px', color: '#111827' }}>Categorie</h3>
+        {error && <p style={{ color: '#dc2626', marginTop: 8 }}>{error}</p>}
+        {loading && <p style={{ color: '#6b7280' }}>Caricamento categorie...</p>}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 16 }}>
+          {presets.map((cat) => (
             <div key={cat.slug} style={{ border: '1px solid rgba(17,24,39,0.15)', borderRadius: 12, padding: 16, background: 'rgba(99,102,241,0.05)', display: 'flex', flexDirection: 'column', gap: 12 }}>
               <div>
                 <h2 style={{ margin: 0, color: '#111827', fontSize: '1.1rem' }}>{cat.title}</h2>
-                <p style={{ margin: '6px 0', color: '#6b7280', fontSize: '0.9rem' }}>{cat.playlistTitle || 'Playlist Deezer'}</p>
+                <p style={{ margin: '6px 0', color: '#6b7280', fontSize: '0.9rem' }}>{cat.playlistTitle || 'Playlist non trovata'}</p>
               </div>
-              <Link
-                href={{ pathname: '/gts/host', query: { playlist: cat.playlistId || '', title: cat.playlistTitle || cat.title } }}
-                className="btn-3d"
-                style={{ textDecoration: 'none', textAlign: 'center', pointerEvents: cat.playlistId ? 'auto' : 'none', opacity: cat.playlistId ? 1 : 0.6 }}
-              >
-                {cat.playlistId ? 'Usa playlist' : (loading ? 'Caricamento...' : 'Playlist non trovata')}
-              </Link>
+              {cat.playlistId ? (
+                <Link href={hostHref({ id: cat.playlistId, title: cat.playlistTitle || cat.title })} className="btn-3d" style={{ textDecoration: 'none', textAlign: 'center' }}>
+                  Usa playlist
+                </Link>
+              ) : (
+                <button className="btn-3d" disabled style={{ opacity: 0.6 }}>Non disponibile</button>
+              )}
             </div>
           ))}
         </div>

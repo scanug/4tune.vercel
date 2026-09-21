@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 4Tune – Party Games
 
-## Getting Started
+Giochi da festa gratuiti, senza registrazione.
 
-First, run the development server:
+- **GTS – Guess the Song**: quiz musicale online. L'host sceglie una playlist Deezer, crea una stanza e condivide un codice a 4 lettere. Le clip partono sincronizzate, il server tiene la risposta corretta e calcola i punti.
+- **Impostore**: gioco dal vivo con un solo telefono che passa di mano. Non usa il server.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Struttura
+
+```
+app/          frontend Next.js (App Router), deploy su Vercel
+lib/          gameClient.js: Socket.IO + rotte HTTP del server
+server/       server di gioco Node (Socket.IO), deploy su Railway
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Il server è l'unica autorità sul gioco: stanze in memoria, timer dei round, punteggi. Non c'è database: una stanza vive finché dura la partita e un redeploy del server azzera le partite in corso.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Sviluppo locale
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Servono due terminali.
 
-## Learn More
+```bash
+# 1. server di gioco (porta 4000)
+cd server && npm install && npm run dev
 
-To learn more about Next.js, take a look at the following resources:
+# 2. frontend (porta 3000)
+cp .env.local.example .env.local   # punta a http://localhost:4000
+npm install && npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Test del motore di gioco:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+npm run test:server
+```
 
-## Deploy on Vercel
+## Deploy
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Server su Render (gratuito)**: da Render scegli *New → Blueprint* e seleziona il repo: [render.yaml](render.yaml) crea il servizio con root `server`, health check su `/health` e piano free. Poi imposta la variabile:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Variabile | Valore |
+|---|---|
+| `CLIENT_ORIGIN` | origin del frontend, separati da virgola (es. `https://4tune.vercel.app`) |
+
+Il piano free si spegne dopo 15 minuti senza traffico e il primo che entra aspetta circa un minuto. Per tenerlo sempre acceso basta un ping gratuito ogni 10 minuti a `/health` (es. cron-job.org): le 750 ore mensili gratuite coprono un servizio acceso tutto il mese.
+
+**Server su Railway**: in alternativa, nuovo servizio dal repo con *Root Directory* = `server` ([railway.json](server/railway.json)), stessa variabile `CLIENT_ORIGIN`.
+
+**Frontend su Vercel**: variabile `NEXT_PUBLIC_GAME_SERVER_URL` = URL pubblico del server (senza slash finale).
+
+## Eventi Socket.IO
+
+Documentati in testa a [server/src/socket.js](server/src/socket.js). Lo stato pubblico della stanza non contiene mai la risposta corretta prima del reveal.
