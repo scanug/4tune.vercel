@@ -3,6 +3,7 @@
 Giochi da festa gratuiti, senza registrazione.
 
 - **GTS – Guess the Song**: quiz musicale online. L'host sceglie una playlist Deezer, crea una stanza e condivide un codice a 4 lettere. Le clip partono sincronizzate, il server tiene la risposta corretta e calcola i punti.
+- **Indovina l'Anno**: quiz online sugli anni. Ogni round esce una carta ("Nasce Vasco Rossi", "Esce al cinema Titanic") e ognuno sceglie l'anno dal suo telefono con uno slider: chi si avvicina di più vince il round. Cinque categorie (personaggi, storia, invenzioni, film/album/videogiochi, attualità) e quasi 600 carte, ogni anno verificato su Wikidata.
 - **Impostore**: gioco dal vivo con un solo telefono che passa di mano. Non usa il server.
 
 ## Struttura
@@ -10,7 +11,7 @@ Giochi da festa gratuiti, senza registrazione.
 ```
 app/          frontend Next.js (App Router), deploy su Vercel
 lib/          gameClient.js: Socket.IO + rotte HTTP del server
-server/       server di gioco Node (Socket.IO), deploy su Railway
+server/       server di gioco Node (Socket.IO), deploy su Render
 ```
 
 Il server è l'unica autorità sul gioco: stanze in memoria, timer dei round, punteggi. Non c'è database: una stanza vive finché dura la partita e un redeploy del server azzera le partite in corso.
@@ -33,6 +34,18 @@ Test del motore di gioco:
 ```bash
 npm run test:server
 ```
+
+## Mazzo di Indovina l'Anno
+
+Le carte si scrivono a mano in `server/data/anno/source/<categoria>.json` (formato descritto in testa a [server/scripts/build-anno-deck.mjs](server/scripts/build-anno-deck.mjs)). Lo script cerca ogni carta su Wikidata e confronta l'anno scritto con quello ufficiale. Se non coincidono si ferma; se coincidono genera `server/data/anno/cards.json`, che è il file letto dal server e va committato.
+
+```bash
+cd server
+npm run deck -- media   # verifica solo una categoria, non scrive nulla
+npm run deck            # verifica tutto e rigenera cards.json
+```
+
+Foto e descrizioni arrivano da Wikidata e Wikimedia Commons; la foto si vede solo al reveal e rimanda alla sua pagina su Commons (autore e licenza).
 
 ## Deploy
 

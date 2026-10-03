@@ -1,0 +1,770 @@
+[
+  {
+    "title": "Esce al cinema Titanic",
+    "subtitle": "Il film di James Cameron con DiCaprio",
+    "wiki": "Titanic (film 1997)",
+    "year": 1997
+  },
+  {
+    "title": "Esce al cinema Il re leone",
+    "subtitle": "Il classico Disney di Simba",
+    "wiki": "Il re leone",
+    "year": 1994
+  },
+  {
+    "title": "Esce al cinema Harry Potter e la pietra filosofale",
+    "subtitle": "Il primo film del maghetto",
+    "wiki": "Harry Potter e la pietra filosofale (film)",
+    "year": 2001
+  },
+  {
+    "title": "Esce al cinema La vita è bella",
+    "subtitle": "Di e con Roberto Benigni",
+    "wiki": "La vita è bella",
+    "year": 1997
+  },
+  {
+    "title": "Esce al cinema Avengers: Endgame",
+    "subtitle": "Lo scontro finale con Thanos",
+    "wiki": "Avengers: Endgame",
+    "year": 2019
+  },
+  {
+    "title": "Esce al cinema Shrek",
+    "subtitle": "L'orco verde della DreamWorks",
+    "wiki": "Shrek (film)",
+    "year": 2001
+  },
+  {
+    "title": "Esce al cinema Frozen - Il regno di ghiaccio",
+    "subtitle": "Elsa, Anna e \"All'alba sorgerò\"",
+    "wiki": "Frozen - Il regno di ghiaccio",
+    "year": 2013
+  },
+  {
+    "title": "Esce al cinema Il padrino",
+    "subtitle": "Di Francis Ford Coppola con Marlon Brando",
+    "wiki": "Il padrino (film)",
+    "year": 1972
+  },
+  {
+    "title": "Esce al cinema Matrix",
+    "subtitle": "Neo, la pillola rossa e la pillola blu",
+    "wiki": "Matrix",
+    "year": 1999
+  },
+  {
+    "title": "Esce al cinema Quo vado?",
+    "subtitle": "Con Checco Zalone",
+    "wiki": "Quo vado?",
+    "year": 2016
+  },
+  {
+    "title": "Esce al cinema Sole a catinelle",
+    "subtitle": "Con Checco Zalone",
+    "wiki": "Sole a catinelle",
+    "year": 2013
+  },
+  {
+    "title": "Esce al cinema Ritorno al futuro",
+    "subtitle": "Marty McFly e la DeLorean",
+    "wiki": "Ritorno al futuro",
+    "year": 1985
+  },
+  {
+    "title": "Esce al cinema Guerre stellari",
+    "subtitle": "Il primo Star Wars di George Lucas",
+    "wiki": "Guerre stellari (film)",
+    "year": 1977
+  },
+  {
+    "title": "Esce al cinema E.T. l'extra-terrestre",
+    "subtitle": "Di Steven Spielberg",
+    "wiki": "E.T. l'extra-terrestre",
+    "year": 1982
+  },
+  {
+    "title": "Esce al cinema Pulp Fiction",
+    "subtitle": "Di Quentin Tarantino",
+    "wiki": "Pulp Fiction",
+    "year": 1994
+  },
+  {
+    "title": "Esce al cinema Forrest Gump",
+    "subtitle": "Con Tom Hanks",
+    "wiki": "Forrest Gump",
+    "year": 1994
+  },
+  {
+    "title": "Esce al cinema Il Signore degli Anelli - La Compagnia dell'Anello",
+    "subtitle": "Di Peter Jackson",
+    "wiki": "Il Signore degli Anelli - La Compagnia dell'Anello",
+    "year": 2001
+  },
+  {
+    "title": "Esce al cinema Avatar",
+    "subtitle": "Di James Cameron, i Na'vi di Pandora",
+    "wiki": "Avatar (film 2009)",
+    "year": 2009
+  },
+  {
+    "title": "Esce al cinema Toy Story",
+    "subtitle": "Il primo film Pixar, Woody e Buzz",
+    "wiki": "Toy Story - Il mondo dei giocattoli",
+    "year": 1995
+  },
+  {
+    "title": "Esce al cinema Alla ricerca di Nemo",
+    "subtitle": "Il pesce pagliaccio della Pixar",
+    "wiki": "Alla ricerca di Nemo",
+    "year": 2003
+  },
+  {
+    "title": "Esce al cinema La grande bellezza",
+    "subtitle": "Di Paolo Sorrentino con Toni Servillo",
+    "wiki": "La grande bellezza",
+    "year": 2013
+  },
+  {
+    "title": "Esce al cinema La dolce vita",
+    "subtitle": "Di Federico Fellini, il bagno nella Fontana di Trevi",
+    "wiki": "La dolce vita",
+    "year": 1960
+  },
+  {
+    "title": "Esce al cinema Roma città aperta",
+    "subtitle": "Di Roberto Rossellini con Anna Magnani",
+    "wiki": "Roma città aperta",
+    "year": 1945
+  },
+  {
+    "title": "Esce al cinema Il cavaliere oscuro",
+    "subtitle": "Batman contro il Joker di Heath Ledger",
+    "wiki": "Il cavaliere oscuro",
+    "year": 2008
+  },
+  {
+    "title": "Esce al cinema Joker",
+    "subtitle": "Con Joaquin Phoenix",
+    "wiki": "Joker (film 2019)",
+    "year": 2019
+  },
+  {
+    "title": "Esce al cinema Barbie",
+    "subtitle": "Di Greta Gerwig con Margot Robbie",
+    "wiki": "Barbie (film)",
+    "year": 2023
+  },
+  {
+    "title": "Esce al cinema Oppenheimer",
+    "subtitle": "Di Christopher Nolan",
+    "wiki": "Oppenheimer (film)",
+    "year": 2023
+  },
+  {
+    "title": "Esce al cinema Il diavolo veste Prada",
+    "subtitle": "Con Meryl Streep e Anne Hathaway",
+    "wiki": "Il diavolo veste Prada (film)",
+    "year": 2006
+  },
+  {
+    "title": "Esce al cinema Notte prima degli esami",
+    "subtitle": "Con Nicolas Vaporidis",
+    "wiki": "Notte prima degli esami (film)",
+    "year": 2006
+  },
+  {
+    "title": "Esce al cinema Perfetti sconosciuti",
+    "subtitle": "Di Paolo Genovese",
+    "wiki": "Perfetti sconosciuti",
+    "year": 2016
+  },
+  {
+    "title": "Esce al cinema Lo chiamavano Jeeg Robot",
+    "subtitle": "Con Claudio Santamaria",
+    "wiki": "Lo chiamavano Jeeg Robot",
+    "year": 2015
+  },
+  {
+    "title": "Esce al cinema Tre uomini e una gamba",
+    "subtitle": "Con Aldo, Giovanni e Giacomo",
+    "wiki": "Tre uomini e una gamba",
+    "year": 1997
+  },
+  {
+    "title": "Esce al cinema Vacanze di Natale",
+    "subtitle": "Il primo cinepanettone, a Cortina",
+    "wiki": "Vacanze di Natale",
+    "year": 1983
+  },
+  {
+    "title": "Esce al cinema Fantozzi",
+    "subtitle": "Con Paolo Villaggio",
+    "wiki": "Fantozzi (film)",
+    "year": 1975
+  },
+  {
+    "title": "Esce al cinema Spider-Man",
+    "subtitle": "Di Sam Raimi con Tobey Maguire",
+    "wiki": "Spider-Man (film)",
+    "year": 2002
+  },
+  {
+    "title": "Esce al cinema Interstellar",
+    "subtitle": "Di Christopher Nolan",
+    "wiki": "Interstellar",
+    "year": 2014
+  },
+  {
+    "title": "Esce al cinema Il gladiatore",
+    "subtitle": "Di Ridley Scott con Russell Crowe",
+    "wiki": "Il gladiatore",
+    "year": 2000
+  },
+  {
+    "title": "Esce al cinema Mamma, ho perso l'aereo",
+    "subtitle": "Con Macaulay Culkin",
+    "wiki": "Mamma, ho perso l'aereo",
+    "year": 1990
+  },
+  {
+    "title": "Esce l'album Thriller",
+    "subtitle": "Di Michael Jackson",
+    "wiki": "Thriller (album Michael Jackson)",
+    "year": 1982
+  },
+  {
+    "title": "Esce l'album Nevermind",
+    "subtitle": "Dei Nirvana",
+    "wiki": "Nevermind",
+    "year": 1991
+  },
+  {
+    "title": "Esce la canzone Vita spericolata",
+    "subtitle": "Di Vasco Rossi",
+    "wiki": "Vita spericolata",
+    "year": 1983
+  },
+  {
+    "title": "Esce la canzone Bohemian Rhapsody",
+    "subtitle": "Dei Queen",
+    "wiki": "Bohemian Rhapsody",
+    "year": 1975
+  },
+  {
+    "title": "Esce l'album Rockstar",
+    "subtitle": "Di Sfera Ebbasta",
+    "wiki": "Rockstar (album Sfera Ebbasta)",
+    "year": 2018
+  },
+  {
+    "title": "Esce la canzone Zitti e buoni",
+    "subtitle": "Dei Måneskin, vincitrice a Sanremo",
+    "wiki": "Zitti e buoni",
+    "year": 2021
+  },
+  {
+    "title": "Esce l'album Fearless",
+    "subtitle": "Di Taylor Swift",
+    "wiki": "Fearless (album Taylor Swift)",
+    "year": 2008
+  },
+  {
+    "title": "Esce la canzone Shake It Off",
+    "subtitle": "Di Taylor Swift",
+    "wiki": "Shake It Off (Taylor Swift)",
+    "year": 2014
+  },
+  {
+    "title": "Esce l'album The Dark Side of the Moon",
+    "subtitle": "Dei Pink Floyd",
+    "wiki": "The Dark Side of the Moon",
+    "year": 1973
+  },
+  {
+    "title": "Esce l'album Abbey Road",
+    "subtitle": "Dei Beatles",
+    "wiki": "Abbey Road",
+    "year": 1969
+  },
+  {
+    "title": "Esce l'album Sgt. Pepper's Lonely Hearts Club Band",
+    "subtitle": "Dei Beatles",
+    "wiki": "Sgt. Pepper's Lonely Hearts Club Band",
+    "year": 1967
+  },
+  {
+    "title": "Esce la canzone ...Baby One More Time",
+    "subtitle": "Di Britney Spears",
+    "wiki": "...Baby One More Time (singolo)",
+    "year": 1998
+  },
+  {
+    "title": "Esce l'album Back in Black",
+    "subtitle": "Degli AC/DC",
+    "wiki": "Back in Black (album AC/DC)",
+    "year": 1980
+  },
+  {
+    "title": "Esce la canzone Nel blu, dipinto di blu",
+    "subtitle": "Di Domenico Modugno, \"Volare\"",
+    "wiki": "Nel blu, dipinto di blu",
+    "year": 1958
+  },
+  {
+    "title": "Esce la canzone Azzurro",
+    "subtitle": "Cantata da Adriano Celentano",
+    "wiki": "Azzurro (brano musicale)",
+    "year": 1968
+  },
+  {
+    "title": "Esce la canzone Albachiara",
+    "subtitle": "Di Vasco Rossi",
+    "wiki": "Albachiara/Fegato, fegato spappolato",
+    "year": 1979
+  },
+  {
+    "title": "Esce la canzone La solitudine",
+    "subtitle": "Di Laura Pausini",
+    "wiki": "La solitudine",
+    "year": 1993
+  },
+  {
+    "title": "Esce la canzone Sarà perché ti amo",
+    "subtitle": "Dei Ricchi e Poveri",
+    "wiki": "Sarà perché ti amo/Bello l'amore",
+    "year": 1981
+  },
+  {
+    "title": "Esce la canzone Gangnam Style",
+    "subtitle": "Di PSY",
+    "wiki": "Gangnam Style",
+    "year": 2012
+  },
+  {
+    "title": "Esce la canzone Despacito",
+    "subtitle": "Di Luis Fonsi e Daddy Yankee",
+    "wiki": "Despacito",
+    "year": 2017
+  },
+  {
+    "title": "Esce la canzone Smells Like Teen Spirit",
+    "subtitle": "Dei Nirvana",
+    "wiki": "Smells Like Teen Spirit",
+    "year": 1991
+  },
+  {
+    "title": "Esce la canzone Wonderwall",
+    "subtitle": "Degli Oasis",
+    "wiki": "Wonderwall",
+    "year": 1995
+  },
+  {
+    "title": "Esce l'album Purple Rain",
+    "subtitle": "Di Prince",
+    "wiki": "Purple Rain (album)",
+    "year": 1984
+  },
+  {
+    "title": "Esce la canzone Soldi",
+    "subtitle": "Di Mahmood, vincitrice a Sanremo",
+    "wiki": "Soldi (Mahmood)",
+    "year": 2019
+  },
+  {
+    "title": "Esce la canzone Tuta gold",
+    "subtitle": "Di Mahmood",
+    "wiki": "Tuta gold",
+    "year": 2024
+  },
+  {
+    "title": "Esce la canzone Bad Guy",
+    "subtitle": "Di Billie Eilish",
+    "wiki": "Bad Guy (Billie Eilish)",
+    "year": 2019
+  },
+  {
+    "title": "Esce l'album Hanno ucciso l'Uomo Ragno",
+    "subtitle": "Degli 883",
+    "wiki": "Hanno ucciso l'Uomo Ragno (album)",
+    "year": 1992
+  },
+  {
+    "title": "Esce la canzone Blinding Lights",
+    "subtitle": "Di The Weeknd",
+    "wiki": "Blinding Lights",
+    "year": 2019
+  },
+  {
+    "title": "Esce la canzone Rolling in the Deep",
+    "subtitle": "Di Adele",
+    "wiki": "Rolling in the Deep",
+    "year": 2010
+  },
+  {
+    "title": "Esce la canzone Imagine",
+    "subtitle": "Di John Lennon",
+    "wiki": "Imagine (singolo John Lennon)",
+    "year": 1971
+  },
+  {
+    "title": "Esce la canzone Brividi",
+    "subtitle": "Di Mahmood e Blanco",
+    "wiki": "Brividi (singolo)",
+    "year": 2022
+  },
+  {
+    "title": "Esce la canzone Bad Romance",
+    "subtitle": "Di Lady Gaga",
+    "wiki": "Bad Romance",
+    "year": 2009
+  },
+  {
+    "title": "Esce l'album Teatro d'ira - Vol. I",
+    "subtitle": "Dei Måneskin",
+    "wiki": "Teatro d'ira - Vol. I",
+    "year": 2021
+  },
+  {
+    "title": "Esce il videogioco Super Mario Bros.",
+    "subtitle": "L'idraulico di Nintendo",
+    "wiki": "Super Mario Bros.",
+    "year": 1985
+  },
+  {
+    "title": "Esce il videogioco Tetris",
+    "subtitle": "Di Aleksej Pažitnov",
+    "wiki": "Tetris",
+    "year": 1984
+  },
+  {
+    "title": "Esce il videogioco Grand Theft Auto: San Andreas",
+    "subtitle": "CJ e Grove Street",
+    "wiki": "Grand Theft Auto: San Andreas",
+    "year": 2004
+  },
+  {
+    "title": "Esce la prima versione del videogioco Minecraft",
+    "subtitle": "Il gioco dei blocchi di Markus Persson",
+    "wiki": "Minecraft",
+    "year": 2009
+  },
+  {
+    "title": "Esce il videogioco Fortnite",
+    "subtitle": "Di Epic Games",
+    "wiki": "Fortnite",
+    "year": 2017
+  },
+  {
+    "title": "Esce il videogioco Pac-Man",
+    "subtitle": "Il mangia-pallini di Namco",
+    "wiki": "Pac-Man",
+    "year": 1980
+  },
+  {
+    "title": "Esce il videogioco Pong",
+    "subtitle": "Il ping pong elettronico di Atari",
+    "wiki": "Pong",
+    "year": 1972
+  },
+  {
+    "title": "Esce il videogioco The Legend of Zelda",
+    "subtitle": "La prima avventura di Link",
+    "wiki": "The Legend of Zelda",
+    "year": 1986
+  },
+  {
+    "title": "Esce il videogioco Sonic the Hedgehog",
+    "subtitle": "Il porcospino blu di SEGA",
+    "wiki": "Sonic the Hedgehog (videogioco 1991 16-bit)",
+    "year": 1991
+  },
+  {
+    "title": "Esce il videogioco Street Fighter II",
+    "subtitle": "Ryu, Ken e l'Hadoken",
+    "wiki": "Street Fighter II: The World Warrior",
+    "year": 1991
+  },
+  {
+    "title": "Esce il videogioco Doom",
+    "subtitle": "Lo sparatutto di id Software",
+    "wiki": "Doom",
+    "year": 1993
+  },
+  {
+    "title": "Esce il videogioco Super Mario 64",
+    "subtitle": "Mario per la prima volta in 3D",
+    "wiki": "Super Mario 64",
+    "year": 1996
+  },
+  {
+    "title": "Esce il videogioco Final Fantasy VII",
+    "subtitle": "Cloud, Sephiroth e Midgar",
+    "wiki": "Final Fantasy VII",
+    "year": 1997
+  },
+  {
+    "title": "Esce il videogioco The Sims",
+    "subtitle": "Il simulatore di vita di Will Wright",
+    "wiki": "The Sims",
+    "year": 2000
+  },
+  {
+    "title": "Esce il videogioco World of Warcraft",
+    "subtitle": "Il MMORPG di Blizzard",
+    "wiki": "World of Warcraft",
+    "year": 2004
+  },
+  {
+    "title": "Esce il videogioco Wii Sports",
+    "subtitle": "Tennis e bowling col telecomando",
+    "wiki": "Wii Sports",
+    "year": 2006
+  },
+  {
+    "title": "Esce il videogioco Call of Duty 4: Modern Warfare",
+    "subtitle": "Di Infinity Ward",
+    "wiki": "Call of Duty 4: Modern Warfare",
+    "year": 2007
+  },
+  {
+    "title": "Esce il videogioco Grand Theft Auto V",
+    "subtitle": "Michael, Franklin e Trevor",
+    "wiki": "Grand Theft Auto V",
+    "year": 2013
+  },
+  {
+    "title": "Esce il videogioco The Witcher 3: Wild Hunt",
+    "subtitle": "Geralt di Rivia",
+    "wiki": "The Witcher 3: Wild Hunt",
+    "year": 2015
+  },
+  {
+    "title": "Esce il videogioco Pokémon GO",
+    "subtitle": "I Pokémon in realtà aumentata",
+    "wiki": "Pokémon Go",
+    "year": 2016
+  },
+  {
+    "title": "Esce il videogioco The Legend of Zelda: Breath of the Wild",
+    "subtitle": "Link nel mondo aperto di Hyrule",
+    "wiki": "The Legend of Zelda: Breath of the Wild",
+    "year": 2017
+  },
+  {
+    "title": "Esce il videogioco Among Us",
+    "subtitle": "Trova l'impostore",
+    "wiki": "Among Us",
+    "year": 2018
+  },
+  {
+    "title": "Esce il videogioco Animal Crossing: New Horizons",
+    "subtitle": "L'isola deserta su Switch",
+    "wiki": "Animal Crossing: New Horizons",
+    "year": 2020
+  },
+  {
+    "title": "Esce il videogioco Elden Ring",
+    "subtitle": "Di FromSoftware",
+    "wiki": "Elden Ring",
+    "year": 2022
+  },
+  {
+    "title": "Esce il videogioco Crash Bandicoot",
+    "subtitle": "Il marsupiale di Naughty Dog",
+    "wiki": "Crash Bandicoot (videogioco)",
+    "year": 1996
+  },
+  {
+    "title": "Esce il videogioco Tomb Raider",
+    "subtitle": "La prima avventura di Lara Croft",
+    "wiki": "Tomb Raider",
+    "year": 1996
+  },
+  {
+    "title": "Esce il videogioco League of Legends",
+    "subtitle": "Il MOBA di Riot Games",
+    "wiki": "League of Legends",
+    "year": 2009
+  },
+  {
+    "title": "Esce il videogioco Candy Crush Saga",
+    "subtitle": "Le caramelle di King",
+    "wiki": "Candy Crush Saga",
+    "year": 2012
+  },
+  {
+    "title": "Esce il videogioco Red Dead Redemption 2",
+    "subtitle": "Arthur Morgan nel Far West",
+    "wiki": "Red Dead Redemption II",
+    "year": 2018
+  },
+  {
+    "title": "Esce il videogioco Assassin's Creed",
+    "subtitle": "Altaïr e le Crociate",
+    "wiki": "Assassin's Creed",
+    "year": 2007
+  },
+  {
+    "title": "Esce il videogioco FIFA International Soccer",
+    "subtitle": "Il primo FIFA di EA Sports",
+    "wiki": "FIFA International Soccer",
+    "year": 1993
+  },
+  {
+    "title": "Debutta la serie Friends",
+    "subtitle": "Rachel, Ross, Monica, Chandler, Joey e Phoebe",
+    "wiki": "Friends",
+    "year": 1994
+  },
+  {
+    "title": "Debutta la serie I Simpson",
+    "subtitle": "Homer, Marge, Bart, Lisa e Maggie",
+    "wiki": "I Simpson",
+    "year": 1989
+  },
+  {
+    "title": "Debutta la serie Breaking Bad",
+    "subtitle": "Walter White e Jesse Pinkman",
+    "wiki": "Breaking Bad",
+    "year": 2008
+  },
+  {
+    "title": "Debutta la serie Il Trono di Spade",
+    "subtitle": "Game of Thrones, dai libri di Martin",
+    "wiki": "Il Trono di Spade (serie televisiva)",
+    "year": 2011
+  },
+  {
+    "title": "Debutta la serie Stranger Things",
+    "subtitle": "Undici e i ragazzi di Hawkins",
+    "wiki": "Stranger Things",
+    "year": 2016
+  },
+  {
+    "title": "Debutta la serie Gomorra - La serie",
+    "subtitle": "Genny Savastano e Ciro l'Immortale",
+    "wiki": "Gomorra - La serie",
+    "year": 2014
+  },
+  {
+    "title": "Debutta la serie Mare fuori",
+    "subtitle": "I ragazzi del carcere minorile di Napoli",
+    "wiki": "Mare fuori",
+    "year": 2020
+  },
+  {
+    "title": "Debutta la serie Squid Game",
+    "subtitle": "Il gioco coreano di Netflix",
+    "wiki": "Squid Game",
+    "year": 2021
+  },
+  {
+    "title": "Debutta la serie Lost",
+    "subtitle": "I naufraghi del volo Oceanic 815",
+    "wiki": "Lost (serie televisiva)",
+    "year": 2004
+  },
+  {
+    "title": "Debutta la serie The Office",
+    "subtitle": "Michael Scott e la Dunder Mifflin",
+    "wiki": "The Office (serie televisiva 2005)",
+    "year": 2005
+  },
+  {
+    "title": "Debutta la serie Dr. House - Medical Division",
+    "subtitle": "Con Hugh Laurie",
+    "wiki": "Dr. House - Medical Division",
+    "year": 2004
+  },
+  {
+    "title": "Debutta la serie La casa de papel",
+    "subtitle": "Il Professore e la rapina alla Zecca",
+    "wiki": "La casa di carta",
+    "year": 2017
+  },
+  {
+    "title": "Debutta la serie Grey's Anatomy",
+    "subtitle": "Meredith Grey e il Seattle Grace",
+    "wiki": "Grey's Anatomy",
+    "year": 2005
+  },
+  {
+    "title": "Debutta la serie How I Met Your Mother",
+    "subtitle": "Ted Mosby e i suoi amici",
+    "wiki": "How I Met Your Mother",
+    "year": 2005
+  },
+  {
+    "title": "Debutta la serie Il commissario Montalbano",
+    "subtitle": "Con Luca Zingaretti",
+    "wiki": "Il commissario Montalbano",
+    "year": 1999
+  },
+  {
+    "title": "Debutta la serie Don Matteo",
+    "subtitle": "Con Terence Hill",
+    "wiki": "Don Matteo",
+    "year": 2000
+  },
+  {
+    "title": "Debutta la serie I Griffin",
+    "subtitle": "Peter, Lois, Stewie e Brian",
+    "wiki": "I Griffin",
+    "year": 1999
+  },
+  {
+    "title": "Debutta la serie South Park",
+    "subtitle": "Cartman, Kyle, Stan e Kenny",
+    "wiki": "South Park",
+    "year": 1997
+  },
+  {
+    "title": "Debutta la serie Dragon Ball",
+    "subtitle": "L'anime di Goku",
+    "wiki": "Dragon Ball (serie animata)",
+    "year": 1986
+  },
+  {
+    "title": "Debutta la serie Skam Italia",
+    "subtitle": "I ragazzi del liceo Kennedy di Roma",
+    "wiki": "Skam Italia",
+    "year": 2018
+  },
+  {
+    "title": "Debutta la serie Un posto al sole",
+    "subtitle": "La soap di Rai 3 a Posillipo",
+    "wiki": "Un posto al sole (soap opera)",
+    "year": 1996
+  },
+  {
+    "title": "Debutta la serie Black Mirror",
+    "subtitle": "Gli episodi distopici di Charlie Brooker",
+    "wiki": "Black Mirror",
+    "year": 2011
+  },
+  {
+    "title": "Debutta la serie Mercoledì",
+    "subtitle": "Wednesday Addams di Tim Burton",
+    "wiki": "Mercoledì (serie televisiva)",
+    "year": 2022
+  },
+  {
+    "title": "Debutta la serie Willy, il principe di Bel-Air",
+    "subtitle": "Con Will Smith",
+    "wiki": "Willy, il principe di Bel-Air",
+    "year": 1990
+  },
+  {
+    "title": "Debutta la serie Romanzo criminale",
+    "subtitle": "La banda della Magliana",
+    "wiki": "Romanzo criminale - La serie",
+    "year": 2008
+  },
+  {
+    "title": "Debutta la serie I Cesaroni",
+    "subtitle": "La famiglia della Garbatella",
+    "wiki": "I Cesaroni",
+    "year": 2006
+  }
+]

@@ -1,0 +1,676 @@
+[
+  {
+    "title": "Pascal inventa la sua calcolatrice meccanica",
+    "subtitle": "La Pascalina",
+    "wiki": "Pascalina",
+    "year": 1642
+  },
+  {
+    "title": "Torricelli inventa il barometro",
+    "subtitle": "Misurare la pressione dell'aria",
+    "wiki": "Barometro",
+    "year": 1643
+  },
+  {
+    "title": "Cristofori inventa il pianoforte",
+    "subtitle": "Un'invenzione padovana a Firenze",
+    "wiki": "Pianoforte",
+    "year": 1700
+  },
+  {
+    "title": "Volta inventa la pila",
+    "subtitle": "La prima batteria elettrica",
+    "wiki": "Pila di Volta",
+    "year": 1800
+  },
+  {
+    "title": "Herschel scopre il pianeta Urano",
+    "subtitle": "Il primo pianeta scoperto col telescopio",
+    "wiki": "Urano (astronomia)",
+    "year": 1781
+  },
+  {
+    "title": "Viene scoperto il pianeta Nettuno",
+    "subtitle": "Previsto prima con la matematica",
+    "wiki": "Nettuno (astronomia)",
+    "year": 1846
+  },
+  {
+    "title": "Braille inventa il suo alfabeto per ciechi",
+    "wiki": "Braille",
+    "year": 1824
+  },
+  {
+    "title": "Esce il primo francobollo della storia",
+    "subtitle": "Il Penny Black inglese",
+    "wiki": "Penny Black",
+    "year": 1840
+  },
+  {
+    "title": "Darwin pubblica L'origine delle specie",
+    "subtitle": "La teoria dell'evoluzione",
+    "wiki": "L'origine delle specie",
+    "year": 1859
+  },
+  {
+    "title": "Mendeleev crea la tavola periodica",
+    "wiki": "Tavola periodica degli elementi",
+    "year": 1869
+  },
+  {
+    "title": "Nobel inventa la dinamite",
+    "wiki": "Dinamite",
+    "year": 1867
+  },
+  {
+    "title": "Edison inventa il fonografo",
+    "subtitle": "Il primo apparecchio per registrare suoni",
+    "wiki": "Fonografo",
+    "year": 1877
+  },
+  {
+    "title": "Benz costruisce la prima automobile a motore",
+    "subtitle": "La Benz Patent-Motorwagen",
+    "wiki": "Benz Patent Motorwagen",
+    "year": 1886
+  },
+  {
+    "title": "Röntgen scopre i raggi X",
+    "wiki": "Raggi X",
+    "year": 1895,
+    "manual": "Wikidata senza data; scoperta annunciata da Röntgen nel dicembre del 1895"
+  },
+  {
+    "title": "Einstein pubblica la relatività ristretta",
+    "wiki": "Relatività ristretta",
+    "year": 1905
+  },
+  {
+    "title": "I fratelli Wright fanno volare il primo aereo",
+    "subtitle": "Il Wright Flyer a Kitty Hawk",
+    "wiki": "Wright Flyer",
+    "year": 1903,
+    "prop": "P606"
+  },
+  {
+    "title": "Fleming scopre la penicillina",
+    "subtitle": "Il primo antibiotico",
+    "wiki": "Penicillina",
+    "year": 1928
+  },
+  {
+    "title": "Viene scoperto Plutone",
+    "subtitle": "Oggi declassato a pianeta nano",
+    "wiki": "Plutone (astronomia)",
+    "year": 1930
+  },
+  {
+    "title": "Viene inventato il transistor",
+    "subtitle": "Nei laboratori Bell",
+    "wiki": "Transistor",
+    "year": 1947
+  },
+  {
+    "title": "Viene costruito il primo laser",
+    "wiki": "Laser",
+    "year": 1960
+  },
+  {
+    "title": "Nasce la pecora Dolly",
+    "subtitle": "Il primo mammifero clonato",
+    "wiki": "Dolly (pecora)",
+    "year": 1996,
+    "prop": "P569"
+  },
+  {
+    "title": "Viene osservato il bosone di Higgs al CERN",
+    "wiki": "Bosone di Higgs",
+    "year": 2012
+  },
+  {
+    "title": "Viene lanciato lo Sputnik",
+    "subtitle": "Il primo satellite artificiale",
+    "wiki": "Sputnik 1",
+    "year": 1957,
+    "prop": "P619"
+  },
+  {
+    "title": "Nasce il World Wide Web",
+    "subtitle": "Tim Berners-Lee al CERN",
+    "wiki": "World Wide Web",
+    "year": 1989
+  },
+  {
+    "title": "Viene inviata la prima email",
+    "wiki": "Posta elettronica",
+    "year": 1971
+  },
+  {
+    "title": "Viene fondata Microsoft",
+    "subtitle": "Bill Gates e Paul Allen",
+    "wiki": "Microsoft",
+    "year": 1975
+  },
+  {
+    "title": "Viene fondata Apple",
+    "subtitle": "Jobs e Wozniak in un garage",
+    "wiki": "Apple",
+    "year": 1976
+  },
+  {
+    "title": "Viene fondata Google",
+    "wiki": "Google (azienda)",
+    "year": 1998,
+    "subtitle": "Larry Page e Sergey Brin"
+  },
+  {
+    "title": "Viene fondata Amazon",
+    "subtitle": "All'inizio vendeva solo libri",
+    "wiki": "Amazon",
+    "year": 1994
+  },
+  {
+    "title": "Nasce Facebook",
+    "subtitle": "Mark Zuckerberg ad Harvard",
+    "wiki": "Facebook",
+    "year": 2004
+  },
+  {
+    "title": "Nasce YouTube",
+    "wiki": "YouTube",
+    "year": 2005
+  },
+  {
+    "title": "Nasce Twitter",
+    "subtitle": "Oggi si chiama X",
+    "wiki": "Twitter",
+    "year": 2006
+  },
+  {
+    "title": "Nasce Instagram",
+    "wiki": "Instagram",
+    "year": 2010
+  },
+  {
+    "title": "Nasce WhatsApp",
+    "wiki": "WhatsApp",
+    "year": 2009
+  },
+  {
+    "title": "Nasce Snapchat",
+    "subtitle": "Le foto che spariscono",
+    "wiki": "Snapchat",
+    "year": 2011
+  },
+  {
+    "title": "Nasce Telegram",
+    "wiki": "Telegram",
+    "year": 2013
+  },
+  {
+    "title": "In Cina nasce Douyin, l'app da cui nasce TikTok",
+    "subtitle": "La versione internazionale arriva dopo",
+    "wiki": "TikTok",
+    "year": 2016
+  },
+  {
+    "title": "Nasce Wikipedia",
+    "subtitle": "L'enciclopedia libera",
+    "wiki": "Wikipedia",
+    "year": 2001
+  },
+  {
+    "title": "Nasce Netflix",
+    "subtitle": "All'inizio noleggiava DVD per posta",
+    "wiki": "Netflix",
+    "year": 1997
+  },
+  {
+    "title": "Nasce Spotify",
+    "subtitle": "Una startup svedese",
+    "wiki": "Spotify",
+    "year": 2006
+  },
+  {
+    "title": "Nasce Twitch",
+    "wiki": "Twitch",
+    "year": 2011
+  },
+  {
+    "title": "Nasce Skype",
+    "wiki": "Skype",
+    "year": 2003
+  },
+  {
+    "title": "Nasce eBay",
+    "wiki": "eBay",
+    "year": 1995
+  },
+  {
+    "title": "Nasce Airbnb",
+    "wiki": "Airbnb",
+    "year": 2008
+  },
+  {
+    "title": "Nasce Uber",
+    "wiki": "Uber",
+    "year": 2009
+  },
+  {
+    "title": "Nasce LinkedIn",
+    "wiki": "LinkedIn",
+    "year": 2002
+  },
+  {
+    "title": "Nasce Reddit",
+    "wiki": "Reddit",
+    "year": 2005
+  },
+  {
+    "title": "Nasce Discord",
+    "wiki": "Discord",
+    "year": 2015
+  },
+  {
+    "title": "Viene lanciato ChatGPT",
+    "subtitle": "Il chatbot di OpenAI",
+    "wiki": "ChatGPT",
+    "year": 2022
+  },
+  {
+    "title": "Viene fondata Tesla",
+    "wiki": "Tesla (azienda)",
+    "year": 2003
+  },
+  {
+    "title": "Viene fondata SpaceX",
+    "subtitle": "L'azienda spaziale di Elon Musk",
+    "wiki": "SpaceX",
+    "year": 2002
+  },
+  {
+    "title": "Nasce il Bitcoin",
+    "subtitle": "La prima criptovaluta",
+    "wiki": "Bitcoin",
+    "year": 2009
+  },
+  {
+    "title": "Esce il primo iPhone",
+    "wiki": "iPhone (prima generazione)",
+    "year": 2007,
+    "prop": "P577"
+  },
+  {
+    "title": "Esce il primo iPad",
+    "wiki": "iPad (prima generazione)",
+    "year": 2010,
+    "prop": "P577"
+  },
+  {
+    "title": "Esce il primo iPod",
+    "subtitle": "Mille canzoni in tasca",
+    "wiki": "iPod",
+    "year": 2001
+  },
+  {
+    "title": "Esce il primo Macintosh",
+    "wiki": "Macintosh 128K",
+    "year": 1984
+  },
+  {
+    "title": "Esce il Commodore 64",
+    "subtitle": "Il computer più venduto di sempre",
+    "wiki": "Commodore 64",
+    "year": 1982
+  },
+  {
+    "title": "Viene presentato il Nokia 3310",
+    "subtitle": "Indistruttibile, con Snake",
+    "wiki": "Nokia 3310",
+    "year": 2000,
+    "prop": "P6949"
+  },
+  {
+    "title": "Esce il primo BlackBerry",
+    "wiki": "BlackBerry",
+    "year": 1999
+  },
+  {
+    "title": "Esce Windows 95",
+    "wiki": "Windows 95",
+    "year": 1995
+  },
+  {
+    "title": "Esce Android",
+    "subtitle": "Il sistema operativo di Google",
+    "wiki": "Android",
+    "year": 2008
+  },
+  {
+    "title": "Esce il Game Boy",
+    "subtitle": "La console portatile di Nintendo",
+    "wiki": "Game Boy",
+    "year": 1989
+  },
+  {
+    "title": "Esce il NES",
+    "subtitle": "Il Nintendo Entertainment System",
+    "wiki": "Nintendo Entertainment System",
+    "year": 1983
+  },
+  {
+    "title": "Esce la prima PlayStation",
+    "wiki": "PlayStation",
+    "year": 1994
+  },
+  {
+    "title": "Esce la PlayStation 2",
+    "subtitle": "La console più venduta di sempre",
+    "wiki": "PlayStation 2",
+    "year": 2000
+  },
+  {
+    "title": "Esce la PlayStation 4",
+    "wiki": "PlayStation 4",
+    "year": 2013
+  },
+  {
+    "title": "Esce la PlayStation 5",
+    "wiki": "PlayStation 5",
+    "year": 2020
+  },
+  {
+    "title": "Esce la prima Xbox",
+    "wiki": "Xbox",
+    "year": 2001
+  },
+  {
+    "title": "Esce il Nintendo Wii",
+    "subtitle": "Il telecomando che si muove",
+    "wiki": "Wii",
+    "year": 2006
+  },
+  {
+    "title": "Esce il Nintendo DS",
+    "wiki": "Nintendo DS",
+    "year": 2004
+  },
+  {
+    "title": "Esce il Nintendo Switch",
+    "wiki": "Nintendo Switch",
+    "year": 2017
+  },
+  {
+    "title": "Esce l'Atari 2600",
+    "wiki": "Atari 2600",
+    "year": 1977
+  },
+  {
+    "title": "Esce il Walkman",
+    "subtitle": "La musica portatile di Sony",
+    "wiki": "Walkman",
+    "year": 1979
+  },
+  {
+    "title": "Viene inventato il Tamagotchi",
+    "subtitle": "Il cucciolo virtuale",
+    "wiki": "Tamagotchi",
+    "year": 1996
+  },
+  {
+    "title": "Nasce la Coca-Cola",
+    "subtitle": "Inventata da un farmacista di Atlanta",
+    "wiki": "Coca-Cola",
+    "year": 1886
+  },
+  {
+    "title": "Nasce la Pepsi",
+    "wiki": "Pepsi-Cola",
+    "year": 1893
+  },
+  {
+    "title": "Nasce la Nutella",
+    "subtitle": "La crema della Ferrero",
+    "wiki": "Nutella",
+    "year": 1964
+  },
+  {
+    "title": "Viene fondata la Ferrero",
+    "subtitle": "Ad Alba, nelle Langhe",
+    "wiki": "Ferrero (azienda)",
+    "year": 1946
+  },
+  {
+    "title": "Viene fondata la Barilla",
+    "subtitle": "Una bottega di Parma",
+    "wiki": "Barilla",
+    "year": 1877
+  },
+  {
+    "title": "Viene fondata la FIAT",
+    "subtitle": "Fabbrica Italiana Automobili Torino",
+    "wiki": "FIAT",
+    "year": 1899
+  },
+  {
+    "title": "La Ferrari diventa una casa automobilistica",
+    "subtitle": "La prima auto con il Cavallino rampante",
+    "wiki": "Ferrari",
+    "year": 1947
+  },
+  {
+    "title": "Viene fondata l'Alfa Romeo",
+    "wiki": "Alfa Romeo",
+    "year": 1910
+  },
+  {
+    "title": "Viene fondata la Ducati",
+    "wiki": "Ducati",
+    "year": 1926
+  },
+  {
+    "title": "Viene fondata la Piaggio",
+    "wiki": "Piaggio",
+    "year": 1884
+  },
+  {
+    "title": "Esce la Vespa",
+    "subtitle": "Lo scooter della Piaggio",
+    "wiki": "Vespa",
+    "year": 1946,
+    "manual": "Wikidata senza data; brevetto e presentazione Piaggio nel 1946"
+  },
+  {
+    "title": "Esce la Fiat 500",
+    "subtitle": "La Nuova 500, il Cinquino",
+    "wiki": "Fiat Nuova 500",
+    "year": 1957,
+    "manual": "Wikidata senza data; la Nuova 500 viene presentata nel luglio 1957"
+  },
+  {
+    "title": "Viene fondata l'Olivetti",
+    "subtitle": "Le macchine da scrivere di Ivrea",
+    "wiki": "Olivetti",
+    "year": 1908
+  },
+  {
+    "title": "Viene fondata Lavazza",
+    "subtitle": "Il caffè di Torino",
+    "wiki": "Lavazza",
+    "year": 1895
+  },
+  {
+    "title": "Nasce la moka Bialetti",
+    "subtitle": "La caffettiera di Alfonso Bialetti",
+    "wiki": "Moka",
+    "year": 1933
+  },
+  {
+    "title": "Viene fondata Gucci",
+    "subtitle": "La maison fiorentina",
+    "wiki": "Gucci",
+    "year": 1921
+  },
+  {
+    "title": "Viene fondata Prada",
+    "wiki": "Prada",
+    "year": 1913
+  },
+  {
+    "title": "Viene fondata Armani",
+    "wiki": "Giorgio Armani (azienda)",
+    "year": 1975
+  },
+  {
+    "title": "Viene fondata Benetton",
+    "wiki": "Benetton (azienda)",
+    "year": 1965
+  },
+  {
+    "title": "Nasce l'Aperol",
+    "wiki": "Aperol",
+    "year": 1919
+  },
+  {
+    "title": "Viene fondata la Peroni",
+    "wiki": "Birra Peroni",
+    "year": 1846
+  },
+  {
+    "title": "Viene fondata la Lego",
+    "subtitle": "I mattoncini danesi",
+    "wiki": "LEGO",
+    "year": 1932
+  },
+  {
+    "title": "Nasce la Barbie",
+    "subtitle": "La bambola della Mattel",
+    "wiki": "Barbie",
+    "year": 1959
+  },
+  {
+    "title": "Nasce il cubo di Rubik",
+    "wiki": "Cubo di Rubik",
+    "year": 1974
+  },
+  {
+    "title": "I fratelli McDonald aprono il loro primo ristorante",
+    "wiki": "McDonald's",
+    "year": 1940,
+    "subtitle": "A San Bernardino, in California"
+  },
+  {
+    "title": "Viene fondata Nike",
+    "wiki": "Nike (azienda)",
+    "year": 1964
+  },
+  {
+    "title": "Viene fondata IKEA",
+    "wiki": "IKEA",
+    "year": 1943
+  },
+  {
+    "title": "Viene fondata Starbucks",
+    "wiki": "Starbucks",
+    "year": 1971
+  },
+  {
+    "title": "Viene fondata Nintendo",
+    "subtitle": "All'inizio produceva carte da gioco",
+    "wiki": "Nintendo",
+    "year": 1889
+  },
+  {
+    "title": "Viene fondata Sony",
+    "wiki": "Sony",
+    "year": 1946
+  },
+  {
+    "title": "Viene fondata Samsung",
+    "wiki": "Samsung",
+    "year": 1938
+  },
+  {
+    "title": "Nasce la Walt Disney Company",
+    "wiki": "The Walt Disney Company",
+    "year": 1923
+  },
+  {
+    "title": "Nascono i jeans Levi's",
+    "wiki": "Levi Strauss (azienda)",
+    "year": 1853
+  },
+  {
+    "title": "Nasce la Red Bull",
+    "subtitle": "La bevanda che mette le ali",
+    "wiki": "Red Bull",
+    "year": 1987
+  },
+  {
+    "title": "Nasce la Ray-Ban",
+    "wiki": "Ray-Ban",
+    "year": 1937
+  },
+  {
+    "title": "Viene fondata Luxottica",
+    "subtitle": "Gli occhiali di Agordo",
+    "wiki": "Luxottica",
+    "year": 1961
+  },
+  {
+    "title": "Viene fondata la Pirelli",
+    "subtitle": "Gomma e pneumatici a Milano",
+    "wiki": "Pirelli (azienda)",
+    "year": 1872
+  },
+  {
+    "title": "Viene fondata Moncler",
+    "wiki": "Moncler",
+    "year": 1952
+  },
+  {
+    "title": "Nasce Zara",
+    "subtitle": "Il marchio spagnolo di Amancio Ortega",
+    "wiki": "Zara (azienda)",
+    "year": 1975
+  },
+  {
+    "title": "Nasce il Chupa Chups",
+    "subtitle": "Il lecca-lecca col logo di Dalí",
+    "wiki": "Chupa Chups",
+    "year": 1958
+  },
+  {
+    "title": "Viene fondata Huawei",
+    "wiki": "Huawei",
+    "year": 1987
+  },
+  {
+    "title": "Viene fondata Nvidia",
+    "subtitle": "Le schede video, poi l'intelligenza artificiale",
+    "wiki": "NVIDIA",
+    "year": 1993
+  },
+  {
+    "title": "Nasce Pinterest",
+    "wiki": "Pinterest",
+    "year": 2010
+  },
+  {
+    "title": "Nasce Gmail",
+    "subtitle": "La posta di Google",
+    "wiki": "Gmail",
+    "year": 2004
+  },
+  {
+    "title": "Nasce Google Maps",
+    "wiki": "Google Maps",
+    "year": 2005
+  },
+  {
+    "title": "Viene fondata Eni",
+    "subtitle": "L'Ente Nazionale Idrocarburi di Mattei",
+    "wiki": "Eni",
+    "year": 1953
+  }
+]

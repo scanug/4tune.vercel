@@ -283,3 +283,195 @@ h1, h2, h3 {
   .bubble { font-size: 10px; }
   .reel-box { width: 96px; height: 68px; font-size: 1.6rem; }
 }
+
+/* ---------- Indovina l'Anno ---------- */
+
+/* Carta della domanda: entra girandosi */
+@keyframes anno-card-in {
+  0% { transform: perspective(800px) rotateX(-70deg) translateY(-12px); opacity: 0; }
+  60% { transform: perspective(800px) rotateX(8deg); opacity: 1; }
+  100% { transform: perspective(800px) rotateX(0); }
+}
+.anno-card {
+  position: relative;
+  border-radius: 16px;
+  padding: clamp(16px, 3vw, 24px);
+  background: linear-gradient(160deg, #1e1b4b 0%, #312e81 55%, #4338ca 100%);
+  color: #fff;
+  box-shadow: 0 10px 0 #1e1b4b, 0 18px 36px rgba(30, 27, 75, 0.35);
+  text-align: center;
+  transform-origin: top center;
+  animation: anno-card-in 520ms cubic-bezier(.2,.9,.3,1.2) both;
+}
+.anno-card h2 { margin: 10px 0 0; font-size: clamp(15px, 3.6vw, 22px); line-height: 1.35; }
+.anno-card p { margin: 10px 0 0; font-size: clamp(11px, 2.4vw, 13px); opacity: 0.8; font-family: var(--font-geist-sans), Arial, sans-serif; letter-spacing: 0; }
+.anno-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 4px 10px; border-radius: 999px;
+  background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.25);
+  font-size: 11px;
+}
+
+/* Selettore dell'anno */
+.anno-year-big {
+  font-size: clamp(42px, 13vw, 72px);
+  font-weight: 800;
+  color: #4f46e5;
+  text-align: center;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  text-shadow: 0 4px 0 rgba(79,70,229,0.18);
+}
+.anno-year-big.bump { animation: pop-reveal 180ms ease-out; }
+.anno-slider {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 14px; border-radius: 999px;
+  background: linear-gradient(90deg, #c7d2fe, #818cf8);
+  outline: none; touch-action: none;
+}
+.anno-slider::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 34px; height: 34px; border-radius: 50%;
+  background: #fff; border: 4px solid #4f46e5;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25); cursor: grab;
+}
+.anno-slider::-moz-range-thumb {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: #fff; border: 4px solid #4f46e5;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25); cursor: grab;
+}
+.anno-slider:disabled { opacity: 0.5; }
+.anno-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.anno-steps .btn-3d { padding-left: 0; padding-right: 0; text-align: center; }
+
+/* Barra del tempo */
+.anno-timebar { height: 8px; border-radius: 999px; background: rgba(17,24,39,0.1); overflow: hidden; }
+.anno-timebar > div { height: 100%; border-radius: 999px; background: linear-gradient(90deg, #10b981, #f59e0b, #ef4444); background-size: 300% 100%; transition: width 250ms linear; }
+
+/* Linea del tempo del reveal */
+.anno-timeline { position: relative; margin: 8px 6px 0; }
+.anno-axis { position: absolute; left: 0; right: 0; height: 4px; border-radius: 4px; background: #111827; }
+.anno-tick { position: absolute; transform: translateX(-50%); font-size: 9px; color: #6b7280; }
+.anno-tick::before { content: ''; position: absolute; left: 50%; top: -9px; width: 2px; height: 6px; background: #111827; transform: translateX(-50%); }
+
+/* Segnaposto e bandierina sono colonne larghe 0 ancorate all'anno: il
+   contenuto centrato sporge uguale dai due lati; vicino ai bordi la
+   etichetta si sposta con --shift per non uscire dallo schermo. */
+@keyframes anno-marker-in {
+  0% { transform: translateY(-60px) scale(0.6); opacity: 0; }
+  70% { transform: translateY(4px) scale(1.05); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+.anno-marker {
+  position: absolute; width: 0;
+  display: flex; flex-direction: column; align-items: center;
+  animation: anno-marker-in 480ms cubic-bezier(.2,.9,.3,1.3) both;
+  transition: opacity 300ms ease, filter 300ms ease;
+  z-index: 1;
+}
+.anno-marker .label {
+  padding: 3px 8px; border-radius: 8px;
+  background: #111827; color: #fff;
+  font: 700 10px/1.4 var(--font-geist-sans), Arial, sans-serif; letter-spacing: 0; white-space: nowrap;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+  transform: translateX(var(--shift, 0));
+}
+.anno-marker.me .label { background: #4f46e5; }
+.anno-marker .stem { width: 2px; background: rgba(17,24,39,0.5); }
+.anno-marker.dim { opacity: 0.45; filter: grayscale(0.6); }
+.anno-marker.win { z-index: 3; }
+.anno-marker.win .label { background: linear-gradient(180deg, #fde68a, #f59e0b); color: #111827; box-shadow: 0 0 0 3px rgba(245,158,11,0.35), 0 6px 14px rgba(245,158,11,0.45); }
+
+@keyframes anno-pin-drop {
+  0% { transform: translateY(-140px); opacity: 0; }
+  55% { transform: translateY(0); opacity: 1; }
+  72% { transform: translateY(-14px); }
+  86% { transform: translateY(0); }
+  93% { transform: translateY(-4px); }
+  100% { transform: translateY(0); }
+}
+.anno-pin {
+  position: absolute; z-index: 4; width: 0;
+  display: flex; flex-direction: column; align-items: center;
+  animation: anno-pin-drop 650ms cubic-bezier(.4,0,.6,1) both;
+}
+.anno-pin .flag {
+  padding: 5px 10px; border-radius: 10px;
+  background: #dc2626; color: #fff; white-space: nowrap;
+  font: 800 13px/1.3 var(--font-geist-sans), Arial, sans-serif; letter-spacing: 0;
+  box-shadow: 0 4px 0 #7f1d1d, 0 8px 18px rgba(220,38,38,0.4);
+  transform: translateX(var(--shift, 0));
+}
+.anno-pin .pole { width: 4px; background: #dc2626; border-radius: 2px; }
+
+@keyframes anno-ring {
+  0% { transform: translate(-50%, -50%) scale(0.2); opacity: 0.9; }
+  100% { transform: translate(-50%, -50%) scale(3.2); opacity: 0; }
+}
+.anno-ring {
+  position: absolute; width: 26px; height: 26px; border-radius: 50%;
+  border: 3px solid #dc2626; transform: translate(-50%, -50%);
+  animation: anno-ring 700ms ease-out both; pointer-events: none;
+}
+
+@keyframes anno-shake {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-4px, 2px); }
+  40% { transform: translate(4px, -2px); }
+  60% { transform: translate(-3px, 1px); }
+  80% { transform: translate(2px, -1px); }
+}
+.anno-shake { animation: anno-shake 360ms ease-in-out; }
+
+.anno-counter {
+  text-align: center; font-weight: 800; color: #dc2626;
+  font-size: clamp(38px, 11vw, 64px); line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.anno-counter.landed { animation: pop-reveal 420ms ease-out; }
+
+/* Coriandoli */
+@keyframes anno-confetti {
+  0% { transform: translate3d(0, -20px, 0) rotate(0deg); opacity: 1; }
+  100% { transform: translate3d(var(--dx), 105vh, 0) rotate(var(--rot)); opacity: 0.9; }
+}
+.anno-confetti { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 60; }
+.anno-confetti span {
+  position: absolute; top: -20px; width: 9px; height: 14px; border-radius: 2px;
+  animation: anno-confetti var(--dur) cubic-bezier(.25,.6,.5,1) var(--delay) both;
+}
+
+/* Dettagli del reveal */
+@keyframes anno-flip-in {
+  0% { transform: perspective(600px) rotateY(90deg); opacity: 0; }
+  100% { transform: perspective(600px) rotateY(0); opacity: 1; }
+}
+.anno-photo { animation: anno-flip-in 520ms ease-out both; }
+@keyframes anno-points {
+  0% { transform: translateY(8px) scale(0.6); opacity: 0; }
+  60% { transform: translateY(-3px) scale(1.15); opacity: 1; }
+  100% { transform: translateY(0) scale(1); opacity: 1; }
+}
+.anno-points { display: inline-block; animation: anno-points 420ms ease-out both; }
+
+.anno-toggle {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 10px 12px; border-radius: 12px; cursor: pointer;
+  border: 2px solid rgba(17,24,39,0.15); background: #fff; color: #111827;
+  text-align: left; font-size: 12px;
+  transition: border-color 120ms ease, background 120ms ease, transform 120ms ease;
+}
+.anno-toggle.on { border-color: #4f46e5; background: rgba(99,102,241,0.1); }
+.anno-toggle:active { transform: scale(0.98); }
+.anno-segment { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: 8px; }
+.anno-segment button {
+  padding: 10px 0; border-radius: 10px; cursor: pointer; font-size: 12px;
+  border: 2px solid rgba(17,24,39,0.15); background: #fff; color: #111827;
+}
+.anno-segment button.on { border-color: #4f46e5; background: #4f46e5; color: #fff; }
+
+@media (prefers-reduced-motion: reduce) {
+  .anno-card, .anno-marker, .anno-pin, .anno-photo, .anno-points, .anno-counter.landed, .anno-year-big.bump { animation: none !important; }
+  .anno-shake { animation: none !important; }
+  .anno-ring, .anno-confetti { display: none; }
+}

@@ -9,6 +9,13 @@ const GAMES = [
     background: '#fdf4ff',
   },
   {
+    href: '/anno',
+    emoji: '📅',
+    title: "Indovina l'Anno",
+    description: 'Quando è nato Vasco? In che anno è uscito Titanic? Chi si avvicina di più vince. Online, con codice stanza.',
+    background: '#fefce8',
+  },
+  {
     href: '/impostore',
     emoji: '🕵️',
     title: 'Impostore',

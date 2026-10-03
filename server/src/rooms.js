@@ -1,14 +1,16 @@
-// Gestore delle stanze GTS. Il server è l'unica autorità: tiene la risposta
-// corretta, misura i tempi di risposta col proprio orologio, calcola i punti
-// e fa avanzare i round con i propri timer. Se l'host chiude la pagina la
-// partita continua.
+// Gestore delle stanze, comune a tutti i giochi online. Il server è l'unica
+// autorità: tiene la risposta corretta, misura i tempi di risposta col proprio
+// orologio, calcola i punti e fa avanzare i round con i propri timer. Se
+// l'host chiude la pagina la partita continua.
+//
+// Le regole del singolo gioco (round, stato visibile, risposte, punti) arrivano
+// da un oggetto `game` (vedi games/gts.js e games/anno.js); senza, è il GTS.
 //
 // Orologio e timer sono iniettabili (`now`, `setTimer`, `clearTimer`) per i test.
 
 import { randomUUID } from 'node:crypto';
-import {
-  GameError, LIMITS, buildRounds, clampSettings, generateCode, sanitizeName, scoreAnswer,
-} from './engine.js';
+import { GameError, LIMITS, generateCode, sanitizeName } from './engine.js';
+import { gtsGame } from './games/gts.js';
 
 const DEFAULTS = {
   revealMs: 5000,        // pausa dopo il reveal prima del round successivo
@@ -26,7 +28,8 @@ export class RoomManager {
     this.rng = options.rng || Math.random;
     this.emit = options.emit || (() => {});
     this.onRoomRemoved = options.onRoomRemoved || (() => {});
-    this.config = { ...DEFAULTS, ...(options.config || {}) };
+    this.game = options.game || gtsGame;
+    this.config = { ...DEFAULTS, ...this.game.config, ...(options.config || {}) };
     this.rooms = new Map();
   }
 
@@ -46,9 +49,6 @@ export class RoomManager {
   publicState(room) {
     const current = room.rounds[room.roundIndex - 1] || null;
     const showRound = current && ['countdown', 'playing', 'reveal'].includes(room.status);
-    // La clip del round dopo arriva in anticipo così i client la scaricano
-    // mentre si gioca questo: l'URL Deezer è un hash, non svela il titolo.
-    const next = showRound ? room.rounds[room.roundIndex] || null : null;
     const players = [...room.players.values()]
       .sort((a, b) => a.joinedAt - b.joinedAt)
       .map((p) => ({
@@ -70,27 +70,19 @@ export class RoomManager {
       startAt: room.startAt,
       phaseEndsAt: room.phaseEndsAt,
       serverNow: this.now(),
-      playlist: {
-        id: room.playlist.id,
-        name: room.playlist.name,
-        image: room.playlist.image || null,
-        trackCount: room.playlist.tracks.length,
-      },
       players,
-      round: showRound ? { options: current.options, clipUrl: current.track.previewUrl } : null,
-      nextClipUrl: next ? next.track.previewUrl : null,
+      ...this.game.publicView(room, current, showRound),
       reveal: ['reveal', 'finished'].includes(room.status) ? room.lastReveal : null,
     };
   }
 
   // ---------- lobby ----------
 
-  createRoom({ hostName, playlist, settings }) {
-    if (!playlist?.tracks?.length) throw new GameError('Playlist non disponibile', 'playlist');
+  // `input`: i dati specifici del gioco (es. la playlist del GTS).
+  createRoom({ hostName, settings, ...input }) {
+    const clean = this.game.clampSettings(settings);
+    const content = this.game.prepare(input, clean, this.rng);
     const name = sanitizeName(hostName);
-    const clean = clampSettings(settings);
-    // Verifica subito che la playlist regga almeno un round.
-    buildRounds(playlist.tracks, 1, this.rng);
 
     let code;
     do { code = generateCode(4, this.rng); } while (this.rooms.has(code));
@@ -100,7 +92,7 @@ export class RoomManager {
       status: 'lobby',
       hostId: null,
       settings: clean,
-      playlist: { id: playlist.id, name: playlist.name, image: playlist.image || null, tracks: playlist.tracks },
+      content,
       rounds: [],
       roundIndex: 0,
       startAt: null,
@@ -179,7 +171,7 @@ export class RoomManager {
     const room = this.getRoom(code);
     this._assertHost(room, playerId);
     if (room.status !== 'lobby') throw new GameError('La partita è già iniziata', 'state');
-    room.rounds = buildRounds(room.playlist.tracks, room.settings.maxRounds, this.rng);
+    room.rounds = this.game.buildRounds(room, this.rng);
     room.roundIndex = 0;
     for (const p of room.players.values()) p.score = 0;
     this._beginRound(room);
@@ -209,12 +201,9 @@ export class RoomManager {
     if (room.status !== 'playing') throw new GameError('Non è il momento di rispondere', 'state');
     if (room.answers.has(playerId)) throw new GameError('Hai già risposto', 'dup');
     const current = room.rounds[room.roundIndex - 1];
-    const idx = Number(choice);
-    if (!Number.isInteger(idx) || idx < 0 || idx >= current.options.length) {
-      throw new GameError('Risposta non valida', 'choice');
-    }
+    const value = this.game.parseAnswer(current, choice);
     const at = this.now();
-    room.answers.set(playerId, { choice: idx, at });
+    room.answers.set(playerId, { choice: value, at });
     this.emit(room);
     this._checkAllAnswered(room);
     return { accepted: true, at };
@@ -270,31 +259,19 @@ export class RoomManager {
     if (room.status !== 'playing') return;
     this._clearRoundTimer(room);
     const current = room.rounds[room.roundIndex - 1];
-    const results = [];
-    let firstCorrect = null;
-
-    const ordered = [...room.answers.entries()].sort((a, b) => a[1].at - b[1].at);
-    for (const [playerId, ans] of ordered) {
-      const player = room.players.get(playerId);
-      if (!player) continue;
-      const correct = ans.choice === current.correctIndex;
-      const deltaMs = Math.max(0, ans.at - room.startAt);
-      const points = correct ? scoreAnswer(deltaMs, room.settings.roundMs) : 0;
-      player.score += points;
-      results.push({ playerId, choice: ans.choice, correct, deltaMs, points });
-      if (correct && !firstCorrect) firstCorrect = { playerId, deltaMs, points };
-    }
+    const answers = [...room.answers.entries()]
+      .filter(([playerId]) => room.players.has(playerId))
+      .map(([playerId, ans]) => ({ playerId, ...ans }))
+      .sort((a, b) => a.at - b.at);
+    const { results, reveal } = this.game.score(room, current, answers);
+    for (const r of results) room.players.get(r.playerId).score += r.points;
 
     const isLast = room.roundIndex >= room.rounds.length;
     room.status = 'reveal';
     room.lastReveal = {
       roundIndex: room.roundIndex,
-      correctIndex: current.correctIndex,
-      title: current.track.title,
-      artist: current.track.artist,
-      cover: current.track.cover || null,
+      ...reveal,
       results,
-      firstCorrect,
       isLast,
     };
     const pause = isLast ? this.config.finalRevealMs : this.config.revealMs;

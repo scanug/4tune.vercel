@@ -1,20 +1,21 @@
 // Layer Socket.IO: traduce gli eventi dei client in chiamate al RoomManager e
-// ritrasmette lo stato pubblico della stanza a chi ci sta dentro.
+// ritrasmette lo stato pubblico della stanza a chi ci sta dentro. Ogni gioco
+// ha il suo namespace (GTS su "/", Indovina l'Anno su "/anno") con gli stessi eventi.
 //
 // Eventi client → server (tutti con ack `{ ok, ...}` oppure `{ ok:false, error }`):
 //   time:sync    (clientSent)                                  → { clientSent, serverNow }
-//   room:create  ({ name, playlistId, maxRounds, roundMs, prepMs }) → { code, playerId, state }
+//   room:create  GTS:  ({ name, playlistId, maxRounds, roundMs, prepMs }) → { code, playerId, state }
+//                Anno: ({ name, categories, maxRounds, roundMs })
 //   room:join    ({ code, name?, playerId? })                  → { code, playerId, state, rejoined }
 //   room:leave   ()          esce davvero dalla stanza
 //   room:detach  ()          stacca il socket ma tiene il posto (cambio pagina)
 //   game:start   ()          solo host
 //   game:restart ()          solo host, a partita finita
-//   game:answer  ({ choice })
+//   game:answer  ({ choice })  GTS: indice dell'opzione · Anno: anno scelto
 // Eventi server → client:
 //   room:state   (state)     ad ogni cambiamento
 
 import { GameError } from './engine.js';
-import { fetchPlaylist } from './deezer.js';
 
 function fail(ack, err) {
   const message = err instanceof GameError ? err.message : 'Errore del server';
@@ -22,7 +23,9 @@ function fail(ack, err) {
   ack?.({ ok: false, error: message, code: err.code || 'server' });
 }
 
-export function attachSockets(io, manager) {
+// `loadRoomInput(payload)`: dati specifici del gioco per createRoom
+// (il GTS scarica la playlist da Deezer, l'Anno non ha bisogno di nulla).
+export function attachSockets(io, manager, { loadRoomInput = async () => ({}) } = {}) {
   manager.emit = (room) => io.to(room.code).emit('room:state', manager.publicState(room));
 
   // Quale socket "possiede" ogni giocatore. Con un refresh della pagina il
@@ -75,10 +78,10 @@ export function attachSockets(io, manager) {
 
     socket.on('room:create', async (payload = {}, ack) => {
       try {
-        const playlist = await fetchPlaylist(payload.playlistId);
+        const input = await loadRoomInput(payload);
         const { room, player } = manager.createRoom({
+          ...input,
           hostName: payload.name,
-          playlist,
           settings: payload,
         });
         bind(room, player);

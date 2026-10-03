@@ -1,19 +1,24 @@
-// Server di gioco 4Tune: HTTP per Deezer e health check, Socket.IO per le
-// stanze GTS. Nessun database: le stanze vivono in memoria finché dura la
-// partita (un redeploy le azzera).
+// Server di gioco 4Tune: HTTP per Deezer, mazzo dell'Anno e health check,
+// Socket.IO per le stanze (GTS sul namespace "/", Indovina l'Anno su "/anno").
+// Nessun database: le stanze vivono in memoria finché dura la partita (un
+// redeploy le azzera).
 //
 // Variabili d'ambiente:
-//   PORT            porta di ascolto (Railway la imposta da solo)
+//   PORT            porta di ascolto (Render e Railway la impostano da soli)
 //   CLIENT_ORIGIN   origin ammessi, separati da virgola (es. https://4tune.vercel.app,http://localhost:3000)
 //                   se assente accetta qualsiasi origin (comodo in sviluppo)
 
 import http from 'node:http';
+import { fileURLToPath } from 'node:url';
 import { Server } from 'socket.io';
 
 import { RoomManager } from './rooms.js';
 import { attachSockets } from './socket.js';
 import { fetchPlaylist, getPresets, playlistSummary, searchPlaylists } from './deezer.js';
 import { GameError } from './engine.js';
+import { categorySummary, createAnnoGame, loadDeck } from './games/anno.js';
+
+const annoDeck = loadDeck(fileURLToPath(new URL('../data/anno/cards.json', import.meta.url)));
 
 const port = Number(process.env.PORT || 4000);
 const allowedOrigins = (process.env.CLIENT_ORIGIN || '')
@@ -52,7 +57,15 @@ async function handleHttp(req, res) {
 
   try {
     if (url.pathname === '/health') {
-      return sendJson(req, res, 200, { ok: true, rooms: manager.rooms.size, uptime: process.uptime() });
+      return sendJson(req, res, 200, {
+        ok: true,
+        rooms: manager.rooms.size + annoManager.rooms.size,
+        annoCards: annoDeck.length,
+        uptime: process.uptime(),
+      });
+    }
+    if (url.pathname === '/anno/categories') {
+      return sendJson(req, res, 200, { data: categorySummary(annoDeck) }, { 'Cache-Control': 'public, max-age=300' });
     }
     if (url.pathname === '/deezer/presets') {
       return sendJson(req, res, 200, { data: await getPresets() }, { 'Cache-Control': 'public, max-age=300' });
@@ -74,7 +87,11 @@ async function handleHttp(req, res) {
 }
 
 const manager = new RoomManager({
-  onRoomRemoved: (room) => console.log(`[rooms] chiusa ${room.code}`),
+  onRoomRemoved: (room) => console.log(`[gts] chiusa ${room.code}`),
+});
+const annoManager = new RoomManager({
+  game: createAnnoGame(annoDeck),
+  onRoomRemoved: (room) => console.log(`[anno] chiusa ${room.code}`),
 });
 
 const server = http.createServer(handleHttp);
@@ -84,10 +101,14 @@ const io = new Server(server, {
     methods: ['GET', 'POST'],
   },
 });
-attachSockets(io, manager);
+attachSockets(io, manager, {
+  loadRoomInput: async (payload) => ({ playlist: await fetchPlaylist(payload.playlistId) }),
+});
+attachSockets(io.of('/anno'), annoManager);
 
 server.listen(port, () => {
   console.log(`4Tune server in ascolto su :${port}` + (allowedOrigins.length ? ` (origin: ${allowedOrigins.join(', ')})` : ' (origin: tutti)'));
+  console.log(`[anno] mazzo: ${annoDeck.length} carte`);
 });
 
 process.on('SIGTERM', () => {

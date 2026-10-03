@@ -1,0 +1,738 @@
+[
+  {
+    "title": "Si consuma lo scisma tra Chiesa d'Oriente e d'Occidente",
+    "subtitle": "Roma e Costantinopoli si scomunicano a vicenda",
+    "wiki": "Grande Scisma",
+    "year": 1054
+  },
+  {
+    "title": "Guglielmo il Conquistatore vince ad Hastings",
+    "subtitle": "I Normanni conquistano l'Inghilterra",
+    "wiki": "Battaglia di Hastings",
+    "year": 1066
+  },
+  {
+    "title": "Parte la Prima crociata",
+    "subtitle": "Obiettivo: Gerusalemme",
+    "wiki": "Prima crociata",
+    "year": 1096,
+    "prop": "P580"
+  },
+  {
+    "title": "La Lega Lombarda sconfigge il Barbarossa a Legnano",
+    "subtitle": "I Comuni contro l'imperatore",
+    "wiki": "Battaglia di Legnano",
+    "year": 1176
+  },
+  {
+    "title": "Il re d'Inghilterra concede la Magna Carta",
+    "subtitle": "Re Giovanni Senzaterra limita il proprio potere",
+    "wiki": "Magna Carta",
+    "year": 1215
+  },
+  {
+    "title": "Scoppiano i Vespri siciliani",
+    "subtitle": "Palermo insorge contro gli Angioini",
+    "wiki": "Vespri siciliani",
+    "year": 1282
+  },
+  {
+    "title": "Bonifacio VIII indice il primo Giubileo",
+    "subtitle": "Pellegrini da tutta Europa verso Roma",
+    "wiki": "Bonifacio VIII indice il giubileo del 1300",
+    "year": 1300
+  },
+  {
+    "title": "Costantinopoli cade in mano agli Ottomani",
+    "subtitle": "Finisce l'Impero romano d'Oriente",
+    "wiki": "Assedio di Costantinopoli (1453)",
+    "year": 1453
+  },
+  {
+    "title": "Congiura dei Pazzi contro i Medici a Firenze",
+    "subtitle": "Giuliano de' Medici ucciso in Duomo",
+    "wiki": "Congiura dei Pazzi",
+    "year": 1478
+  },
+  {
+    "title": "Cristoforo Colombo arriva in America",
+    "subtitle": "Tre caravelle partite dalla Spagna",
+    "wiki": "Primo viaggio di Cristoforo Colombo",
+    "year": 1492
+  },
+  {
+    "title": "Tredici italiani sfidano tredici francesi a Barletta",
+    "subtitle": "Ettore Fieramosca guida gli italiani",
+    "wiki": "Disfida di Barletta",
+    "year": 1503
+  },
+  {
+    "title": "Lutero affigge le 95 tesi",
+    "subtitle": "Inizia la Riforma protestante",
+    "wiki": "95 tesi di Lutero",
+    "year": 1517,
+    "prop": "P577"
+  },
+  {
+    "title": "I Lanzichenecchi saccheggiano Roma",
+    "subtitle": "Le truppe di Carlo V nella città del Papa",
+    "wiki": "Sacco di Roma (1527)",
+    "year": 1527
+  },
+  {
+    "title": "Si apre il Concilio di Trento",
+    "subtitle": "La risposta cattolica alla Riforma",
+    "wiki": "Concilio di Trento",
+    "year": 1545,
+    "prop": "P580"
+  },
+  {
+    "title": "La flotta cristiana sconfigge i Turchi a Lepanto",
+    "subtitle": "Venezia, Spagna e Papato uniti nella Lega Santa",
+    "wiki": "Battaglia di Lepanto",
+    "year": 1571
+  },
+  {
+    "title": "Galileo viene condannato e abiura davanti all'Inquisizione",
+    "subtitle": "\"Eppur si muove\"",
+    "wiki": "Processo a Galileo Galilei",
+    "year": 1633,
+    "prop": "P582"
+  },
+  {
+    "title": "Un grande incendio distrugge Londra",
+    "subtitle": "Partito da un forno di Pudding Lane",
+    "wiki": "Grande incendio di Londra",
+    "year": 1666
+  },
+  {
+    "title": "Gli Ottomani vengono respinti alle porte di Vienna",
+    "subtitle": "Interviene il re polacco Giovanni Sobieski",
+    "wiki": "Battaglia di Vienna",
+    "year": 1683
+  },
+  {
+    "title": "Un terremoto e uno tsunami radono al suolo Lisbona",
+    "subtitle": "Il disastro che fece riflettere Voltaire",
+    "wiki": "Terremoto di Lisbona del 1755",
+    "year": 1755
+  },
+  {
+    "title": "I coloni rovesciano il tè nel porto di Boston",
+    "subtitle": "La protesta contro le tasse inglesi",
+    "wiki": "Boston Tea Party",
+    "year": 1773
+  },
+  {
+    "title": "Le colonie americane dichiarano l'indipendenza",
+    "subtitle": "Nasce il 4 luglio",
+    "wiki": "Dichiarazione d'indipendenza degli Stati Uniti d'America",
+    "year": 1776
+  },
+  {
+    "title": "Il popolo di Parigi prende la Bastiglia",
+    "subtitle": "Inizia la Rivoluzione francese",
+    "wiki": "Presa della Bastiglia",
+    "year": 1789
+  },
+  {
+    "title": "Cade la Repubblica di Venezia",
+    "subtitle": "Dopo mille anni, il doge si arrende a Napoleone",
+    "wiki": "Caduta della Repubblica di Venezia",
+    "year": 1797,
+    "prop": "P582"
+  },
+  {
+    "title": "Napoleone trionfa ad Austerlitz",
+    "subtitle": "La battaglia dei tre imperatori",
+    "wiki": "Battaglia di Austerlitz",
+    "year": 1805
+  },
+  {
+    "title": "Napoleone viene sconfitto a Waterloo",
+    "subtitle": "La fine dei Cento giorni",
+    "wiki": "Battaglia di Waterloo",
+    "year": 1815
+  },
+  {
+    "title": "Milano insorge contro gli austriaci per cinque giorni",
+    "subtitle": "Le barricate del Risorgimento",
+    "wiki": "Cinque giornate di Milano",
+    "year": 1848
+  },
+  {
+    "title": "Garibaldi parte da Quarto con i Mille",
+    "subtitle": "Destinazione: la Sicilia",
+    "wiki": "Spedizione dei Mille",
+    "year": 1860
+  },
+  {
+    "title": "Viene proclamato il Regno d'Italia",
+    "subtitle": "Vittorio Emanuele II primo re d'Italia",
+    "wiki": "Proclamazione del Regno d'Italia",
+    "year": 1861
+  },
+  {
+    "title": "Abraham Lincoln viene assassinato a teatro",
+    "subtitle": "Gli spara John Wilkes Booth",
+    "wiki": "Assassinio di Abraham Lincoln",
+    "year": 1865
+  },
+  {
+    "title": "Finisce la guerra di secessione americana",
+    "subtitle": "Il Nord sconfigge la Confederazione",
+    "wiki": "Guerra civile americana",
+    "year": 1865,
+    "prop": "P582"
+  },
+  {
+    "title": "I bersaglieri entrano a Roma da Porta Pia",
+    "subtitle": "Fine del potere temporale dei papi",
+    "wiki": "Presa di Roma",
+    "year": 1870
+  },
+  {
+    "title": "Ad Atene si tengono le prime Olimpiadi moderne",
+    "subtitle": "Il sogno di Pierre de Coubertin",
+    "wiki": "Giochi della I Olimpiade",
+    "year": 1896
+  },
+  {
+    "title": "Il re Umberto I viene ucciso a Monza",
+    "subtitle": "L'anarchico Gaetano Bresci spara al sovrano",
+    "wiki": "Regicidio di Umberto I",
+    "year": 1900
+  },
+  {
+    "title": "Un terremoto devasta San Francisco",
+    "subtitle": "E poi gli incendi bruciano la città",
+    "wiki": "Terremoto di San Francisco del 1906",
+    "year": 1906
+  },
+  {
+    "title": "Un terremoto e un maremoto distruggono Messina e Reggio",
+    "subtitle": "Il sisma più letale della storia d'Italia",
+    "wiki": "Terremoto di Messina del 1908",
+    "year": 1908
+  },
+  {
+    "title": "Il Titanic affonda dopo aver urtato un iceberg",
+    "subtitle": "Era al suo viaggio inaugurale",
+    "wiki": "Naufragio del RMS Titanic",
+    "year": 1912
+  },
+  {
+    "title": "L'arciduca Francesco Ferdinando viene ucciso a Sarajevo",
+    "subtitle": "La scintilla della Grande Guerra",
+    "wiki": "Attentato di Sarajevo",
+    "year": 1914
+  },
+  {
+    "title": "L'esercito italiano viene travolto a Caporetto",
+    "subtitle": "Una disfatta diventata modo di dire",
+    "wiki": "Battaglia di Caporetto",
+    "year": 1917
+  },
+  {
+    "title": "I bolscevichi prendono il potere in Russia",
+    "subtitle": "La Rivoluzione d'ottobre di Lenin",
+    "wiki": "Rivoluzione d'ottobre",
+    "year": 1917
+  },
+  {
+    "title": "L'Italia vince la battaglia di Vittorio Veneto",
+    "subtitle": "L'ultima offensiva contro l'Austria-Ungheria",
+    "wiki": "Battaglia di Vittorio Veneto",
+    "year": 1918
+  },
+  {
+    "title": "Finisce la Prima guerra mondiale",
+    "subtitle": "Firmato l'armistizio di Compiègne",
+    "wiki": "Prima guerra mondiale",
+    "year": 1918,
+    "prop": "P582"
+  },
+  {
+    "title": "I fascisti marciano su Roma",
+    "subtitle": "Il re affida il governo a Mussolini",
+    "wiki": "Marcia su Roma",
+    "year": 1922
+  },
+  {
+    "title": "Il deputato Giacomo Matteotti viene rapito e ucciso",
+    "subtitle": "Aveva denunciato i brogli fascisti",
+    "wiki": "Delitto Matteotti",
+    "year": 1924
+  },
+  {
+    "title": "Stato e Chiesa firmano i Patti Lateranensi",
+    "subtitle": "Nasce lo Stato della Città del Vaticano",
+    "wiki": "Patti Lateranensi",
+    "year": 1929
+  },
+  {
+    "title": "Crolla la Borsa di Wall Street",
+    "subtitle": "Il crollo che apre la Grande depressione",
+    "wiki": "Martedì nero",
+    "year": 1929
+  },
+  {
+    "title": "Gandhi guida la Marcia del sale",
+    "subtitle": "La disobbedienza civile contro gli inglesi",
+    "wiki": "Marcia del sale",
+    "year": 1930
+  },
+  {
+    "title": "L'Italia fascista invade l'Etiopia",
+    "subtitle": "Inizia la guerra coloniale in Africa orientale",
+    "wiki": "Guerra d'Etiopia",
+    "year": 1935,
+    "prop": "P580"
+  },
+  {
+    "title": "Scoppia la guerra civile spagnola",
+    "subtitle": "Repubblicani contro i nazionalisti di Franco",
+    "wiki": "Guerra civile spagnola",
+    "year": 1936,
+    "prop": "P580"
+  },
+  {
+    "title": "Viene pubblicato il Manifesto della razza",
+    "subtitle": "Il preludio alle leggi razziali fasciste",
+    "wiki": "Manifesto degli scienziati razzisti",
+    "year": 1938,
+    "prop": "P577"
+  },
+  {
+    "title": "Scoppia la Seconda guerra mondiale",
+    "subtitle": "La Germania invade la Polonia",
+    "wiki": "Seconda guerra mondiale",
+    "year": 1939,
+    "prop": "P580"
+  },
+  {
+    "title": "Il Giappone attacca Pearl Harbor",
+    "subtitle": "Gli Stati Uniti entrano in guerra",
+    "wiki": "Attacco di Pearl Harbor",
+    "year": 1941
+  },
+  {
+    "title": "Viene annunciato l'armistizio dell'8 settembre",
+    "subtitle": "L'Italia si arrende agli Alleati",
+    "wiki": "Armistizio di Cassibile",
+    "year": 1943
+  },
+  {
+    "title": "Gli Alleati sbarcano in Sicilia",
+    "subtitle": "Operazione Husky",
+    "wiki": "Sbarco in Sicilia",
+    "year": 1943
+  },
+  {
+    "title": "I nazisti compiono l'eccidio delle Fosse Ardeatine",
+    "subtitle": "La rappresaglia dopo l'attentato di via Rasella",
+    "wiki": "Eccidio delle Fosse Ardeatine",
+    "year": 1944
+  },
+  {
+    "title": "Gli Alleati sbarcano in Normandia",
+    "subtitle": "Il D-Day",
+    "wiki": "Sbarco in Normandia",
+    "year": 1944
+  },
+  {
+    "title": "Gli Stati Uniti sganciano la bomba atomica su Hiroshima",
+    "subtitle": "E tre giorni dopo su Nagasaki",
+    "wiki": "Bombardamenti atomici di Hiroshima e Nagasaki",
+    "year": 1945
+  },
+  {
+    "title": "Finisce la Seconda guerra mondiale",
+    "subtitle": "La resa del Giappone chiude il conflitto",
+    "wiki": "Seconda guerra mondiale",
+    "year": 1945,
+    "prop": "P582"
+  },
+  {
+    "title": "Gli italiani scelgono la Repubblica con un referendum",
+    "subtitle": "Votano per la prima volta anche le donne",
+    "wiki": "Nascita della Repubblica Italiana",
+    "year": 1946
+  },
+  {
+    "title": "L'India diventa indipendente e si separa dal Pakistan",
+    "subtitle": "La fine del dominio britannico",
+    "wiki": "Partizione dell'India",
+    "year": 1947
+  },
+  {
+    "title": "Enrico De Nicola firma la Costituzione italiana",
+    "subtitle": "La promulgazione, prima dell'entrata in vigore",
+    "wiki": "Costituzione della Repubblica Italiana",
+    "year": 1947,
+    "prop": "P577"
+  },
+  {
+    "title": "Viene proclamato lo Stato di Israele",
+    "subtitle": "Ben Gurion legge la dichiarazione a Tel Aviv",
+    "wiki": "Dichiarazione d'indipendenza israeliana",
+    "year": 1948
+  },
+  {
+    "title": "L'aereo del Grande Torino si schianta a Superga",
+    "subtitle": "Muore un'intera squadra leggendaria",
+    "wiki": "Tragedia di Superga",
+    "year": 1949
+  },
+  {
+    "title": "Mao proclama la Repubblica Popolare Cinese",
+    "subtitle": "In piazza Tienanmen, a Pechino",
+    "wiki": "Proclamazione della Repubblica Popolare Cinese",
+    "year": 1949
+  },
+  {
+    "title": "Scoppia la guerra di Corea",
+    "subtitle": "Il Nord invade il Sud",
+    "wiki": "Guerra di Corea",
+    "year": 1950,
+    "prop": "P580"
+  },
+  {
+    "title": "Elisabetta II viene incoronata a Westminster",
+    "subtitle": "La prima incoronazione trasmessa in TV",
+    "wiki": "Incoronazione della regina Elisabetta II",
+    "year": 1953
+  },
+  {
+    "title": "Rosa Parks non cede il posto sull'autobus",
+    "subtitle": "Parte il boicottaggio dei bus di Montgomery",
+    "wiki": "Boicottaggio dei bus di Montgomery",
+    "year": 1955,
+    "prop": "P580"
+  },
+  {
+    "title": "Una miniera prende fuoco a Marcinelle",
+    "subtitle": "In Belgio muoiono 136 minatori italiani",
+    "wiki": "Disastro di Marcinelle",
+    "year": 1956
+  },
+  {
+    "title": "I carri armati sovietici schiacciano la rivolta ungherese",
+    "subtitle": "Budapest contro Mosca",
+    "wiki": "Rivoluzione ungherese del 1956",
+    "year": 1956
+  },
+  {
+    "title": "Sei Paesi firmano i Trattati di Roma",
+    "subtitle": "Nasce la Comunità Economica Europea",
+    "wiki": "Trattato che istituisce la Comunità economica europea",
+    "year": 1957
+  },
+  {
+    "title": "Roma ospita le Olimpiadi",
+    "subtitle": "Abebe Bikila vince la maratona a piedi nudi",
+    "wiki": "Giochi della XVII Olimpiade",
+    "year": 1960
+  },
+  {
+    "title": "Jurij Gagarin è il primo uomo nello spazio",
+    "subtitle": "A bordo della Vostok 1",
+    "wiki": "Vostok 1",
+    "year": 1961,
+    "prop": "P619"
+  },
+  {
+    "title": "Viene costruito il Muro di Berlino",
+    "subtitle": "La città divisa in una notte",
+    "wiki": "Muro di Berlino",
+    "year": 1961,
+    "prop": "P571"
+  },
+  {
+    "title": "Si apre il Concilio Vaticano II",
+    "subtitle": "Convocato da papa Giovanni XXIII",
+    "wiki": "Concilio Vaticano II",
+    "year": 1962,
+    "prop": "P580"
+  },
+  {
+    "title": "USA e URSS sull'orlo della guerra per i missili a Cuba",
+    "subtitle": "Tredici giorni di tensione nucleare",
+    "wiki": "Crisi dei missili di Cuba",
+    "year": 1962
+  },
+  {
+    "title": "John F. Kennedy viene ucciso a Dallas",
+    "subtitle": "Colpito durante una parata in auto scoperta",
+    "wiki": "Assassinio di John Fitzgerald Kennedy",
+    "year": 1963
+  },
+  {
+    "title": "Una frana nella diga del Vajont travolge Longarone",
+    "subtitle": "Un'onda gigantesca sulla valle del Piave",
+    "wiki": "Disastro del Vajont",
+    "year": 1963
+  },
+  {
+    "title": "L'Arno esonda e allaga Firenze",
+    "subtitle": "Arrivano gli angeli del fango",
+    "wiki": "Alluvione di Firenze del 4 novembre 1966",
+    "year": 1966
+  },
+  {
+    "title": "Martin Luther King viene assassinato a Memphis",
+    "subtitle": "Il leader dei diritti civili ucciso in un motel",
+    "wiki": "Assassinio di Martin Luther King",
+    "year": 1968
+  },
+  {
+    "title": "Gli studenti occupano le strade di Parigi",
+    "subtitle": "Il Maggio francese",
+    "wiki": "Maggio francese",
+    "year": 1968
+  },
+  {
+    "title": "L'uomo sbarca sulla Luna",
+    "subtitle": "La missione di Armstrong e Aldrin",
+    "wiki": "Apollo 11",
+    "year": 1969,
+    "prop": "P619"
+  },
+  {
+    "title": "Una bomba esplode in piazza Fontana a Milano",
+    "subtitle": "Alla Banca Nazionale dell'Agricoltura",
+    "wiki": "Strage di piazza Fontana",
+    "year": 1969
+  },
+  {
+    "title": "Un commando palestinese colpisce gli atleti alle Olimpiadi di Monaco",
+    "subtitle": "Vittime gli atleti israeliani",
+    "wiki": "Massacro di Monaco di Baviera",
+    "year": 1972
+  },
+  {
+    "title": "Gli italiani votano per mantenere il divorzio",
+    "subtitle": "Il referendum vinto dal No all'abrogazione",
+    "wiki": "Referendum abrogativo in Italia del 1974",
+    "year": 1974
+  },
+  {
+    "title": "Saigon cade e finisce la guerra del Vietnam",
+    "subtitle": "I nordvietnamiti entrano in città",
+    "wiki": "Caduta di Saigon",
+    "year": 1975
+  },
+  {
+    "title": "Un terremoto colpisce il Friuli",
+    "subtitle": "Gemona e Venzone distrutte",
+    "wiki": "Terremoto del Friuli del 1976",
+    "year": 1976
+  },
+  {
+    "title": "Le Brigate Rosse rapiscono Aldo Moro",
+    "subtitle": "In via Fani, a Roma",
+    "wiki": "Caso Moro",
+    "year": 1978
+  },
+  {
+    "title": "Un DC-9 dell'Itavia precipita vicino a Ustica",
+    "subtitle": "Una strage ancora piena di misteri",
+    "wiki": "Strage di Ustica",
+    "year": 1980
+  },
+  {
+    "title": "Una bomba esplode alla stazione di Bologna",
+    "subtitle": "La strage più grave degli anni di piombo",
+    "wiki": "Strage di Bologna",
+    "year": 1980
+  },
+  {
+    "title": "Un terremoto devasta l'Irpinia",
+    "subtitle": "Campania e Basilicata in ginocchio",
+    "wiki": "Terremoto dell'Irpinia del 1980",
+    "year": 1980
+  },
+  {
+    "title": "Papa Giovanni Paolo II viene ferito in piazza San Pietro",
+    "subtitle": "Gli spara Ali Ağca",
+    "wiki": "Attentato a Giovanni Paolo II",
+    "year": 1981
+  },
+  {
+    "title": "L'Italia di Bearzot vince il Mondiale in Spagna",
+    "subtitle": "L'urlo di Tardelli in finale",
+    "wiki": "Campionato mondiale di calcio 1982",
+    "year": 1982
+  },
+  {
+    "title": "Strage allo stadio Heysel prima della finale di Coppa",
+    "subtitle": "Juventus-Liverpool a Bruxelles",
+    "wiki": "Strage dell'Heysel",
+    "year": 1985
+  },
+  {
+    "title": "Lo Space Shuttle Challenger esplode dopo il decollo",
+    "subtitle": "In diretta televisiva",
+    "wiki": "Disastro dello Space Shuttle Challenger",
+    "year": 1986
+  },
+  {
+    "title": "Esplode il reattore della centrale di Chernobyl",
+    "subtitle": "Il peggior incidente nucleare della storia",
+    "wiki": "Disastro di Černobyl'",
+    "year": 1986
+  },
+  {
+    "title": "Le proteste di piazza Tienanmen vengono represse",
+    "subtitle": "L'uomo davanti al carro armato",
+    "wiki": "Protesta di piazza Tienanmen",
+    "year": 1989,
+    "prop": "P580"
+  },
+  {
+    "title": "Cade il Muro di Berlino",
+    "subtitle": "La Germania torna a unirsi",
+    "wiki": "Caduta del muro di Berlino",
+    "year": 1989
+  },
+  {
+    "title": "La Germania si riunifica",
+    "subtitle": "La DDR entra nella Repubblica Federale",
+    "wiki": "Riunificazione tedesca",
+    "year": 1990,
+    "prop": "P582"
+  },
+  {
+    "title": "L'Unione Sovietica si dissolve",
+    "subtitle": "Gorbačëv si dimette, nascono quindici Stati",
+    "wiki": "Dissoluzione dell'Unione Sovietica",
+    "year": 1991
+  },
+  {
+    "title": "Inizia l'inchiesta Mani pulite",
+    "subtitle": "L'arresto di Mario Chiesa apre Tangentopoli",
+    "wiki": "Mani pulite",
+    "year": 1992
+  },
+  {
+    "title": "La mafia uccide Giovanni Falcone a Capaci",
+    "subtitle": "Con la moglie e gli uomini della scorta",
+    "wiki": "Strage di Capaci",
+    "year": 1992
+  },
+  {
+    "title": "La mafia uccide Paolo Borsellino in via D'Amelio",
+    "subtitle": "Insieme a cinque agenti della scorta",
+    "wiki": "Strage di via D'Amelio",
+    "year": 1992
+  },
+  {
+    "title": "Viene firmato il Trattato di Maastricht",
+    "subtitle": "Nasce l'Unione europea",
+    "wiki": "Trattato di Maastricht",
+    "year": 1992
+  },
+  {
+    "title": "Una bomba mafiosa colpisce via dei Georgofili a Firenze",
+    "subtitle": "Danneggiati anche gli Uffizi",
+    "wiki": "Strage di via dei Georgofili",
+    "year": 1993
+  },
+  {
+    "title": "In Ruanda si consuma il genocidio dei tutsi",
+    "subtitle": "Cento giorni di massacri",
+    "wiki": "Genocidio del Ruanda",
+    "year": 1994,
+    "prop": "P580"
+  },
+  {
+    "title": "Il massacro di Srebrenica sconvolge l'Europa",
+    "subtitle": "Durante la guerra in Bosnia",
+    "wiki": "Genocidio di Srebrenica",
+    "year": 1995
+  },
+  {
+    "title": "Lady Diana muore in un incidente a Parigi",
+    "subtitle": "Nel tunnel del Pont de l'Alma",
+    "wiki": "Morte di Diana Spencer",
+    "year": 1997
+  },
+  {
+    "title": "Scontri e violenze durante il G8 di Genova",
+    "subtitle": "La morte di Carlo Giuliani e la scuola Diaz",
+    "wiki": "Fatti del G8 di Genova",
+    "year": 2001
+  },
+  {
+    "title": "Due aerei colpiscono le Torri Gemelle",
+    "subtitle": "L'attacco agli Stati Uniti dell'11 settembre",
+    "wiki": "Attentati dell'11 settembre 2001",
+    "year": 2001
+  },
+  {
+    "title": "Gli Stati Uniti invadono l'Iraq di Saddam Hussein",
+    "subtitle": "La seconda guerra del Golfo",
+    "wiki": "Invasione dell'Iraq del 2003",
+    "year": 2003
+  },
+  {
+    "title": "Uno tsunami colpisce le coste dell'Oceano Indiano",
+    "subtitle": "Il giorno di Santo Stefano",
+    "wiki": "Terremoto e maremoto dell'Oceano Indiano del 2004",
+    "year": 2004
+  },
+  {
+    "title": "L'uragano Katrina allaga New Orleans",
+    "subtitle": "Gli argini cedono in Louisiana",
+    "wiki": "Uragano Katrina",
+    "year": 2005
+  },
+  {
+    "title": "Torino ospita le Olimpiadi invernali",
+    "subtitle": "La fiaccola sulle Alpi piemontesi",
+    "wiki": "XX Giochi olimpici invernali",
+    "year": 2006
+  },
+  {
+    "title": "L'Italia di Lippi vince il Mondiale in Germania",
+    "subtitle": "Grosso segna l'ultimo rigore a Berlino",
+    "wiki": "Campionato mondiale di calcio 2006",
+    "year": 2006
+  },
+  {
+    "title": "Barack Obama vince le elezioni presidenziali",
+    "subtitle": "Primo presidente afroamericano degli USA",
+    "wiki": "Elezioni presidenziali negli Stati Uniti d'America del 2008",
+    "year": 2008
+  },
+  {
+    "title": "Un terremoto colpisce L'Aquila",
+    "subtitle": "La notte del 6 aprile in Abruzzo",
+    "wiki": "Terremoto dell'Aquila del 2009",
+    "year": 2009
+  },
+  {
+    "title": "Un terremoto devasta Haiti",
+    "subtitle": "Port-au-Prince rasa al suolo",
+    "wiki": "Terremoto di Haiti del 2010",
+    "year": 2010
+  },
+  {
+    "title": "Un incidente nucleare colpisce Fukushima",
+    "subtitle": "Dopo il maremoto in Giappone",
+    "wiki": "Incidente nucleare di Fukushima Dai-ichi",
+    "year": 2011
+  },
+  {
+    "title": "Le forze speciali USA uccidono Osama bin Laden",
+    "subtitle": "Il blitz ad Abbottabad, in Pakistan",
+    "wiki": "Morte di Osama bin Laden",
+    "year": 2011
+  },
+  {
+    "title": "La Costa Concordia naufraga davanti al Giglio",
+    "subtitle": "L'inchino finito sugli scogli",
+    "wiki": "Naufragio della Costa Concordia",
+    "year": 2012
+  }
+]

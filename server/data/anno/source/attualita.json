@@ -1,0 +1,577 @@
+[
+  {
+    "title": "Benedetto XVI rinuncia al papato",
+    "subtitle": "Il primo papa a dimettersi da secoli",
+    "wiki": "Dimissioni di papa Benedetto XVI",
+    "year": 2013
+  },
+  {
+    "title": "Bergoglio eletto papa, prende il nome Francesco",
+    "subtitle": "Il primo papa argentino",
+    "wiki": "Conclave del 2013",
+    "year": 2013
+  },
+  {
+    "title": "Nasce il governo Letta",
+    "subtitle": "Larghe intese dopo le elezioni",
+    "wiki": "Governo Letta",
+    "year": 2013
+  },
+  {
+    "title": "Naufragio di migranti a Lampedusa",
+    "subtitle": "Oltre 360 vittime al largo dell'isola",
+    "wiki": "Naufragio di Lampedusa del 3 ottobre 2013",
+    "year": 2013
+  },
+  {
+    "title": "Marco Mengoni vince Sanremo con L'essenziale",
+    "wiki": "Festival di Sanremo 2013",
+    "year": 2013
+  },
+  {
+    "title": "Attentato alla maratona di Boston",
+    "wiki": "Attentato alla maratona di Boston",
+    "year": 2013
+  },
+  {
+    "title": "Muore Nelson Mandela",
+    "subtitle": "Il primo presidente nero del Sudafrica",
+    "wiki": "Nelson Mandela",
+    "year": 2013,
+    "prop": "P570"
+  },
+  {
+    "title": "Matteo Renzi diventa presidente del Consiglio",
+    "wiki": "Governo Renzi",
+    "year": 2014
+  },
+  {
+    "title": "Vincenzo Nibali vince il Tour de France",
+    "subtitle": "Lo Squalo dello Stretto in giallo a Parigi",
+    "wiki": "Tour de France 2014",
+    "year": 2014
+  },
+  {
+    "title": "La Germania travolge il Brasile 7-1",
+    "subtitle": "La semifinale del Mondiale a Belo Horizonte",
+    "wiki": "Mineirazo",
+    "year": 2014
+  },
+  {
+    "title": "La Russia annette la Crimea",
+    "wiki": "Annessione della Crimea alla Russia",
+    "year": 2014
+  },
+  {
+    "title": "Scompare il volo Malaysia Airlines MH370",
+    "subtitle": "Mai ritrovato il Boeing 777",
+    "wiki": "Volo Malaysia Airlines 370",
+    "year": 2014
+  },
+  {
+    "title": "Muore Robin Williams",
+    "subtitle": "L'attore di Mrs. Doubtfire e L'attimo fuggente",
+    "wiki": "Robin Williams",
+    "year": 2014,
+    "prop": "P570"
+  },
+  {
+    "title": "Attentato alla redazione di Charlie Hebdo",
+    "wiki": "Attentato alla sede di Charlie Hebdo",
+    "year": 2015
+  },
+  {
+    "title": "Sergio Mattarella eletto presidente della Repubblica",
+    "subtitle": "Il primo mandato",
+    "wiki": "Elezione del Presidente della Repubblica Italiana del 2015",
+    "year": 2015
+  },
+  {
+    "title": "Milano ospita l'Esposizione Universale",
+    "subtitle": "Nutrire il pianeta, energia per la vita",
+    "wiki": "Expo 2015",
+    "year": 2015
+  },
+  {
+    "title": "Pennetta batte Vinci nella finale tutta italiana",
+    "subtitle": "La finale femminile degli US Open",
+    "wiki": "US Open 2015 - Singolare femminile",
+    "year": 2015
+  },
+  {
+    "title": "Attentati di Parigi al Bataclan",
+    "subtitle": "La notte del terrore nella capitale francese",
+    "wiki": "Attentati di Parigi del 13 novembre 2015",
+    "year": 2015
+  },
+  {
+    "title": "Firmato l'Accordo di Parigi sul clima",
+    "wiki": "Accordo di Parigi (2015)",
+    "year": 2015
+  },
+  {
+    "title": "Muore David Bowie",
+    "subtitle": "Il Duca Bianco",
+    "wiki": "David Bowie",
+    "year": 2016,
+    "prop": "P570"
+  },
+  {
+    "title": "Il Regno Unito vota per la Brexit",
+    "subtitle": "Il referendum sull'uscita dall'UE",
+    "wiki": "Referendum sulla permanenza del Regno Unito nell'Unione europea",
+    "year": 2016
+  },
+  {
+    "title": "Il terremoto distrugge Amatrice",
+    "subtitle": "Il sisma del Centro Italia",
+    "wiki": "Sequenza sismica del Centro Italia del 2016-2017",
+    "year": 2016
+  },
+  {
+    "title": "Donald Trump eletto presidente per la prima volta",
+    "wiki": "Elezioni presidenziali negli Stati Uniti d'America del 2016",
+    "year": 2016
+  },
+  {
+    "title": "Il referendum costituzionale di Renzi viene bocciato",
+    "subtitle": "Vince il No, Renzi si dimette",
+    "wiki": "Referendum costituzionale in Italia del 2016",
+    "year": 2016
+  },
+  {
+    "title": "Muore Fidel Castro",
+    "subtitle": "Il líder máximo di Cuba",
+    "wiki": "Fidel Castro",
+    "year": 2016,
+    "prop": "P570"
+  },
+  {
+    "title": "Una valanga travolge l'hotel Rigopiano",
+    "subtitle": "In Abruzzo, dopo le scosse di gennaio",
+    "wiki": "Valanga di Rigopiano",
+    "year": 2017
+  },
+  {
+    "title": "Gabbani vince Sanremo con Occidentali's Karma",
+    "subtitle": "Quello della scimmia nuda che balla",
+    "wiki": "Festival di Sanremo 2017",
+    "year": 2017
+  },
+  {
+    "title": "Emmanuel Macron eletto presidente della Francia",
+    "subtitle": "Il primo mandato",
+    "wiki": "Elezioni presidenziali in Francia del 2017",
+    "year": 2017
+  },
+  {
+    "title": "Attentato al concerto di Ariana Grande a Manchester",
+    "wiki": "Attentato di Manchester del 22 maggio 2017",
+    "year": 2017
+  },
+  {
+    "title": "La Catalogna vota il referendum sull'indipendenza",
+    "wiki": "Referendum sull'indipendenza della Catalogna del 2017",
+    "year": 2017
+  },
+  {
+    "title": "Muore Stephen Hawking",
+    "subtitle": "L'astrofisico dei buchi neri",
+    "wiki": "Stephen Hawking",
+    "year": 2018,
+    "prop": "P570"
+  },
+  {
+    "title": "Il principe Harry sposa Meghan Markle",
+    "wiki": "Matrimonio del principe Harry e Meghan Markle",
+    "year": 2018
+  },
+  {
+    "title": "Nasce il governo gialloverde Lega-M5S",
+    "subtitle": "Giuseppe Conte a Palazzo Chigi",
+    "wiki": "Governo Conte I",
+    "year": 2018
+  },
+  {
+    "title": "La Francia vince il Mondiale in Russia",
+    "subtitle": "Mbappé e Griezmann battono la Croazia",
+    "wiki": "Campionato mondiale di calcio 2018",
+    "year": 2018
+  },
+  {
+    "title": "Salvati i ragazzini intrappolati in una grotta thailandese",
+    "wiki": "Incidente di Tham Luang",
+    "year": 2018
+  },
+  {
+    "title": "Crolla il ponte Morandi a Genova",
+    "wiki": "Crollo del viadotto Polcevera",
+    "year": 2018
+  },
+  {
+    "title": "Mahmood vince Sanremo con Soldi",
+    "wiki": "Festival di Sanremo 2019",
+    "year": 2019
+  },
+  {
+    "title": "Brucia la cattedrale di Notre-Dame",
+    "subtitle": "Crolla la guglia, Parigi sotto choc",
+    "wiki": "Incendio della cattedrale di Notre-Dame",
+    "year": 2019
+  },
+  {
+    "title": "Muore Niki Lauda",
+    "subtitle": "Tre volte campione del mondo di F1",
+    "wiki": "Niki Lauda",
+    "year": 2019,
+    "prop": "P570"
+  },
+  {
+    "title": "Nasce il governo giallorosso PD-M5S",
+    "subtitle": "Il secondo governo Conte",
+    "wiki": "Governo Conte II",
+    "year": 2019
+  },
+  {
+    "title": "Boris Johnson diventa primo ministro britannico",
+    "wiki": "Governo Johnson I",
+    "year": 2019
+  },
+  {
+    "title": "Esplodono le proteste di massa a Hong Kong",
+    "subtitle": "Contro la legge sull'estradizione in Cina",
+    "wiki": "Proteste a Hong Kong del 2019-2020",
+    "year": 2019
+  },
+  {
+    "title": "Muore Kobe Bryant in un incidente in elicottero",
+    "wiki": "Kobe Bryant",
+    "year": 2020,
+    "prop": "P570"
+  },
+  {
+    "title": "Diodato vince Sanremo con Fai rumore",
+    "wiki": "Festival di Sanremo 2020",
+    "year": 2020
+  },
+  {
+    "title": "L'Italia entra in lockdown per il Covid",
+    "subtitle": "Io resto a casa",
+    "wiki": "Pandemia di COVID-19 in Italia",
+    "year": 2020
+  },
+  {
+    "title": "L'uccisione di George Floyd a Minneapolis",
+    "subtitle": "Esplodono le proteste Black Lives Matter",
+    "wiki": "Omicidio di George Floyd",
+    "year": 2020
+  },
+  {
+    "title": "Muore Ennio Morricone",
+    "subtitle": "Il maestro delle colonne sonore",
+    "wiki": "Ennio Morricone",
+    "year": 2020,
+    "prop": "P570"
+  },
+  {
+    "title": "Esplosione devastante al porto di Beirut",
+    "wiki": "Esplosione di Beirut",
+    "year": 2020
+  },
+  {
+    "title": "Joe Biden eletto presidente degli Stati Uniti",
+    "wiki": "Elezioni presidenziali negli Stati Uniti d'America del 2020",
+    "year": 2020
+  },
+  {
+    "title": "Muore Diego Armando Maradona",
+    "wiki": "Diego Armando Maradona",
+    "year": 2020,
+    "prop": "P570"
+  },
+  {
+    "title": "L'assalto al Campidoglio di Washington",
+    "subtitle": "I sostenitori di Trump entrano al Congresso",
+    "wiki": "Assalto al Campidoglio degli Stati Uniti d'America del 2021",
+    "year": 2021
+  },
+  {
+    "title": "Mario Draghi diventa presidente del Consiglio",
+    "wiki": "Governo Draghi",
+    "year": 2021
+  },
+  {
+    "title": "I Måneskin vincono Sanremo",
+    "subtitle": "Con Zitti e buoni",
+    "wiki": "Festival di Sanremo 2021",
+    "year": 2021
+  },
+  {
+    "title": "I Måneskin vincono l'Eurovision",
+    "subtitle": "Con Zitti e buoni, a Rotterdam",
+    "wiki": "Eurovision Song Contest 2021",
+    "year": 2021
+  },
+  {
+    "title": "Muore Franco Battiato",
+    "subtitle": "Il cantautore di La cura",
+    "wiki": "Franco Battiato",
+    "year": 2021,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Raffaella Carrà",
+    "wiki": "Raffaella Carrà",
+    "year": 2021,
+    "prop": "P570"
+  },
+  {
+    "title": "L'Italia campione d'Europa a Wembley",
+    "subtitle": "Donnarumma para i rigori all'Inghilterra",
+    "wiki": "Campionato europeo maschile di calcio 2020",
+    "year": 2021
+  },
+  {
+    "title": "Jacobs oro olimpico nei 100 metri a Tokyo",
+    "subtitle": "Le Olimpiadi slittate per la pandemia",
+    "wiki": "Giochi della XXXII Olimpiade",
+    "year": 2021
+  },
+  {
+    "title": "I talebani riprendono Kabul",
+    "subtitle": "Il caotico ritiro occidentale dall'Afghanistan",
+    "wiki": "Caduta di Kabul (2021)",
+    "year": 2021
+  },
+  {
+    "title": "Mattarella rieletto presidente della Repubblica",
+    "subtitle": "Il secondo mandato",
+    "wiki": "Elezione del Presidente della Repubblica Italiana del 2022",
+    "year": 2022
+  },
+  {
+    "title": "Mahmood e Blanco vincono Sanremo con Brividi",
+    "wiki": "Festival di Sanremo 2022",
+    "year": 2022
+  },
+  {
+    "title": "La Russia invade l'Ucraina",
+    "wiki": "Invasione russa dell'Ucraina del 2022",
+    "year": 2022
+  },
+  {
+    "title": "Will Smith schiaffeggia Chris Rock agli Oscar",
+    "wiki": "Schiaffo di Will Smith a Chris Rock",
+    "year": 2022
+  },
+  {
+    "title": "Crolla un seracco del ghiacciaio della Marmolada",
+    "wiki": "Valanga della Marmolada",
+    "year": 2022
+  },
+  {
+    "title": "Muore Piero Angela",
+    "subtitle": "Il papà di Superquark",
+    "wiki": "Piero Angela",
+    "year": 2022,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore la regina Elisabetta II",
+    "subtitle": "La sovrana più longeva della storia britannica",
+    "wiki": "Elisabetta II del Regno Unito",
+    "year": 2022,
+    "prop": "P570"
+  },
+  {
+    "title": "Giorgia Meloni prima donna premier in Italia",
+    "wiki": "Governo Meloni",
+    "year": 2022
+  },
+  {
+    "title": "L'Argentina di Messi vince il Mondiale in Qatar",
+    "subtitle": "Finale ai rigori contro la Francia",
+    "wiki": "Campionato mondiale di calcio 2022",
+    "year": 2022
+  },
+  {
+    "title": "Mengoni vince Sanremo per la seconda volta",
+    "subtitle": "Con Due vite",
+    "wiki": "Festival di Sanremo 2023",
+    "year": 2023
+  },
+  {
+    "title": "Taylor Swift parte con l'Eras Tour",
+    "subtitle": "Il tour più redditizio di sempre",
+    "wiki": "The Eras Tour",
+    "year": 2023
+  },
+  {
+    "title": "Carlo III viene incoronato a Westminster",
+    "wiki": "Incoronazione di re Carlo III e della regina Camilla",
+    "year": 2023
+  },
+  {
+    "title": "L'alluvione in Emilia-Romagna",
+    "subtitle": "Esondano decine di fiumi in Romagna",
+    "wiki": "Alluvione dell'Emilia-Romagna del 2023",
+    "year": 2023
+  },
+  {
+    "title": "Il Napoli di Spalletti vince il terzo scudetto",
+    "subtitle": "Il primo senza Maradona",
+    "wiki": "Serie A 2022-2023",
+    "year": 2023,
+    "prop": "P582"
+  },
+  {
+    "title": "Muore Silvio Berlusconi",
+    "wiki": "Silvio Berlusconi",
+    "year": 2023,
+    "prop": "P570"
+  },
+  {
+    "title": "Il sommergibile Titan implode vicino al Titanic",
+    "wiki": "Incidente del sommergibile Titan",
+    "year": 2023
+  },
+  {
+    "title": "Hamas attacca Israele, inizia la guerra a Gaza",
+    "wiki": "Attacco di Hamas a Israele del 2023",
+    "year": 2023
+  },
+  {
+    "title": "Sinner vince il suo primo Slam a Melbourne",
+    "subtitle": "Australian Open, rimonta su Medvedev",
+    "wiki": "Australian Open 2024 - Singolare maschile",
+    "year": 2024
+  },
+  {
+    "title": "Angelina Mango vince Sanremo con La noia",
+    "wiki": "Festival di Sanremo 2024",
+    "year": 2024
+  },
+  {
+    "title": "Muore in carcere Aleksej Navalny",
+    "subtitle": "Il principale oppositore di Putin",
+    "wiki": "Aleksej Naval'nyj",
+    "year": 2024,
+    "prop": "P570"
+  },
+  {
+    "title": "L'Inter vince lo scudetto della seconda stella",
+    "subtitle": "Festa nel derby contro il Milan",
+    "wiki": "Serie A 2023-2024",
+    "year": 2024,
+    "prop": "P582"
+  },
+  {
+    "title": "La Spagna vince l'Europeo in Germania",
+    "subtitle": "Yamal e Williams battono l'Inghilterra",
+    "wiki": "Campionato europeo maschile di calcio 2024",
+    "year": 2024
+  },
+  {
+    "title": "Parigi ospita le Olimpiadi",
+    "subtitle": "La cerimonia d'apertura sulla Senna",
+    "wiki": "Giochi della XXXIII Olimpiade",
+    "year": 2024
+  },
+  {
+    "title": "Trump rieletto presidente degli Stati Uniti",
+    "subtitle": "Batte Kamala Harris",
+    "wiki": "Elezioni presidenziali negli Stati Uniti d'America del 2024",
+    "year": 2024
+  },
+  {
+    "title": "Cade il regime di Assad in Siria",
+    "wiki": "Caduta di Damasco",
+    "year": 2024,
+    "subtitle": "I ribelli entrano a Damasco, Assad fugge in Russia"
+  },
+  {
+    "title": "Olly vince Sanremo con Balorda nostalgia",
+    "wiki": "Festival di Sanremo 2025",
+    "year": 2025
+  },
+  {
+    "title": "Muore papa Francesco",
+    "subtitle": "Il giorno dopo la benedizione di Pasqua",
+    "wiki": "Papa Francesco",
+    "year": 2025,
+    "prop": "P570"
+  },
+  {
+    "title": "Blackout totale in Spagna e Portogallo",
+    "wiki": "Black out nella Penisola iberica del 2025",
+    "year": 2025
+  },
+  {
+    "title": "Robert Prevost eletto papa, prende il nome Leone XIV",
+    "subtitle": "Il primo papa statunitense",
+    "wiki": "Conclave del 2025",
+    "year": 2025
+  },
+  {
+    "title": "Il Napoli di Conte vince il quarto scudetto",
+    "wiki": "Serie A 2024-2025",
+    "year": 2025,
+    "prop": "P582"
+  },
+  {
+    "title": "Il PSG travolge l'Inter in finale di Champions",
+    "subtitle": "Finisce 5-0 a Monaco di Baviera",
+    "wiki": "Finale della UEFA Champions League 2024-2025",
+    "year": 2025
+  },
+  {
+    "title": "Sinner vince Wimbledon",
+    "subtitle": "Il primo italiano a trionfare sull'erba londinese",
+    "wiki": "Torneo di Wimbledon 2025 - Singolare maschile",
+    "year": 2025
+  },
+  {
+    "title": "Muore Ozzy Osbourne",
+    "subtitle": "Il Principe delle Tenebre dei Black Sabbath",
+    "wiki": "Ozzy Osbourne",
+    "year": 2025,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Giorgio Armani",
+    "subtitle": "Re Giorgio della moda italiana",
+    "wiki": "Giorgio Armani",
+    "year": 2025,
+    "prop": "P570"
+  },
+  {
+    "title": "Milano e Cortina ospitano le Olimpiadi invernali",
+    "wiki": "XXV Giochi olimpici invernali",
+    "year": 2026
+  },
+  {
+    "title": "Il primo Mondiale a 48 squadre",
+    "subtitle": "Tra Stati Uniti, Canada e Messico",
+    "wiki": "Campionato mondiale di calcio 2026",
+    "year": 2026
+  },
+  {
+    "title": "Sal Da Vinci vince Sanremo con Per sempre sì",
+    "subtitle": "Il cantante napoletano trionfa all'Ariston",
+    "wiki": "Festival di Sanremo 2026",
+    "year": 2026
+  },
+  {
+    "title": "Referendum sulla separazione delle carriere dei magistrati",
+    "subtitle": "La riforma Meloni-Nordio va alle urne",
+    "wiki": "Referendum costituzionale in Italia del 2026",
+    "year": 2026
+  },
+  {
+    "title": "Artemis II porta quattro astronauti intorno alla Luna",
+    "subtitle": "Il primo volo umano lunare dai tempi dell'Apollo",
+    "wiki": "Artemis II",
+    "year": 2026,
+    "prop": "P619"
+  }
+]

@@ -1,0 +1,782 @@
+[
+  {
+    "title": "Nasce Vasco Rossi",
+    "subtitle": "Il Blasco, rocker di Zocca",
+    "wiki": "Vasco Rossi",
+    "year": 1952
+  },
+  {
+    "title": "Nasce Laura Pausini",
+    "subtitle": "La voce de \"La solitudine\"",
+    "wiki": "Laura Pausini",
+    "year": 1974
+  },
+  {
+    "title": "Nasce Eros Ramazzotti",
+    "subtitle": "Cantautore di \"Più bella cosa\"",
+    "wiki": "Eros Ramazzotti",
+    "year": 1963
+  },
+  {
+    "title": "Nasce Jovanotti",
+    "subtitle": "Lorenzo Cherubini, \"L'ombelico del mondo\"",
+    "wiki": "Jovanotti",
+    "year": 1966
+  },
+  {
+    "title": "Nasce Luciano Ligabue",
+    "subtitle": "Il Liga, rocker di Correggio",
+    "wiki": "Luciano Ligabue",
+    "year": 1960
+  },
+  {
+    "title": "Nasce Zucchero",
+    "subtitle": "Il bluesman di \"Diamante\"",
+    "wiki": "Zucchero Fornaciari",
+    "year": 1955
+  },
+  {
+    "title": "Nasce Mina",
+    "subtitle": "La Tigre di Cremona",
+    "wiki": "Mina (cantante)",
+    "year": 1940
+  },
+  {
+    "title": "Nasce Adriano Celentano",
+    "subtitle": "Il Molleggiato",
+    "wiki": "Adriano Celentano",
+    "year": 1938
+  },
+  {
+    "title": "Nasce Lucio Battisti",
+    "subtitle": "Autore di \"Emozioni\" con Mogol",
+    "wiki": "Lucio Battisti",
+    "year": 1943
+  },
+  {
+    "title": "Nasce Lucio Dalla",
+    "subtitle": "Cantautore di \"Caruso\"",
+    "wiki": "Lucio Dalla",
+    "year": 1943
+  },
+  {
+    "title": "Nasce Fabrizio De André",
+    "subtitle": "Faber, cantautore di \"Bocca di rosa\"",
+    "wiki": "Fabrizio De André",
+    "year": 1940
+  },
+  {
+    "title": "Nasce Domenico Modugno",
+    "subtitle": "Mister \"Volare\"",
+    "wiki": "Domenico Modugno",
+    "year": 1928
+  },
+  {
+    "title": "Nasce Gianna Nannini",
+    "subtitle": "Rocker di \"Bello e impossibile\"",
+    "wiki": "Gianna Nannini",
+    "year": 1954
+  },
+  {
+    "title": "Nasce Tiziano Ferro",
+    "subtitle": "Cantautore di \"Xdono\"",
+    "wiki": "Tiziano Ferro",
+    "year": 1980
+  },
+  {
+    "title": "Nasce Marco Mengoni",
+    "subtitle": "Voce de \"L'essenziale\"",
+    "wiki": "Marco Mengoni",
+    "year": 1988
+  },
+  {
+    "title": "Nasce Elisa",
+    "subtitle": "Cantautrice di \"Luce\"",
+    "wiki": "Elisa (cantante 1977)",
+    "year": 1977
+  },
+  {
+    "title": "Nasce Sfera Ebbasta",
+    "subtitle": "Il trapper di Cinisello Balsamo",
+    "wiki": "Sfera Ebbasta",
+    "year": 1992
+  },
+  {
+    "title": "Nasce Elodie",
+    "subtitle": "Popstar di \"Andromeda\"",
+    "wiki": "Elodie",
+    "year": 1990
+  },
+  {
+    "title": "Nasce Damiano David",
+    "subtitle": "Il frontman dei Måneskin",
+    "wiki": "Damiano David",
+    "year": 1999
+  },
+  {
+    "title": "Nasce Mahmood",
+    "subtitle": "Vincitore di Sanremo con \"Soldi\"",
+    "wiki": "Mahmood",
+    "year": 1992
+  },
+  {
+    "title": "Nasce Blanco",
+    "subtitle": "Cantante di \"Brividi\" con Mahmood",
+    "wiki": "Blanco (cantante)",
+    "year": 2003
+  },
+  {
+    "title": "Nasce Annalisa",
+    "subtitle": "Popstar di \"Mon amour\"",
+    "wiki": "Annalisa (cantante)",
+    "year": 1985
+  },
+  {
+    "title": "Nasce Geolier",
+    "subtitle": "Rapper napoletano di Secondigliano",
+    "wiki": "Geolier",
+    "year": 2000
+  },
+  {
+    "title": "Nasce Ultimo",
+    "subtitle": "Cantautore romano da stadi",
+    "wiki": "Ultimo (cantautore)",
+    "year": 1996
+  },
+  {
+    "title": "Nasce Achille Lauro",
+    "subtitle": "Cantante di \"Rolls Royce\"",
+    "wiki": "Achille Lauro (cantante)",
+    "year": 1990
+  },
+  {
+    "title": "Nasce Fedez",
+    "subtitle": "Rapper ed ex giudice di X Factor",
+    "wiki": "Fedez",
+    "year": 1989
+  },
+  {
+    "title": "Nasce Max Pezzali",
+    "subtitle": "La voce degli 883",
+    "wiki": "Max Pezzali",
+    "year": 1967
+  },
+  {
+    "title": "Nasce Luciano Pavarotti",
+    "subtitle": "Il tenore di \"Nessun dorma\"",
+    "wiki": "Luciano Pavarotti",
+    "year": 1935
+  },
+  {
+    "title": "Nasce Andrea Bocelli",
+    "subtitle": "Tenore di \"Con te partirò\"",
+    "wiki": "Andrea Bocelli",
+    "year": 1958
+  },
+  {
+    "title": "Nasce Beyoncé",
+    "subtitle": "Queen B, ex Destiny's Child",
+    "wiki": "Beyoncé",
+    "year": 1981
+  },
+  {
+    "title": "Nasce Eminem",
+    "subtitle": "Slim Shady, rapper di Detroit",
+    "wiki": "Eminem",
+    "year": 1972
+  },
+  {
+    "title": "Nasce Taylor Swift",
+    "subtitle": "Popstar dell'Eras Tour",
+    "wiki": "Taylor Swift",
+    "year": 1989
+  },
+  {
+    "title": "Nasce Rihanna",
+    "subtitle": "Popstar di \"Umbrella\"",
+    "wiki": "Rihanna",
+    "year": 1988
+  },
+  {
+    "title": "Nasce Lady Gaga",
+    "subtitle": "Popstar di \"Poker Face\"",
+    "wiki": "Lady Gaga",
+    "year": 1986
+  },
+  {
+    "title": "Nasce Billie Eilish",
+    "subtitle": "Cantante di \"Bad Guy\"",
+    "wiki": "Billie Eilish",
+    "year": 2001
+  },
+  {
+    "title": "Nasce Ed Sheeran",
+    "subtitle": "Cantautore di \"Shape of You\"",
+    "wiki": "Ed Sheeran",
+    "year": 1991
+  },
+  {
+    "title": "Nasce Dua Lipa",
+    "subtitle": "Popstar di \"Levitating\"",
+    "wiki": "Dua Lipa",
+    "year": 1995
+  },
+  {
+    "title": "Nasce Freddie Mercury",
+    "subtitle": "La voce dei Queen",
+    "wiki": "Freddie Mercury",
+    "year": 1946
+  },
+  {
+    "title": "Nasce John Lennon",
+    "subtitle": "Beatle, autore di \"Imagine\"",
+    "wiki": "John Lennon",
+    "year": 1940
+  },
+  {
+    "title": "Nasce Elvis Presley",
+    "subtitle": "Il Re del rock and roll",
+    "wiki": "Elvis Presley",
+    "year": 1935
+  },
+  {
+    "title": "Nasce Michael Jackson",
+    "subtitle": "Il Re del pop",
+    "wiki": "Michael Jackson",
+    "year": 1958
+  },
+  {
+    "title": "Nasce Madonna",
+    "subtitle": "La regina del pop",
+    "wiki": "Madonna (cantante)",
+    "year": 1958
+  },
+  {
+    "title": "Nasce Bob Marley",
+    "subtitle": "Leggenda del reggae",
+    "wiki": "Bob Marley",
+    "year": 1945
+  },
+  {
+    "title": "Nasce David Bowie",
+    "subtitle": "Il Duca Bianco, Ziggy Stardust",
+    "wiki": "David Bowie",
+    "year": 1947
+  },
+  {
+    "title": "Nasce Ariana Grande",
+    "subtitle": "Popstar, Glinda in \"Wicked\"",
+    "wiki": "Ariana Grande",
+    "year": 1993
+  },
+  {
+    "title": "Nasce Bad Bunny",
+    "subtitle": "Il re del reggaeton portoricano",
+    "wiki": "Bad Bunny",
+    "year": 1994
+  },
+  {
+    "title": "Nasce Harry Styles",
+    "subtitle": "Ex One Direction, \"As It Was\"",
+    "wiki": "Harry Styles",
+    "year": 1994
+  },
+  {
+    "title": "Nasce Francesco Totti",
+    "subtitle": "Er Pupone, capitano della Roma",
+    "wiki": "Francesco Totti",
+    "year": 1976
+  },
+  {
+    "title": "Nasce Valentino Rossi",
+    "subtitle": "Il Dottore della MotoGP",
+    "wiki": "Valentino Rossi",
+    "year": 1979
+  },
+  {
+    "title": "Nasce Jannik Sinner",
+    "subtitle": "Tennista altoatesino, numero 1 ATP",
+    "wiki": "Jannik Sinner",
+    "year": 2001
+  },
+  {
+    "title": "Nasce Lionel Messi",
+    "subtitle": "La Pulga argentina",
+    "wiki": "Lionel Messi",
+    "year": 1987
+  },
+  {
+    "title": "Nasce Cristiano Ronaldo",
+    "subtitle": "CR7, fuoriclasse portoghese",
+    "wiki": "Cristiano Ronaldo",
+    "year": 1985
+  },
+  {
+    "title": "Nasce Federica Pellegrini",
+    "subtitle": "La Divina del nuoto",
+    "wiki": "Federica Pellegrini",
+    "year": 1988
+  },
+  {
+    "title": "Nasce Alessandro Del Piero",
+    "subtitle": "Pinturicchio, bandiera juventina",
+    "wiki": "Alessandro Del Piero",
+    "year": 1974
+  },
+  {
+    "title": "Nasce Gianluigi Buffon",
+    "subtitle": "Superman, portiere campione del mondo",
+    "wiki": "Gianluigi Buffon",
+    "year": 1978
+  },
+  {
+    "title": "Nasce Roberto Baggio",
+    "subtitle": "Il Divin Codino",
+    "wiki": "Roberto Baggio",
+    "year": 1967
+  },
+  {
+    "title": "Nasce Diego Armando Maradona",
+    "subtitle": "El Pibe de Oro del Napoli",
+    "wiki": "Diego Armando Maradona",
+    "year": 1960
+  },
+  {
+    "title": "Nasce Pelé",
+    "subtitle": "O Rei del calcio brasiliano",
+    "wiki": "Pelé",
+    "year": 1940
+  },
+  {
+    "title": "Nasce Michael Jordan",
+    "subtitle": "His Airness, leggenda dei Bulls",
+    "wiki": "Michael Jordan",
+    "year": 1963
+  },
+  {
+    "title": "Nasce Usain Bolt",
+    "subtitle": "Il fulmine giamaicano",
+    "wiki": "Usain Bolt",
+    "year": 1986
+  },
+  {
+    "title": "Nasce Marcell Jacobs",
+    "subtitle": "Oro olimpico nei 100 metri",
+    "wiki": "Marcell Jacobs",
+    "year": 1994
+  },
+  {
+    "title": "Nasce Gianmarco Tamberi",
+    "subtitle": "Gimbo, saltatore in alto",
+    "wiki": "Gianmarco Tamberi",
+    "year": 1992
+  },
+  {
+    "title": "Nasce Alberto Tomba",
+    "subtitle": "Tomba la Bomba dello sci",
+    "wiki": "Alberto Tomba",
+    "year": 1966
+  },
+  {
+    "title": "Nasce Ayrton Senna",
+    "subtitle": "Campione brasiliano di Formula 1",
+    "wiki": "Ayrton Senna",
+    "year": 1960
+  },
+  {
+    "title": "Nasce Michael Schumacher",
+    "subtitle": "Il Kaiser della Ferrari",
+    "wiki": "Michael Schumacher",
+    "year": 1969
+  },
+  {
+    "title": "Nasce Lewis Hamilton",
+    "subtitle": "Sette volte campione di Formula 1",
+    "wiki": "Lewis Hamilton",
+    "year": 1985
+  },
+  {
+    "title": "Nasce Roger Federer",
+    "subtitle": "Il Re di Wimbledon",
+    "wiki": "Roger Federer",
+    "year": 1981
+  },
+  {
+    "title": "Nasce Rafael Nadal",
+    "subtitle": "Il re della terra rossa",
+    "wiki": "Rafael Nadal",
+    "year": 1986
+  },
+  {
+    "title": "Nasce Muhammad Ali",
+    "subtitle": "The Greatest della boxe",
+    "wiki": "Muhammad Ali",
+    "year": 1942
+  },
+  {
+    "title": "Nasce Bebe Vio",
+    "subtitle": "Campionessa paralimpica di scherma",
+    "wiki": "Bebe Vio",
+    "year": 1997
+  },
+  {
+    "title": "Nasce Sofia Goggia",
+    "subtitle": "Regina della discesa libera",
+    "wiki": "Sofia Goggia",
+    "year": 1992
+  },
+  {
+    "title": "Nasce Kylian Mbappé",
+    "subtitle": "Attaccante della nazionale francese",
+    "wiki": "Kylian Mbappé",
+    "year": 1998
+  },
+  {
+    "title": "Nasce Leonardo DiCaprio",
+    "subtitle": "Jack in \"Titanic\"",
+    "wiki": "Leonardo DiCaprio",
+    "year": 1974
+  },
+  {
+    "title": "Nasce Zendaya",
+    "subtitle": "Rue in \"Euphoria\"",
+    "wiki": "Zendaya",
+    "year": 1996
+  },
+  {
+    "title": "Nasce Chiara Ferragni",
+    "subtitle": "Influencer di The Blonde Salad",
+    "wiki": "Chiara Ferragni",
+    "year": 1987
+  },
+  {
+    "title": "Nasce Khaby Lame",
+    "subtitle": "Il tiktoker più seguito al mondo",
+    "wiki": "Khaby Lame",
+    "year": 2000
+  },
+  {
+    "title": "Nasce Checco Zalone",
+    "subtitle": "Comico di \"Quo vado?\"",
+    "wiki": "Checco Zalone",
+    "year": 1977
+  },
+  {
+    "title": "Nasce Roberto Benigni",
+    "subtitle": "Oscar per \"La vita è bella\"",
+    "wiki": "Roberto Benigni",
+    "year": 1952
+  },
+  {
+    "title": "Nasce Sophia Loren",
+    "subtitle": "Diva de \"La ciociara\"",
+    "wiki": "Sophia Loren",
+    "year": 1934
+  },
+  {
+    "title": "Nasce Alberto Sordi",
+    "subtitle": "Albertone, \"Il marchese del Grillo\"",
+    "wiki": "Alberto Sordi",
+    "year": 1920
+  },
+  {
+    "title": "Nasce Totò",
+    "subtitle": "Il principe della risata",
+    "wiki": "Totò",
+    "year": 1898
+  },
+  {
+    "title": "Nasce Federico Fellini",
+    "subtitle": "Regista de \"La dolce vita\"",
+    "wiki": "Federico Fellini",
+    "year": 1920
+  },
+  {
+    "title": "Nasce Marilyn Monroe",
+    "subtitle": "Icona di Hollywood",
+    "wiki": "Marilyn Monroe",
+    "year": 1926
+  },
+  {
+    "title": "Nasce Audrey Hepburn",
+    "subtitle": "Holly in \"Colazione da Tiffany\"",
+    "wiki": "Audrey Hepburn",
+    "year": 1929
+  },
+  {
+    "title": "Nasce Charlie Chaplin",
+    "subtitle": "Charlot, genio del muto",
+    "wiki": "Charlie Chaplin",
+    "year": 1889
+  },
+  {
+    "title": "Nasce Tom Holland",
+    "subtitle": "Spider-Man del Marvel Universe",
+    "wiki": "Tom Holland (attore)",
+    "year": 1996
+  },
+  {
+    "title": "Nasce Timothée Chalamet",
+    "subtitle": "Paul Atreides in \"Dune\"",
+    "wiki": "Timothée Chalamet",
+    "year": 1995
+  },
+  {
+    "title": "Nasce Brad Pitt",
+    "subtitle": "Tyler Durden in \"Fight Club\"",
+    "wiki": "Brad Pitt",
+    "year": 1963
+  },
+  {
+    "title": "Nasce Rosario Fiorello",
+    "subtitle": "Showman di Viva Rai2",
+    "wiki": "Fiorello",
+    "year": 1960
+  },
+  {
+    "title": "Nasce Maria De Filippi",
+    "subtitle": "Conduttrice di \"C'è posta per te\"",
+    "wiki": "Maria De Filippi",
+    "year": 1961
+  },
+  {
+    "title": "Nasce Margot Robbie",
+    "subtitle": "Barbie nel film di Greta Gerwig",
+    "wiki": "Margot Robbie",
+    "year": 1990
+  },
+  {
+    "title": "Nasce Steven Spielberg",
+    "subtitle": "Regista di \"E.T.\" e \"Jurassic Park\"",
+    "wiki": "Steven Spielberg",
+    "year": 1946
+  },
+  {
+    "title": "Nasce Dante Alighieri",
+    "subtitle": "Il Sommo Poeta della Divina Commedia",
+    "wiki": "Dante Alighieri",
+    "year": 1265
+  },
+  {
+    "title": "Nasce Francesco Petrarca",
+    "subtitle": "Poeta del Canzoniere, amava Laura",
+    "wiki": "Francesco Petrarca",
+    "year": 1304
+  },
+  {
+    "title": "Nasce Marco Polo",
+    "subtitle": "Mercante veneziano de \"Il Milione\"",
+    "wiki": "Marco Polo",
+    "year": 1254
+  },
+  {
+    "title": "Nasce Leonardo da Vinci",
+    "subtitle": "Il genio della Gioconda",
+    "wiki": "Leonardo da Vinci",
+    "year": 1452
+  },
+  {
+    "title": "Nasce Michelangelo Buonarroti",
+    "subtitle": "Scultore del David",
+    "wiki": "Michelangelo Buonarroti",
+    "year": 1475
+  },
+  {
+    "title": "Nasce Raffaello Sanzio",
+    "subtitle": "Pittore de \"La scuola di Atene\"",
+    "wiki": "Raffaello Sanzio",
+    "year": 1483
+  },
+  {
+    "title": "Nasce Niccolò Machiavelli",
+    "subtitle": "Autore de \"Il Principe\"",
+    "wiki": "Niccolò Machiavelli",
+    "year": 1469
+  },
+  {
+    "title": "Nasce Galileo Galilei",
+    "subtitle": "Il padre del metodo scientifico",
+    "wiki": "Galileo Galilei",
+    "year": 1564
+  },
+  {
+    "title": "Nasce William Shakespeare",
+    "subtitle": "Il Bardo di \"Romeo e Giulietta\"",
+    "wiki": "William Shakespeare",
+    "year": 1564
+  },
+  {
+    "title": "Nasce Caravaggio",
+    "subtitle": "Maestro del chiaroscuro",
+    "wiki": "Caravaggio",
+    "year": 1571
+  },
+  {
+    "title": "Nasce Antonio Vivaldi",
+    "subtitle": "Il Prete Rosso de \"Le quattro stagioni\"",
+    "wiki": "Antonio Vivaldi",
+    "year": 1678
+  },
+  {
+    "title": "Nasce Wolfgang Amadeus Mozart",
+    "subtitle": "Genio di Salisburgo, \"Il flauto magico\"",
+    "wiki": "Wolfgang Amadeus Mozart",
+    "year": 1756
+  },
+  {
+    "title": "Nasce Ludwig van Beethoven",
+    "subtitle": "Compositore della Nona sinfonia",
+    "wiki": "Ludwig van Beethoven",
+    "year": 1770
+  },
+  {
+    "title": "Nasce Alessandro Volta",
+    "subtitle": "Inventore della pila",
+    "wiki": "Alessandro Volta",
+    "year": 1745
+  },
+  {
+    "title": "Nasce Napoleone Bonaparte",
+    "subtitle": "Imperatore dei francesi",
+    "wiki": "Napoleone Bonaparte",
+    "year": 1769
+  },
+  {
+    "title": "Nasce Alessandro Manzoni",
+    "subtitle": "Autore de \"I promessi sposi\"",
+    "wiki": "Alessandro Manzoni",
+    "year": 1785
+  },
+  {
+    "title": "Nasce Giacomo Leopardi",
+    "subtitle": "Poeta de \"L'infinito\"",
+    "wiki": "Giacomo Leopardi",
+    "year": 1798
+  },
+  {
+    "title": "Nasce Giuseppe Garibaldi",
+    "subtitle": "L'eroe dei due mondi",
+    "wiki": "Giuseppe Garibaldi",
+    "year": 1807
+  },
+  {
+    "title": "Nasce Giuseppe Verdi",
+    "subtitle": "Compositore di \"Aida\" e \"La traviata\"",
+    "wiki": "Giuseppe Verdi",
+    "year": 1813
+  },
+  {
+    "title": "Nasce Charles Darwin",
+    "subtitle": "Padre della teoria dell'evoluzione",
+    "wiki": "Charles Darwin",
+    "year": 1809
+  },
+  {
+    "title": "Nasce Vincent van Gogh",
+    "subtitle": "Pittore de \"La notte stellata\"",
+    "wiki": "Vincent van Gogh",
+    "year": 1853
+  },
+  {
+    "title": "Nasce Thomas Edison",
+    "subtitle": "Inventore della lampadina",
+    "wiki": "Thomas Edison",
+    "year": 1847
+  },
+  {
+    "title": "Nasce Nikola Tesla",
+    "subtitle": "Pioniere della corrente alternata",
+    "wiki": "Nikola Tesla",
+    "year": 1856
+  },
+  {
+    "title": "Nasce Marie Curie",
+    "subtitle": "Doppio Nobel, scoprì il radio",
+    "wiki": "Marie Curie",
+    "year": 1867
+  },
+  {
+    "title": "Nasce Mahatma Gandhi",
+    "subtitle": "Padre della non violenza",
+    "wiki": "Mahatma Gandhi",
+    "year": 1869
+  },
+  {
+    "title": "Nasce Guglielmo Marconi",
+    "subtitle": "Pioniere della radio",
+    "wiki": "Guglielmo Marconi",
+    "year": 1874
+  },
+  {
+    "title": "Nasce Albert Einstein",
+    "subtitle": "Padre della relatività",
+    "wiki": "Albert Einstein",
+    "year": 1879
+  },
+  {
+    "title": "Nasce Pablo Picasso",
+    "subtitle": "Pittore di \"Guernica\"",
+    "wiki": "Pablo Picasso",
+    "year": 1881
+  },
+  {
+    "title": "Nasce Maria Montessori",
+    "subtitle": "Pedagogista del metodo Montessori",
+    "wiki": "Maria Montessori",
+    "year": 1870
+  },
+  {
+    "title": "Nasce Luigi Pirandello",
+    "subtitle": "Autore de \"Il fu Mattia Pascal\"",
+    "wiki": "Luigi Pirandello",
+    "year": 1867
+  },
+  {
+    "title": "Nasce Rita Levi-Montalcini",
+    "subtitle": "Premio Nobel per la medicina",
+    "wiki": "Rita Levi-Montalcini",
+    "year": 1909
+  },
+  {
+    "title": "Nasce Nelson Mandela",
+    "subtitle": "Madiba, presidente del Sudafrica",
+    "wiki": "Nelson Mandela",
+    "year": 1918
+  },
+  {
+    "title": "Nasce Martin Luther King",
+    "subtitle": "\"I have a dream\"",
+    "wiki": "Martin Luther King",
+    "year": 1929
+  },
+  {
+    "title": "Nasce Papa Giovanni Paolo II",
+    "subtitle": "Karol Wojtyła, il papa polacco",
+    "wiki": "Papa Giovanni Paolo II",
+    "year": 1920
+  },
+  {
+    "title": "Nasce Papa Francesco",
+    "subtitle": "Jorge Mario Bergoglio",
+    "wiki": "Papa Francesco",
+    "year": 1936
+  },
+  {
+    "title": "Nasce Steve Jobs",
+    "subtitle": "Cofondatore di Apple",
+    "wiki": "Steve Jobs",
+    "year": 1955
+  },
+  {
+    "title": "Nasce Bill Gates",
+    "subtitle": "Fondatore di Microsoft",
+    "wiki": "Bill Gates",
+    "year": 1955
+  },
+  {
+    "title": "Nasce Mark Zuckerberg",
+    "subtitle": "Fondatore di Facebook",
+    "wiki": "Mark Zuckerberg",
+    "year": 1984
+  }
+]

@@ -10,7 +10,9 @@
     "dev": "node --watch src/index.js",
     "start": "node src/index.js",
     "test": "node --test \"test/**/*.test.js\"",
-    "smoke": "node scripts/smoke.mjs"
+    "smoke": "node scripts/smoke.mjs",
+    "deck": "node scripts/build-anno-deck.mjs",
+    "smoke:anno": "node scripts/smoke-anno.mjs"
   },
   "dependencies": {
     "socket.io": "^4.8.1"
