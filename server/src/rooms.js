@@ -46,6 +46,9 @@ export class RoomManager {
   publicState(room) {
     const current = room.rounds[room.roundIndex - 1] || null;
     const showRound = current && ['countdown', 'playing', 'reveal'].includes(room.status);
+    // La clip del round dopo arriva in anticipo così i client la scaricano
+    // mentre si gioca questo: l'URL Deezer è un hash, non svela il titolo.
+    const next = showRound ? room.rounds[room.roundIndex] || null : null;
     const players = [...room.players.values()]
       .sort((a, b) => a.joinedAt - b.joinedAt)
       .map((p) => ({
@@ -75,6 +78,7 @@ export class RoomManager {
       },
       players,
       round: showRound ? { options: current.options, clipUrl: current.track.previewUrl } : null,
+      nextClipUrl: next ? next.track.previewUrl : null,
       reveal: ['reveal', 'finished'].includes(room.status) ? room.lastReveal : null,
     };
   }

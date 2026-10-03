@@ -6,11 +6,7 @@ import Link from 'next/link';
 import {
   emitAck, getNickname, getSocket, getStoredPlayer, setNickname, storePlayer, syncClock,
 } from '@/lib/gameClient';
-
-// Un wav silenzioso di pochi byte: serve solo a "sbloccare" l'audio con un
-// gesto dell'utente (Safari iOS vuole play() dentro il click) quando non c'è
-// ancora una clip da suonare.
-const SILENT_WAV = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
+import { createSyncedAudio } from '@/lib/syncedAudio';
 
 const STATUS_LABEL = {
   lobby: 'In attesa',
@@ -34,6 +30,7 @@ export default function GTSGamePage() {
   const [state, setState] = useState(null);
   const [playerId, setPlayerId] = useState(null);
   const [offset, setOffset] = useState(0);
+  const [clockSynced, setClockSynced] = useState(false);
   const [now, setNow] = useState(() => Date.now());
   const [myAnswer, setMyAnswer] = useState(null);
   const [sending, setSending] = useState(false);
@@ -44,7 +41,7 @@ export default function GTSGamePage() {
   const [copied, setCopied] = useState(false);
 
   const audioRef = useRef(null);
-  const playTimerRef = useRef(null);
+  const offsetRef = useRef(0);
   const scheduledRef = useRef(''); // chiave dell'ultima clip programmata
 
   // ---------- connessione e ingresso ----------
@@ -75,7 +72,11 @@ export default function GTSGamePage() {
     const onState = (s) => setState(s);
     const onConnect = () => {
       setOnline(true);
-      syncClock().then(setOffset);
+      syncClock(8).then((o) => {
+        offsetRef.current = o;
+        setOffset(o);
+        setClockSynced(true);
+      });
       join();
     };
     const onDisconnect = () => setOnline(false);
@@ -125,20 +126,33 @@ export default function GTSGamePage() {
   // ---------- audio ----------
 
   useEffect(() => {
-    const audio = new Audio();
-    audio.preload = 'auto';
+    const audio = createSyncedAudio();
     audioRef.current = audio;
     return () => {
-      if (playTimerRef.current) clearTimeout(playTimerRef.current);
-      audio.pause();
-      audio.src = '';
+      audio.close();
       audioRef.current = null;
     };
   }, []);
 
   const clipUrl = state?.round?.clipUrl || null;
+  const nextClipUrl = state?.nextClipUrl || null;
   const startAt = state?.startAt || null;
   const status = state?.status;
+
+  // A ogni countdown si riallinea l'orologio: la rete cambia (Wi-Fi ↔ 4G) e
+  // un offset vecchio di qualche minuto può valere centinaia di ms.
+  useEffect(() => {
+    if (status !== 'countdown') return;
+    syncClock(6).then((o) => {
+      offsetRef.current = o;
+      setOffset(o);
+    });
+  }, [status, roundIndex]);
+
+  // Mentre si gioca un round si scarica già la clip del successivo.
+  useEffect(() => {
+    if (audioUnlocked && nextClipUrl) audioRef.current?.preload(nextClipUrl)?.catch(() => {});
+  }, [audioUnlocked, nextClipUrl]);
 
   useEffect(() => {
     const audio = audioRef.current;
@@ -147,52 +161,24 @@ export default function GTSGamePage() {
     const shouldPlay = clipUrl && startAt && ['countdown', 'playing', 'reveal'].includes(status);
     if (!shouldPlay) {
       scheduledRef.current = '';
-      if (playTimerRef.current) { clearTimeout(playTimerRef.current); playTimerRef.current = null; }
-      audio.pause();
+      audio.stop();
       return;
     }
-    if (!audioUnlocked) return;
+    if (!audioUnlocked || !clockSynced) return;
 
     const key = `${clipUrl}|${startAt}`;
     if (scheduledRef.current === key) return;
     scheduledRef.current = key;
 
-    if (playTimerRef.current) { clearTimeout(playTimerRef.current); playTimerRef.current = null; }
-    audio.pause();
-    audio.src = clipUrl;
-    audio.load();
-
-    const startPlayback = () => {
-      const elapsed = Date.now() + offset - startAt;
-      if (elapsed <= 0) {
-        audio.currentTime = 0;
-        audio.play().catch(() => {});
-        return;
-      }
-      // Ingresso a round già iniziato: si salta avanti di quanto è passato,
-      // ma solo dopo che il browser conosce la durata (altrimenti Safari ignora il seek).
-      const seekAndPlay = () => {
-        const target = (Date.now() + offset - startAt) / 1000;
-        if (Number.isFinite(audio.duration) && target >= audio.duration) return;
-        try { audio.currentTime = Math.max(0, target); } catch { /* ignora */ }
-        audio.play().catch(() => {});
-      };
-      if (audio.readyState >= 1) seekAndPlay();
-      else audio.addEventListener('loadedmetadata', seekAndPlay, { once: true });
-    };
-
-    const delay = startAt - (Date.now() + offset);
-    if (delay > 0) playTimerRef.current = setTimeout(startPlayback, delay);
-    else startPlayback();
-  }, [clipUrl, startAt, status, audioUnlocked, offset]);
+    // L'offset si legge al momento della programmazione (dopo il download),
+    // non quando parte l'effetto: un risincronizzo nel frattempo conta.
+    audio.play(clipUrl, startAt, () => Date.now() + offsetRef.current).catch(() => {
+      scheduledRef.current = ''; // download fallito: si riprova al prossimo stato
+    });
+  }, [clipUrl, startAt, status, audioUnlocked, clockSynced]);
 
   function unlockAudio() {
-    const audio = audioRef.current;
-    if (!audio) return;
-    if (!audio.src) audio.src = SILENT_WAV;
-    audio.play().then(() => {
-      if (audio.src === SILENT_WAV) audio.pause();
-    }).catch(() => {});
+    audioRef.current?.unlock();
     setAudioUnlocked(true);
   }
 

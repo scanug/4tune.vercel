@@ -62,6 +62,15 @@ test('lo stato pubblico non contiene mai la risposta corretta durante il round',
   assert.ok(!JSON.stringify(state).includes('"correctIndex"'));
 });
 
+test('lo stato pubblico anticipa la clip del round successivo', () => {
+  const { clock, manager, room, host } = setup();
+  manager.startGame(room.code, host.id);
+  clock.advance(2000);
+  const state = manager.publicState(room);
+  assert.equal(state.nextClipUrl, room.rounds[1].track.previewUrl);
+  assert.notEqual(state.nextClipUrl, state.round.clipUrl);
+});
+
 test('flusso completo: countdown → playing → reveal → round 2 → finished, guidato dai timer del server', () => {
   const { clock, manager, room, host } = setup();
   manager.startGame(room.code, host.id);
