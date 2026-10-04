@@ -13,7 +13,9 @@ export const ANNO_CATEGORIES = [
   { id: 'personaggi', label: 'Personaggi', emoji: '🎂', span: 120 },
   { id: 'storia', label: 'Eventi storici', emoji: '🏛️', span: 250 },
   { id: 'invenzioni', label: 'Invenzioni e prodotti', emoji: '💡', span: 200 },
-  { id: 'media', label: 'Film, album e videogiochi', emoji: '🎬', span: 60 },
+  { id: 'media', label: 'Film, serie e videogiochi', emoji: '🎬', span: 60 },
+  { id: 'musica', label: 'Musica', emoji: '🎵', span: 60 },
+  { id: 'sport', label: 'Sport', emoji: '⚽', span: 120 },
   { id: 'attualita', label: 'Attualità', emoji: '📰', span: 20 },
 ];
 const CATEGORY = new Map(ANNO_CATEGORIES.map((c) => [c.id, c]));

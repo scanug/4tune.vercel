@@ -17,7 +17,7 @@ export default function AnnoLandingPage() {
 
         <section className="fade-up" style={{ marginTop: 24, display: 'grid', gap: 18 }}>
           <p style={{ fontSize: '1.1rem', color: '#111827' }}>
-            Quando è nato Vasco? In che anno è uscito Titanic? Ognuno sceglie un anno dal suo telefono: chi si avvicina di più vince il round. Personaggi, storia, invenzioni, film, musica, videogiochi e attualità, tutto verificato su Wikipedia.
+            Quando è nato Vasco? In che anno è uscito Titanic? Ognuno sceglie un anno dal suo telefono: chi si avvicina di più vince il round. Personaggi, storia, invenzioni, film e serie, musica, sport e attualità, tutto verificato su Wikipedia.
           </p>
 
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>

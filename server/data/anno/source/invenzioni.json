@@ -672,5 +672,440 @@
     "subtitle": "L'Ente Nazionale Idrocarburi di Mattei",
     "wiki": "Eni",
     "year": 1953
+  },
+  {
+    "title": "Viene lanciato il telescopio spaziale Hubble",
+    "subtitle": "L'occhio della NASA in orbita",
+    "wiki": "Telescopio spaziale Hubble",
+    "year": 1990,
+    "prop": "P619"
+  },
+  {
+    "title": "Goodyear scopre la vulcanizzazione della gomma",
+    "subtitle": "Il segreto degli pneumatici resistenti",
+    "wiki": "Vulcanizzazione",
+    "year": 1839
+  },
+  {
+    "title": "Viene inventato il forno a microonde",
+    "subtitle": "Nato per caso studiando i radar",
+    "wiki": "Forno a microonde",
+    "year": 1945
+  },
+  {
+    "title": "Viene fondata la Otis, l'azienda degli ascensori",
+    "subtitle": "Elisha Otis e il freno di sicurezza",
+    "wiki": "Otis Elevator Company",
+    "year": 1853
+  },
+  {
+    "title": "Benjamin Franklin inventa il parafulmine",
+    "subtitle": "L'esperimento con l'aquilone",
+    "wiki": "Parafulmine",
+    "year": 1752
+  },
+  {
+    "title": "Edison inventa la lampadina a incandescenza",
+    "subtitle": "La luce elettrica entra nelle case",
+    "wiki": "Lampada a incandescenza",
+    "year": 1879
+  },
+  {
+    "title": "Graham Bell brevetta il telefono",
+    "subtitle": "Anche se in Italia diciamo Meucci",
+    "wiki": "Telefono",
+    "year": 1876
+  },
+  {
+    "title": "Daguerre presenta la dagherrotipia",
+    "subtitle": "Uno dei primi procedimenti fotografici",
+    "wiki": "Dagherrotipia",
+    "year": 1839
+  },
+  {
+    "title": "Thomson scopre l'elettrone",
+    "subtitle": "La prima particella subatomica",
+    "wiki": "Elettrone",
+    "year": 1897
+  },
+  {
+    "title": "Chadwick scopre il neutrone",
+    "subtitle": "La particella senza carica del nucleo",
+    "wiki": "Neutrone",
+    "year": 1932
+  },
+  {
+    "title": "I coniugi Curie scoprono il radio",
+    "subtitle": "L'elemento radioattivo di Marie e Pierre",
+    "wiki": "Radio (elemento chimico)",
+    "year": 1898
+  },
+  {
+    "title": "Galileo pubblica il Sidereus Nuncius",
+    "subtitle": "Le prime osservazioni col cannocchiale",
+    "wiki": "Sidereus Nuncius",
+    "year": 1610
+  },
+  {
+    "title": "Copernico pubblica il De revolutionibus",
+    "subtitle": "Il Sole al centro dell'universo",
+    "wiki": "De revolutionibus orbium coelestium",
+    "year": 1543
+  },
+  {
+    "title": "Giuseppe Piazzi scopre Cerere",
+    "subtitle": "Il primo asteroide, avvistato da Palermo",
+    "wiki": "Cerere (astronomia)",
+    "year": 1801
+  },
+  {
+    "title": "Viene inaugurata la ferrovia Napoli-Portici",
+    "subtitle": "La prima linea ferroviaria italiana",
+    "wiki": "Ferrovia Napoli-Portici",
+    "year": 1839,
+    "prop": "P1619"
+  },
+  {
+    "title": "Apre la metropolitana di Londra",
+    "subtitle": "La prima metropolitana del mondo",
+    "wiki": "Metropolitana di Londra",
+    "year": 1863,
+    "prop": "P1619"
+  },
+  {
+    "title": "Karl Drais inventa la draisina",
+    "subtitle": "L'antenata della bicicletta, senza pedali",
+    "wiki": "Draisina",
+    "year": 1817
+  },
+  {
+    "title": "Rudolf Diesel inventa il suo motore",
+    "subtitle": "Il motore che porta il suo nome",
+    "wiki": "Motore Diesel",
+    "year": 1893
+  },
+  {
+    "title": "Il Concorde compie il suo primo volo",
+    "subtitle": "L'aereo di linea supersonico",
+    "wiki": "Concorde",
+    "year": 1969,
+    "prop": "P606"
+  },
+  {
+    "title": "Viene presentato l'ENIAC",
+    "subtitle": "Uno dei primi computer elettronici",
+    "wiki": "ENIAC",
+    "year": 1946,
+    "prop": "P1619"
+  },
+  {
+    "title": "Nasce lo standard Wi-Fi",
+    "subtitle": "Internet senza fili",
+    "wiki": "Wi-Fi",
+    "year": 1997
+  },
+  {
+    "title": "Viene inventato il codice QR",
+    "subtitle": "Nato in Giappone per le fabbriche Toyota",
+    "wiki": "Codice QR",
+    "year": 1994
+  },
+  {
+    "title": "Viene brevettata la cerniera lampo",
+    "subtitle": "La zip di Whitcomb Judson",
+    "wiki": "Cerniera lampo",
+    "year": 1893
+  },
+  {
+    "title": "Cavendish scopre l'idrogeno",
+    "subtitle": "L'elemento più leggero",
+    "wiki": "Idrogeno",
+    "year": 1766
+  },
+  {
+    "title": "Giffard fa volare il primo dirigibile",
+    "subtitle": "Un pallone con motore a vapore",
+    "wiki": "Dirigibile",
+    "year": 1852
+  },
+  {
+    "title": "Huygens inventa l'orologio a pendolo",
+    "subtitle": "Il primo orologio davvero preciso",
+    "wiki": "Orologio a pendolo",
+    "year": 1656
+  },
+  {
+    "title": "Viene inventato il circuito integrato",
+    "subtitle": "Il microchip di Jack Kilby",
+    "wiki": "Circuito integrato",
+    "year": 1958
+  },
+  {
+    "title": "Viene inventato il microprocessore",
+    "subtitle": "C'era anche l'italiano Federico Faggin",
+    "wiki": "Microprocessore",
+    "year": 1971
+  },
+  {
+    "title": "Viene inventato il telefono cellulare",
+    "subtitle": "La prima chiamata di Martin Cooper",
+    "wiki": "Telefono cellulare",
+    "year": 1973
+  },
+  {
+    "title": "Viene inventato il nylon",
+    "subtitle": "La fibra sintetica delle calze",
+    "wiki": "Nylon",
+    "year": 1935
+  },
+  {
+    "title": "Viene inventata la bachelite",
+    "subtitle": "La prima plastica sintetica",
+    "wiki": "Bachelite",
+    "year": 1907
+  },
+  {
+    "title": "Pasteur inventa la pastorizzazione",
+    "subtitle": "Il trattamento che conserva latte e vino",
+    "wiki": "Pastorizzazione",
+    "year": 1864
+  },
+  {
+    "title": "Viene lanciata la sonda Voyager 1",
+    "subtitle": "L'oggetto umano più lontano dalla Terra",
+    "wiki": "Voyager 1",
+    "year": 1977,
+    "prop": "P619"
+  },
+  {
+    "title": "Entra in funzione il Large Hadron Collider",
+    "subtitle": "Il grande acceleratore del CERN",
+    "wiki": "Large Hadron Collider",
+    "year": 2008,
+    "prop": "P1619"
+  },
+  {
+    "title": "Fermi accende il primo reattore nucleare",
+    "subtitle": "La pila atomica di Chicago",
+    "wiki": "Chicago Pile-1",
+    "year": 1942,
+    "prop": "P729"
+  },
+  {
+    "title": "Viene annunciato il vaccino antipolio di Salk",
+    "subtitle": "La fine della paura per la poliomielite",
+    "wiki": "Vaccino anti-poliomielite",
+    "year": 1955,
+    "prop": "P577"
+  },
+  {
+    "title": "Nasce il Diners Club, la prima carta di credito",
+    "subtitle": "Per pagare la cena senza contanti",
+    "wiki": "Diners",
+    "year": 1950
+  },
+  {
+    "title": "Newton pubblica i Principia",
+    "subtitle": "La legge di gravitazione universale",
+    "wiki": "Philosophiae Naturalis Principia Mathematica",
+    "year": 1687,
+    "prop": "P577"
+  },
+  {
+    "title": "Parte il Progetto Genoma Umano",
+    "subtitle": "La mappa completa del nostro DNA",
+    "wiki": "Progetto genoma umano",
+    "year": 1990
+  },
+  {
+    "title": "Nasce ARPANET, l'antenata di Internet",
+    "subtitle": "La rete del Dipartimento della Difesa USA",
+    "wiki": "ARPANET",
+    "year": 1969
+  },
+  {
+    "title": "Viene scoperto l'elio",
+    "subtitle": "Trovato prima nel Sole che sulla Terra",
+    "wiki": "Elio",
+    "year": 1868
+  },
+  {
+    "title": "Esce la Ford Model T",
+    "subtitle": "L'auto della catena di montaggio",
+    "wiki": "Ford Model T",
+    "year": 1908
+  },
+  {
+    "title": "Lo Space Shuttle compie il suo primo volo",
+    "subtitle": "La navetta spaziale riutilizzabile",
+    "wiki": "Space Shuttle",
+    "year": 1981,
+    "prop": "P606"
+  },
+  {
+    "title": "Entra in servizio lo Shinkansen",
+    "subtitle": "Il treno proiettile giapponese",
+    "wiki": "Shinkansen",
+    "year": 1964
+  },
+  {
+    "title": "Parte il primo Orient Express",
+    "subtitle": "Il treno di lusso da Parigi verso Oriente",
+    "wiki": "Orient Express",
+    "year": 1883
+  },
+  {
+    "title": "Nasce il Monopoly",
+    "subtitle": "Il gioco da tavolo di case e alberghi",
+    "wiki": "Monopoly",
+    "year": 1935
+  },
+  {
+    "title": "Nascono i Playmobil",
+    "subtitle": "Gli omini di plastica tedeschi",
+    "wiki": "Playmobil",
+    "year": 1974
+  },
+  {
+    "title": "Esce il Nintendo 64",
+    "wiki": "Nintendo 64",
+    "year": 1996
+  },
+  {
+    "title": "Esce la PlayStation Portable",
+    "subtitle": "La PSP, la prima portatile di Sony",
+    "wiki": "PlayStation Portable",
+    "year": 2004
+  },
+  {
+    "title": "Esce il Sega Mega Drive",
+    "subtitle": "La console di Sonic",
+    "wiki": "Sega Mega Drive",
+    "year": 1988
+  },
+  {
+    "title": "Esce il primo Apple Watch",
+    "wiki": "Apple Watch",
+    "year": 2015
+  },
+  {
+    "title": "Escono le prime AirPods",
+    "subtitle": "Gli auricolari senza fili di Apple",
+    "wiki": "AirPods",
+    "year": 2016
+  },
+  {
+    "title": "Nascono i Ferrero Rocher",
+    "subtitle": "I cioccolatini nella carta dorata",
+    "wiki": "Ferrero Rocher",
+    "year": 1982
+  },
+  {
+    "title": "Viene fondata la Maserati",
+    "subtitle": "La casa del Tridente",
+    "wiki": "Maserati",
+    "year": 1914
+  },
+  {
+    "title": "Viene fondata la Sanpellegrino",
+    "subtitle": "L'acqua frizzante di San Pellegrino Terme",
+    "wiki": "Sanpellegrino",
+    "year": 1899
+  },
+  {
+    "title": "Viene fondata Fendi",
+    "subtitle": "La maison romana di moda",
+    "wiki": "Fendi",
+    "year": 1925
+  },
+  {
+    "title": "Viene fondata Geox",
+    "subtitle": "La scarpa che respira",
+    "wiki": "Geox",
+    "year": 1995
+  },
+  {
+    "title": "Viene fondata la Perugina",
+    "subtitle": "Quella dei Baci",
+    "wiki": "Perugina",
+    "year": 1907
+  },
+  {
+    "title": "Viene fondata Parmalat",
+    "subtitle": "L'azienda del latte di Collecchio",
+    "wiki": "Parmalat",
+    "year": 1961
+  },
+  {
+    "title": "Viene fondata la Martini & Rossi",
+    "subtitle": "Il vermut di Torino",
+    "wiki": "Martini & Rossi",
+    "year": 1863
+  },
+  {
+    "title": "Nasce il KitKat",
+    "subtitle": "Have a break, have a KitKat",
+    "wiki": "Kit Kat",
+    "year": 1935
+  },
+  {
+    "title": "Nascono le Pringles",
+    "subtitle": "Le patatine nel tubo",
+    "wiki": "Pringles",
+    "year": 1968
+  },
+  {
+    "title": "Viene fondata Intel",
+    "subtitle": "Il gigante dei processori",
+    "wiki": "Intel",
+    "year": 1968
+  },
+  {
+    "title": "Viene fondata IBM",
+    "subtitle": "Big Blue",
+    "wiki": "IBM",
+    "year": 1911
+  },
+  {
+    "title": "Viene fondata OpenAI",
+    "subtitle": "L'azienda che creerà ChatGPT",
+    "wiki": "OpenAI",
+    "year": 2015
+  },
+  {
+    "title": "Nasce Tinder",
+    "subtitle": "L'app degli swipe",
+    "wiki": "Tinder",
+    "year": 2012
+  },
+  {
+    "title": "Linus Torvalds crea il kernel Linux",
+    "subtitle": "Il pinguino del software libero",
+    "wiki": "Linux (kernel)",
+    "year": 1991
+  },
+  {
+    "title": "Esce Google Chrome",
+    "subtitle": "Il browser di Google",
+    "wiki": "Google Chrome",
+    "year": 2008
+  },
+  {
+    "title": "Nasce Swatch",
+    "subtitle": "Gli orologi svizzeri di plastica colorata",
+    "wiki": "Swatch",
+    "year": 1983
+  },
+  {
+    "title": "Nasce Nespresso",
+    "subtitle": "Il caffè in capsule di Nestlé",
+    "wiki": "Nespresso",
+    "year": 1986
+  },
+  {
+    "title": "Viene fondata la Esselunga",
+    "subtitle": "Il supermercato di Caprotti",
+    "wiki": "Esselunga",
+    "year": 1957
   }
 ]

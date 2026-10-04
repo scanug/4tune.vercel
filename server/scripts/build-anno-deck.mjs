@@ -28,7 +28,7 @@ const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const SOURCE_DIR = path.join(ROOT, 'data/anno/source');
 const OUT_FILE = path.join(ROOT, 'data/anno/cards.json');
 
-export const CATEGORIES = ['personaggi', 'storia', 'invenzioni', 'media', 'attualita'];
+export const CATEGORIES = ['personaggi', 'storia', 'invenzioni', 'media', 'musica', 'sport', 'attualita'];
 
 // Proprietà Wikidata da provare in ordine, per categoria.
 //   P569 nascita · P585 data · P580 inizio · P571 fondazione/creazione
@@ -38,6 +38,8 @@ const DEFAULT_PROPS = {
   storia: ['P585', 'P580', 'P571'],
   invenzioni: ['P575', 'P571', 'P577', 'P585', 'P580'],
   media: ['P577', 'P571', 'P580'],
+  musica: ['P577', 'P585', 'P580', 'P571'],
+  sport: ['P585', 'P580', 'P577', 'P571'],
   attualita: ['P585', 'P580', 'P577', 'P571'],
 };
 
@@ -69,8 +71,9 @@ async function fetchEntities(titles) {
     if (json?.entities) return json.entities;
     // maxlag: Wikidata chiede di ripassare quando i suoi server sono in ritardo.
     const lagged = json?.error?.code === 'maxlag';
-    if (attempt >= (lagged ? 40 : 4)) throw new Error(`Wikidata non risponde (${res.status}) ${json?.error?.info || ''}`);
-    await new Promise((r) => setTimeout(r, lagged ? 5000 : 2000 * attempt));
+    if (attempt >= (lagged ? 60 : 4)) throw new Error(`Wikidata non risponde (${res.status}) ${json?.error?.info || ''}`);
+    // Ritardi lunghi capitano (manutenzione, carico): si aspetta sempre di più, fino a 15s.
+    await new Promise((r) => setTimeout(r, lagged ? Math.min(15000, 3000 + 1000 * attempt) : 2000 * attempt));
   }
 }
 

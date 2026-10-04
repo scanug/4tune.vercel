@@ -1,0 +1,908 @@
+[
+  {
+    "title": "Ad Atene si tengono le prime Olimpiadi moderne",
+    "subtitle": "Il sogno di Pierre de Coubertin",
+    "wiki": "Giochi della I Olimpiade",
+    "year": 1896
+  },
+  {
+    "title": "Roma ospita le Olimpiadi",
+    "subtitle": "Abebe Bikila vince la maratona a piedi nudi",
+    "wiki": "Giochi della XVII Olimpiade",
+    "year": 1960
+  },
+  {
+    "title": "L'Italia di Bearzot vince il Mondiale in Spagna",
+    "subtitle": "L'urlo di Tardelli in finale",
+    "wiki": "Campionato mondiale di calcio 1982",
+    "year": 1982
+  },
+  {
+    "title": "Torino ospita le Olimpiadi invernali",
+    "subtitle": "La fiaccola sulle Alpi piemontesi",
+    "wiki": "XX Giochi olimpici invernali",
+    "year": 2006
+  },
+  {
+    "title": "L'Italia di Lippi vince il Mondiale in Germania",
+    "subtitle": "Grosso segna l'ultimo rigore a Berlino",
+    "wiki": "Campionato mondiale di calcio 2006",
+    "year": 2006
+  },
+  {
+    "title": "Vincenzo Nibali vince il Tour de France",
+    "subtitle": "Lo Squalo dello Stretto in giallo a Parigi",
+    "wiki": "Tour de France 2014",
+    "year": 2014
+  },
+  {
+    "title": "La Germania travolge il Brasile 7-1",
+    "subtitle": "La semifinale del Mondiale a Belo Horizonte",
+    "wiki": "Mineirazo",
+    "year": 2014
+  },
+  {
+    "title": "Pennetta batte Vinci nella finale tutta italiana",
+    "subtitle": "La finale femminile degli US Open",
+    "wiki": "US Open 2015 - Singolare femminile",
+    "year": 2015
+  },
+  {
+    "title": "La Francia vince il Mondiale in Russia",
+    "subtitle": "Mbappé e Griezmann battono la Croazia",
+    "wiki": "Campionato mondiale di calcio 2018",
+    "year": 2018
+  },
+  {
+    "title": "L'Italia campione d'Europa a Wembley",
+    "subtitle": "Donnarumma para i rigori all'Inghilterra",
+    "wiki": "Campionato europeo maschile di calcio 2020",
+    "year": 2021
+  },
+  {
+    "title": "Jacobs oro olimpico nei 100 metri a Tokyo",
+    "subtitle": "Le Olimpiadi slittate per la pandemia",
+    "wiki": "Giochi della XXXII Olimpiade",
+    "year": 2021
+  },
+  {
+    "title": "L'Argentina di Messi vince il Mondiale in Qatar",
+    "subtitle": "Finale ai rigori contro la Francia",
+    "wiki": "Campionato mondiale di calcio 2022",
+    "year": 2022
+  },
+  {
+    "title": "Il Napoli di Spalletti vince il terzo scudetto",
+    "subtitle": "Il primo senza Maradona",
+    "wiki": "Serie A 2022-2023",
+    "year": 2023,
+    "prop": "P582"
+  },
+  {
+    "title": "Sinner vince il suo primo Slam a Melbourne",
+    "subtitle": "Australian Open, rimonta su Medvedev",
+    "wiki": "Australian Open 2024 - Singolare maschile",
+    "year": 2024
+  },
+  {
+    "title": "L'Inter vince lo scudetto della seconda stella",
+    "subtitle": "Festa nel derby contro il Milan",
+    "wiki": "Serie A 2023-2024",
+    "year": 2024,
+    "prop": "P582"
+  },
+  {
+    "title": "La Spagna vince l'Europeo in Germania",
+    "subtitle": "Yamal e Williams battono l'Inghilterra",
+    "wiki": "Campionato europeo maschile di calcio 2024",
+    "year": 2024
+  },
+  {
+    "title": "Parigi ospita le Olimpiadi",
+    "subtitle": "La cerimonia d'apertura sulla Senna",
+    "wiki": "Giochi della XXXIII Olimpiade",
+    "year": 2024
+  },
+  {
+    "title": "Il Napoli di Conte vince il quarto scudetto",
+    "wiki": "Serie A 2024-2025",
+    "year": 2025,
+    "prop": "P582"
+  },
+  {
+    "title": "Il PSG travolge l'Inter in finale di Champions",
+    "subtitle": "Finisce 5-0 a Monaco di Baviera",
+    "wiki": "Finale della UEFA Champions League 2024-2025",
+    "year": 2025
+  },
+  {
+    "title": "Sinner vince Wimbledon",
+    "subtitle": "Il primo italiano a trionfare sull'erba londinese",
+    "wiki": "Torneo di Wimbledon 2025 - Singolare maschile",
+    "year": 2025
+  },
+  {
+    "title": "Milano e Cortina ospitano le Olimpiadi invernali",
+    "wiki": "XXV Giochi olimpici invernali",
+    "year": 2026
+  },
+  {
+    "title": "Il primo Mondiale a 48 squadre",
+    "subtitle": "Tra Stati Uniti, Canada e Messico",
+    "wiki": "Campionato mondiale di calcio 2026",
+    "year": 2026
+  },
+  {
+    "title": "Il Genoa vince il primo campionato italiano di calcio",
+    "subtitle": "Si gioca tutto in un giorno a Torino",
+    "wiki": "Campionato Italiano di Football 1898",
+    "year": 1898
+  },
+  {
+    "title": "Nasce la Juventus",
+    "subtitle": "Fondata da studenti di un liceo torinese",
+    "wiki": "Juventus Football Club",
+    "year": 1897,
+    "prop": "P571"
+  },
+  {
+    "title": "Nasce il Milan",
+    "subtitle": "Tra i fondatori l'inglese Herbert Kilpin",
+    "wiki": "Associazione Calcio Milan",
+    "year": 1899,
+    "prop": "P571"
+  },
+  {
+    "title": "Nasce l'Inter",
+    "subtitle": "Una scissione dal Milan, aperta agli stranieri",
+    "wiki": "Football Club Internazionale Milano",
+    "year": 1908,
+    "prop": "P571"
+  },
+  {
+    "title": "Nasce il Genoa, il club di calcio più antico d'Italia",
+    "wiki": "Genoa Cricket and Football Club",
+    "year": 1893,
+    "prop": "P571"
+  },
+  {
+    "title": "Nasce la Roma",
+    "subtitle": "Dalla fusione di tre club della capitale",
+    "wiki": "Associazione Sportiva Roma",
+    "year": 1927,
+    "prop": "P571"
+  },
+  {
+    "title": "Nasce la Lazio",
+    "subtitle": "Fondata da un gruppo di podisti",
+    "wiki": "Società Sportiva Lazio",
+    "year": 1900,
+    "prop": "P571"
+  },
+  {
+    "title": "Nasce il Napoli",
+    "subtitle": "Il club azzurro del Vesuvio",
+    "wiki": "Società Sportiva Calcio Napoli",
+    "year": 1926,
+    "prop": "P571"
+  },
+  {
+    "title": "Nasce il Barcellona",
+    "subtitle": "Lo fonda lo svizzero Joan Gamper",
+    "wiki": "Futbol Club Barcelona",
+    "year": 1899,
+    "prop": "P571"
+  },
+  {
+    "title": "Nasce la FIFA",
+    "subtitle": "Fondata a Parigi da sette federazioni europee",
+    "wiki": "FIFA",
+    "year": 1904,
+    "prop": "P571"
+  },
+  {
+    "title": "Parte la prima Serie A a girone unico",
+    "subtitle": "Vince l'Ambrosiana, cioè l'Inter",
+    "wiki": "Serie A 1929-1930",
+    "year": 1929,
+    "prop": "P580"
+  },
+  {
+    "title": "Si gioca il primo Mondiale di calcio",
+    "subtitle": "In Uruguay, che lo vince in casa",
+    "wiki": "Campionato mondiale di calcio 1930",
+    "year": 1930
+  },
+  {
+    "title": "L'Italia di Pozzo vince il suo primo Mondiale, in casa",
+    "subtitle": "Finale a Roma contro la Cecoslovacchia",
+    "wiki": "Campionato mondiale di calcio 1934",
+    "year": 1934
+  },
+  {
+    "title": "L'Uruguay zittisce il Maracanã e vince il Mondiale",
+    "subtitle": "Il Brasile sconfitto in casa nella partita decisiva",
+    "wiki": "Maracanazo",
+    "year": 1950
+  },
+  {
+    "title": "Il Brasile di un giovanissimo Pelé vince il Mondiale",
+    "subtitle": "Il torneo si gioca in Svezia",
+    "wiki": "Campionato mondiale di calcio 1958",
+    "year": 1958
+  },
+  {
+    "title": "L'Inghilterra vince il suo unico Mondiale",
+    "subtitle": "Finale a Wembley contro la Germania Ovest",
+    "wiki": "Campionato mondiale di calcio 1966",
+    "year": 1966
+  },
+  {
+    "title": "Si gioca Italia-Germania 4-3, la partita del secolo",
+    "subtitle": "Semifinale mondiale allo stadio Azteca",
+    "wiki": "Partita del secolo",
+    "year": 1970
+  },
+  {
+    "title": "Il Brasile di Pelé batte l'Italia nella finale mondiale",
+    "subtitle": "Si gioca in Messico, finisce 4-1",
+    "wiki": "Campionato mondiale di calcio 1970",
+    "year": 1970
+  },
+  {
+    "title": "La Germania Ovest di Beckenbauer vince il Mondiale in casa",
+    "subtitle": "Battuta in finale l'Olanda di Cruijff",
+    "wiki": "Campionato mondiale di calcio 1974",
+    "year": 1974
+  },
+  {
+    "title": "Maradona segna di mano all'Inghilterra",
+    "subtitle": "La Mano de Dios ai quarti del Mondiale",
+    "wiki": "Mano de Dios",
+    "year": 1986
+  },
+  {
+    "title": "L'Argentina di Maradona vince il Mondiale in Messico",
+    "wiki": "Campionato mondiale di calcio 1986",
+    "year": 1986
+  },
+  {
+    "title": "L'Italia ospita i Mondiali delle Notti magiche",
+    "subtitle": "Totò Schillaci capocannoniere",
+    "wiki": "Campionato mondiale di calcio 1990",
+    "year": 1990
+  },
+  {
+    "title": "Baggio sbaglia il rigore nella finale mondiale",
+    "subtitle": "Il Brasile vince a Pasadena",
+    "wiki": "Campionato mondiale di calcio 1994",
+    "year": 1994
+  },
+  {
+    "title": "La Francia di Zidane vince il Mondiale in casa",
+    "subtitle": "Doppietta di testa in finale al Brasile",
+    "wiki": "Campionato mondiale di calcio 1998",
+    "year": 1998
+  },
+  {
+    "title": "Il Brasile di Ronaldo vince il Mondiale in Asia",
+    "subtitle": "Il primo torneo tra Corea del Sud e Giappone",
+    "wiki": "Campionato mondiale di calcio 2002",
+    "year": 2002
+  },
+  {
+    "title": "La Spagna vince il suo primo Mondiale",
+    "subtitle": "In Sudafrica, Iniesta decide la finale",
+    "wiki": "Campionato mondiale di calcio 2010",
+    "year": 2010
+  },
+  {
+    "title": "La Germania vince il Mondiale in Brasile",
+    "subtitle": "Götze decide la finale con l'Argentina",
+    "wiki": "Campionato mondiale di calcio 2014",
+    "year": 2014
+  },
+  {
+    "title": "L'Italia vince il suo primo Europeo",
+    "subtitle": "Finale ripetuta contro la Jugoslavia a Roma",
+    "wiki": "Campionato europeo maschile di calcio 1968",
+    "year": 1968
+  },
+  {
+    "title": "Panenka decide l'Europeo con il suo cucchiaio",
+    "subtitle": "La Cecoslovacchia batte la Germania Ovest",
+    "wiki": "Campionato europeo maschile di calcio 1976",
+    "year": 1976
+  },
+  {
+    "title": "Trezeguet beffa l'Italia con il golden goal",
+    "subtitle": "La Francia vince l'Europeo a Rotterdam",
+    "wiki": "Campionato europeo maschile di calcio 2000",
+    "year": 2000
+  },
+  {
+    "title": "La Grecia vince a sorpresa l'Europeo in Portogallo",
+    "wiki": "Campionato europeo maschile di calcio 2004",
+    "year": 2004
+  },
+  {
+    "title": "La Spagna travolge l'Italia 4-0 nella finale dell'Europeo",
+    "subtitle": "Si gioca a Kiev",
+    "wiki": "Campionato europeo maschile di calcio 2012",
+    "year": 2012
+  },
+  {
+    "title": "Il Portogallo di Cristiano Ronaldo vince l'Europeo",
+    "subtitle": "Eder decide la finale contro la Francia",
+    "wiki": "Campionato europeo maschile di calcio 2016",
+    "year": 2016
+  },
+  {
+    "title": "Il Real Madrid vince la prima Coppa dei Campioni",
+    "subtitle": "Battuto lo Stade de Reims a Parigi",
+    "wiki": "Finale della Coppa dei Campioni 1955-1956",
+    "year": 1956
+  },
+  {
+    "title": "Il Milan è la prima italiana a vincere la Coppa dei Campioni",
+    "subtitle": "Doppietta di Altafini a Wembley",
+    "wiki": "Finale della Coppa dei Campioni 1962-1963",
+    "year": 1963
+  },
+  {
+    "title": "La Grande Inter di Herrera vince la Coppa dei Campioni",
+    "subtitle": "Battuto il Real Madrid a Vienna",
+    "wiki": "Finale della Coppa dei Campioni 1963-1964",
+    "year": 1964
+  },
+  {
+    "title": "Il Milan di Sacchi vince la Coppa dei Campioni",
+    "subtitle": "4-0 alla Steaua Bucarest a Barcellona",
+    "wiki": "Finale della Coppa dei Campioni 1988-1989",
+    "year": 1989
+  },
+  {
+    "title": "Il Milan di Capello travolge il Barcellona 4-0",
+    "subtitle": "La finale di Champions ad Atene",
+    "wiki": "Finale della UEFA Champions League 1993-1994",
+    "year": 1994
+  },
+  {
+    "title": "La Juventus di Lippi vince la Champions ai rigori",
+    "subtitle": "Battuto l'Ajax all'Olimpico di Roma",
+    "wiki": "Finale della UEFA Champions League 1995-1996",
+    "year": 1996
+  },
+  {
+    "title": "Milan e Juventus si sfidano nella finale di Champions",
+    "subtitle": "Shevchenko segna il rigore decisivo a Manchester",
+    "wiki": "Finale della UEFA Champions League 2002-2003",
+    "year": 2003
+  },
+  {
+    "title": "Il Liverpool rimonta tre gol al Milan a Istanbul",
+    "subtitle": "Finale di Champions vinta ai rigori dagli inglesi",
+    "wiki": "Finale della UEFA Champions League 2004-2005",
+    "year": 2005
+  },
+  {
+    "title": "Il Milan si vendica del Liverpool ad Atene",
+    "subtitle": "Doppietta di Pippo Inzaghi in finale di Champions",
+    "wiki": "Finale della UEFA Champions League 2006-2007",
+    "year": 2007
+  },
+  {
+    "title": "L'Inter di Mourinho completa il Triplete",
+    "subtitle": "Milito stende il Bayern a Madrid",
+    "wiki": "Finale della UEFA Champions League 2009-2010",
+    "year": 2010
+  },
+  {
+    "title": "La Juventus perde la finale di Champions a Cardiff",
+    "subtitle": "Il Real Madrid vince 4-1",
+    "wiki": "Finale della UEFA Champions League 2016-2017",
+    "year": 2017
+  },
+  {
+    "title": "Il Napoli di Maradona vince la Coppa UEFA",
+    "subtitle": "Battuto lo Stoccarda in finale",
+    "wiki": "Finale della Coppa UEFA 1988-1989",
+    "year": 1989
+  },
+  {
+    "title": "L'Atalanta di Gasperini vince l'Europa League",
+    "subtitle": "Tripletta di Lookman a Dublino",
+    "wiki": "Finale della UEFA Europa League 2023-2024",
+    "year": 2024
+  },
+  {
+    "title": "La Roma di Mourinho vince la Conference League",
+    "subtitle": "Zaniolo decide la finale di Tirana",
+    "wiki": "Finale della UEFA Europa Conference League 2021-2022",
+    "year": 2022
+  },
+  {
+    "title": "Il Bologna vince lo scudetto allo spareggio",
+    "subtitle": "Battuta l'Inter all'Olimpico",
+    "wiki": "Serie A 1963-1964",
+    "year": 1964,
+    "prop": "P582"
+  },
+  {
+    "title": "Il Cagliari di Gigi Riva vince lo scudetto",
+    "subtitle": "Il primo titolo di una squadra delle isole",
+    "wiki": "Serie A 1969-1970",
+    "year": 1970,
+    "prop": "P582"
+  },
+  {
+    "title": "Il Verona vince lo scudetto",
+    "subtitle": "L'unico titolo della sua storia",
+    "wiki": "Serie A 1984-1985",
+    "year": 1985,
+    "prop": "P582"
+  },
+  {
+    "title": "Il Napoli di Maradona vince il primo scudetto",
+    "wiki": "Serie A 1986-1987",
+    "year": 1987,
+    "prop": "P582"
+  },
+  {
+    "title": "La Sampdoria di Vialli e Mancini vince lo scudetto",
+    "wiki": "Serie A 1990-1991",
+    "year": 1991,
+    "prop": "P582"
+  },
+  {
+    "title": "La Lazio di Eriksson vince lo scudetto all'ultima giornata",
+    "subtitle": "La Juve affonda sotto il diluvio di Perugia",
+    "wiki": "Serie A 1999-2000",
+    "year": 2000,
+    "prop": "P582"
+  },
+  {
+    "title": "La Roma di Totti vince il terzo scudetto",
+    "wiki": "Serie A 2000-2001",
+    "year": 2001,
+    "prop": "P582"
+  },
+  {
+    "title": "La Juve di Conte vince il primo di nove scudetti di fila",
+    "subtitle": "Senza perdere neanche una partita",
+    "wiki": "Serie A 2011-2012",
+    "year": 2012,
+    "prop": "P582"
+  },
+  {
+    "title": "La Juventus vince il nono scudetto consecutivo",
+    "subtitle": "Si chiude d'estate, dopo lo stop per il Covid",
+    "wiki": "Serie A 2019-2020",
+    "year": 2020,
+    "prop": "P582"
+  },
+  {
+    "title": "Il Milan di Pioli vince lo scudetto",
+    "subtitle": "Il primo dopo undici anni",
+    "wiki": "Serie A 2021-2022",
+    "year": 2022,
+    "prop": "P582"
+  },
+  {
+    "title": "Scoppia lo scandalo Calciopoli",
+    "subtitle": "La Juventus viene retrocessa in Serie B",
+    "wiki": "Calciopoli",
+    "year": 2006
+  },
+  {
+    "title": "La sentenza Bosman rivoluziona il calciomercato",
+    "subtitle": "I calciatori a fine contratto si liberano gratis",
+    "wiki": "Sentenza Bosman",
+    "year": 1995
+  },
+  {
+    "title": "Gianni Rivera vince il Pallone d'oro",
+    "subtitle": "Il Golden Boy del Milan",
+    "wiki": "Pallone d'oro 1969",
+    "year": 1969
+  },
+  {
+    "title": "Paolo Rossi vince il Pallone d'oro",
+    "subtitle": "Pablito, capocannoniere azzurro",
+    "wiki": "Pallone d'oro 1982",
+    "year": 1982
+  },
+  {
+    "title": "Roberto Baggio vince il Pallone d'oro",
+    "subtitle": "Il Divin Codino, allora alla Juventus",
+    "wiki": "Pallone d'oro 1993",
+    "year": 1993
+  },
+  {
+    "title": "Fabio Cannavaro vince il Pallone d'oro",
+    "subtitle": "Il capitano azzurro campione del mondo",
+    "wiki": "Pallone d'oro 2006",
+    "year": 2006
+  },
+  {
+    "title": "Il Leicester di Ranieri vince la Premier League",
+    "subtitle": "Era quotato 5000 a 1 a inizio stagione",
+    "wiki": "Premier League 2015-2016",
+    "year": 2016,
+    "prop": "P582"
+  },
+  {
+    "title": "Dorando Pietri arriva primo alla maratona ma viene squalificato",
+    "subtitle": "Sorretto dai giudici sul traguardo di Londra",
+    "wiki": "Giochi della IV Olimpiade",
+    "year": 1908
+  },
+  {
+    "title": "Jesse Owens vince quattro ori alle Olimpiadi di Berlino",
+    "subtitle": "Sotto gli occhi di Hitler",
+    "wiki": "Giochi della XI Olimpiade",
+    "year": 1936
+  },
+  {
+    "title": "Tommie Smith e John Carlos alzano il pugno sul podio",
+    "subtitle": "Olimpiadi di Città del Messico",
+    "wiki": "Giochi della XIX Olimpiade",
+    "year": 1968
+  },
+  {
+    "title": "Nadia Comăneci prende il primo 10 della ginnastica",
+    "subtitle": "Olimpiadi di Montréal",
+    "wiki": "Giochi della XXI Olimpiade",
+    "year": 1976
+  },
+  {
+    "title": "Pietro Mennea vince l'oro nei 200 metri a Mosca",
+    "subtitle": "Olimpiadi boicottate dagli Stati Uniti",
+    "wiki": "Giochi della XXII Olimpiade",
+    "year": 1980
+  },
+  {
+    "title": "Ben Johnson perde l'oro dei 100 metri per doping",
+    "subtitle": "Olimpiadi di Seul",
+    "wiki": "Giochi della XXIV Olimpiade",
+    "year": 1988
+  },
+  {
+    "title": "Il Dream Team di Jordan incanta le Olimpiadi di Barcellona",
+    "subtitle": "I campioni NBA ai Giochi per la prima volta",
+    "wiki": "Giochi della XXV Olimpiade",
+    "year": 1992
+  },
+  {
+    "title": "Muhammad Ali accende il braciere olimpico ad Atlanta",
+    "wiki": "Giochi della XXVI Olimpiade",
+    "year": 1996
+  },
+  {
+    "title": "Stefano Baldini vince la maratona olimpica di Atene",
+    "subtitle": "Le Olimpiadi tornano in Grecia",
+    "wiki": "Giochi della XXVIII Olimpiade",
+    "year": 2004
+  },
+  {
+    "title": "Phelps vince otto ori e Bolt vola a Pechino",
+    "subtitle": "Le prime Olimpiadi in Cina",
+    "wiki": "Giochi della XXIX Olimpiade",
+    "year": 2008
+  },
+  {
+    "title": "Rio de Janeiro ospita le prime Olimpiadi in Sudamerica",
+    "wiki": "Giochi della XXXI Olimpiade",
+    "year": 2016
+  },
+  {
+    "title": "Chamonix ospita le prime Olimpiadi invernali",
+    "wiki": "I Giochi olimpici invernali",
+    "year": 1924
+  },
+  {
+    "title": "Cortina d'Ampezzo ospita le Olimpiadi invernali",
+    "subtitle": "La prima volta in Italia",
+    "wiki": "VII Giochi olimpici invernali",
+    "year": 1956
+  },
+  {
+    "title": "Gli studenti americani battono l'URSS nell'hockey",
+    "subtitle": "Il Miracolo sul ghiaccio di Lake Placid",
+    "wiki": "Miracolo sul ghiaccio",
+    "year": 1980
+  },
+  {
+    "title": "Alberto Tomba vince due ori olimpici a Calgary",
+    "subtitle": "Slalom e gigante, la Tomba-mania",
+    "wiki": "XV Giochi olimpici invernali",
+    "year": 1988
+  },
+  {
+    "title": "Sofia Goggia oro olimpico in discesa libera",
+    "subtitle": "Olimpiadi di PyeongChang",
+    "wiki": "XXIII Giochi olimpici invernali",
+    "year": 2018
+  },
+  {
+    "title": "Nasce il Comitato Olimpico Internazionale",
+    "subtitle": "Su iniziativa di Pierre de Coubertin",
+    "wiki": "Comitato Olimpico Internazionale",
+    "year": 1894,
+    "prop": "P571"
+  },
+  {
+    "title": "Usain Bolt corre i 100 metri in 9 secondi e 58",
+    "subtitle": "Il record del mondo ai Mondiali di Berlino",
+    "wiki": "Campionati del mondo di atletica leggera 2009",
+    "year": 2009
+  },
+  {
+    "title": "Si corre il primo Giro d'Italia",
+    "subtitle": "Lo organizza la Gazzetta dello Sport",
+    "wiki": "Giro d'Italia 1909",
+    "year": 1909
+  },
+  {
+    "title": "Si corre il primo Tour de France",
+    "wiki": "Tour de France 1903",
+    "year": 1903
+  },
+  {
+    "title": "Gino Bartali vince il Tour e calma l'Italia",
+    "subtitle": "Pochi giorni dopo l'attentato a Togliatti",
+    "wiki": "Tour de France 1948",
+    "year": 1948
+  },
+  {
+    "title": "Fausto Coppi vince per la prima volta Giro e Tour",
+    "subtitle": "Il primo a riuscirci nello stesso anno",
+    "wiki": "Tour de France 1949",
+    "year": 1949
+  },
+  {
+    "title": "Marco Pantani vince il Tour de France",
+    "subtitle": "Il Pirata fa doppietta con il Giro",
+    "wiki": "Tour de France 1998",
+    "year": 1998
+  },
+  {
+    "title": "Pantani viene fermato a Madonna di Campiglio",
+    "subtitle": "Escluso dal Giro mentre è in maglia rosa",
+    "wiki": "Giro d'Italia 1999",
+    "year": 1999
+  },
+  {
+    "title": "Il Tour de France parte per la prima volta dall'Italia",
+    "subtitle": "Grand Départ da Firenze",
+    "wiki": "Tour de France 2024",
+    "year": 2024
+  },
+  {
+    "title": "Nino Farina vince il primo Mondiale di Formula 1",
+    "subtitle": "Al volante di un'Alfa Romeo",
+    "wiki": "Campionato mondiale di Formula 1 1950",
+    "year": 1950
+  },
+  {
+    "title": "Niki Lauda vince il suo primo Mondiale con la Ferrari",
+    "wiki": "Campionato mondiale di Formula 1 1975",
+    "year": 1975
+  },
+  {
+    "title": "Ayrton Senna vince il suo primo Mondiale di Formula 1",
+    "subtitle": "Con la McLaren, rivale di Prost",
+    "wiki": "Campionato mondiale di Formula 1 1988",
+    "year": 1988
+  },
+  {
+    "title": "Schumacher riporta il Mondiale piloti alla Ferrari",
+    "subtitle": "Il primo titolo di Maranello dopo 21 anni",
+    "wiki": "Campionato mondiale di Formula 1 2000",
+    "year": 2000
+  },
+  {
+    "title": "Schumacher vince il suo settimo Mondiale",
+    "subtitle": "L'ultimo titolo in rosso del Kaiser",
+    "wiki": "Campionato mondiale di Formula 1 2004",
+    "year": 2004
+  },
+  {
+    "title": "Räikkönen vince il Mondiale con la Ferrari",
+    "subtitle": "L'ultimo titolo piloti di Maranello",
+    "wiki": "Campionato mondiale di Formula 1 2007",
+    "year": 2007
+  },
+  {
+    "title": "Verstappen vince il Mondiale all'ultimo giro di Abu Dhabi",
+    "subtitle": "Il duello con Hamilton",
+    "wiki": "Campionato mondiale di Formula 1 2021",
+    "year": 2021
+  },
+  {
+    "title": "Leclerc vince a Monza con la Ferrari",
+    "subtitle": "Il primo successo rosso in casa dopo nove anni",
+    "wiki": "Gran Premio d'Italia 2019",
+    "year": 2019
+  },
+  {
+    "title": "Giacomo Agostini vince il primo Mondiale della classe 500",
+    "subtitle": "Con la MV Agusta",
+    "wiki": "Motomondiale 1966",
+    "year": 1966
+  },
+  {
+    "title": "Valentino Rossi vince il suo primo Mondiale",
+    "subtitle": "In classe 125 con l'Aprilia",
+    "wiki": "Motomondiale 1997",
+    "year": 1997
+  },
+  {
+    "title": "Valentino Rossi vince l'ultimo Mondiale della classe 500",
+    "subtitle": "Poi arriva la MotoGP",
+    "wiki": "Motomondiale 2001",
+    "year": 2001
+  },
+  {
+    "title": "Valentino Rossi vince il suo nono e ultimo Mondiale",
+    "subtitle": "Con la Yamaha, duello con Lorenzo",
+    "wiki": "Motomondiale 2009",
+    "year": 2009
+  },
+  {
+    "title": "Pecco Bagnaia vince la MotoGP con la Ducati",
+    "subtitle": "Primo italiano su moto italiana dai tempi di Agostini",
+    "wiki": "Motomondiale 2022",
+    "year": 2022
+  },
+  {
+    "title": "Si gioca il primo torneo di Wimbledon",
+    "wiki": "Torneo di Wimbledon",
+    "year": 1877,
+    "prop": "P571"
+  },
+  {
+    "title": "Adriano Panatta vince il Roland Garros",
+    "wiki": "Open di Francia 1976 - Singolare maschile",
+    "year": 1976
+  },
+  {
+    "title": "L'Italia di Panatta vince la Coppa Davis in Cile",
+    "wiki": "Coppa Davis 1976",
+    "year": 1976
+  },
+  {
+    "title": "Borg batte McEnroe nella leggendaria finale di Wimbledon",
+    "subtitle": "Il tie-break del quarto set finisce 18-16",
+    "wiki": "Torneo di Wimbledon 1980 - Singolare maschile",
+    "year": 1980
+  },
+  {
+    "title": "Roger Federer vince il suo primo Wimbledon",
+    "wiki": "Torneo di Wimbledon 2003 - Singolare maschile",
+    "year": 2003
+  },
+  {
+    "title": "Rafael Nadal vince il suo primo Roland Garros",
+    "wiki": "Open di Francia 2005 - Singolare maschile",
+    "year": 2005
+  },
+  {
+    "title": "Francesca Schiavone vince il Roland Garros",
+    "subtitle": "La prima italiana a vincere uno Slam",
+    "wiki": "Open di Francia 2010 - Singolare femminile",
+    "year": 2010
+  },
+  {
+    "title": "L'Italia di Sinner vince la Coppa Davis",
+    "subtitle": "Il secondo titolo dopo quello di Panatta",
+    "wiki": "Coppa Davis 2023",
+    "year": 2023
+  },
+  {
+    "title": "Sinner vince gli US Open",
+    "subtitle": "Battuto in finale Taylor Fritz",
+    "wiki": "US Open 2024 - Singolare maschile",
+    "year": 2024
+  },
+  {
+    "title": "Sinner vince le ATP Finals a Torino",
+    "subtitle": "Senza perdere neanche un set",
+    "wiki": "ATP Finals 2024",
+    "year": 2024
+  },
+  {
+    "title": "Alcaraz batte Sinner nella finale infinita del Roland Garros",
+    "subtitle": "Annullati tre match point, oltre cinque ore di gioco",
+    "wiki": "Open di Francia 2025 - Singolare maschile",
+    "year": 2025
+  },
+  {
+    "title": "Nasce la NBA",
+    "subtitle": "Il campionato professionistico di basket americano",
+    "wiki": "NBA",
+    "year": 1946,
+    "prop": "P571"
+  },
+  {
+    "title": "Michael Jordan vince il suo primo titolo NBA",
+    "subtitle": "I Chicago Bulls battono i Lakers di Magic Johnson",
+    "wiki": "NBA Playoffs 1991",
+    "year": 1991
+  },
+  {
+    "title": "Jordan vince il sesto titolo con i Bulls",
+    "subtitle": "L'ultimo atto di The Last Dance",
+    "wiki": "NBA Playoffs 1998",
+    "year": 1998
+  },
+  {
+    "title": "Marco Belinelli vince il titolo NBA con San Antonio",
+    "subtitle": "Il primo italiano campione NBA",
+    "wiki": "NBA Playoffs 2014",
+    "year": 2014
+  },
+  {
+    "title": "Ali batte Foreman nel Rumble in the Jungle",
+    "subtitle": "Il match del secolo a Kinshasa",
+    "wiki": "The Rumble in the Jungle",
+    "year": 1974
+  },
+  {
+    "title": "Tyson morde l'orecchio di Holyfield sul ring",
+    "subtitle": "Squalificato a Las Vegas",
+    "wiki": "Evander Holyfield vs. Mike Tyson II",
+    "year": 1997
+  },
+  {
+    "title": "La goletta America vince la prima America's Cup",
+    "subtitle": "La regata intorno all'isola di Wight",
+    "wiki": "America's Cup",
+    "year": 1851,
+    "prop": "P571"
+  },
+  {
+    "title": "Si gioca il primo Open Championship di golf",
+    "subtitle": "In Scozia, il torneo più antico del golf",
+    "wiki": "The Open Championship",
+    "year": 1860,
+    "prop": "P571"
+  },
+  {
+    "title": "L'Italia di Velasco vince il suo primo Mondiale di volley",
+    "subtitle": "La generazione di fenomeni",
+    "wiki": "Campionato mondiale maschile di pallavolo 1990",
+    "year": 1990
+  },
+  {
+    "title": "L'Italia del rugby debutta nel Sei Nazioni",
+    "subtitle": "E batte subito la Scozia",
+    "wiki": "Sei Nazioni 2000",
+    "year": 2000
+  },
+  {
+    "title": "Il Sudafrica di Mandela vince la Coppa del Mondo di rugby",
+    "subtitle": "Il torneo del film Invictus",
+    "wiki": "Coppa del Mondo di rugby 1995",
+    "year": 1995
+  },
+  {
+    "title": "Si gioca il primo Super Bowl",
+    "subtitle": "Vincono i Green Bay Packers",
+    "wiki": "Super Bowl I",
+    "year": 1967
+  },
+  {
+    "title": "Federica Pellegrini fa il record del mondo a Roma",
+    "subtitle": "Mondiali di nuoto in casa, oro nei 200 e 400 stile",
+    "wiki": "Campionati mondiali di nuoto 2009",
+    "year": 2009
+  },
+  {
+    "title": "Si corre la prima Mille Miglia",
+    "subtitle": "La corsa automobilistica da Brescia a Roma e ritorno",
+    "wiki": "Mille Miglia",
+    "year": 1927,
+    "prop": "P571"
+  }
+]

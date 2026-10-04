@@ -11,7 +11,9 @@ const CATEGORY = {
   personaggi: { label: 'Personaggi', emoji: '🎂' },
   storia: { label: 'Eventi storici', emoji: '🏛️' },
   invenzioni: { label: 'Invenzioni e prodotti', emoji: '💡' },
-  media: { label: 'Film, album e videogiochi', emoji: '🎬' },
+  media: { label: 'Film, serie e videogiochi', emoji: '🎬' },
+  musica: { label: 'Musica', emoji: '🎵' },
+  sport: { label: 'Sport', emoji: '⚽' },
   attualita: { label: 'Attualità', emoji: '📰' },
 };
 

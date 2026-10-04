@@ -192,12 +192,6 @@
     "year": 1870
   },
   {
-    "title": "Ad Atene si tengono le prime Olimpiadi moderne",
-    "subtitle": "Il sogno di Pierre de Coubertin",
-    "wiki": "Giochi della I Olimpiade",
-    "year": 1896
-  },
-  {
     "title": "Il re Umberto I viene ucciso a Monza",
     "subtitle": "L'anarchico Gaetano Bresci spara al sovrano",
     "wiki": "Regicidio di Umberto I",
@@ -429,12 +423,6 @@
     "year": 1957
   },
   {
-    "title": "Roma ospita le Olimpiadi",
-    "subtitle": "Abebe Bikila vince la maratona a piedi nudi",
-    "wiki": "Giochi della XVII Olimpiade",
-    "year": 1960
-  },
-  {
     "title": "Jurij Gagarin è il primo uomo nello spazio",
     "subtitle": "A bordo della Vostok 1",
     "wiki": "Vostok 1",
@@ -557,12 +545,6 @@
     "subtitle": "Gli spara Ali Ağca",
     "wiki": "Attentato a Giovanni Paolo II",
     "year": 1981
-  },
-  {
-    "title": "L'Italia di Bearzot vince il Mondiale in Spagna",
-    "subtitle": "L'urlo di Tardelli in finale",
-    "wiki": "Campionato mondiale di calcio 1982",
-    "year": 1982
   },
   {
     "title": "Strage allo stadio Heysel prima della finale di Coppa",
@@ -688,18 +670,6 @@
     "year": 2005
   },
   {
-    "title": "Torino ospita le Olimpiadi invernali",
-    "subtitle": "La fiaccola sulle Alpi piemontesi",
-    "wiki": "XX Giochi olimpici invernali",
-    "year": 2006
-  },
-  {
-    "title": "L'Italia di Lippi vince il Mondiale in Germania",
-    "subtitle": "Grosso segna l'ultimo rigore a Berlino",
-    "wiki": "Campionato mondiale di calcio 2006",
-    "year": 2006
-  },
-  {
     "title": "Barack Obama vince le elezioni presidenziali",
     "subtitle": "Primo presidente afroamericano degli USA",
     "wiki": "Elezioni presidenziali negli Stati Uniti d'America del 2008",
@@ -734,5 +704,531 @@
     "subtitle": "L'inchino finito sugli scogli",
     "wiki": "Naufragio della Costa Concordia",
     "year": 2012
+  },
+  {
+    "title": "Enrico IV si umilia davanti al papa a Canossa",
+    "subtitle": "Scalzo nella neve, chiede il perdono di Gregorio VII",
+    "wiki": "Umiliazione di Canossa",
+    "year": 1077,
+    "prop": "P582"
+  },
+  {
+    "title": "Viene fondata l'Università di Bologna, la più antica d'Occidente",
+    "subtitle": "Nasce lo Studium dei glossatori",
+    "wiki": "Università di Bologna",
+    "year": 1088
+  },
+  {
+    "title": "I crociati conquistano Gerusalemme",
+    "subtitle": "Si conclude la Prima crociata",
+    "wiki": "Assedio di Gerusalemme (1099)",
+    "year": 1099
+  },
+  {
+    "title": "Papa e imperatore firmano il Concordato di Worms",
+    "subtitle": "Fine della lotta per le investiture",
+    "wiki": "Concordato di Worms",
+    "year": 1122
+  },
+  {
+    "title": "Il Barbarossa firma la pace di Costanza con i Comuni",
+    "subtitle": "I Comuni lombardi ottengono le loro autonomie",
+    "wiki": "Pace di Costanza",
+    "year": 1183
+  },
+  {
+    "title": "I crociati saccheggiano Costantinopoli",
+    "subtitle": "La Quarta crociata devia sulla città cristiana",
+    "wiki": "Assedio di Costantinopoli (1204)",
+    "year": 1204
+  },
+  {
+    "title": "I ghibellini di Siena sconfiggono Firenze a Montaperti",
+    "subtitle": "Lo scempio che fece l'Arbia colorata in rosso",
+    "wiki": "Battaglia di Montaperti",
+    "year": 1260
+  },
+  {
+    "title": "Lo schiaffo di Anagni umilia papa Bonifacio VIII",
+    "subtitle": "Gli uomini del re di Francia catturano il papa",
+    "wiki": "Schiaffo di Anagni",
+    "year": 1303
+  },
+  {
+    "title": "Il papato si trasferisce ad Avignone",
+    "subtitle": "Inizia la cattività avignonese",
+    "wiki": "Cattività avignonese",
+    "year": 1309,
+    "prop": "P580"
+  },
+  {
+    "title": "Inizia la guerra dei cent'anni",
+    "subtitle": "Francia e Inghilterra si combattono per il trono",
+    "wiki": "Guerra dei cent'anni",
+    "year": 1337,
+    "prop": "P580"
+  },
+  {
+    "title": "A Firenze si ribellano i Ciompi",
+    "subtitle": "I lavoratori della lana prendono il potere",
+    "wiki": "Tumulto dei Ciompi",
+    "year": 1378
+  },
+  {
+    "title": "Giovanna d'Arco muore sul rogo a Rouen",
+    "subtitle": "La Pulzella d'Orléans",
+    "wiki": "Giovanna d'Arco",
+    "year": 1431,
+    "prop": "P570"
+  },
+  {
+    "title": "Gli Stati italiani firmano la pace di Lodi",
+    "subtitle": "Lorenzo il Magnifico lo chiamerà equilibrio",
+    "wiki": "Pace di Lodi",
+    "year": 1454
+  },
+  {
+    "title": "Carlo VIII di Francia scende in Italia",
+    "subtitle": "Inizia l'era delle guerre d'Italia",
+    "wiki": "Discesa di Carlo VIII in Italia",
+    "year": 1494,
+    "prop": "P580"
+  },
+  {
+    "title": "Vasco da Gama arriva in India circumnavigando l'Africa",
+    "subtitle": "Si apre la rotta delle spezie",
+    "wiki": "Prima Armata d'India (Vasco da Gama, 1497)",
+    "year": 1498
+  },
+  {
+    "title": "Magellano parte per il primo giro del mondo",
+    "subtitle": "Tornerà solo una nave su cinque",
+    "wiki": "Spedizione di Ferdinando Magellano",
+    "year": 1519,
+    "prop": "P580"
+  },
+  {
+    "title": "Cortés conquista Tenochtitlán, capitale degli Aztechi",
+    "subtitle": "Sulle rovine nascerà Città del Messico",
+    "wiki": "Caduta di Tenochtitlán",
+    "year": 1521,
+    "prop": "P580"
+  },
+  {
+    "title": "Carlo V sconfigge e cattura Francesco I a Pavia",
+    "subtitle": "Tutto è perduto fuorché l'onore",
+    "wiki": "Battaglia di Pavia (1525)",
+    "year": 1525
+  },
+  {
+    "title": "La pace di Augusta divide la Germania tra cattolici e luterani",
+    "subtitle": "Cuius regio, eius religio",
+    "wiki": "Pace di Augusta",
+    "year": 1555
+  },
+  {
+    "title": "La pace di Cateau-Cambrésis consegna l'Italia alla Spagna",
+    "subtitle": "Finiscono le guerre d'Italia",
+    "wiki": "Pace di Cateau-Cambrésis",
+    "year": 1559
+  },
+  {
+    "title": "A Parigi si consuma la strage della notte di San Bartolomeo",
+    "subtitle": "I cattolici massacrano gli ugonotti",
+    "wiki": "Notte di san Bartolomeo",
+    "year": 1572
+  },
+  {
+    "title": "Papa Gregorio XIII introduce il nuovo calendario",
+    "subtitle": "Dal 4 ottobre si salta direttamente al 15",
+    "wiki": "Calendario gregoriano",
+    "year": 1582
+  },
+  {
+    "title": "L'Invincibile Armata spagnola viene sconfitta",
+    "subtitle": "Elisabetta I salva l'Inghilterra",
+    "wiki": "Invincibile Armata",
+    "year": 1588,
+    "prop": "P576"
+  },
+  {
+    "title": "Enrico IV di Francia firma l'editto di Nantes",
+    "subtitle": "Libertà di culto agli ugonotti",
+    "wiki": "Editto di Nantes",
+    "year": 1598
+  },
+  {
+    "title": "Giordano Bruno viene arso vivo a Campo de' Fiori",
+    "subtitle": "Condannato per eresia dall'Inquisizione",
+    "wiki": "Giordano Bruno",
+    "year": 1600,
+    "prop": "P570"
+  },
+  {
+    "title": "A Praga i funzionari imperiali vengono gettati dalla finestra",
+    "subtitle": "Scoppia la guerra dei trent'anni",
+    "wiki": "Defenestrazione di Praga (1618)",
+    "year": 1618
+  },
+  {
+    "title": "La pace di Westfalia chiude la guerra dei trent'anni",
+    "subtitle": "Nasce l'Europa degli Stati sovrani",
+    "wiki": "Pace di Vestfalia",
+    "year": 1648
+  },
+  {
+    "title": "In Inghilterra si compie la Gloriosa rivoluzione",
+    "subtitle": "Giacomo II fugge, arriva Guglielmo d'Orange",
+    "wiki": "Gloriosa rivoluzione",
+    "year": 1688
+  },
+  {
+    "title": "Pietro il Grande fonda San Pietroburgo",
+    "subtitle": "La nuova capitale sul Baltico",
+    "wiki": "San Pietroburgo",
+    "year": 1703,
+    "prop": "P571"
+  },
+  {
+    "title": "I Savoia resistono all'assedio francese di Torino",
+    "subtitle": "Pietro Micca si sacrifica per la città",
+    "wiki": "Assedio di Torino",
+    "year": 1706
+  },
+  {
+    "title": "La Francia approva la Dichiarazione dei diritti dell'uomo",
+    "subtitle": "Libertà, uguaglianza e diritti naturali",
+    "wiki": "Dichiarazione dei diritti dell'uomo e del cittadino",
+    "year": 1789,
+    "prop": "P577"
+  },
+  {
+    "title": "Re Luigi XVI viene ghigliottinato a Parigi",
+    "subtitle": "Condannato dalla Convenzione",
+    "wiki": "Luigi XVI di Francia",
+    "year": 1793,
+    "prop": "P570"
+  },
+  {
+    "title": "Napoleone si incorona imperatore a Notre-Dame",
+    "subtitle": "Si posa la corona in testa da solo",
+    "wiki": "Incoronazione di Napoleone",
+    "year": 1804
+  },
+  {
+    "title": "Napoleone invade la Russia",
+    "subtitle": "La ritirata nella neve sarà un disastro",
+    "wiki": "Campagna di Russia",
+    "year": 1812,
+    "prop": "P580"
+  },
+  {
+    "title": "Si conclude il Congresso di Vienna",
+    "subtitle": "Le potenze restaurano l'ordine prima di Napoleone",
+    "wiki": "Congresso di Vienna",
+    "year": 1815,
+    "prop": "P582"
+  },
+  {
+    "title": "Mazzini fonda la Giovine Italia",
+    "subtitle": "Per un'Italia unita, libera e repubblicana",
+    "wiki": "Giovine Italia",
+    "year": 1831,
+    "prop": "P571"
+  },
+  {
+    "title": "Carlo Alberto concede lo Statuto Albertino",
+    "subtitle": "Diventerà la prima costituzione dell'Italia unita",
+    "wiki": "Statuto Albertino",
+    "year": 1848
+  },
+  {
+    "title": "Marx ed Engels pubblicano il Manifesto del Partito Comunista",
+    "subtitle": "Proletari di tutti i paesi, unitevi!",
+    "wiki": "Manifesto del Partito Comunista",
+    "year": 1848,
+    "prop": "P577"
+  },
+  {
+    "title": "Mazzini e Garibaldi difendono la Repubblica Romana",
+    "subtitle": "Il papa fugge a Gaeta",
+    "wiki": "Repubblica Romana (1849)",
+    "year": 1849,
+    "prop": "P571"
+  },
+  {
+    "title": "Franco-piemontesi vincono a Solferino e San Martino",
+    "subtitle": "Dalla strage nasce l'idea della Croce Rossa",
+    "wiki": "Battaglia di Solferino e San Martino",
+    "year": 1859
+  },
+  {
+    "title": "Inizia la terza guerra d'indipendenza",
+    "subtitle": "L'Italia otterrà il Veneto",
+    "wiki": "Terza guerra d'indipendenza italiana",
+    "year": 1866,
+    "prop": "P580"
+  },
+  {
+    "title": "Viene inaugurato il Canale di Suez",
+    "subtitle": "Il Mediterraneo si unisce al Mar Rosso",
+    "wiki": "Canale di Suez",
+    "year": 1869,
+    "prop": "P1619"
+  },
+  {
+    "title": "A Versailles viene proclamato l'Impero tedesco",
+    "subtitle": "Bismarck completa l'unificazione della Germania",
+    "wiki": "Proclamazione dell'Impero tedesco",
+    "year": 1871
+  },
+  {
+    "title": "Le potenze europee si spartiscono l'Africa a Berlino",
+    "subtitle": "Si apre la Conferenza di Berlino",
+    "wiki": "Conferenza di Berlino (1884)",
+    "year": 1884,
+    "prop": "P580"
+  },
+  {
+    "title": "L'esercito italiano viene sconfitto ad Adua",
+    "subtitle": "Fallisce la conquista dell'Etiopia",
+    "wiki": "Battaglia di Adua",
+    "year": 1896
+  },
+  {
+    "title": "L'Italia dichiara guerra all'Impero ottomano per la Libia",
+    "subtitle": "Tripoli, bel suol d'amore",
+    "wiki": "Guerra italo-turca",
+    "year": 1911,
+    "prop": "P580"
+  },
+  {
+    "title": "L'Italia entra nella Prima guerra mondiale",
+    "subtitle": "Il Piave mormorava…",
+    "wiki": "Fronte italiano (1915-1918)",
+    "year": 1915,
+    "prop": "P580"
+  },
+  {
+    "title": "Viene firmato il Trattato di Versailles",
+    "subtitle": "La Germania sconfitta paga le riparazioni",
+    "wiki": "Trattato di Versailles",
+    "year": 1919
+  },
+  {
+    "title": "D'Annunzio occupa Fiume con i suoi legionari",
+    "subtitle": "L'impresa di Fiume",
+    "wiki": "Impresa di Fiume",
+    "year": 1919,
+    "prop": "P580"
+  },
+  {
+    "title": "Vengono firmati i Patti di Locarno",
+    "subtitle": "Germania, Francia e Belgio garantiscono i confini",
+    "wiki": "Patto di Locarno",
+    "year": 1925
+  },
+  {
+    "title": "Nella Notte dei cristalli i nazisti assaltano i negozi ebrei",
+    "subtitle": "Sinagoghe in fiamme in tutta la Germania",
+    "wiki": "Notte dei cristalli",
+    "year": 1938
+  },
+  {
+    "title": "Italia e Germania firmano il Patto d'Acciaio",
+    "subtitle": "L'alleanza militare tra Mussolini e Hitler",
+    "wiki": "Patto d'Acciaio",
+    "year": 1939
+  },
+  {
+    "title": "Hitler invade l'Unione Sovietica",
+    "subtitle": "Scatta l'operazione Barbarossa",
+    "wiki": "Operazione Barbarossa",
+    "year": 1941
+  },
+  {
+    "title": "Inizia la battaglia di Stalingrado",
+    "subtitle": "La svolta della guerra sul fronte orientale",
+    "wiki": "Battaglia di Stalingrado",
+    "year": 1942,
+    "prop": "P580"
+  },
+  {
+    "title": "Il Gran Consiglio sfiducia Mussolini, che viene arrestato",
+    "subtitle": "Il 25 luglio cade il fascismo",
+    "wiki": "Caduta del fascismo",
+    "year": 1943
+  },
+  {
+    "title": "Mussolini viene fucilato dai partigiani",
+    "subtitle": "Catturato a Dongo mentre fuggiva",
+    "wiki": "Morte di Benito Mussolini",
+    "year": 1945
+  },
+  {
+    "title": "Nasce l'Organizzazione delle Nazioni Unite",
+    "subtitle": "Sede a New York",
+    "wiki": "Organizzazione delle Nazioni Unite",
+    "year": 1945,
+    "prop": "P571"
+  },
+  {
+    "title": "Gandhi viene assassinato a Nuova Delhi",
+    "subtitle": "Il padre dell'India indipendente",
+    "wiki": "Mahatma Gandhi",
+    "year": 1948,
+    "prop": "P570"
+  },
+  {
+    "title": "La DC batte il Fronte Popolare nelle elezioni del 18 aprile",
+    "subtitle": "De Gasperi trionfa nella prima sfida della Repubblica",
+    "wiki": "Elezioni politiche in Italia del 1948",
+    "year": 1948
+  },
+  {
+    "title": "Parte il Piano Marshall per ricostruire l'Europa",
+    "subtitle": "Gli aiuti americani arrivano anche in Italia",
+    "wiki": "Piano Marshall",
+    "year": 1948,
+    "prop": "P580"
+  },
+  {
+    "title": "Dodici Paesi firmano il Patto Atlantico",
+    "subtitle": "Nasce la NATO",
+    "wiki": "Patto Atlantico",
+    "year": 1949
+  },
+  {
+    "title": "Trieste torna all'Italia",
+    "subtitle": "Il Memorandum di Londra divide il Territorio Libero",
+    "wiki": "Memorandum di Londra",
+    "year": 1954
+  },
+  {
+    "title": "Fidel Castro prende il potere a Cuba",
+    "subtitle": "Batista fugge, trionfa la rivoluzione",
+    "wiki": "Rivoluzione cubana",
+    "year": 1959
+  },
+  {
+    "title": "Martin Luther King pronuncia il discorso \"I have a dream\"",
+    "subtitle": "Davanti al Lincoln Memorial di Washington",
+    "wiki": "Marcia su Washington per il lavoro e la libertà",
+    "year": 1963
+  },
+  {
+    "title": "Israele vince la guerra dei sei giorni",
+    "subtitle": "Conquista Gerusalemme Est, Gaza e il Sinai",
+    "wiki": "Guerra dei sei giorni",
+    "year": 1967,
+    "prop": "P580"
+  },
+  {
+    "title": "I carri armati sovietici pongono fine alla Primavera di Praga",
+    "subtitle": "Il socialismo dal volto umano di Dubček",
+    "wiki": "Primavera di Praga",
+    "year": 1968
+  },
+  {
+    "title": "Un golpe militare rovescia Allende in Cile",
+    "subtitle": "Inizia la dittatura di Pinochet",
+    "wiki": "Colpo di Stato in Cile del 1973",
+    "year": 1973
+  },
+  {
+    "title": "Nixon si dimette per lo scandalo Watergate",
+    "subtitle": "Primo presidente USA a lasciare l'incarico",
+    "wiki": "Scandalo Watergate",
+    "year": 1974,
+    "prop": "P582"
+  },
+  {
+    "title": "La Rivoluzione dei garofani porta la democrazia in Portogallo",
+    "subtitle": "Fiori nei fucili dei soldati",
+    "wiki": "Rivoluzione dei garofani",
+    "year": 1974
+  },
+  {
+    "title": "Sandro Pertini viene eletto presidente della Repubblica",
+    "subtitle": "Il presidente più amato dagli italiani",
+    "wiki": "Elezione del Presidente della Repubblica Italiana del 1978",
+    "year": 1978
+  },
+  {
+    "title": "Karol Wojtyła viene eletto papa",
+    "subtitle": "Il primo papa polacco della storia",
+    "wiki": "Conclave dell'ottobre 1978",
+    "year": 1978
+  },
+  {
+    "title": "L'Unione Sovietica invade l'Afghanistan",
+    "subtitle": "Una guerra lunga dieci anni",
+    "wiki": "Guerra in Afghanistan (1979-1989)",
+    "year": 1979,
+    "prop": "P580"
+  },
+  {
+    "title": "Argentina e Regno Unito si scontrano per le Falkland",
+    "subtitle": "La Thatcher manda la flotta nell'Atlantico",
+    "wiki": "Guerra delle Falkland",
+    "year": 1982
+  },
+  {
+    "title": "Viene firmato l'accordo di Schengen",
+    "subtitle": "Verso un'Europa senza frontiere interne",
+    "wiki": "Accordo di Schengen",
+    "year": 1985
+  },
+  {
+    "title": "A Palermo si apre il maxiprocesso a Cosa Nostra",
+    "subtitle": "Oltre 400 imputati nell'aula bunker",
+    "wiki": "Maxiprocesso di Palermo",
+    "year": 1986,
+    "prop": "P580"
+  },
+  {
+    "title": "In Romania cade il regime di Ceaușescu",
+    "subtitle": "Il dittatore viene catturato e fucilato",
+    "wiki": "Rivoluzione romena del 1989",
+    "year": 1989
+  },
+  {
+    "title": "Rabin e Arafat firmano gli accordi di Oslo",
+    "subtitle": "La storica stretta di mano alla Casa Bianca",
+    "wiki": "Accordi di Oslo",
+    "year": 1993
+  },
+  {
+    "title": "Berlusconi vince le elezioni per la prima volta",
+    "subtitle": "Forza Italia al governo dopo la discesa in campo",
+    "wiki": "Elezioni politiche in Italia del 1994",
+    "year": 1994
+  },
+  {
+    "title": "Mandela vince le prime elezioni libere in Sudafrica",
+    "subtitle": "Finisce l'apartheid",
+    "wiki": "Elezioni generali in Sudafrica del 1994",
+    "year": 1994
+  },
+  {
+    "title": "Muore papa Giovanni Paolo II",
+    "subtitle": "Folle immense a Roma per l'addio",
+    "wiki": "Papa Giovanni Paolo II",
+    "year": 2005,
+    "prop": "P570"
+  },
+  {
+    "title": "Fallisce la banca americana Lehman Brothers",
+    "subtitle": "La crisi finanziaria diventa globale",
+    "wiki": "Lehman Brothers",
+    "year": 2008,
+    "prop": "P576"
+  },
+  {
+    "title": "Mario Monti guida un governo tecnico",
+    "subtitle": "Lo spread fa cadere Berlusconi",
+    "wiki": "Governo Monti",
+    "year": 2011,
+    "prop": "P571"
   }
 ]

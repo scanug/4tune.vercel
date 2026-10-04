@@ -24,11 +24,6 @@
     "year": 2013
   },
   {
-    "title": "Marco Mengoni vince Sanremo con L'essenziale",
-    "wiki": "Festival di Sanremo 2013",
-    "year": 2013
-  },
-  {
     "title": "Attentato alla maratona di Boston",
     "wiki": "Attentato alla maratona di Boston",
     "year": 2013
@@ -43,18 +38,6 @@
   {
     "title": "Matteo Renzi diventa presidente del Consiglio",
     "wiki": "Governo Renzi",
-    "year": 2014
-  },
-  {
-    "title": "Vincenzo Nibali vince il Tour de France",
-    "subtitle": "Lo Squalo dello Stretto in giallo a Parigi",
-    "wiki": "Tour de France 2014",
-    "year": 2014
-  },
-  {
-    "title": "La Germania travolge il Brasile 7-1",
-    "subtitle": "La semifinale del Mondiale a Belo Horizonte",
-    "wiki": "Mineirazo",
     "year": 2014
   },
   {
@@ -90,12 +73,6 @@
     "title": "Milano ospita l'Esposizione Universale",
     "subtitle": "Nutrire il pianeta, energia per la vita",
     "wiki": "Expo 2015",
-    "year": 2015
-  },
-  {
-    "title": "Pennetta batte Vinci nella finale tutta italiana",
-    "subtitle": "La finale femminile degli US Open",
-    "wiki": "US Open 2015 - Singolare femminile",
     "year": 2015
   },
   {
@@ -153,12 +130,6 @@
     "year": 2017
   },
   {
-    "title": "Gabbani vince Sanremo con Occidentali's Karma",
-    "subtitle": "Quello della scimmia nuda che balla",
-    "wiki": "Festival di Sanremo 2017",
-    "year": 2017
-  },
-  {
     "title": "Emmanuel Macron eletto presidente della Francia",
     "subtitle": "Il primo mandato",
     "wiki": "Elezioni presidenziali in Francia del 2017",
@@ -193,12 +164,6 @@
     "year": 2018
   },
   {
-    "title": "La Francia vince il Mondiale in Russia",
-    "subtitle": "Mbappé e Griezmann battono la Croazia",
-    "wiki": "Campionato mondiale di calcio 2018",
-    "year": 2018
-  },
-  {
     "title": "Salvati i ragazzini intrappolati in una grotta thailandese",
     "wiki": "Incidente di Tham Luang",
     "year": 2018
@@ -207,11 +172,6 @@
     "title": "Crolla il ponte Morandi a Genova",
     "wiki": "Crollo del viadotto Polcevera",
     "year": 2018
-  },
-  {
-    "title": "Mahmood vince Sanremo con Soldi",
-    "wiki": "Festival di Sanremo 2019",
-    "year": 2019
   },
   {
     "title": "Brucia la cattedrale di Notre-Dame",
@@ -248,11 +208,6 @@
     "wiki": "Kobe Bryant",
     "year": 2020,
     "prop": "P570"
-  },
-  {
-    "title": "Diodato vince Sanremo con Fai rumore",
-    "wiki": "Festival di Sanremo 2020",
-    "year": 2020
   },
   {
     "title": "L'Italia entra in lockdown per il Covid",
@@ -301,18 +256,6 @@
     "year": 2021
   },
   {
-    "title": "I Måneskin vincono Sanremo",
-    "subtitle": "Con Zitti e buoni",
-    "wiki": "Festival di Sanremo 2021",
-    "year": 2021
-  },
-  {
-    "title": "I Måneskin vincono l'Eurovision",
-    "subtitle": "Con Zitti e buoni, a Rotterdam",
-    "wiki": "Eurovision Song Contest 2021",
-    "year": 2021
-  },
-  {
     "title": "Muore Franco Battiato",
     "subtitle": "Il cantautore di La cura",
     "wiki": "Franco Battiato",
@@ -326,18 +269,6 @@
     "prop": "P570"
   },
   {
-    "title": "L'Italia campione d'Europa a Wembley",
-    "subtitle": "Donnarumma para i rigori all'Inghilterra",
-    "wiki": "Campionato europeo maschile di calcio 2020",
-    "year": 2021
-  },
-  {
-    "title": "Jacobs oro olimpico nei 100 metri a Tokyo",
-    "subtitle": "Le Olimpiadi slittate per la pandemia",
-    "wiki": "Giochi della XXXII Olimpiade",
-    "year": 2021
-  },
-  {
     "title": "I talebani riprendono Kabul",
     "subtitle": "Il caotico ritiro occidentale dall'Afghanistan",
     "wiki": "Caduta di Kabul (2021)",
@@ -347,11 +278,6 @@
     "title": "Mattarella rieletto presidente della Repubblica",
     "subtitle": "Il secondo mandato",
     "wiki": "Elezione del Presidente della Repubblica Italiana del 2022",
-    "year": 2022
-  },
-  {
-    "title": "Mahmood e Blanco vincono Sanremo con Brividi",
-    "wiki": "Festival di Sanremo 2022",
     "year": 2022
   },
   {
@@ -389,18 +315,6 @@
     "year": 2022
   },
   {
-    "title": "L'Argentina di Messi vince il Mondiale in Qatar",
-    "subtitle": "Finale ai rigori contro la Francia",
-    "wiki": "Campionato mondiale di calcio 2022",
-    "year": 2022
-  },
-  {
-    "title": "Mengoni vince Sanremo per la seconda volta",
-    "subtitle": "Con Due vite",
-    "wiki": "Festival di Sanremo 2023",
-    "year": 2023
-  },
-  {
     "title": "Taylor Swift parte con l'Eras Tour",
     "subtitle": "Il tour più redditizio di sempre",
     "wiki": "The Eras Tour",
@@ -416,13 +330,6 @@
     "subtitle": "Esondano decine di fiumi in Romagna",
     "wiki": "Alluvione dell'Emilia-Romagna del 2023",
     "year": 2023
-  },
-  {
-    "title": "Il Napoli di Spalletti vince il terzo scudetto",
-    "subtitle": "Il primo senza Maradona",
-    "wiki": "Serie A 2022-2023",
-    "year": 2023,
-    "prop": "P582"
   },
   {
     "title": "Muore Silvio Berlusconi",
@@ -441,41 +348,11 @@
     "year": 2023
   },
   {
-    "title": "Sinner vince il suo primo Slam a Melbourne",
-    "subtitle": "Australian Open, rimonta su Medvedev",
-    "wiki": "Australian Open 2024 - Singolare maschile",
-    "year": 2024
-  },
-  {
-    "title": "Angelina Mango vince Sanremo con La noia",
-    "wiki": "Festival di Sanremo 2024",
-    "year": 2024
-  },
-  {
     "title": "Muore in carcere Aleksej Navalny",
     "subtitle": "Il principale oppositore di Putin",
     "wiki": "Aleksej Naval'nyj",
     "year": 2024,
     "prop": "P570"
-  },
-  {
-    "title": "L'Inter vince lo scudetto della seconda stella",
-    "subtitle": "Festa nel derby contro il Milan",
-    "wiki": "Serie A 2023-2024",
-    "year": 2024,
-    "prop": "P582"
-  },
-  {
-    "title": "La Spagna vince l'Europeo in Germania",
-    "subtitle": "Yamal e Williams battono l'Inghilterra",
-    "wiki": "Campionato europeo maschile di calcio 2024",
-    "year": 2024
-  },
-  {
-    "title": "Parigi ospita le Olimpiadi",
-    "subtitle": "La cerimonia d'apertura sulla Senna",
-    "wiki": "Giochi della XXXIII Olimpiade",
-    "year": 2024
   },
   {
     "title": "Trump rieletto presidente degli Stati Uniti",
@@ -488,11 +365,6 @@
     "wiki": "Caduta di Damasco",
     "year": 2024,
     "subtitle": "I ribelli entrano a Damasco, Assad fugge in Russia"
-  },
-  {
-    "title": "Olly vince Sanremo con Balorda nostalgia",
-    "wiki": "Festival di Sanremo 2025",
-    "year": 2025
   },
   {
     "title": "Muore papa Francesco",
@@ -513,24 +385,6 @@
     "year": 2025
   },
   {
-    "title": "Il Napoli di Conte vince il quarto scudetto",
-    "wiki": "Serie A 2024-2025",
-    "year": 2025,
-    "prop": "P582"
-  },
-  {
-    "title": "Il PSG travolge l'Inter in finale di Champions",
-    "subtitle": "Finisce 5-0 a Monaco di Baviera",
-    "wiki": "Finale della UEFA Champions League 2024-2025",
-    "year": 2025
-  },
-  {
-    "title": "Sinner vince Wimbledon",
-    "subtitle": "Il primo italiano a trionfare sull'erba londinese",
-    "wiki": "Torneo di Wimbledon 2025 - Singolare maschile",
-    "year": 2025
-  },
-  {
     "title": "Muore Ozzy Osbourne",
     "subtitle": "Il Principe delle Tenebre dei Black Sabbath",
     "wiki": "Ozzy Osbourne",
@@ -545,23 +399,6 @@
     "prop": "P570"
   },
   {
-    "title": "Milano e Cortina ospitano le Olimpiadi invernali",
-    "wiki": "XXV Giochi olimpici invernali",
-    "year": 2026
-  },
-  {
-    "title": "Il primo Mondiale a 48 squadre",
-    "subtitle": "Tra Stati Uniti, Canada e Messico",
-    "wiki": "Campionato mondiale di calcio 2026",
-    "year": 2026
-  },
-  {
-    "title": "Sal Da Vinci vince Sanremo con Per sempre sì",
-    "subtitle": "Il cantante napoletano trionfa all'Ariston",
-    "wiki": "Festival di Sanremo 2026",
-    "year": 2026
-  },
-  {
     "title": "Referendum sulla separazione delle carriere dei magistrati",
     "subtitle": "La riforma Meloni-Nordio va alle urne",
     "wiki": "Referendum costituzionale in Italia del 2026",
@@ -573,5 +410,695 @@
     "wiki": "Artemis II",
     "year": 2026,
     "prop": "P619"
+  },
+  {
+    "title": "Boom del Movimento 5 Stelle alle politiche, nessuna maggioranza",
+    "subtitle": "Il Senato resta senza vincitori",
+    "wiki": "Elezioni politiche in Italia del 2013",
+    "year": 2013
+  },
+  {
+    "title": "Giorgio Napolitano rieletto presidente della Repubblica",
+    "subtitle": "Il primo bis della storia al Quirinale",
+    "wiki": "Elezione del Presidente della Repubblica Italiana del 2013",
+    "year": 2013
+  },
+  {
+    "title": "Muore Margaret Thatcher",
+    "subtitle": "La Lady di ferro britannica",
+    "wiki": "Margaret Thatcher",
+    "year": 2013,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Paul Walker",
+    "subtitle": "Il Brian O'Conner di Fast & Furious",
+    "wiki": "Paul Walker",
+    "year": 2013,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Giulio Andreotti",
+    "subtitle": "Sette volte presidente del Consiglio",
+    "wiki": "Giulio Andreotti",
+    "year": 2013,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Margherita Hack",
+    "subtitle": "La signora delle stelle",
+    "wiki": "Margherita Hack",
+    "year": 2013,
+    "prop": "P570"
+  },
+  {
+    "title": "Una meteora esplode nei cieli di Čeljabinsk",
+    "subtitle": "Migliaia di vetri in frantumi negli Urali",
+    "wiki": "Meteora di Čeljabinsk",
+    "year": 2013
+  },
+  {
+    "title": "Il tifone Haiyan devasta le Filippine",
+    "wiki": "Tifone Haiyan",
+    "year": 2013
+  },
+  {
+    "title": "Snowden svela la sorveglianza di massa dell'NSA",
+    "subtitle": "Lo scandalo Datagate",
+    "wiki": "Datagate",
+    "year": 2013
+  },
+  {
+    "title": "Tutti si rovesciano un secchio d'acqua gelata in testa",
+    "subtitle": "La Ice Bucket Challenge per la SLA",
+    "wiki": "Ice Bucket Challenge",
+    "year": 2014,
+    "manual": "Wikidata senza data: fenomeno virale dell'estate 2014"
+  },
+  {
+    "title": "Abbattuto il volo MH17 sopra l'Ucraina",
+    "wiki": "Volo Malaysia Airlines 17",
+    "year": 2014
+  },
+  {
+    "title": "La Scozia vota sull'indipendenza dal Regno Unito",
+    "subtitle": "Vince il No",
+    "wiki": "Referendum sull'indipendenza della Scozia del 2014",
+    "year": 2014
+  },
+  {
+    "title": "Muore Gabriel García Márquez",
+    "subtitle": "L'autore di Cent'anni di solitudine",
+    "wiki": "Gabriel García Márquez",
+    "year": 2014,
+    "prop": "P570"
+  },
+  {
+    "title": "Il PD di Renzi supera il 40% alle europee",
+    "wiki": "Elezioni europee del 2014 in Italia",
+    "year": 2014
+  },
+  {
+    "title": "Il lander Philae si posa su una cometa",
+    "subtitle": "La missione Rosetta dell'ESA",
+    "wiki": "Philae (sonda spaziale)",
+    "year": 2014,
+    "prop": "P620"
+  },
+  {
+    "title": "Samantha Cristoforetti parte per la Stazione spaziale",
+    "subtitle": "La prima donna italiana nello spazio",
+    "wiki": "Sojuz TMA-15M",
+    "year": 2014,
+    "prop": "P619"
+  },
+  {
+    "title": "Il Bisagno esonda di nuovo e allaga Genova",
+    "wiki": "Alluvione di Genova del 9 e 10 ottobre 2014",
+    "year": 2014
+  },
+  {
+    "title": "Il copilota fa schiantare un aereo Germanwings sulle Alpi",
+    "wiki": "Volo Germanwings 9525",
+    "year": 2015
+  },
+  {
+    "title": "Un terremoto devasta il Nepal",
+    "subtitle": "Crollano templi a Kathmandu, valanghe sull'Everest",
+    "wiki": "Terremoto del Nepal del 25 aprile 2015",
+    "year": 2015
+  },
+  {
+    "title": "La Grecia di Tsipras vota No all'austerità",
+    "subtitle": "Il referendum dell'OXI",
+    "wiki": "Referendum consultivo in Grecia del 2015",
+    "year": 2015
+  },
+  {
+    "title": "Scoppia il Dieselgate Volkswagen",
+    "subtitle": "Software truccati per le emissioni",
+    "wiki": "Dieselgate",
+    "year": 2015
+  },
+  {
+    "title": "La Corte suprema USA legalizza i matrimoni gay",
+    "wiki": "Obergefell contro Hodges",
+    "year": 2015
+  },
+  {
+    "title": "Muore Pino Daniele",
+    "subtitle": "Il cantautore di Napule è",
+    "wiki": "Pino Daniele",
+    "year": 2015,
+    "prop": "P570"
+  },
+  {
+    "title": "Papa Francesco apre il Giubileo della Misericordia",
+    "wiki": "Giubileo straordinario della misericordia",
+    "year": 2015
+  },
+  {
+    "title": "Papa Francesco pubblica l'enciclica sull'ambiente",
+    "subtitle": "Laudato si', sulla cura della casa comune",
+    "wiki": "Laudato si'",
+    "year": 2015
+  },
+  {
+    "title": "Muore Umberto Eco",
+    "subtitle": "L'autore de Il nome della rosa",
+    "wiki": "Umberto Eco",
+    "year": 2016,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Bud Spencer",
+    "subtitle": "Il gigante buono, in coppia con Terence Hill",
+    "wiki": "Bud Spencer",
+    "year": 2016,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Dario Fo",
+    "subtitle": "Premio Nobel per la letteratura",
+    "wiki": "Dario Fo",
+    "year": 2016,
+    "prop": "P570"
+  },
+  {
+    "title": "Escono i Panama Papers",
+    "subtitle": "Milioni di documenti sui paradisi fiscali",
+    "wiki": "Panama Papers",
+    "year": 2016
+  },
+  {
+    "title": "L'Italia approva le unioni civili",
+    "subtitle": "La legge Cirinnà",
+    "wiki": "Legge Cirinnà",
+    "year": 2016
+  },
+  {
+    "title": "Un camion sulla folla della Promenade des Anglais a Nizza",
+    "wiki": "Strage di Nizza",
+    "year": 2016
+  },
+  {
+    "title": "Fallisce il tentato golpe contro Erdoğan in Turchia",
+    "wiki": "Colpo di Stato in Turchia del 2016",
+    "year": 2016
+  },
+  {
+    "title": "Il referendum sulle trivelle non raggiunge il quorum",
+    "wiki": "Referendum abrogativo in Italia del 2016",
+    "year": 2016
+  },
+  {
+    "title": "Un furgone sulla folla della Rambla a Barcellona",
+    "wiki": "Attentato di Barcellona del 17 agosto 2017",
+    "year": 2017
+  },
+  {
+    "title": "Brucia la Grenfell Tower a Londra",
+    "wiki": "Incendio della Grenfell Tower",
+    "year": 2017
+  },
+  {
+    "title": "Strage al festival country di Las Vegas",
+    "subtitle": "Spari dal 32° piano di un hotel",
+    "wiki": "Strage di Las Vegas",
+    "year": 2017
+  },
+  {
+    "title": "Panico tra i tifosi in piazza San Carlo a Torino",
+    "subtitle": "Durante la finale di Champions della Juve",
+    "wiki": "Tragedia di piazza San Carlo",
+    "year": 2017
+  },
+  {
+    "title": "Muore Paolo Villaggio",
+    "subtitle": "Il ragionier Fantozzi",
+    "wiki": "Paolo Villaggio",
+    "year": 2017,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Totò Riina",
+    "subtitle": "Il capo dei capi di Cosa nostra",
+    "wiki": "Totò Riina",
+    "year": 2017,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Chester Bennington",
+    "subtitle": "La voce dei Linkin Park",
+    "wiki": "Chester Bennington",
+    "year": 2017,
+    "prop": "P570"
+  },
+  {
+    "title": "Esplode il caso Weinstein, nasce il #MeToo",
+    "wiki": "Caso Harvey Weinstein",
+    "year": 2017,
+    "manual": "Wikidata senza data: inchieste NYT/New Yorker di ottobre 2017"
+  },
+  {
+    "title": "M5S primo partito, boom della Lega alle politiche",
+    "wiki": "Elezioni politiche in Italia del 2018",
+    "year": 2018
+  },
+  {
+    "title": "Greta Thunberg inizia lo sciopero per il clima",
+    "subtitle": "Nascono i Fridays for Future",
+    "wiki": "Fridays for Future",
+    "year": 2018
+  },
+  {
+    "title": "Trump e Kim Jong-un si stringono la mano a Singapore",
+    "wiki": "Vertice tra Stati Uniti e Corea del Nord del 2018",
+    "year": 2018
+  },
+  {
+    "title": "Muore Sergio Marchionne",
+    "subtitle": "Il manager col maglione di FCA",
+    "wiki": "Sergio Marchionne",
+    "year": 2018,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Fabrizio Frizzi",
+    "subtitle": "Il conduttore de L'eredità",
+    "wiki": "Fabrizio Frizzi",
+    "year": 2018,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Stan Lee",
+    "subtitle": "Il papà di Spider-Man e degli X-Men",
+    "wiki": "Stan Lee",
+    "year": 2018,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Avicii",
+    "subtitle": "Il DJ di Wake Me Up e Levels",
+    "wiki": "Avicii",
+    "year": 2018,
+    "prop": "P570"
+  },
+  {
+    "title": "In Francia esplode la protesta dei gilet gialli",
+    "wiki": "Movimento dei gilet gialli",
+    "year": 2018
+  },
+  {
+    "title": "La tempesta Vaia abbatte milioni di alberi sulle Dolomiti",
+    "wiki": "Tempesta Vaia",
+    "year": 2018
+  },
+  {
+    "title": "Attacco a due moschee di Christchurch in Nuova Zelanda",
+    "wiki": "Attentati di Christchurch",
+    "year": 2019
+  },
+  {
+    "title": "La Lega di Salvini primo partito alle europee",
+    "wiki": "Elezioni europee del 2019 in Italia",
+    "year": 2019
+  },
+  {
+    "title": "Muore Karl Lagerfeld",
+    "subtitle": "Lo stilista di Chanel",
+    "wiki": "Karl Lagerfeld",
+    "year": 2019,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Andrea Camilleri",
+    "subtitle": "Il papà del commissario Montalbano",
+    "wiki": "Andrea Camilleri",
+    "year": 2019,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Nadia Toffa",
+    "subtitle": "La iena di Italia 1",
+    "wiki": "Nadia Toffa",
+    "year": 2019,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Luciano De Crescenzo",
+    "subtitle": "Il professor Bellavista",
+    "wiki": "Luciano De Crescenzo",
+    "year": 2019,
+    "prop": "P570"
+  },
+  {
+    "title": "Le Sardine riempiono le piazze italiane",
+    "wiki": "Movimento delle sardine",
+    "year": 2019
+  },
+  {
+    "title": "Brucia la foresta amazzonica",
+    "subtitle": "Il polmone verde in fiamme, accuse a Bolsonaro",
+    "wiki": "Incendi in Amazzonia del 2019",
+    "year": 2019
+  },
+  {
+    "title": "Un drone USA uccide il generale iraniano Soleimani",
+    "wiki": "Attacco aereo dell'aeroporto di Baghdad del 2020",
+    "year": 2020
+  },
+  {
+    "title": "Il Regno Unito esce ufficialmente dall'Unione europea",
+    "wiki": "Uscita del Regno Unito dall'Unione europea",
+    "year": 2020
+  },
+  {
+    "title": "Gli italiani votano il taglio dei parlamentari",
+    "subtitle": "Da 945 a 600 tra deputati e senatori",
+    "wiki": "Referendum costituzionale in Italia del 2020",
+    "year": 2020
+  },
+  {
+    "title": "Muore Gigi Proietti",
+    "subtitle": "Il Maresciallo Rocca",
+    "wiki": "Gigi Proietti",
+    "year": 2020,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Chadwick Boseman",
+    "subtitle": "Il Black Panther della Marvel",
+    "wiki": "Chadwick Boseman",
+    "year": 2020,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Sean Connery",
+    "subtitle": "Il primo James Bond del cinema",
+    "wiki": "Sean Connery",
+    "year": 2020,
+    "prop": "P570"
+  },
+  {
+    "title": "SpaceX porta per la prima volta astronauti in orbita",
+    "subtitle": "La capsula Crew Dragon verso la ISS",
+    "wiki": "SpaceX Crew Dragon Demo 2",
+    "year": 2020,
+    "prop": "P619"
+  },
+  {
+    "title": "Muore Philippe Daverio",
+    "subtitle": "Il critico d'arte col papillon",
+    "wiki": "Philippe Daverio",
+    "year": 2020,
+    "prop": "P570"
+  },
+  {
+    "title": "La nave Ever Given si incastra nel canale di Suez",
+    "wiki": "Ostruzione del Canale di Suez del 2021",
+    "year": 2021
+  },
+  {
+    "title": "Muore il principe Filippo",
+    "subtitle": "Il marito della regina Elisabetta",
+    "wiki": "Filippo di Edimburgo",
+    "year": 2021,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Gino Strada",
+    "subtitle": "Il fondatore di Emergency",
+    "wiki": "Gino Strada",
+    "year": 2021,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Carla Fracci",
+    "subtitle": "L'étoile della Scala",
+    "wiki": "Carla Fracci",
+    "year": 2021,
+    "prop": "P570"
+  },
+  {
+    "title": "Precipita una cabina della funivia del Mottarone",
+    "wiki": "Incidente della funivia Stresa-Alpino-Mottarone",
+    "year": 2021
+  },
+  {
+    "title": "Lanciato il telescopio spaziale James Webb",
+    "subtitle": "L'erede di Hubble",
+    "wiki": "Telescopio spaziale James Webb",
+    "year": 2021,
+    "prop": "P619"
+  },
+  {
+    "title": "Roma ospita il vertice del G20",
+    "wiki": "G20 del 2021",
+    "year": 2021
+  },
+  {
+    "title": "No vax assaltano la sede nazionale della CGIL",
+    "wiki": "Assalto alla sede della CGIL",
+    "year": 2021
+  },
+  {
+    "title": "Muore David Sassoli",
+    "subtitle": "Presidente del Parlamento europeo",
+    "wiki": "David Sassoli",
+    "year": 2022,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Monica Vitti",
+    "subtitle": "La musa di Antonioni",
+    "wiki": "Monica Vitti",
+    "year": 2022,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Joseph Ratzinger, papa emerito",
+    "subtitle": "Benedetto XVI, dieci anni dopo la rinuncia",
+    "wiki": "Papa Benedetto XVI",
+    "year": 2022,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Michail Gorbačëv",
+    "subtitle": "L'ultimo leader dell'Unione Sovietica",
+    "wiki": "Michail Gorbačëv",
+    "year": 2022,
+    "prop": "P570"
+  },
+  {
+    "title": "L'ex premier giapponese Shinzō Abe ucciso in un comizio",
+    "wiki": "Assassinio di Shinzō Abe",
+    "year": 2022
+  },
+  {
+    "title": "Liz Truss premier britannica per soli 49 giorni",
+    "wiki": "Governo Truss",
+    "year": 2022
+  },
+  {
+    "title": "La morte di Mahsa Amini infiamma le proteste in Iran",
+    "subtitle": "Donna, vita, libertà",
+    "wiki": "Morte di Mahsa Amini",
+    "year": 2022
+  },
+  {
+    "title": "Alluvione nelle Marche, esondano Misa e Nevola",
+    "wiki": "Alluvione delle Marche del 2022",
+    "year": 2022
+  },
+  {
+    "title": "Un terremoto devastante colpisce Turchia e Siria",
+    "wiki": "Terremoto in Turchia e Siria del 2023",
+    "year": 2023
+  },
+  {
+    "title": "Muore Matteo Messina Denaro, arrestato pochi mesi prima",
+    "subtitle": "Dopo trent'anni di latitanza",
+    "wiki": "Matteo Messina Denaro",
+    "year": 2023,
+    "prop": "P570"
+  },
+  {
+    "title": "Fallisce la Silicon Valley Bank",
+    "subtitle": "La banca delle startup americane",
+    "wiki": "Fallimento della Silicon Valley Bank",
+    "year": 2023
+  },
+  {
+    "title": "Muore Maurizio Costanzo",
+    "subtitle": "Il re dei talk show",
+    "wiki": "Maurizio Costanzo",
+    "year": 2023,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Michela Murgia",
+    "subtitle": "La scrittrice di Accabadora",
+    "wiki": "Michela Murgia",
+    "year": 2023,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Giorgio Napolitano",
+    "subtitle": "Unico presidente rieletto prima di Mattarella",
+    "wiki": "Giorgio Napolitano",
+    "year": 2023,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Matthew Perry",
+    "subtitle": "Il Chandler di Friends",
+    "wiki": "Matthew Perry",
+    "year": 2023,
+    "prop": "P570"
+  },
+  {
+    "title": "Il femminicidio di Giulia Cecchettin scuote l'Italia",
+    "wiki": "Omicidio di Giulia Cecchettin",
+    "year": 2023
+  },
+  {
+    "title": "L'India atterra vicino al polo sud della Luna",
+    "subtitle": "La missione Chandrayaan-3",
+    "wiki": "Chandrayaan-3",
+    "year": 2023,
+    "prop": "P619"
+  },
+  {
+    "title": "Trump ferito all'orecchio durante un comizio",
+    "subtitle": "Spari a Butler, in Pennsylvania",
+    "wiki": "Attentato a Donald Trump",
+    "year": 2024
+  },
+  {
+    "title": "Un aggiornamento CrowdStrike manda in tilt i PC Windows",
+    "subtitle": "Voli e banche bloccati in tutto il mondo",
+    "wiki": "Guasto informatico di CrowdStrike del 2024",
+    "year": 2024
+  },
+  {
+    "title": "Muore Liam Payne",
+    "subtitle": "Ex One Direction",
+    "wiki": "Liam Payne",
+    "year": 2024,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Alain Delon",
+    "subtitle": "Il samurai del cinema francese",
+    "wiki": "Alain Delon",
+    "year": 2024,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Jimmy Carter",
+    "subtitle": "Il presidente USA più longevo",
+    "wiki": "Jimmy Carter",
+    "year": 2024,
+    "prop": "P570"
+  },
+  {
+    "title": "Fratelli d'Italia primo partito alle europee",
+    "subtitle": "Schlein e il PD secondi",
+    "wiki": "Elezioni europee del 2024 in Italia",
+    "year": 2024
+  },
+  {
+    "title": "Un'alluvione devasta la zona di Valencia",
+    "subtitle": "La DANA, oltre 200 vittime",
+    "wiki": "Alluvione della Spagna del 2024",
+    "year": 2024
+  },
+  {
+    "title": "I laburisti tornano al governo, Starmer premier",
+    "wiki": "Governo Starmer",
+    "year": 2024
+  },
+  {
+    "title": "Il G7 si riunisce a Borgo Egnazia in Puglia",
+    "subtitle": "Anche papa Francesco al vertice",
+    "wiki": "G7 del 2024",
+    "year": 2024
+  },
+  {
+    "title": "Trump torna alla Casa Bianca per il secondo mandato",
+    "wiki": "Seconda presidenza di Donald Trump",
+    "year": 2025
+  },
+  {
+    "title": "I dazi del \"Liberation Day\" fanno crollare Wall Street",
+    "wiki": "Crollo borsistico del 2025",
+    "year": 2025
+  },
+  {
+    "title": "Muore Pippo Baudo",
+    "subtitle": "Tredici Festival di Sanremo condotti",
+    "wiki": "Pippo Baudo",
+    "year": 2025,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Ornella Vanoni",
+    "subtitle": "La voce de L'appuntamento",
+    "wiki": "Ornella Vanoni",
+    "year": 2025,
+    "prop": "P570"
+  },
+  {
+    "title": "Muore Robert Redford",
+    "subtitle": "Il fondatore del Sundance",
+    "wiki": "Robert Redford",
+    "year": 2025,
+    "prop": "P570"
+  },
+  {
+    "title": "Rubati i gioielli della Corona al Louvre",
+    "subtitle": "Il colpo del secolo in pochi minuti",
+    "wiki": "Furto del Louvre",
+    "year": 2025
+  },
+  {
+    "title": "Zohran Mamdani eletto sindaco di New York",
+    "wiki": "Elezioni del sindaco di New York del 2025",
+    "year": 2025
+  },
+  {
+    "title": "Un sisma di magnitudo 7,7 colpisce la Birmania",
+    "subtitle": "Crolla anche un grattacielo a Bangkok",
+    "wiki": "Terremoto di Sagaing del 2025",
+    "year": 2025
+  },
+  {
+    "title": "Scoperta la cometa interstellare 3I/ATLAS",
+    "subtitle": "Il terzo oggetto venuto da fuori il Sistema solare",
+    "wiki": "3I/ATLAS",
+    "year": 2025,
+    "prop": "P575"
+  },
+  {
+    "title": "Fallisce il quorum ai referendum su lavoro e cittadinanza",
+    "wiki": "Referendum abrogativi in Italia del 2025",
+    "year": 2025
+  },
+  {
+    "title": "Blitz USA a Caracas: catturato Nicolás Maduro",
+    "wiki": "Attacchi statunitensi in Venezuela del 2026",
+    "year": 2026
+  },
+  {
+    "title": "Rogo in un bar di Crans-Montana la notte di Capodanno",
+    "subtitle": "Tra le vittime giovanissime anche sei italiani",
+    "wiki": "Incendio di Crans-Montana",
+    "year": 2026
+  },
+  {
+    "title": "Orbán perde le elezioni, in Ungheria vince Péter Magyar",
+    "wiki": "Elezioni parlamentari in Ungheria del 2026",
+    "year": 2026
   }
 ]

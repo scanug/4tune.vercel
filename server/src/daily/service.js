@@ -13,8 +13,9 @@ import { GameError, sanitizeName, shuffle } from '../engine.js';
 import { ANNO_CATEGORIES, ANNO_SCORING, currentYear, distancePoints, pickRange } from '../games/anno.js';
 import { addDays, dayNumber, nextRomeMidnight, romeDay } from './time.js';
 
-export const CARDS_PER_CATEGORY = 2;
-export const DAILY_TOTAL = ANNO_CATEGORIES.length * CARDS_PER_CATEGORY;
+// 10 carte: una per categoria, più qualche extra da categorie estratte a caso.
+export const DAILY_TOTAL = 10;
+const EXTRA_CARDS = DAILY_TOTAL - ANNO_CATEGORIES.length;
 export const MAX_SCORE = DAILY_TOTAL * (ANNO_SCORING.maxDistancePoints + ANNO_SCORING.exactBonus);
 const LEADERBOARD_SIZE = 50;
 
@@ -100,6 +101,25 @@ export function streaks(days, today) {
   return { current, best };
 }
 
+// Riordina in modo che due carte della stessa categoria non siano vicine
+// (con 10 carte su 7 categorie è sempre possibile).
+export function spreadCategories(cards) {
+  const out = [];
+  const rest = [...cards];
+  while (rest.length) {
+    const prev = out[out.length - 1]?.category;
+    // Prima la categoria con più carte rimaste, così le ripetute non finiscono in coda insieme.
+    const counts = rest.reduce((m, c) => m.set(c.category, (m.get(c.category) || 0) + 1), new Map());
+    let best = -1;
+    for (let i = 0; i < rest.length; i++) {
+      if (rest[i].category === prev) continue;
+      if (best === -1 || counts.get(rest[i].category) > counts.get(rest[best].category)) best = i;
+    }
+    out.push(rest.splice(best === -1 ? 0 : best, 1)[0]);
+  }
+  return out;
+}
+
 export function createDailyService({ db, deck, now = Date.now, rng = Math.random }) {
   const categoryOf = new Map(ANNO_CATEGORIES.map((c) => [c.id, c]));
 
@@ -131,23 +151,31 @@ export function createDailyService({ db, deck, now = Date.now, rng = Math.random
 
   // ---------- carte del giorno ----------
 
-  // Sceglie 2 carte per categoria evitando quelle già uscite nei giorni
-  // precedenti; finite quelle nuove si ricomincia dalla categoria intera.
-  async function pickCards(day) {
+  // Una carta per categoria più EXTRA_CARDS da categorie diverse a caso,
+  // evitando quelle già uscite nei giorni precedenti (riconosciute anche dal
+  // titolo: una carta spostata di categoria cambia id). Finite le carte nuove
+  // di una categoria si ricomincia da quella intera.
+  async function pickCards() {
     const { rows } = await db.query('SELECT cards FROM daily_days');
-    const used = new Set(rows.flatMap((r) => r.cards.map((c) => c.id)));
+    const usedIds = new Set(rows.flatMap((r) => r.cards.map((c) => c.id)));
+    const usedTitles = new Set(rows.flatMap((r) => r.cards.map((c) => c.title)));
+    const isUsed = (c) => usedIds.has(c.id) || usedTitles.has(c.title);
     const maxYear = currentYear(now());
-    const halves = [[], []];
-    for (const { id } of ANNO_CATEGORIES) {
-      const all = deck.filter((c) => c.category === id);
-      const fresh = all.filter((c) => !used.has(c.id));
-      const pool = shuffle(fresh.length >= CARDS_PER_CATEGORY ? fresh : all, rng).slice(0, CARDS_PER_CATEGORY);
-      pool.forEach((card, i) => halves[i % 2].push(card));
-    }
-    // Due giri da 5 carte, una per categoria, in ordine casuale.
-    const ordered = [...shuffle(halves[0], rng), ...shuffle(halves[1], rng)];
-    if (ordered.length === 0) throw new GameError('Mazzo non disponibile', 'deck');
-    return ordered.map((c) => {
+
+    const pools = ANNO_CATEGORIES
+      .map(({ id }) => {
+        const all = deck.filter((c) => c.category === id);
+        const fresh = all.filter((c) => !isUsed(c));
+        return { id, cards: shuffle(fresh.length >= 2 ? fresh : all, rng) };
+      })
+      .filter((p) => p.cards.length > 0);
+    if (pools.length === 0) throw new GameError('Mazzo non disponibile', 'deck');
+
+    const picked = pools.map((p) => p.cards.shift());
+    const extraFrom = shuffle(pools.filter((p) => p.cards.length > 0), rng).slice(0, Math.max(0, DAILY_TOTAL - picked.length));
+    for (const p of extraFrom) picked.push(p.cards.shift());
+
+    return spreadCategories(shuffle(picked, rng)).map((c) => {
       const { span } = categoryOf.get(c.category);
       return {
         id: c.id,
@@ -169,7 +197,7 @@ export function createDailyService({ db, deck, now = Date.now, rng = Math.random
   async function cardsFor(day) {
     const found = await db.query('SELECT cards FROM daily_days WHERE day = $1', [day]);
     if (found.rows[0]) return found.rows[0].cards;
-    const cards = await pickCards(day);
+    const cards = await pickCards();
     await db.query('INSERT INTO daily_days (day, cards) VALUES ($1, $2) ON CONFLICT (day) DO NOTHING', [day, JSON.stringify(cards)]);
     const { rows } = await db.query('SELECT cards FROM daily_days WHERE day = $1', [day]);
     return rows[0].cards;

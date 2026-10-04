@@ -4,7 +4,7 @@ import { PGlite } from '@electric-sql/pglite';
 import { ANNO_CATEGORIES } from '../src/games/anno.js';
 import { DAY_ONE, addDays, dayNumber, nextRomeMidnight, romeDay } from '../src/daily/time.js';
 import {
-  DAILY_TOTAL, MAX_SCORE, cardPoints, createDailyService, nameKey, resultEmoji, streaks,
+  DAILY_TOTAL, MAX_SCORE, cardPoints, createDailyService, nameKey, resultEmoji, spreadCategories, streaks,
 } from '../src/daily/service.js';
 
 // ---------- calendario ----------
@@ -88,7 +88,16 @@ test('registrazione: nickname unico senza distinzione di maiuscole, token valido
   await assert.rejects(service.auth('token-inventato'), /non riconosciuto/);
 });
 
-test('sfida: 10 carte, 2 per categoria, uguali per tutti e senza anno prima della risposta', async () => {
+test('spreadCategories: mai due carte della stessa categoria vicine', () => {
+  const cards = ['a', 'a', 'a', 'b', 'b', 'c', 'd', 'e', 'f', 'g'].map((category, i) => ({ category, i }));
+  for (let k = 0; k < 20; k++) {
+    const out = spreadCategories([...cards].sort(() => Math.random() - 0.5));
+    assert.equal(out.length, 10);
+    for (let i = 1; i < out.length; i++) assert.notEqual(out[i].category, out[i - 1].category);
+  }
+});
+
+test('sfida: 10 carte, almeno una per categoria, uguali per tutti e senza anno prima della risposta', async () => {
   const { service } = await setup();
   const a = await service.register('A');
   const b = await service.register('B');
@@ -106,7 +115,12 @@ test('sfida: 10 carte, 2 per categoria, uguali per tutti e senza anno prima dell
     assert.ok(r.next === null || !('year' in r.next));
     card = r.next;
   }
-  for (const { id } of ANNO_CATEGORIES) assert.equal(review.filter((c) => c === id).length, 2);
+  assert.equal(review.length, DAILY_TOTAL);
+  for (const { id } of ANNO_CATEGORIES) {
+    const n = review.filter((c) => c === id).length;
+    assert.ok(n >= 1 && n <= 2, `${id}: ${n} carte`);
+  }
+  for (let i = 1; i < review.length; i++) assert.notEqual(review[i], review[i - 1]);
 });
 
 test('risposte: ordine obbligato, niente doppioni, anno dentro l\'intervallo, punteggio sommato', async () => {
