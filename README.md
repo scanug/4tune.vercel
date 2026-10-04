@@ -4,6 +4,7 @@ Giochi da festa gratuiti, senza registrazione.
 
 - **GTS – Guess the Song**: quiz musicale online. L'host sceglie una playlist Deezer, crea una stanza e condivide un codice a 4 lettere. Le clip partono sincronizzate, il server tiene la risposta corretta e calcola i punti.
 - **Indovina l'Anno**: quiz online sugli anni. Ogni round esce una carta ("Nasce Vasco Rossi", "Esce al cinema Titanic") e ognuno sceglie l'anno dal suo telefono con uno slider: chi si avvicina di più vince il round. Cinque categorie (personaggi, storia, invenzioni, film/album/videogiochi, attualità) e quasi 600 carte, ogni anno verificato su Wikidata.
+- **L'Anno del Giorno**: la versione single player in stile Wordle. Ogni giorno (da mezzanotte, ora italiana) escono 10 carte uguali per tutti; si gioca col proprio nickname riservato e si entra nella classifica del giorno e in quella di sempre. Si può rigiocare per allenarsi, ma conta solo il primo tentativo.
 - **Impostore**: gioco dal vivo con un solo telefono che passa di mano. Non usa il server.
 
 ## Struttura
@@ -14,7 +15,7 @@ lib/          gameClient.js: Socket.IO + rotte HTTP del server
 server/       server di gioco Node (Socket.IO), deploy su Render
 ```
 
-Il server è l'unica autorità sul gioco: stanze in memoria, timer dei round, punteggi. Non c'è database: una stanza vive finché dura la partita e un redeploy del server azzera le partite in corso.
+Il server è l'unica autorità sul gioco: stanze in memoria, timer dei round, punteggi. Le stanze non usano database: una stanza vive finché dura la partita e un redeploy del server azzera le partite in corso. Solo l'Anno del Giorno salva su Postgres (Neon) nickname, sfide e punteggi; le tabelle le crea il server da solo all'avvio e il browser non parla mai col database. In locale, senza `DATABASE_URL`, il server usa un Postgres in memoria (PGlite) che si azzera al riavvio.
 
 ## Sviluppo locale
 
@@ -54,6 +55,7 @@ Foto e descrizioni arrivano da Wikidata e Wikimedia Commons; la foto si vede sol
 | Variabile | Valore |
 |---|---|
 | `CLIENT_ORIGIN` | origin del frontend, separati da virgola (es. `https://4tune.vercel.app`) |
+| `DATABASE_URL` | stringa di connessione Postgres di Neon (Vercel → Storage → il database → `.env.local`/Quickstart), serve all'Anno del Giorno |
 
 Il piano free si spegne dopo 15 minuti senza traffico e il primo che entra aspetta circa un minuto. Per tenerlo sempre acceso basta un ping gratuito ogni 10 minuti a `/health` (es. cron-job.org): le 750 ore mensili gratuite coprono un servizio acceso tutto il mese.
 

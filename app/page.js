@@ -16,6 +16,13 @@ const GAMES = [
     background: '#fefce8',
   },
   {
+    href: '/anno/giorno',
+    emoji: '🗓️',
+    title: "L'Anno del Giorno",
+    description: 'Da solo, 10 carte al giorno uguali per tutti. Indovina gli anni e scala la classifica.',
+    background: '#ecfdf5',
+  },
+  {
     href: '/impostore',
     emoji: '🕵️',
     title: 'Impostore',

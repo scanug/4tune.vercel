@@ -23,6 +23,7 @@ export default function AnnoLandingPage() {
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
             <Link href="/anno/host" className="btn-3d" style={{ textDecoration: 'none', minWidth: 160, textAlign: 'center' }}>Crea stanza</Link>
             <Link href="/anno/join" className="btn-3d" style={{ textDecoration: 'none', minWidth: 160, textAlign: 'center' }}>Entra con codice</Link>
+            <Link href="/anno/giorno" className="btn-3d" style={{ textDecoration: 'none', minWidth: 160, textAlign: 'center', background: 'linear-gradient(180deg, #10b981, #059669)', boxShadow: '0 8px 0 #065f46, 0 12px 22px rgba(5,150,105,0.35)' }}>🗓️ Sfida del giorno</Link>
             <button
               type="button"
               className="btn-3d"
