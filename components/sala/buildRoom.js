@@ -1,5 +1,6 @@
 import { ICONS, PALETTE } from '@/components/PixelIcon';
 import { GAMES } from '@/lib/games';
+import { TIERS, trophiesFor } from '@/lib/trophies';
 
 // La scena si disegna a bassa risoluzione e il canvas viene ingrandito con
 // image-rendering: pixelated, così anche il 3D ha i pixel grossi del 16-bit.
@@ -138,6 +139,14 @@ export function buildRoom(THREE, OrbitControls, host, { reducedMotion, onSelect 
 
   // ---------- Cabinati ----------
   const voxel = new THREE.BoxGeometry(1, 1, 1);
+
+  // Coppa dei trofei: profilo girato su 8 lati, look low-poly
+  const cupGeo = new THREE.LatheGeometry([
+    [0, 0], [0.09, 0], [0.09, 0.025], [0.03, 0.045], [0.025, 0.11],
+    [0.06, 0.13], [0.11, 0.2], [0.12, 0.29], [0.105, 0.29], [0, 0.18],
+  ].map(([x, y]) => new THREE.Vector2(x, y)), 8);
+  const lockedCup = toon('#3a3266');
+  const tierCup = Object.fromEntries(Object.entries(TIERS).map(([k, t]) => [k, toon(t.color)]));
   const cabinets = GAMES.map((game, index) => {
     const angle = (index - (GAMES.length - 1) / 2) * ARC_STEP;
     const pos = new THREE.Vector3(Math.sin(angle) * ARC_RADIUS, 0, -Math.cos(angle) * ARC_RADIUS);
@@ -253,13 +262,26 @@ export function buildRoom(THREE, OrbitControls, host, { reducedMotion, onSelect 
     model.position.y = 3.15;
     root.add(model);
 
+    // I trofei del gioco girano intorno al modellino
+    const cupRing = new THREE.Group();
+    cupRing.position.y = 2.95;
+    root.add(cupRing);
+    const cups = trophiesFor(game.id).map((trophy, i, list) => {
+      const a = (i / list.length) * Math.PI * 2;
+      const cup = new THREE.Mesh(cupGeo, lockedCup);
+      cup.position.set(Math.cos(a) * 0.75, 0, Math.sin(a) * 0.75);
+      cup.scale.setScalar(0.9);
+      cupRing.add(cup);
+      return { trophy, cup };
+    });
+
     const light = new THREE.PointLight(game.accent, 6, 5, 2);
     light.position.set(0, 2.6, 1.2);
     root.add(light);
 
     const azimuth = Math.atan2(facing.x, facing.z);
 
-    return { root, beamMat, model, drawScreen, drawMarquee, pos, facing, azimuth };
+    return { root, beamMat, model, cupRing, cups, drawScreen, drawMarquee, pos, facing, azimuth };
   });
 
   // Il font pixel potrebbe arrivare dopo: si ridisegnano le scritte
@@ -389,6 +411,7 @@ export function buildRoom(THREE, OrbitControls, host, { reducedMotion, onSelect 
       c.beamMat.opacity = on ? 0.09 : 0.035;
       if (!reducedMotion) {
         c.model.rotation.y += dt * (on ? 1.2 : 0.4);
+        c.cupRing.rotation.y -= dt * 0.5;
         c.model.position.y = 3.15 + (on ? Math.round(Math.sin(t * 2) * 6) / 100 : 0);
       }
     });
@@ -414,8 +437,16 @@ export function buildRoom(THREE, OrbitControls, host, { reducedMotion, onSelect 
   };
   animate();
 
+  // Colora le coppe dei trofei sbloccati: `unlocked` è { idTrofeo: timestamp }
+  const setTrophies = (unlocked = {}) => {
+    cabinets.forEach((c) => c.cups.forEach(({ trophy, cup }) => {
+      cup.material = unlocked[trophy.id] ? tierCup[trophy.tier] : lockedCup;
+    }));
+  };
+
   return {
     select,
+    setTrophies,
     dispose() {
       cancelAnimationFrame(frame);
       ro.disconnect();
@@ -429,6 +460,8 @@ export function buildRoom(THREE, OrbitControls, host, { reducedMotion, onSelect 
       });
       gradientMap.dispose();
       brickTex.dispose();
+      lockedCup.dispose();
+      Object.values(tierCup).forEach((m) => m.dispose());
       renderer.dispose();
       canvas.remove();
     },

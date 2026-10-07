@@ -1,6 +1,8 @@
 import { Rubik, JetBrains_Mono, Press_Start_2P, Pixelify_Sans } from "next/font/google";
 import "./globals.css";
 import MusicController from "../components/MusicController";
+import TrophyToast from "../components/TrophyToast";
+import ServerWake from "../components/ServerWake";
 
 const geistSans = Rubik({
   variable: "--font-geist-sans",
@@ -50,6 +52,8 @@ export default function RootLayout({ children }) {
         </div>
         {children}
         <MusicController />
+        <TrophyToast />
+        <ServerWake />
       </body>
     </html>
   );

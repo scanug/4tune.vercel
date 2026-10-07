@@ -8,14 +8,24 @@ import PixelIcon from '@/components/PixelIcon';
 import { MuteButton } from '@/components/MusicController';
 import { GAMES } from '@/lib/games';
 import { readStats, statRows } from '@/lib/stats';
+import { TIERS, TROPHY_EVENT, cupColors, readUnlocked, trophiesFor } from '@/lib/trophies';
 
 export default function SalaPage() {
   const router = useRouter();
   const [status, setStatus] = useState('loading'); // 'loading' | 'ready' | 'error'
   const [index, setIndex] = useState(0);
   const [stats, setStats] = useState({});
+  const [unlocked, setUnlocked] = useState({});
+  const [picked, setPicked] = useState(null); // trofeo di cui mostrare i dettagli
 
-  useEffect(() => { setStats(readStats()); }, []);
+  useEffect(() => {
+    const refresh = () => { setStats(readStats()); setUnlocked(readUnlocked()); };
+    refresh();
+    window.addEventListener(TROPHY_EVENT, refresh);
+    return () => window.removeEventListener(TROPHY_EVENT, refresh);
+  }, []);
+
+  useEffect(() => { setPicked(null); }, [index]);
 
   const go = useCallback((delta) => setIndex((i) => (i + delta + GAMES.length) % GAMES.length), []);
 
@@ -31,10 +41,14 @@ export default function SalaPage() {
 
   const game = GAMES[index];
   const rows = statRows(game.id, stats[game.id]);
+  const trophies = trophiesFor(game.id);
+  const got = trophies.filter((t) => unlocked[t.id]).length;
+  // Senza scelta si mostra il prossimo trofeo da prendere
+  const shown = trophies.find((t) => t.id === picked) || trophies.find((t) => !unlocked[t.id]) || trophies[trophies.length - 1];
 
   return (
     <main className="sala">
-      <Room3D index={index} onSelect={setIndex} onReady={() => setStatus('ready')} onError={() => setStatus('error')} />
+      <Room3D index={index} unlocked={unlocked} onSelect={setIndex} onReady={() => setStatus('ready')} onError={() => setStatus('error')} />
 
       {status === 'loading' && <div className="sala-loading" role="status">CARICAMENTO<span className="blink">_</span></div>}
       {status === 'error' && (
@@ -62,6 +76,34 @@ export default function SalaPage() {
             <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
           ))}
         </dl>
+        <div className="sala-trophies">
+          <div className="sala-trophies-head">
+            <span>Trofei</span>
+            <span>{got}/{trophies.length}</span>
+          </div>
+          <div className="sala-cups">
+            {trophies.map((t) => {
+              const on = !!unlocked[t.id];
+              return (
+                <button
+                  key={t.id}
+                  type="button"
+                  className={`sala-cup${shown?.id === t.id ? ' picked' : ''}`}
+                  onClick={() => setPicked(t.id)}
+                  aria-label={`${t.title}, ${TIERS[t.tier].label}, ${on ? 'sbloccato' : `da sbloccare: ${t.hint}`}`}
+                >
+                  <PixelIcon name="trophy" size={28} colors={cupColors(t.tier, on)} />
+                </button>
+              );
+            })}
+          </div>
+          {shown && (
+            <p className="sala-trophy-info">
+              <strong style={{ color: unlocked[shown.id] ? TIERS[shown.tier].color : undefined }}>{shown.title}</strong>
+              {' · '}{unlocked[shown.id] ? 'Sbloccato!' : shown.hint}
+            </p>
+          )}
+        </div>
         <div className="sala-card-foot">
           <span className="sala-dots" aria-hidden="true">
             {GAMES.map((g, i) => <span key={g.id} className={i === index ? 'on' : ''} />)}

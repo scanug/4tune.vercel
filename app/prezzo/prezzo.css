@@ -1,0 +1,56 @@
+/* ---------- Quanto costa? ----------
+   Riusa le classi anno-* di globals.css; qui solo quello che cambia per i
+   prezzi (stringhe più lunghe degli anni) e il riquadro della nota. */
+
+/* "1,5 mln $" o "34.000 mld $" sono più larghi di un anno: il corpo lo
+   decide bigFontSize() in base alla lunghezza, qui solo niente a capo. */
+.anno-year-big.prezzo-big,
+.anno-counter.prezzo-counter { white-space: nowrap; }
+
+/* "−10%" è più largo di "−10": le colonne non devono allargarsi oltre il pannello. */
+.anno-steps.prezzo-steps { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.anno-steps.prezzo-steps .btn-3d { font-size: clamp(10px, 3vw, 14px); }
+
+/* Righe del reveal: nome sopra, prezzo scelto e scarto sotto. */
+.prezzo-result-guess {
+  display: block;
+  margin-top: 3px;
+  font-size: 10px;
+  color: #4b5563;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Carta della domanda: verde "banconota" invece dell'indaco dell'Anno. */
+.anno-card.prezzo-card {
+  background: linear-gradient(160deg, #052e16 0%, #065f46 55%, #059669 100%);
+  box-shadow: 0 10px 0 #052e16, 0 18px 36px rgba(5, 46, 22, 0.35);
+}
+
+.prezzo-unit {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.15);
+  font-size: 10px;
+}
+
+/* Nota del reveal: cos'è il prezzo, quando, dove si controlla. */
+.prezzo-note {
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(16,185,129,0.08);
+  border: 1px solid rgba(16,185,129,0.3);
+}
+.prezzo-note p { margin: 0; }
+.prezzo-note .title { font-weight: 700; color: #111827; font-size: 13px; }
+.prezzo-note .text,
+.prezzo-note .source {
+  margin-top: 6px;
+  font-family: var(--font-geist-sans), Arial, sans-serif;
+  letter-spacing: 0;
+}
+.prezzo-note .text { color: #374151; font-size: 12px; }
+.prezzo-note .source { color: #6b7280; font-size: 11px; font-style: italic; }

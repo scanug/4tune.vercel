@@ -1,7 +1,8 @@
-// Server di gioco 4Tune: HTTP per Deezer, mazzo dell'Anno, Anno del Giorno e
-// health check; Socket.IO per le stanze (GTS sul namespace "/", Indovina
-// l'Anno su "/anno"). Le stanze vivono in memoria finché dura la partita (un
-// redeploy le azzera); solo l'Anno del Giorno salva su Postgres.
+// Server di gioco 4Tune: HTTP per Deezer, mazzi dell'Anno e di Quanto costa?,
+// Anno del Giorno e health check; Socket.IO per le stanze (GTS sul namespace
+// "/", Indovina l'Anno su "/anno", Quanto costa? su "/prezzo"). Le stanze
+// vivono in memoria finché dura la partita (un redeploy le azzera); solo
+// l'Anno del Giorno salva su Postgres.
 //
 // Variabili d'ambiente:
 //   PORT            porta di ascolto (Render e Railway la impostano da soli)
@@ -19,11 +20,13 @@ import { attachSockets } from './socket.js';
 import { fetchPlaylist, getPresets, playlistSummary, searchPlaylists } from './deezer.js';
 import { GameError } from './engine.js';
 import { categorySummary, createAnnoGame, loadDeck } from './games/anno.js';
+import { categorySummary as prezzoCategorySummary, createPrezzoGame, loadDeck as loadPrezzoDeck } from './games/prezzo.js';
 import { connectDailyDb } from './daily/db.js';
 import { createDailyService } from './daily/service.js';
 import { createDailyRoutes } from './daily/http.js';
 
 const annoDeck = loadDeck(fileURLToPath(new URL('../data/anno/cards.json', import.meta.url)));
+const prezzoDeck = loadPrezzoDeck(fileURLToPath(new URL('../data/prezzo/cards.json', import.meta.url)));
 
 const port = Number(process.env.PORT || 4000);
 const allowedOrigins = (process.env.CLIENT_ORIGIN || '')
@@ -113,14 +116,18 @@ async function handleHttp(req, res) {
     if (url.pathname === '/health') {
       return sendJson(req, res, 200, {
         ok: true,
-        rooms: manager.rooms.size + annoManager.rooms.size,
+        rooms: manager.rooms.size + annoManager.rooms.size + prezzoManager.rooms.size,
         annoCards: annoDeck.length,
+        prezzoCards: prezzoDeck.length,
         daily: !!dailyService,
         uptime: process.uptime(),
       });
     }
     if (url.pathname === '/anno/categories') {
       return sendJson(req, res, 200, { data: categorySummary(annoDeck) }, { 'Cache-Control': 'public, max-age=300' });
+    }
+    if (url.pathname === '/prezzo/categories') {
+      return sendJson(req, res, 200, { data: prezzoCategorySummary(prezzoDeck) }, { 'Cache-Control': 'public, max-age=300' });
     }
     if (url.pathname === '/deezer/presets') {
       return sendJson(req, res, 200, { data: await getPresets() }, { 'Cache-Control': 'public, max-age=300' });
@@ -148,6 +155,10 @@ const annoManager = new RoomManager({
   game: createAnnoGame(annoDeck),
   onRoomRemoved: (room) => console.log(`[anno] chiusa ${room.code}`),
 });
+const prezzoManager = new RoomManager({
+  game: createPrezzoGame(prezzoDeck),
+  onRoomRemoved: (room) => console.log(`[prezzo] chiusa ${room.code}`),
+});
 
 const server = http.createServer(handleHttp);
 const io = new Server(server, {
@@ -160,10 +171,12 @@ attachSockets(io, manager, {
   loadRoomInput: async (payload) => ({ playlist: await fetchPlaylist(payload.playlistId) }),
 });
 attachSockets(io.of('/anno'), annoManager);
+attachSockets(io.of('/prezzo'), prezzoManager);
 
 server.listen(port, () => {
   console.log(`4Tune server in ascolto su :${port}` + (allowedOrigins.length ? ` (origin: ${allowedOrigins.join(', ')})` : ' (origin: tutti)'));
   console.log(`[anno] mazzo: ${annoDeck.length} carte`);
+  console.log(`[prezzo] mazzo: ${prezzoDeck.length} carte`);
   startDaily();
 });
 

@@ -12,7 +12,8 @@
     "test": "node --test \"test/**/*.test.js\"",
     "smoke": "node scripts/smoke.mjs",
     "deck": "node scripts/build-anno-deck.mjs",
-    "smoke:anno": "node scripts/smoke-anno.mjs"
+    "smoke:anno": "node scripts/smoke-anno.mjs",
+    "deck:prezzo": "node scripts/build-prezzo-deck.mjs"
   },
   "dependencies": {
     "pg": "^8.23.1",

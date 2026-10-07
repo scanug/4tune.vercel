@@ -1,0 +1,178 @@
+[
+  {
+    "title": "Un caffè espresso al bar",
+    "subtitle": "Al banco",
+    "price": 1.22,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025: media nazionale della tazzina al banco ad aprile 2025",
+    "source": "Osservatorio prezzi MIMIT, elaborazione C.r.c./Assoutenti 2025"
+  },
+  {
+    "title": "Un cappuccino al bar",
+    "subtitle": "Al banco",
+    "price": 1.6,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025 (dato nazionale 2024: 1,60)",
+    "source": "Osservatorio Nazionale Federconsumatori"
+  },
+  {
+    "title": "Un cornetto al bar",
+    "subtitle": "Al banco",
+    "price": 1.4,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025 (dato nazionale 2024: 1,40)",
+    "source": "Osservatorio Nazionale Federconsumatori"
+  },
+  {
+    "title": "Una pizza margherita in pizzeria",
+    "subtitle": "Solo la pizza, senza bibita e coperto",
+    "price": 7,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025: la fascia più comune è tra 5 e 8",
+    "source": "Osservatorio Pizza 2025; Altroconsumo"
+  },
+  {
+    "title": "Uno spritz al bar",
+    "subtitle": "Aperol spritz, fuori dalle zone turistiche",
+    "price": 6,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025: si va da 4 a Padova a oltre 10 nelle zone turistiche",
+    "source": "Rassegna stampa 2025 (Gambero Rosso, Scatti di Gusto)"
+  },
+  {
+    "title": "Una birra media alla spina al pub",
+    "subtitle": "Birra industriale da 0,4 litri",
+    "price": 5,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini di bar e pub, 2025"
+  },
+  {
+    "title": "Un cono gelato da due gusti",
+    "subtitle": "In gelateria artigianale",
+    "price": 3,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini delle gelaterie, 2025"
+  },
+  {
+    "title": "Un litro di benzina",
+    "subtitle": "Self service, media dell'anno",
+    "price": 1.73,
+    "unit": "EUR",
+    "note": "Prezzo medio in Italia nel 2025: media annua dei prezzi settimanali (minimo 1,68, massimo 1,83)",
+    "source": "Bollettino petrolifero settimanale del Ministero dell'Ambiente (MASE)"
+  },
+  {
+    "title": "Un litro di latte fresco intero di marca",
+    "subtitle": "Al supermercato",
+    "price": 1.7,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "title": "Un pacco di spaghetti di marca da mezzo chilo",
+    "subtitle": "Al supermercato",
+    "price": 1.3,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "title": "Un chilo di pane dal fornaio",
+    "subtitle": "Pane comune di grano tenero",
+    "price": 4,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025: si va da circa 3 a Napoli a oltre 5 a Milano",
+    "source": "Osservatorio prezzi MIMIT; Altroconsumo"
+  },
+  {
+    "title": "Una confezione da sei uova",
+    "subtitle": "Da galline allevate a terra, al supermercato",
+    "price": 2.5,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "title": "Un litro di olio extravergine d'oliva",
+    "subtitle": "Al supermercato",
+    "price": 9,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025: lo scaffale va da 8 a 10, spesso in promozione",
+    "source": "Ismea / Il Fatto Alimentare, 2025"
+  },
+  {
+    "title": "Un chilo di Parmigiano Reggiano",
+    "subtitle": "Stagionato 24 mesi, al supermercato",
+    "price": 25,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "title": "Un chilo di banane",
+    "subtitle": "Al supermercato",
+    "price": 1.9,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "title": "Un pacchetto di caffè macinato da 250 grammi",
+    "subtitle": "Miscela di marca per moka",
+    "price": 5,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025, dopo i forti rincari del caffè crudo",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "title": "Una lattina di Coca-Cola",
+    "subtitle": "Da 33 cl, al supermercato",
+    "price": 0.9,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "title": "Un Big Mac da McDonald's in Italia",
+    "subtitle": "Solo il panino",
+    "price": 6.56,
+    "unit": "EUR",
+    "note": "Prezzo rilevato per l'Italia dal Big Mac Index, luglio 2026 (era 6,20 a luglio 2025)",
+    "source": "The Economist, Big Mac Index"
+  },
+  {
+    "title": "Una bottiglia di Prosecco DOC",
+    "subtitle": "Da 75 cl, al supermercato",
+    "price": 7,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "title": "Un barattolo di Nutella da 750 grammi",
+    "subtitle": "Al supermercato",
+    "price": 7,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "title": "Una copia del Corriere della Sera",
+    "subtitle": "In edicola, nei giorni feriali",
+    "price": 1.7,
+    "unit": "EUR",
+    "note": "Prezzo di copertina in vigore dal 5 agosto 2026 (prima 1,50, invariato dal 2015)",
+    "source": "RCS / Calcio e Finanza, agosto 2026"
+  },
+  {
+    "title": "Una bottiglia di acqua minerale naturale",
+    "subtitle": "Da 1,5 litri, al supermercato",
+    "price": 0.4,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  }
+]

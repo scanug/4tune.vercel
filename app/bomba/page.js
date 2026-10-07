@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import PixelIcon from '@/components/PixelIcon';
 import { BOMBA_CATEGORIES, BOMBA_SYLLABLES, BOMBA_FUSES } from '@/lib/bombaPrompts';
 import { isAudioMuted } from '@/lib/chiptune';
@@ -19,6 +19,16 @@ const FUSES = [
   { id: 'media', label: 'Media' },
   { id: 'lunga', label: 'Lunga' },
 ];
+
+// Una voce per riga, senza doppioni né righe vuote.
+function parseLines(text, upper) {
+  const seen = new Set();
+  return String(text || '').split('\n')
+    .map((l) => l.trim().slice(0, 60))
+    .map((l) => (upper ? l.toUpperCase() : l))
+    .filter((l) => l && !seen.has(l.toLowerCase()) && seen.add(l.toLowerCase()))
+    .slice(0, 200);
+}
 
 function shuffledIndexes(n) {
   const a = Array.from({ length: n }, (_, i) => i);
@@ -104,8 +114,11 @@ export default function BombaPage() {
   const [loser, setLoser] = useState(null);
   const [wobble, setWobble] = useState(700);
   const [loaded, setLoaded] = useState(false);
+  const [custom, setCustom] = useState({ categorie: '', sillabe: '' }); // testo scritto dall'utente
+  const [customOnly, setCustomOnly] = useState(false);
+  const [startError, setStartError] = useState('');
 
-  const bagsRef = useRef({ categorie: [], sillabe: [] });
+  const bagRef = useRef({ pool: null, order: [] });
   const { unlock, tick, boom } = useBombaAudio();
   useMusicSuppressed(phase !== 'setup');
 
@@ -116,6 +129,10 @@ export default function BombaPage() {
         if (MODES.some((m) => m.id === saved.mode)) setMode(saved.mode);
         if (BOMBA_FUSES[saved.fuse]) setFuse(saved.fuse);
         if (Array.isArray(saved.players)) setPlayers(saved.players.filter((p) => typeof p === 'string').slice(0, 20));
+        if (saved.custom && typeof saved.custom === 'object') {
+          setCustom({ categorie: String(saved.custom.categorie || ''), sillabe: String(saved.custom.sillabe || '') });
+        }
+        setCustomOnly(!!saved.customOnly);
       }
     } catch { /* storage non disponibile: si parte dai default */ }
     setLoaded(true);
@@ -123,15 +140,24 @@ export default function BombaPage() {
 
   useEffect(() => {
     if (!loaded) return;
-    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ mode, fuse, players })); } catch { /* ignora */ }
-  }, [loaded, mode, fuse, players]);
+    try { localStorage.setItem(STORAGE_KEY, JSON.stringify({ mode, fuse, players, custom, customOnly })); } catch { /* ignora */ }
+  }, [loaded, mode, fuse, players, custom, customOnly]);
 
+  // Le voci dell'utente si aggiungono a quelle incluse, oppure le sostituiscono
+  const mine = useMemo(() => parseLines(custom[mode], mode === 'sillabe'), [custom, mode]);
+  const pool = useMemo(() => {
+    const base = mode === 'sillabe' ? BOMBA_SYLLABLES : BOMBA_CATEGORIES;
+    if (customOnly) return mine;
+    const known = new Set(base.map((b) => b.toLowerCase()));
+    return [...base, ...mine.filter((m) => !known.has(m.toLowerCase()))];
+  }, [mode, mine, customOnly]);
+
+  // Pesca senza ripetere finché il mazzo non è finito
   const nextPrompt = useCallback(() => {
-    const list = mode === 'sillabe' ? BOMBA_SYLLABLES : BOMBA_CATEGORIES;
-    const bags = bagsRef.current;
-    if (bags[mode].length === 0) bags[mode] = shuffledIndexes(list.length);
-    return list[bags[mode].pop()];
-  }, [mode]);
+    const bag = bagRef.current;
+    if (bag.pool !== pool || bag.order.length === 0) bagRef.current = { pool, order: shuffledIndexes(pool.length) };
+    return pool[bagRef.current.order.pop()];
+  }, [pool]);
 
   // La miccia: durata casuale nascosta, i tic accelerano verso la fine.
   useEffect(() => {
@@ -178,6 +204,11 @@ export default function BombaPage() {
   }
 
   function light() {
+    if (pool.length === 0) {
+      setStartError(mode === 'sillabe' ? 'Scrivi almeno una sillaba tua, o usa anche quelle incluse' : 'Scrivi almeno una categoria tua, o usa anche quelle incluse');
+      return;
+    }
+    setStartError('');
     unlock();
     setLoser(null);
     setPrompt(nextPrompt());
@@ -235,6 +266,23 @@ export default function BombaPage() {
               </div>
             </div>
 
+            <details className="bomba-custom" open={mine.length > 0 || customOnly}>
+              <summary>{mode === 'sillabe' ? 'Le tue sillabe' : 'Le tue categorie'}{mine.length > 0 ? ` (${mine.length})` : ''}</summary>
+              <textarea
+                className="input-modern"
+                rows={5}
+                value={custom[mode]}
+                onChange={(e) => setCustom((c) => ({ ...c, [mode]: e.target.value }))}
+                placeholder={mode === 'sillabe' ? 'Una per riga, es.\nCHE\nTRA' : 'Una per riga, es.\nCose che si trovano in cantina\nNomi dei nostri prof'}
+                aria-label={mode === 'sillabe' ? 'Le tue sillabe, una per riga' : 'Le tue categorie, una per riga'}
+                style={{ resize: 'vertical', fontFamily: 'var(--font-pixel-body), var(--font-pixel), sans-serif', fontSize: 16, marginTop: 10 }}
+              />
+              <div className="anno-segment" role="radiogroup" aria-label="Come usarle" style={{ marginTop: 10 }}>
+                <button type="button" role="radio" aria-checked={!customOnly} className={!customOnly ? 'on' : ''} onClick={() => setCustomOnly(false)}>Con le incluse</button>
+                <button type="button" role="radio" aria-checked={customOnly} className={customOnly ? 'on' : ''} onClick={() => setCustomOnly(true)}>Solo le mie</button>
+              </div>
+            </details>
+
             <div>
               <label htmlFor="bomba-player" style={{ display: 'block', fontSize: 11, color: '#111827', marginBottom: 8 }}>
                 Giocatori <span style={{ color: '#6b7280' }}>(facoltativo, per il punteggio)</span>
@@ -266,6 +314,7 @@ export default function BombaPage() {
               </div>
             )}
 
+            {startError && <p role="alert" style={{ margin: 0, color: '#dc2626', fontSize: 11, lineHeight: 1.5 }}>{startError}</p>}
             <button type="button" className="btn-3d" onClick={light} style={{ background: 'var(--neon-orange)', fontSize: 'clamp(13px, 3vw, 16px)', padding: '16px 20px' }}>
               Accendi la miccia
             </button>

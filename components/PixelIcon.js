@@ -125,6 +125,24 @@ export const ICONS = {
     '...KNNNNNNNNK...',
     '...KKKKKKKKKK...',
   ],
+  coin: [
+    '.....KKKKKK.....',
+    '...KKYYYYYYKK...',
+    '..KYWWYYYYYYYK..',
+    '.KYYYYOOOOYYYYK.',
+    '.KYYYOYYYYOYYYK.',
+    'KYYYOYYYYYYYYYYK',
+    'KYYOOOOOOYYYYYYK',
+    'KYYYOYYYYYYYYYYK',
+    'KYYOOOOOOYYYYYYK',
+    'KYYYOYYYYYYYYYYK',
+    '.KYYYOYYYYOYYYK.',
+    '.KYYYYOOOOYYYYK.',
+    '..KYYYYYYYYYOK..',
+    '...KKYYYYYOKK...',
+    '.....KKKKKK.....',
+    '................',
+  ],
   speaker: [
     '................',
     '................',
@@ -172,7 +190,7 @@ function toRuns(rows) {
       const c = row[x];
       let end = x + 1;
       while (end < row.length && row[end] === c) end++;
-      if (c !== '.') runs.push({ x, y, w: end - x, fill: PALETTE[c] });
+      if (c !== '.') runs.push({ x, y, w: end - x, c });
       x = end;
     }
   });
@@ -181,7 +199,8 @@ function toRuns(rows) {
 
 const RUNS = Object.fromEntries(Object.entries(ICONS).map(([k, v]) => [k, toRuns(v)]));
 
-export default function PixelIcon({ name, size = 48, title, className, style }) {
+// `colors` sostituisce alcune lettere della palette (es. la coppa in argento).
+export default function PixelIcon({ name, size = 48, title, className, style, colors }) {
   const runs = RUNS[name];
   if (!runs) return null;
   return (
@@ -197,7 +216,7 @@ export default function PixelIcon({ name, size = 48, title, className, style }) 
       aria-label={title}
     >
       {runs.map((r, i) => (
-        <rect key={i} x={r.x} y={r.y} width={r.w} height={1} fill={r.fill} />
+        <rect key={i} x={r.x} y={r.y} width={r.w} height={1} fill={colors?.[r.c] ?? PALETTE[r.c]} />
       ))}
     </svg>
   );

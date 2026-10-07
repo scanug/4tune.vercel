@@ -4,7 +4,7 @@
 // l'host chiude la pagina la partita continua.
 //
 // Le regole del singolo gioco (round, stato visibile, risposte, punti) arrivano
-// da un oggetto `game` (vedi games/gts.js e games/anno.js); senza, è il GTS.
+// da un oggetto `game` (vedi games/gts.js, games/anno.js e games/prezzo.js); senza, è il GTS.
 //
 // Orologio e timer sono iniettabili (`now`, `setTimer`, `clearTimer`) per i test.
 

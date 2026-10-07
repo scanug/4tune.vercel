@@ -3,10 +3,12 @@
 import { useEffect, useRef } from 'react';
 
 // three.js si carica solo qui, quando si apre la Sala, e non pesa sul resto del sito.
-export default function Room3D({ index, onSelect, onReady, onError }) {
+export default function Room3D({ index, unlocked, onSelect, onReady, onError }) {
   const hostRef = useRef(null);
   const apiRef = useRef(null);
   const indexRef = useRef(index);
+  const unlockedRef = useRef(unlocked);
+  unlockedRef.current = unlocked;
   const callbacks = useRef({ onSelect, onReady, onError });
   callbacks.current = { onSelect, onReady, onError };
   indexRef.current = index;
@@ -26,6 +28,7 @@ export default function Room3D({ index, onSelect, onReady, onError }) {
         onSelect: (i) => callbacks.current.onSelect?.(i),
       });
       apiRef.current.select(indexRef.current);
+      apiRef.current.setTrophies(unlockedRef.current);
       callbacks.current.onReady?.();
     })().catch((err) => {
       console.error('Sala 3D non disponibile', err);
@@ -41,6 +44,10 @@ export default function Room3D({ index, onSelect, onReady, onError }) {
   useEffect(() => {
     apiRef.current?.select(index);
   }, [index]);
+
+  useEffect(() => {
+    apiRef.current?.setTrophies(unlocked);
+  }, [unlocked]);
 
   return <div ref={hostRef} className="sala-canvas" />;
 }

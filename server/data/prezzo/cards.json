@@ -1,0 +1,1832 @@
+[
+  {
+    "id": "spesa-una-bottiglia-di-acqua-minerale-naturale",
+    "category": "spesa",
+    "title": "Una bottiglia di acqua minerale naturale",
+    "subtitle": "Da 1,5 litri, al supermercato",
+    "price": 0.4,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "id": "spesa-una-lattina-di-coca-cola",
+    "category": "spesa",
+    "title": "Una lattina di Coca-Cola",
+    "subtitle": "Da 33 cl, al supermercato",
+    "price": 0.9,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "id": "spesa-un-caffe-espresso-al-bar",
+    "category": "spesa",
+    "title": "Un caffè espresso al bar",
+    "subtitle": "Al banco",
+    "price": 1.22,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025: media nazionale della tazzina al banco ad aprile 2025",
+    "source": "Osservatorio prezzi MIMIT, elaborazione C.r.c./Assoutenti 2025"
+  },
+  {
+    "id": "spesa-un-pacco-di-spaghetti-di-marca-da-mezzo-chilo",
+    "category": "spesa",
+    "title": "Un pacco di spaghetti di marca da mezzo chilo",
+    "subtitle": "Al supermercato",
+    "price": 1.3,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "id": "spesa-un-cornetto-al-bar",
+    "category": "spesa",
+    "title": "Un cornetto al bar",
+    "subtitle": "Al banco",
+    "price": 1.4,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025 (dato nazionale 2024: 1,40)",
+    "source": "Osservatorio Nazionale Federconsumatori"
+  },
+  {
+    "id": "spesa-un-cappuccino-al-bar",
+    "category": "spesa",
+    "title": "Un cappuccino al bar",
+    "subtitle": "Al banco",
+    "price": 1.6,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025 (dato nazionale 2024: 1,60)",
+    "source": "Osservatorio Nazionale Federconsumatori"
+  },
+  {
+    "id": "spesa-un-litro-di-latte-fresco-intero-di-marca",
+    "category": "spesa",
+    "title": "Un litro di latte fresco intero di marca",
+    "subtitle": "Al supermercato",
+    "price": 1.7,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "id": "spesa-una-copia-del-corriere-della-sera",
+    "category": "spesa",
+    "title": "Una copia del Corriere della Sera",
+    "subtitle": "In edicola, nei giorni feriali",
+    "price": 1.7,
+    "unit": "EUR",
+    "note": "Prezzo di copertina in vigore dal 5 agosto 2026 (prima 1,50, invariato dal 2015)",
+    "source": "RCS / Calcio e Finanza, agosto 2026"
+  },
+  {
+    "id": "spesa-un-litro-di-benzina",
+    "category": "spesa",
+    "title": "Un litro di benzina",
+    "subtitle": "Self service, media dell'anno",
+    "price": 1.73,
+    "unit": "EUR",
+    "note": "Prezzo medio in Italia nel 2025: media annua dei prezzi settimanali (minimo 1,68, massimo 1,83)",
+    "source": "Bollettino petrolifero settimanale del Ministero dell'Ambiente (MASE)"
+  },
+  {
+    "id": "spesa-un-chilo-di-banane",
+    "category": "spesa",
+    "title": "Un chilo di banane",
+    "subtitle": "Al supermercato",
+    "price": 1.9,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "id": "spesa-una-confezione-da-sei-uova",
+    "category": "spesa",
+    "title": "Una confezione da sei uova",
+    "subtitle": "Da galline allevate a terra, al supermercato",
+    "price": 2.5,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "id": "spesa-un-cono-gelato-da-due-gusti",
+    "category": "spesa",
+    "title": "Un cono gelato da due gusti",
+    "subtitle": "In gelateria artigianale",
+    "price": 3,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini delle gelaterie, 2025"
+  },
+  {
+    "id": "spesa-un-chilo-di-pane-dal-fornaio",
+    "category": "spesa",
+    "title": "Un chilo di pane dal fornaio",
+    "subtitle": "Pane comune di grano tenero",
+    "price": 4,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025: si va da circa 3 a Napoli a oltre 5 a Milano",
+    "source": "Osservatorio prezzi MIMIT; Altroconsumo"
+  },
+  {
+    "id": "spesa-un-pacchetto-di-caffe-macinato-da-250-grammi",
+    "category": "spesa",
+    "title": "Un pacchetto di caffè macinato da 250 grammi",
+    "subtitle": "Miscela di marca per moka",
+    "price": 5,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025, dopo i forti rincari del caffè crudo",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "id": "spesa-una-birra-media-alla-spina-al-pub",
+    "category": "spesa",
+    "title": "Una birra media alla spina al pub",
+    "subtitle": "Birra industriale da 0,4 litri",
+    "price": 5,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini di bar e pub, 2025"
+  },
+  {
+    "id": "spesa-uno-spritz-al-bar",
+    "category": "spesa",
+    "title": "Uno spritz al bar",
+    "subtitle": "Aperol spritz, fuori dalle zone turistiche",
+    "price": 6,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025: si va da 4 a Padova a oltre 10 nelle zone turistiche",
+    "source": "Rassegna stampa 2025 (Gambero Rosso, Scatti di Gusto)"
+  },
+  {
+    "id": "spesa-un-big-mac-da-mcdonald-s-in-italia",
+    "category": "spesa",
+    "title": "Un Big Mac da McDonald's in Italia",
+    "subtitle": "Solo il panino",
+    "price": 6.56,
+    "unit": "EUR",
+    "note": "Prezzo rilevato per l'Italia dal Big Mac Index, luglio 2026 (era 6,20 a luglio 2025)",
+    "source": "The Economist, Big Mac Index"
+  },
+  {
+    "id": "spesa-un-barattolo-di-nutella-da-750-grammi",
+    "category": "spesa",
+    "title": "Un barattolo di Nutella da 750 grammi",
+    "subtitle": "Al supermercato",
+    "price": 7,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "id": "spesa-una-bottiglia-di-prosecco-doc",
+    "category": "spesa",
+    "title": "Una bottiglia di Prosecco DOC",
+    "subtitle": "Da 75 cl, al supermercato",
+    "price": 7,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "id": "spesa-una-pizza-margherita-in-pizzeria",
+    "category": "spesa",
+    "title": "Una pizza margherita in pizzeria",
+    "subtitle": "Solo la pizza, senza bibita e coperto",
+    "price": 7,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025: la fascia più comune è tra 5 e 8",
+    "source": "Osservatorio Pizza 2025; Altroconsumo"
+  },
+  {
+    "id": "spesa-un-litro-di-olio-extravergine-d-oliva",
+    "category": "spesa",
+    "title": "Un litro di olio extravergine d'oliva",
+    "subtitle": "Al supermercato",
+    "price": 9,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025: lo scaffale va da 8 a 10, spesso in promozione",
+    "source": "Ismea / Il Fatto Alimentare, 2025"
+  },
+  {
+    "id": "spesa-un-chilo-di-parmigiano-reggiano",
+    "category": "spesa",
+    "title": "Un chilo di Parmigiano Reggiano",
+    "subtitle": "Stagionato 24 mesi, al supermercato",
+    "price": 25,
+    "unit": "EUR",
+    "note": "Prezzo medio indicativo in Italia, 2025",
+    "source": "Listini online della grande distribuzione, 2025"
+  },
+  {
+    "id": "tecnologia-panno-per-la-pulizia-apple",
+    "category": "tecnologia",
+    "title": "Panno per la pulizia Apple",
+    "subtitle": "Il famoso panno in microfibra col logo della mela",
+    "price": 25,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, ottobre 2021. Dal 26 agosto 2026 Apple l'ha ridotto a 10 €",
+    "source": "Multiplayer.it, ottobre 2021; Smartworld, agosto 2026"
+  },
+  {
+    "id": "tecnologia-un-airtag",
+    "category": "tecnologia",
+    "title": "Un AirTag",
+    "subtitle": "Il localizzatore Apple, confezione singola",
+    "price": 35,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, aprile 2021 (la confezione da quattro costava 119 €)",
+    "source": "Smartworld e TuttoTech, aprile 2021"
+  },
+  {
+    "id": "tecnologia-kindle-paperwhite",
+    "category": "tecnologia",
+    "title": "Kindle Paperwhite",
+    "subtitle": "Modello 2024 da 16 GB, con pubblicità",
+    "price": 169.99,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, ottobre 2024",
+    "source": "Smartworld; Trovaprezzi Magazine, 2024"
+  },
+  {
+    "id": "tecnologia-airpods-pro-3",
+    "category": "tecnologia",
+    "title": "AirPods Pro 3",
+    "subtitle": "Auricolari Apple del 2025",
+    "price": 249,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, settembre 2025",
+    "source": "Multiplayer.it e iPhoneItalia, settembre 2025"
+  },
+  {
+    "id": "tecnologia-airpods-pro-2",
+    "category": "tecnologia",
+    "title": "AirPods Pro 2",
+    "subtitle": "Auricolari Apple del 2022",
+    "price": 299,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, settembre 2022",
+    "source": "Smartworld e iPhoneItalia, settembre 2022"
+  },
+  {
+    "id": "tecnologia-xbox-series-s",
+    "category": "tecnologia",
+    "title": "Xbox Series S",
+    "subtitle": "Modello da 512 GB, 2020",
+    "price": 299.99,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, 10 novembre 2020 (la Series X costava 499,99 €)",
+    "source": "Multiplayer.it, 'Xbox Series X e Series S: preorder e prezzi confermati in Italia da Microsoft', settembre 2020"
+  },
+  {
+    "id": "tecnologia-meta-quest-3s",
+    "category": "tecnologia",
+    "title": "Meta Quest 3S",
+    "subtitle": "Visore per la realtà virtuale, versione da 128 GB",
+    "price": 329.99,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, ottobre 2024 (la versione da 256 GB costava 439,99 €)",
+    "source": "Punto Informatico, 'Meta Quest 3S: specifiche complete e prezzi in Italia', settembre 2024"
+  },
+  {
+    "id": "tecnologia-playstation-5-digital-edition",
+    "category": "tecnologia",
+    "title": "PlayStation 5 Digital Edition",
+    "subtitle": "Senza lettore dischi, modello 2020",
+    "price": 399.99,
+    "unit": "EUR",
+    "note": "Prezzo consigliato da Sony al lancio in Italia, 19 novembre 2020",
+    "source": "Sky TG24, 'PlayStation 5, annunciati prezzo e data di uscita', 17 settembre 2020"
+  },
+  {
+    "id": "tecnologia-apple-watch-series-11",
+    "category": "tecnologia",
+    "title": "Apple Watch Series 11",
+    "subtitle": "Cassa da 42 mm in alluminio, modello GPS",
+    "price": 459,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, settembre 2025 (il modello da 46 mm costava 489 €)",
+    "source": "Telefonino.net, 'Apple Watch Series 11 ufficiale', settembre 2025; TuttoTech"
+  },
+  {
+    "id": "tecnologia-nintendo-switch-2",
+    "category": "tecnologia",
+    "title": "Nintendo Switch 2",
+    "subtitle": "Console sola, senza giochi in bundle",
+    "price": 469.99,
+    "unit": "EUR",
+    "note": "Prezzo consigliato al lancio in Italia, 5 giugno 2025 (il bundle con Mario Kart World costava 509,99 €). Dal 1° settembre 2026 Nintendo l'ha portata a 499,99 €",
+    "source": "Smartworld, 'Nintendo Switch 2, ecco il prezzo ufficiale per l'Italia', aprile 2025; Everyeye.it, maggio 2026"
+  },
+  {
+    "id": "tecnologia-ruote-per-il-mac-pro-2019",
+    "category": "tecnologia",
+    "title": "Ruote per il Mac Pro (2019)",
+    "subtitle": "Le quattro rotelle in acciaio, opzione di configurazione",
+    "price": 480,
+    "unit": "EUR",
+    "note": "Sovrapprezzo in Italia per le ruote al posto dei piedini, dicembre 2019",
+    "source": "Punto Informatico, dicembre 2019; TechRadar Italia, 11 dicembre 2019"
+  },
+  {
+    "id": "tecnologia-il-primo-iphone-2007-negli-usa",
+    "category": "tecnologia",
+    "title": "Il primo iPhone (2007), negli USA",
+    "subtitle": "Versione da 4 GB",
+    "price": 499,
+    "unit": "USD",
+    "note": "Prezzo al lancio negli USA con contratto biennale AT&T, giugno 2007 (la versione da 8 GB costava 599 $)",
+    "source": "Apple Newsroom, 'Apple Reinvents the Phone with iPhone', 9 gennaio 2007"
+  },
+  {
+    "id": "tecnologia-playstation-5",
+    "category": "tecnologia",
+    "title": "PlayStation 5",
+    "subtitle": "Modello standard con lettore dischi",
+    "price": 499.99,
+    "unit": "EUR",
+    "note": "Prezzo consigliato da Sony al lancio in Italia, 19 novembre 2020",
+    "source": "Sky TG24, 'PlayStation 5, annunciati prezzo e data di uscita', 17 settembre 2020"
+  },
+  {
+    "id": "tecnologia-steam-deck-oled",
+    "category": "tecnologia",
+    "title": "Steam Deck OLED",
+    "subtitle": "Versione da 512 GB",
+    "price": 569,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Europa sullo Steam Store, novembre 2023. Nel maggio 2026 Valve l'ha portato a 779 €",
+    "source": "Multiplayer.it, novembre 2023; Gematsu, maggio 2026"
+  },
+  {
+    "id": "tecnologia-apple-i-negli-usa",
+    "category": "tecnologia",
+    "title": "Apple I, negli USA",
+    "subtitle": "Il primo computer Apple, 1976",
+    "price": 666.66,
+    "unit": "USD",
+    "note": "Prezzo di vendita negli USA nel 1976 (scheda madre assemblata, senza case, tastiera né monitor)",
+    "source": "Computer History Museum"
+  },
+  {
+    "id": "tecnologia-playstation-5-pro",
+    "category": "tecnologia",
+    "title": "PlayStation 5 Pro",
+    "subtitle": "Senza lettore dischi né supporto verticale",
+    "price": 799.99,
+    "unit": "EUR",
+    "note": "Prezzo consigliato al lancio in Italia, 7 novembre 2024. Il lettore dischi si comprava a parte a 119,99 €",
+    "source": "QuiFinanza e Multiplayer.it, settembre 2024"
+  },
+  {
+    "id": "tecnologia-google-pixel-10",
+    "category": "tecnologia",
+    "title": "Google Pixel 10",
+    "subtitle": "Versione da 128 GB",
+    "price": 899,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, agosto 2025",
+    "source": "Smartworld e YourLifeUpdated, agosto 2025"
+  },
+  {
+    "id": "tecnologia-iphone-16",
+    "category": "tecnologia",
+    "title": "iPhone 16",
+    "subtitle": "Versione da 128 GB",
+    "price": 979,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, settembre 2024 (presentato il 9 settembre 2024)",
+    "source": "Apple Store Italia; Smartworld, 'iPhone 16: tutti i prezzi per l'Italia', settembre 2024"
+  },
+  {
+    "id": "tecnologia-iphone-17",
+    "category": "tecnologia",
+    "title": "iPhone 17",
+    "subtitle": "Versione base da 256 GB",
+    "price": 979,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, settembre 2025: stesso prezzo dell'iPhone 16 ma con il doppio della memoria",
+    "source": "Smartworld, 'I prezzi italiani dei nuovi iPhone 17 e iPhone Air', settembre 2025; Money.it"
+  },
+  {
+    "id": "tecnologia-supporto-pro-stand-di-apple",
+    "category": "tecnologia",
+    "title": "Supporto Pro Stand di Apple",
+    "subtitle": "Solo il piedistallo per il monitor Pro Display XDR",
+    "price": 1099,
+    "unit": "EUR",
+    "note": "Prezzo di listino in Italia, dicembre 2019: il monitor era venduto senza supporto",
+    "source": "Punto Informatico, 'Il nuovo Mac Pro è in vendita', dicembre 2019"
+  },
+  {
+    "id": "tecnologia-iphone-air",
+    "category": "tecnologia",
+    "title": "iPhone Air",
+    "subtitle": "Versione da 256 GB",
+    "price": 1239,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, settembre 2025",
+    "source": "Smartworld, 'I prezzi italiani dei nuovi iPhone 17 e iPhone Air', settembre 2025"
+  },
+  {
+    "id": "tecnologia-macbook-air-13-pollici-con-chip-m4",
+    "category": "tecnologia",
+    "title": "MacBook Air 13 pollici con chip M4",
+    "subtitle": "Configurazione base: 16 GB di memoria e SSD da 256 GB",
+    "price": 1249,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, marzo 2025",
+    "source": "Smartworld, 'Apple MacBook Air M4 è qui', marzo 2025; Trovaprezzi Magazine"
+  },
+  {
+    "id": "tecnologia-iphone-16-pro-max",
+    "category": "tecnologia",
+    "title": "iPhone 16 Pro Max",
+    "subtitle": "Versione da 256 GB",
+    "price": 1489,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, settembre 2024",
+    "source": "Apple Store Italia; Smartworld, settembre 2024"
+  },
+  {
+    "id": "tecnologia-samsung-galaxy-s25-ultra",
+    "category": "tecnologia",
+    "title": "Samsung Galaxy S25 Ultra",
+    "subtitle": "12 GB di RAM e 256 GB di memoria",
+    "price": 1499,
+    "unit": "EUR",
+    "note": "Prezzo consigliato al lancio in Italia, febbraio 2025 (presentato il 22 gennaio 2025)",
+    "source": "YourLifeUpdated, 'Ecco i prezzi italiani dei nuovi Samsung Galaxy S25', gennaio 2025"
+  },
+  {
+    "id": "tecnologia-samsung-galaxy-z-fold7",
+    "category": "tecnologia",
+    "title": "Samsung Galaxy Z Fold7",
+    "subtitle": "Pieghevole, 12 GB di RAM e 256 GB di memoria",
+    "price": 2199,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, luglio 2025",
+    "source": "TuttoAndroid, 25 luglio 2025; Multiplayer.it"
+  },
+  {
+    "id": "tecnologia-iphone-17-pro-max-da-2-tb",
+    "category": "tecnologia",
+    "title": "iPhone 17 Pro Max da 2 TB",
+    "subtitle": "Il primo iPhone con 2 terabyte di memoria",
+    "price": 2489,
+    "unit": "EUR",
+    "note": "Prezzo di listino al lancio in Italia, settembre 2025: il più alto mai chiesto per un iPhone (il 17 Pro Max da 256 GB costava 1.489 €)",
+    "source": "Smartworld, 'I prezzi italiani dei nuovi iPhone 17 e iPhone Air', settembre 2025"
+  },
+  {
+    "id": "tecnologia-macintosh-128k-negli-usa",
+    "category": "tecnologia",
+    "title": "Macintosh 128K, negli USA",
+    "subtitle": "Il primo Macintosh, 1984",
+    "price": 2495,
+    "unit": "USD",
+    "note": "Prezzo al lancio negli USA, 24 gennaio 1984",
+    "source": "Comunicato Apple del 24 gennaio 1984; Computer History Museum"
+  },
+  {
+    "id": "tecnologia-monitor-apple-pro-display-xdr",
+    "category": "tecnologia",
+    "title": "Monitor Apple Pro Display XDR",
+    "subtitle": "Venduto senza supporto",
+    "price": 5599,
+    "unit": "EUR",
+    "note": "Prezzo di listino in Italia, dicembre 2019 (il supporto Pro Stand era a parte)",
+    "source": "Punto Informatico, 'Il nuovo Mac Pro è in vendita', dicembre 2019"
+  },
+  {
+    "id": "tecnologia-mac-pro-2019",
+    "category": "tecnologia",
+    "title": "Mac Pro (2019)",
+    "subtitle": "Configurazione base: Xeon 8 core, 32 GB di RAM, SSD da 256 GB",
+    "price": 6599,
+    "unit": "EUR",
+    "note": "Prezzo di listino in Italia della configurazione base, dicembre 2019; al massimo si superavano i 62.000 €",
+    "source": "Punto Informatico, 'Il nuovo Mac Pro è in vendita', dicembre 2019"
+  },
+  {
+    "id": "vita-francobollo-per-una-lettera-ordinaria",
+    "category": "vita",
+    "title": "Francobollo per una lettera ordinaria",
+    "subtitle": "Posta Ordinaria fino a 20 grammi",
+    "price": 1.3,
+    "unit": "EUR",
+    "note": "Tariffa di Poste Italiane in vigore dal 31 marzo 2025, confermata nel listino del 1° maggio 2026",
+    "source": "Poste Italiane, listino tariffe 2026"
+  },
+  {
+    "id": "vita-biglietto-bit-dell-atac-a-roma",
+    "category": "vita",
+    "title": "Biglietto BIT dell'ATAC a Roma",
+    "subtitle": "Valido 100 minuti, con un solo ingresso in metro",
+    "price": 1.5,
+    "unit": "EUR",
+    "note": "Tariffa in vigore a ottobre 2026: l'aumento previsto per luglio 2026 è stato rimandato",
+    "source": "ATAC, pagina 'Biglietti' (atac.roma.it), consultata a ottobre 2026"
+  },
+  {
+    "id": "vita-fontana-di-trevi",
+    "category": "vita",
+    "title": "Fontana di Trevi",
+    "subtitle": "Ingresso all'area davanti alla vasca, per i turisti",
+    "price": 2,
+    "unit": "EUR",
+    "note": "Ticket introdotto il 2 febbraio 2026 per turisti e non residenti; gratis per chi risiede a Roma",
+    "source": "Roma Capitale; LaPresse, 2 febbraio 2026"
+  },
+  {
+    "id": "vita-biglietto-ordinario-atm-a-milano",
+    "category": "vita",
+    "title": "Biglietto ordinario ATM a Milano",
+    "subtitle": "Zone Mi1-Mi3, valido 90 minuti",
+    "price": 2.2,
+    "unit": "EUR",
+    "note": "Tariffa 2026, in vigore dal 2023",
+    "source": "ATM Milano, pagina 'Biglietti per Milano e dintorni' (atm.it)"
+  },
+  {
+    "id": "vita-biglietto-della-lotteria-italia",
+    "category": "vita",
+    "title": "Biglietto della Lotteria Italia",
+    "subtitle": "Un tagliando",
+    "price": 5,
+    "unit": "EUR",
+    "note": "Prezzo del biglietto per l'edizione 2025-2026, uguale da anni",
+    "source": "Agenzia delle Dogane e dei Monopoli; Il Fatto Quotidiano, 7 gennaio 2026"
+  },
+  {
+    "id": "vita-contributo-di-accesso-a-venezia",
+    "category": "vita",
+    "title": "Contributo di accesso a Venezia",
+    "subtitle": "Ticket per i turisti giornalieri, pagato in anticipo",
+    "price": 5,
+    "unit": "EUR",
+    "note": "Importo 2026 se si paga almeno 4 giorni prima (altrimenti 10 €), nelle giornate di aprile-luglio 2026",
+    "source": "Comune di Venezia, 'Contributo di accesso 2026: gli importi e le date'"
+  },
+  {
+    "id": "vita-netflix-standard-con-pubblicita",
+    "category": "vita",
+    "title": "Netflix Standard con pubblicità",
+    "subtitle": "Il piano più economico, abbonamento mensile",
+    "price": 6.99,
+    "unit": "EUR",
+    "note": "Prezzo mensile in Italia nel 2026, invariato da ottobre 2024",
+    "source": "Centro assistenza Netflix Italia, 'Piani e prezzi'"
+  },
+  {
+    "id": "vita-biglietto-atac-di-24-ore-a-roma",
+    "category": "vita",
+    "title": "Biglietto ATAC di 24 ore a Roma",
+    "subtitle": "Corse illimitate su bus, tram e metro",
+    "price": 8.5,
+    "unit": "EUR",
+    "note": "Tariffa in vigore a ottobre 2026",
+    "source": "ATAC, pagina 'Biglietti' (atac.roma.it), consultata a ottobre 2026"
+  },
+  {
+    "id": "vita-spotify-premium-individual",
+    "category": "vita",
+    "title": "Spotify Premium Individual",
+    "subtitle": "Abbonamento mensile per una persona",
+    "price": 11.99,
+    "unit": "EUR",
+    "note": "Prezzo mensile in Italia dal 1° settembre 2025 (prima 10,99 €), in vigore nel 2026",
+    "source": "Spotify Italia (spotify.com/it)"
+  },
+  {
+    "id": "vita-disney-premium",
+    "category": "vita",
+    "title": "Disney+ Premium",
+    "subtitle": "Abbonamento mensile, 4K e 4 schermi",
+    "price": 15.99,
+    "unit": "EUR",
+    "note": "Prezzo mensile in Italia dal 25 novembre 2025 (prima 13,99 €)",
+    "source": "Smartworld, 'Disney+ aumenta i prezzi in Italia', 2025"
+  },
+  {
+    "id": "vita-marca-da-bollo-per-istanze-e-certificati",
+    "category": "vita",
+    "title": "Marca da bollo per istanze e certificati",
+    "subtitle": "Quella delle domande alla Pubblica Amministrazione",
+    "price": 16,
+    "unit": "EUR",
+    "note": "Imposta di bollo ordinaria per istanze e certificati (DPR 642/1972), in vigore nel 2026",
+    "source": "Agenzia delle Entrate, imposta di bollo"
+  },
+  {
+    "id": "vita-carta-d-identita-elettronica",
+    "category": "vita",
+    "title": "Carta d'identità elettronica",
+    "subtitle": "Solo la quota che va allo Stato",
+    "price": 16.79,
+    "unit": "EUR",
+    "note": "Importo fissato dal decreto del 25 maggio 2016, invariato nel 2026. Il Comune aggiunge i suoi diritti, che variano: in genere si pagano circa 22 € in tutto",
+    "source": "Ministero dell'Interno, cartaidentita.interno.gov.it"
+  },
+  {
+    "id": "vita-colosseo-foro-romano-e-palatino",
+    "category": "vita",
+    "title": "Colosseo, Foro Romano e Palatino",
+    "subtitle": "Biglietto intero valido 24 ore",
+    "price": 18,
+    "unit": "EUR",
+    "note": "Tariffa 2026 del biglietto standard: Colosseo più Foro Romano e Palatino entro 24 ore",
+    "source": "Parco archeologico del Colosseo (colosseo.it)"
+  },
+  {
+    "id": "vita-netflix-premium",
+    "category": "vita",
+    "title": "Netflix Premium",
+    "subtitle": "Abbonamento mensile, 4K e 4 schermi",
+    "price": 19.99,
+    "unit": "EUR",
+    "note": "Prezzo mensile in Italia nel 2026, invariato dall'aumento di ottobre 2024",
+    "source": "Centro assistenza Netflix Italia, 'Piani e prezzi'"
+  },
+  {
+    "id": "vita-musei-vaticani",
+    "category": "vita",
+    "title": "Musei Vaticani",
+    "subtitle": "Biglietto intero, Cappella Sistina compresa",
+    "price": 20,
+    "unit": "EUR",
+    "note": "Tariffa dal 1° gennaio 2024, in vigore nel 2026; la prenotazione online aggiunge 5 €",
+    "source": "Musei Vaticani, 'Nuove tariffe per il 2024' (museivaticani.va)"
+  },
+  {
+    "id": "vita-galleria-degli-uffizi",
+    "category": "vita",
+    "title": "Galleria degli Uffizi",
+    "subtitle": "Biglietto intero in alta stagione, comprato il giorno stesso",
+    "price": 25,
+    "unit": "EUR",
+    "note": "Tariffa 2026, alta stagione (1° marzo - 30 novembre); comprato nei giorni precedenti costa 29 €",
+    "source": "Gallerie degli Uffizi, pagina 'Biglietti' (uffizi.it)"
+  },
+  {
+    "id": "vita-esta-per-entrare-negli-stati-uniti",
+    "category": "vita",
+    "title": "ESTA per entrare negli Stati Uniti",
+    "subtitle": "Autorizzazione di viaggio online",
+    "price": 40.27,
+    "unit": "USD",
+    "note": "Tariffa dal 1° gennaio 2026: 40 $ dal 30 settembre 2025 (prima 21 $) più l'adeguamento all'inflazione",
+    "source": "U.S. Customs and Border Protection, Federal Register del 19 novembre 2025"
+  },
+  {
+    "id": "vita-multa-per-divieto-di-sosta",
+    "category": "vita",
+    "title": "Multa per divieto di sosta",
+    "subtitle": "Auto in sosta vietata in centro abitato",
+    "price": 42,
+    "unit": "EUR",
+    "note": "Importo minimo della sanzione (art. 7 del Codice della Strada, da 42 a 173 €), invariato nel 2026",
+    "source": "Codice della Strada, art. 7"
+  },
+  {
+    "id": "vita-multa-per-eccesso-di-velocita",
+    "category": "vita",
+    "title": "Multa per eccesso di velocità",
+    "subtitle": "Limite superato di non più di 10 km/h",
+    "price": 42,
+    "unit": "EUR",
+    "note": "Importo minimo della sanzione (art. 142 del Codice della Strada, da 42 a 173 €), in vigore nel 2026: l'aggiornamento ISTAT è stato bloccato",
+    "source": "Codice della Strada, art. 142"
+  },
+  {
+    "id": "vita-amazon-prime",
+    "category": "vita",
+    "title": "Amazon Prime",
+    "subtitle": "Abbonamento annuale",
+    "price": 49.9,
+    "unit": "EUR",
+    "note": "Prezzo annuale in Italia dal 15 settembre 2022 (prima 36 €), in vigore nel 2026",
+    "source": "Amazon.it"
+  },
+  {
+    "id": "vita-multa-per-mancato-uso-della-cintura",
+    "category": "vita",
+    "title": "Multa per mancato uso della cintura",
+    "subtitle": "Conducente o passeggero senza cintura",
+    "price": 83,
+    "unit": "EUR",
+    "note": "Importo minimo della sanzione (art. 172 del Codice della Strada, da 83 a 332 €) più 5 punti di patente, invariato nel 2026",
+    "source": "Codice della Strada, art. 172"
+  },
+  {
+    "id": "vita-canone-rai",
+    "category": "vita",
+    "title": "Canone Rai",
+    "subtitle": "Abbonamento annuale per uso privato",
+    "price": 90,
+    "unit": "EUR",
+    "note": "Importo 2026 confermato dalla Legge di Bilancio 2026, in bolletta in 10 rate. Nel 2024 era sceso a 70 €",
+    "source": "Legge di Bilancio 2026; Money.it, 'Canone Rai 2026'"
+  },
+  {
+    "id": "vita-giro-in-gondola-a-venezia",
+    "category": "vita",
+    "title": "Giro in gondola a Venezia",
+    "subtitle": "Tariffa diurna per 30 minuti, per gondola fino a 5 persone",
+    "price": 90,
+    "unit": "EUR",
+    "note": "Tariffa ufficiale del Comune di Venezia, in vigore da fine 2023 e valida nel 2026 (dopo le 19 sono 110 € per 35 minuti)",
+    "source": "Comune di Venezia, delibera sulle tariffe della gondola (2023)"
+  },
+  {
+    "id": "vita-passaporto-ordinario",
+    "category": "vita",
+    "title": "Passaporto ordinario",
+    "subtitle": "Costo totale per il primo rilascio o il rinnovo",
+    "price": 116.2,
+    "unit": "EUR",
+    "note": "Importo 2026: contributo amministrativo di 73,50 € più libretto di 42,70 € (dal 1° dicembre 2025, prima 42,50 €). Esclusa la consegna a domicilio",
+    "source": "Polizia di Stato, avviso sul pagamento del passaporto dal 1° dicembre 2025"
+  },
+  {
+    "id": "vita-multa-per-passaggio-col-semaforo-rosso",
+    "category": "vita",
+    "title": "Multa per passaggio col semaforo rosso",
+    "subtitle": "Prima violazione",
+    "price": 167,
+    "unit": "EUR",
+    "note": "Importo minimo della sanzione (art. 146 del Codice della Strada, da 167 a 665 €) più 6 punti di patente, invariato nel 2026",
+    "source": "Codice della Strada, art. 146"
+  },
+  {
+    "id": "vita-domanda-di-cittadinanza-italiana",
+    "category": "vita",
+    "title": "Domanda di cittadinanza italiana",
+    "subtitle": "Contributo per la richiesta per residenza o matrimonio",
+    "price": 250,
+    "unit": "EUR",
+    "note": "Contributo al Ministero dell'Interno (art. 9-bis della legge 91/1992), in vigore nel 2026; più una marca da bollo",
+    "source": "Ministero dell'Interno"
+  },
+  {
+    "id": "vita-multa-per-uso-del-cellulare-alla-guida",
+    "category": "vita",
+    "title": "Multa per uso del cellulare alla guida",
+    "subtitle": "Senza vivavoce né auricolare, prima violazione",
+    "price": 250,
+    "unit": "EUR",
+    "note": "Importo minimo della sanzione (art. 173 del Codice della Strada, da 250 a 1.000 €) introdotto dal nuovo Codice in vigore dal 14 dicembre 2024",
+    "source": "Legge 177/2024 (nuovo Codice della Strada)"
+  },
+  {
+    "id": "calcio-il-liverpool-compra-chiesa-dalla-juventus-2024",
+    "category": "calcio",
+    "title": "Il Liverpool compra Chiesa dalla Juventus (2024)",
+    "subtitle": null,
+    "price": 12000000,
+    "unit": "EUR",
+    "note": "Parte fissa comunicata dalla Juventus, agosto 2024, pagabile in quattro esercizi; bonus fino a 3 milioni",
+    "source": "Comunicato Juventus FC al mercato, 29 agosto 2024"
+  },
+  {
+    "id": "calcio-il-liverpool-compra-salah-dalla-roma-2017",
+    "category": "calcio",
+    "title": "Il Liverpool compra Salah dalla Roma (2017)",
+    "subtitle": null,
+    "price": 42000000,
+    "unit": "EUR",
+    "note": "Parte fissa comunicata dalla Roma, giugno 2017; bonus fino a 8 milioni",
+    "source": "Comunicato AS Roma al mercato, 22 giugno 2017"
+  },
+  {
+    "id": "calcio-il-barcellona-compra-lewandowski-dal-bayern-monaco-2022",
+    "category": "calcio",
+    "title": "Il Barcellona compra Lewandowski dal Bayern Monaco (2022)",
+    "subtitle": null,
+    "price": 45000000,
+    "unit": "EUR",
+    "note": "Parte fissa comunicata dal Barcellona, luglio 2022; variabili fino a 5 milioni",
+    "source": "Comunicato FC Barcelona, luglio 2022"
+  },
+  {
+    "id": "calcio-la-juventus-compra-koopmeiners-dall-atalanta-2024",
+    "category": "calcio",
+    "title": "La Juventus compra Koopmeiners dall'Atalanta (2024)",
+    "subtitle": null,
+    "price": 51300000,
+    "unit": "EUR",
+    "note": "Corrispettivo comunicato dalla Juventus, agosto 2024, pagabile in quattro esercizi; più oneri accessori per 3,4 milioni e bonus fino a 6 milioni",
+    "source": "Comunicato Juventus FC al mercato, 28 agosto 2024"
+  },
+  {
+    "id": "calcio-il-barcellona-compra-pjanic-dalla-juventus-2020",
+    "category": "calcio",
+    "title": "Il Barcellona compra Pjanić dalla Juventus (2020)",
+    "subtitle": "Nello scambio con Arthur",
+    "price": 60000000,
+    "unit": "EUR",
+    "note": "Corrispettivo comunicato dalla Juventus, giugno 2020; bonus fino a 5 milioni",
+    "source": "Comunicato Juventus FC al mercato, 29 giugno 2020"
+  },
+  {
+    "id": "calcio-il-liverpool-compra-alisson-dalla-roma-2018",
+    "category": "calcio",
+    "title": "Il Liverpool compra Alisson dalla Roma (2018)",
+    "subtitle": "All'epoca il portiere più caro di sempre",
+    "price": 62500000,
+    "unit": "EUR",
+    "note": "Parte fissa comunicata dalla Roma, luglio 2018; bonus fino a 10 milioni",
+    "source": "Comunicato AS Roma al mercato, 19 luglio 2018"
+  },
+  {
+    "id": "calcio-il-psg-riscatta-goncalo-ramos-dal-benfica-2023",
+    "category": "calcio",
+    "title": "Il PSG riscatta Gonçalo Ramos dal Benfica (2023)",
+    "subtitle": null,
+    "price": 65000000,
+    "unit": "EUR",
+    "note": "Riscatto esercitato dal PSG a novembre 2023 dopo il prestito; variabili fino a un totale di 80 milioni",
+    "source": "Comunicato Benfica alla CMVM, 22 novembre 2023"
+  },
+  {
+    "id": "calcio-il-bayern-monaco-compra-de-ligt-dalla-juventus-2022",
+    "category": "calcio",
+    "title": "Il Bayern Monaco compra de Ligt dalla Juventus (2022)",
+    "subtitle": null,
+    "price": 67000000,
+    "unit": "EUR",
+    "note": "Parte fissa comunicata dalla Juventus, luglio 2022, pagabile in quattro anni; bonus fino a 10 milioni",
+    "source": "Comunicato Juventus FC al mercato, 19 luglio 2022"
+  },
+  {
+    "id": "calcio-la-juventus-compra-vlahovic-dalla-fiorentina-2022",
+    "category": "calcio",
+    "title": "La Juventus compra Vlahović dalla Fiorentina (2022)",
+    "subtitle": null,
+    "price": 70000000,
+    "unit": "EUR",
+    "note": "Parte fissa comunicata dalla Juventus, gennaio 2022, pagabile in tre esercizi; bonus fino a 10 milioni",
+    "source": "Comunicato Juventus FC al mercato, 28 gennaio 2022"
+  },
+  {
+    "id": "calcio-la-juventus-compra-arthur-dal-barcellona-2020",
+    "category": "calcio",
+    "title": "La Juventus compra Arthur dal Barcellona (2020)",
+    "subtitle": "Nello scambio con Pjanić",
+    "price": 72000000,
+    "unit": "EUR",
+    "note": "Parte fissa comunicata dalla Juventus, giugno 2020, pagabile in quattro esercizi; bonus fino a 10 milioni",
+    "source": "Comunicato Juventus FC al mercato, 29 giugno 2020"
+  },
+  {
+    "id": "calcio-il-barcellona-compra-frenkie-de-jong-dall-ajax-2019",
+    "category": "calcio",
+    "title": "Il Barcellona compra Frenkie de Jong dall'Ajax (2019)",
+    "subtitle": null,
+    "price": 75000000,
+    "unit": "EUR",
+    "note": "Parte fissa comunicata da Barcellona e Ajax, gennaio 2019; variabili fino a 11 milioni",
+    "source": "Comunicato FC Barcelona e Ajax, 23 gennaio 2019"
+  },
+  {
+    "id": "calcio-il-galatasaray-compra-osimhen-dal-napoli-2025",
+    "category": "calcio",
+    "title": "Il Galatasaray compra Osimhen dal Napoli (2025)",
+    "subtitle": "Il trasferimento più caro della storia del calcio turco",
+    "price": 75000000,
+    "unit": "EUR",
+    "note": "Cartellino comunicato dal Galatasaray alla borsa turca, luglio 2025; al Napoli anche il 10% di un'eventuale futura plusvalenza",
+    "source": "Comunicazione Galatasaray alla KAP (Borsa Istanbul), luglio 2025"
+  },
+  {
+    "id": "calcio-il-liverpool-compra-darwin-nunez-dal-benfica-2022",
+    "category": "calcio",
+    "title": "Il Liverpool compra Darwin Núñez dal Benfica (2022)",
+    "subtitle": null,
+    "price": 75000000,
+    "unit": "EUR",
+    "note": "Parte fissa comunicata dal Benfica, giugno 2022; variabili fino a 25 milioni",
+    "source": "Comunicato Benfica alla CMVM, 14 giugno 2022"
+  },
+  {
+    "id": "calcio-la-juventus-compra-de-ligt-dall-ajax-2019",
+    "category": "calcio",
+    "title": "La Juventus compra de Ligt dall'Ajax (2019)",
+    "subtitle": null,
+    "price": 75000000,
+    "unit": "EUR",
+    "note": "Corrispettivo comunicato dalla Juventus, luglio 2019, pagabile in cinque esercizi; oneri accessori per 10,5 milioni a parte",
+    "source": "Comunicato Juventus FC al mercato, 18 luglio 2019"
+  },
+  {
+    "id": "calcio-il-manchester-united-compra-sancho-dal-borussia-dortmund-202",
+    "category": "calcio",
+    "title": "Il Manchester United compra Sancho dal Borussia Dortmund (2021)",
+    "subtitle": null,
+    "price": 85000000,
+    "unit": "EUR",
+    "note": "Cifra comunicata dal BVB, luglio 2021 (il 15% spettava al Manchester City sulla rivendita)",
+    "source": "Comunicazione ad hoc Borussia Dortmund, 1 luglio 2021"
+  },
+  {
+    "id": "calcio-la-juventus-compra-higuain-dal-napoli-2016",
+    "category": "calcio",
+    "title": "La Juventus compra Higuaín dal Napoli (2016)",
+    "subtitle": null,
+    "price": 90000000,
+    "unit": "EUR",
+    "note": "Clausola rescissoria pagata dalla Juventus, luglio 2016",
+    "source": "Comunicato Juventus FC al mercato, 26 luglio 2016"
+  },
+  {
+    "id": "calcio-il-manchester-united-compra-antony-dall-ajax-2022",
+    "category": "calcio",
+    "title": "Il Manchester United compra Antony dall'Ajax (2022)",
+    "subtitle": null,
+    "price": 95000000,
+    "unit": "EUR",
+    "note": "Parte fissa comunicata dall'Ajax, agosto 2022 (record olandese); bonus fino a 5 milioni",
+    "source": "Comunicato Ajax (quotato su Euronext), 30 agosto 2022"
+  },
+  {
+    "id": "calcio-la-juventus-compra-cristiano-ronaldo-dal-real-madrid-2018",
+    "category": "calcio",
+    "title": "La Juventus compra Cristiano Ronaldo dal Real Madrid (2018)",
+    "subtitle": null,
+    "price": 100000000,
+    "unit": "EUR",
+    "note": "Corrispettivo comunicato dalla Juventus il 10 luglio 2018, pagabile in due esercizi; in più contributo di solidarietà e oneri accessori per 12 milioni",
+    "source": "Comunicato Juventus FC al mercato, 10 luglio 2018"
+  },
+  {
+    "id": "calcio-il-real-madrid-compra-bellingham-dal-borussia-dortmund-2023",
+    "category": "calcio",
+    "title": "Il Real Madrid compra Bellingham dal Borussia Dortmund (2023)",
+    "subtitle": null,
+    "price": 103000000,
+    "unit": "EUR",
+    "note": "Parte fissa dalla comunicazione ad hoc del BVB, giugno 2023; variabili fino a circa il 30% della parte fissa",
+    "source": "Comunicazione ad hoc Borussia Dortmund, 7 giugno 2023"
+  },
+  {
+    "id": "calcio-il-barcellona-compra-dembele-dal-borussia-dortmund-2017",
+    "category": "calcio",
+    "title": "Il Barcellona compra Dembélé dal Borussia Dortmund (2017)",
+    "subtitle": null,
+    "price": 105000000,
+    "unit": "EUR",
+    "note": "Parte fissa comunicata da Barcellona e BVB, agosto 2017; variabili fino a 40 milioni",
+    "source": "Comunicato FC Barcelona, 25 agosto 2017"
+  },
+  {
+    "id": "calcio-il-manchester-united-ricompra-pogba-dalla-juventus-2016",
+    "category": "calcio",
+    "title": "Il Manchester United ricompra Pogba dalla Juventus (2016)",
+    "subtitle": null,
+    "price": 105000000,
+    "unit": "EUR",
+    "note": "Corrispettivo fisso comunicato dalla Juventus, agosto 2016, pagabile in due anni; bonus fino a 5 milioni a parte",
+    "source": "Comunicato Juventus FC al mercato, agosto 2016"
+  },
+  {
+    "id": "calcio-il-barcellona-compra-coutinho-dal-liverpool-2018",
+    "category": "calcio",
+    "title": "Il Barcellona compra Coutinho dal Liverpool (2018)",
+    "subtitle": null,
+    "price": 120000000,
+    "unit": "EUR",
+    "note": "Parte fissa comunicata dal Barcellona, gennaio 2018; variabili fino a 40 milioni",
+    "source": "Comunicato FC Barcelona, 6 gennaio 2018"
+  },
+  {
+    "id": "calcio-il-barcellona-compra-griezmann-dall-atletico-madrid-2019",
+    "category": "calcio",
+    "title": "Il Barcellona compra Griezmann dall'Atlético Madrid (2019)",
+    "subtitle": null,
+    "price": 120000000,
+    "unit": "EUR",
+    "note": "Clausola rescissoria depositata dal Barcellona alla LaLiga, luglio 2019",
+    "source": "Comunicato FC Barcelona, 12 luglio 2019"
+  },
+  {
+    "id": "calcio-il-chelsea-compra-enzo-fernandez-dal-benfica-2023",
+    "category": "calcio",
+    "title": "Il Chelsea compra Enzo Fernández dal Benfica (2023)",
+    "subtitle": null,
+    "price": 121000000,
+    "unit": "EUR",
+    "note": "Importo della clausola rescissoria comunicato dal Benfica, gennaio 2023",
+    "source": "Comunicato Benfica alla CMVM, 31 gennaio 2023"
+  },
+  {
+    "id": "calcio-l-atletico-madrid-compra-joao-felix-dal-benfica-2019",
+    "category": "calcio",
+    "title": "L'Atlético Madrid compra João Félix dal Benfica (2019)",
+    "subtitle": null,
+    "price": 126000000,
+    "unit": "EUR",
+    "note": "Valore totale comunicato dal Benfica, giugno 2019 (clausola di 120 milioni più oneri)",
+    "source": "Comunicato Benfica alla CMVM, 26 giugno 2019"
+  },
+  {
+    "id": "calcio-il-psg-compra-neymar-dal-barcellona-2017",
+    "category": "calcio",
+    "title": "Il PSG compra Neymar dal Barcellona (2017)",
+    "subtitle": "Il trasferimento più caro della storia",
+    "price": 222000000,
+    "unit": "EUR",
+    "note": "Clausola rescissoria pagata per intero e depositata alla LaLiga il 3 agosto 2017",
+    "source": "Comunicato FC Barcelona, 3 agosto 2017"
+  },
+  {
+    "id": "affari-gli-stati-uniti-comprano-l-alaska-dalla-russia-1867",
+    "category": "affari",
+    "title": "Gli Stati Uniti comprano l'Alaska dalla Russia (1867)",
+    "subtitle": null,
+    "price": 7200000,
+    "unit": "USD",
+    "note": "Prezzo fissato dal trattato firmato il 30 marzo 1867",
+    "source": "Trattato di cessione dell'Alaska, 1867 (National Archives USA)"
+  },
+  {
+    "id": "affari-gli-stati-uniti-comprano-la-louisiana-dalla-francia-1803",
+    "category": "affari",
+    "title": "Gli Stati Uniti comprano la Louisiana dalla Francia (1803)",
+    "subtitle": null,
+    "price": 15000000,
+    "unit": "USD",
+    "note": "Prezzo complessivo del trattato del 1803 (circa 11,25 milioni più 3,75 milioni di crediti di cittadini USA verso la Francia accollati dagli Stati Uniti)",
+    "source": "Trattato di acquisto della Louisiana, 30 aprile 1803 (National Archives USA)"
+  },
+  {
+    "id": "affari-luxottica-compra-ray-ban-1999",
+    "category": "affari",
+    "title": "Luxottica compra Ray-Ban (1999)",
+    "subtitle": "Insieme agli altri occhiali da sole di Bausch & Lomb",
+    "price": 640000000,
+    "unit": "USD",
+    "note": "In contanti, per tutto il ramo occhiali da sole di Bausch & Lomb (Ray-Ban più Revo, Arnette e Killer Loop), chiuso il 26 giugno 1999",
+    "source": "Bausch & Lomb, Form 8-K alla SEC, 1999"
+  },
+  {
+    "id": "affari-amazon-compra-twitch-2014",
+    "category": "affari",
+    "title": "Amazon compra Twitch (2014)",
+    "subtitle": null,
+    "price": 970000000,
+    "unit": "USD",
+    "note": "In contanti, annunciato ad agosto 2014",
+    "source": "Comunicato Amazon, 25 agosto 2014"
+  },
+  {
+    "id": "affari-facebook-compra-instagram-2012",
+    "category": "affari",
+    "title": "Facebook compra Instagram (2012)",
+    "subtitle": null,
+    "price": 1000000000,
+    "unit": "USD",
+    "note": "Valore annunciato ad aprile 2012, in contanti e azioni; alla chiusura valeva circa 715 milioni per il calo delle azioni Facebook",
+    "source": "Comunicato Facebook, 9 aprile 2012"
+  },
+  {
+    "id": "affari-prada-compra-versace-2025",
+    "category": "affari",
+    "title": "Prada compra Versace (2025)",
+    "subtitle": null,
+    "price": 1250000000,
+    "unit": "EUR",
+    "note": "Valore dell'impresa (enterprise value) annunciato ad aprile 2025, acquisizione chiusa il 2 dicembre 2025",
+    "source": "Comunicato Prada Group, 2 dicembre 2025"
+  },
+  {
+    "id": "affari-ebay-compra-paypal-2002",
+    "category": "affari",
+    "title": "eBay compra PayPal (2002)",
+    "subtitle": null,
+    "price": 1500000000,
+    "unit": "USD",
+    "note": "Valore annunciato a luglio 2002, pagato in azioni, chiuso a ottobre 2002",
+    "source": "Comunicato eBay, 8 luglio 2002"
+  },
+  {
+    "id": "affari-google-compra-youtube-2006",
+    "category": "affari",
+    "title": "Google compra YouTube (2006)",
+    "subtitle": null,
+    "price": 1650000000,
+    "unit": "USD",
+    "note": "Valore annunciato a ottobre 2006, pagato interamente in azioni",
+    "source": "Comunicato Google, 9 ottobre 2006"
+  },
+  {
+    "id": "affari-luxottica-compra-oakley-2007",
+    "category": "affari",
+    "title": "Luxottica compra Oakley (2007)",
+    "subtitle": null,
+    "price": 2100000000,
+    "unit": "USD",
+    "note": "29,30 dollari per azione in contanti, annunciato a giugno 2007, chiuso il 14 novembre 2007",
+    "source": "Oakley Inc., Form 8-K alla SEC, 2007"
+  },
+  {
+    "id": "affari-microsoft-compra-mojang-i-creatori-di-minecraft-2014",
+    "category": "affari",
+    "title": "Microsoft compra Mojang, i creatori di Minecraft (2014)",
+    "subtitle": null,
+    "price": 2500000000,
+    "unit": "USD",
+    "note": "Valore annunciato a settembre 2014, chiuso a novembre 2014",
+    "source": "Comunicato Microsoft, 15 settembre 2014"
+  },
+  {
+    "id": "affari-ferrero-compra-i-dolciumi-americani-di-nestle-2018",
+    "category": "affari",
+    "title": "Ferrero compra i dolciumi americani di Nestlé (2018)",
+    "subtitle": "Butterfinger, Crunch, Baby Ruth",
+    "price": 2800000000,
+    "unit": "USD",
+    "note": "In contanti, annunciato a gennaio 2018",
+    "source": "Comunicato Nestlé, 16 gennaio 2018"
+  },
+  {
+    "id": "affari-apple-compra-beats-2014",
+    "category": "affari",
+    "title": "Apple compra Beats (2014)",
+    "subtitle": "Cuffie e streaming di Dr. Dre e Jimmy Iovine",
+    "price": 3000000000,
+    "unit": "USD",
+    "note": "Valore annunciato a maggio 2014: 2,6 miliardi più 400 milioni in azioni vincolate nel tempo",
+    "source": "Comunicato Apple, 28 maggio 2014"
+  },
+  {
+    "id": "affari-ferrero-compra-i-cereali-wk-kellogg-2025",
+    "category": "affari",
+    "title": "Ferrero compra i cereali WK Kellogg (2025)",
+    "subtitle": null,
+    "price": 3100000000,
+    "unit": "USD",
+    "note": "23 dollari per azione, debito incluso, annunciato il 10 luglio 2025, chiuso il 26 settembre 2025",
+    "source": "Comunicato Ferrero / WK Kellogg Co, 26 settembre 2025"
+  },
+  {
+    "id": "affari-disney-compra-marvel-2009",
+    "category": "affari",
+    "title": "Disney compra Marvel (2009)",
+    "subtitle": null,
+    "price": 4000000000,
+    "unit": "USD",
+    "note": "Valore annunciato ad agosto 2009, in contanti e azioni, chiuso a dicembre 2009",
+    "source": "Comunicato The Walt Disney Company, 31 agosto 2009"
+  },
+  {
+    "id": "affari-disney-compra-lucasfilm-2012",
+    "category": "affari",
+    "title": "Disney compra Lucasfilm (2012)",
+    "subtitle": "Con i diritti di Star Wars",
+    "price": 4050000000,
+    "unit": "USD",
+    "note": "Metà in contanti e metà in azioni, annunciato a ottobre 2012, chiuso a dicembre 2012",
+    "source": "Comunicato The Walt Disney Company, 30 ottobre 2012"
+  },
+  {
+    "id": "affari-disney-compra-pixar-2006",
+    "category": "affari",
+    "title": "Disney compra Pixar (2006)",
+    "subtitle": null,
+    "price": 7400000000,
+    "unit": "USD",
+    "note": "Valore annunciato a gennaio 2006, interamente in azioni, chiuso a maggio 2006",
+    "source": "Comunicato The Walt Disney Company, 24 gennaio 2006"
+  },
+  {
+    "id": "affari-amazon-compra-lo-studio-mgm-2022",
+    "category": "affari",
+    "title": "Amazon compra lo studio MGM (2022)",
+    "subtitle": "Lo studio di James Bond e Rocky",
+    "price": 8450000000,
+    "unit": "USD",
+    "note": "Debito incluso, annunciato a maggio 2021, chiuso a marzo 2022",
+    "source": "Comunicato Amazon, 26 maggio 2021"
+  },
+  {
+    "id": "affari-microsoft-compra-skype-2011",
+    "category": "affari",
+    "title": "Microsoft compra Skype (2011)",
+    "subtitle": null,
+    "price": 8500000000,
+    "unit": "USD",
+    "note": "In contanti, annunciato a maggio 2011, chiuso a ottobre 2011",
+    "source": "Comunicato Microsoft, 10 maggio 2011"
+  },
+  {
+    "id": "affari-amazon-compra-whole-foods-2017",
+    "category": "affari",
+    "title": "Amazon compra Whole Foods (2017)",
+    "subtitle": "La catena di supermercati bio americana",
+    "price": 13700000000,
+    "unit": "USD",
+    "note": "42 dollari per azione in contanti, debito incluso, annunciato a giugno 2017, chiuso ad agosto 2017",
+    "source": "Comunicato Amazon, 16 giugno 2017"
+  },
+  {
+    "id": "affari-lvmh-compra-tiffany-co-2021",
+    "category": "affari",
+    "title": "LVMH compra Tiffany & Co. (2021)",
+    "subtitle": null,
+    "price": 15800000000,
+    "unit": "USD",
+    "note": "Prezzo rinegoziato a ottobre 2020 (131,50 dollari per azione; l'originale era circa 16,2 miliardi), chiuso a gennaio 2021",
+    "source": "Comunicati LVMH, 29 ottobre 2020 e 7 gennaio 2021"
+  },
+  {
+    "id": "affari-facebook-compra-whatsapp-2014",
+    "category": "affari",
+    "title": "Facebook compra WhatsApp (2014)",
+    "subtitle": null,
+    "price": 19000000000,
+    "unit": "USD",
+    "note": "Valore annunciato a febbraio 2014: 4 miliardi in contanti, 12 in azioni e 3 in azioni vincolate ai dipendenti; alla chiusura (ottobre 2014) circa 21,8 miliardi",
+    "source": "Comunicato Facebook, 19 febbraio 2014"
+  },
+  {
+    "id": "affari-microsoft-compra-linkedin-2016",
+    "category": "affari",
+    "title": "Microsoft compra LinkedIn (2016)",
+    "subtitle": null,
+    "price": 26200000000,
+    "unit": "USD",
+    "note": "196 dollari per azione in contanti, valore annunciato a giugno 2016 (chiusura dicembre 2016)",
+    "source": "Comunicato Microsoft, 13 giugno 2016"
+  },
+  {
+    "id": "affari-google-compra-la-startup-di-cybersicurezza-wiz-2026",
+    "category": "affari",
+    "title": "Google compra la startup di cybersicurezza Wiz (2026)",
+    "subtitle": "La più grande acquisizione della storia di Google",
+    "price": 32000000000,
+    "unit": "USD",
+    "note": "In contanti, annunciato il 18 marzo 2025, chiuso a marzo 2026",
+    "source": "Comunicato Alphabet/Google, 18 marzo 2025; annuncio di chiusura, marzo 2026"
+  },
+  {
+    "id": "affari-mars-compra-kellanova-il-produttore-delle-pringles-2025",
+    "category": "affari",
+    "title": "Mars compra Kellanova, il produttore delle Pringles (2025)",
+    "subtitle": null,
+    "price": 35900000000,
+    "unit": "USD",
+    "note": "83,50 dollari per azione, debito incluso, annunciato il 14 agosto 2024, chiuso l'11 dicembre 2025 dopo il via libera UE",
+    "source": "Comunicati Mars, 14 agosto 2024 e 11 dicembre 2025"
+  },
+  {
+    "id": "affari-elon-musk-compra-twitter-2022",
+    "category": "affari",
+    "title": "Elon Musk compra Twitter (2022)",
+    "subtitle": null,
+    "price": 44000000000,
+    "unit": "USD",
+    "note": "54,20 dollari per azione, accordo di aprile 2022, chiuso il 27 ottobre 2022",
+    "source": "Comunicato Twitter, 25 aprile 2022"
+  },
+  {
+    "id": "affari-microsoft-compra-activision-blizzard-2023",
+    "category": "affari",
+    "title": "Microsoft compra Activision Blizzard (2023)",
+    "subtitle": "Call of Duty, Warcraft e Candy Crush",
+    "price": 68700000000,
+    "unit": "USD",
+    "note": "95 dollari per azione in contanti, annunciato a gennaio 2022, chiuso il 13 ottobre 2023",
+    "source": "Comunicato Microsoft, 18 gennaio 2022"
+  },
+  {
+    "id": "affari-disney-compra-21st-century-fox-2019",
+    "category": "affari",
+    "title": "Disney compra 21st Century Fox (2019)",
+    "subtitle": null,
+    "price": 71300000000,
+    "unit": "USD",
+    "note": "Offerta rivista di giugno 2018 in contanti e azioni, chiusa a marzo 2019",
+    "source": "Comunicato The Walt Disney Company, 20 giugno 2018"
+  },
+  {
+    "id": "cinema-quanto-e-costato-girare-guerre-stellari-1977",
+    "category": "cinema",
+    "title": "Quanto è costato girare Guerre stellari (1977)",
+    "subtitle": "Il budget di produzione del primo film della saga",
+    "price": 11000000,
+    "unit": "USD",
+    "note": "Budget di produzione ufficialmente dichiarato, film del 1977 (Box Office Mojo)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-in-italia-di-c-e-ancora-domani-2023",
+    "category": "cinema",
+    "title": "Incasso in Italia di C'è ancora domani (2023)",
+    "subtitle": "Il film di Paola Cortellesi",
+    "price": 36912915,
+    "unit": "EUR",
+    "note": "Incasso complessivo in Italia, miglior incasso del 2023 (dati Cinetel; a fine 2023 erano 36,3 milioni)",
+    "source": "Cinetel / Wikipedia"
+  },
+  {
+    "id": "cinema-incasso-in-italia-di-tolo-tolo-2020",
+    "category": "cinema",
+    "title": "Incasso in Italia di Tolo Tolo (2020)",
+    "subtitle": "Checco Zalone",
+    "price": 46208356,
+    "unit": "EUR",
+    "note": "Incasso complessivo in Italia dell'uscita del 2020 (dati Cinetel)",
+    "source": "Cinetel"
+  },
+  {
+    "id": "cinema-incasso-negli-usa-di-la-vita-e-bella-1998",
+    "category": "cinema",
+    "title": "Incasso negli USA di La vita è bella (1998)",
+    "subtitle": "Roberto Benigni, premio Oscar",
+    "price": 57563264,
+    "unit": "USD",
+    "note": "Incasso nel solo mercato nordamericano (USA e Canada) dell'uscita del 1998-1999; nel mondo circa 230 milioni di dollari (Box Office Mojo)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-quanto-e-costato-girare-jurassic-park-1993",
+    "category": "cinema",
+    "title": "Quanto è costato girare Jurassic Park (1993)",
+    "subtitle": "Il budget di produzione",
+    "price": 63000000,
+    "unit": "USD",
+    "note": "Budget di produzione ufficialmente dichiarato, film del 1993 (Box Office Mojo)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-in-italia-di-quo-vado-2016",
+    "category": "cinema",
+    "title": "Incasso in Italia di Quo vado? (2016)",
+    "subtitle": "Checco Zalone",
+    "price": 65365676,
+    "unit": "EUR",
+    "note": "Incasso complessivo in Italia, record italiano dal 2016 fino a Buen Camino nel 2026 (dati Cinetel)",
+    "source": "Cinetel"
+  },
+  {
+    "id": "cinema-incasso-in-italia-di-buen-camino-2025",
+    "category": "cinema",
+    "title": "Incasso in Italia di Buen Camino (2025)",
+    "subtitle": "Il film di Checco Zalone uscito a Natale",
+    "price": 76450644,
+    "unit": "EUR",
+    "note": "Incasso in Italia (dati Cinetel, aggiornati a maggio 2026): record assoluto del box office italiano",
+    "source": "Cinetel (via AGI e Rolling Stone Italia, maggio 2026)"
+  },
+  {
+    "id": "cinema-quanto-e-costato-girare-titanic-1997",
+    "category": "cinema",
+    "title": "Quanto è costato girare Titanic (1997)",
+    "subtitle": "Il budget di produzione",
+    "price": 200000000,
+    "unit": "USD",
+    "note": "Budget di produzione ufficialmente dichiarato, film del 1997 (Box Office Mojo)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-quanto-e-costato-girare-avatar-2009",
+    "category": "cinema",
+    "title": "Quanto è costato girare Avatar (2009)",
+    "subtitle": "Il budget di produzione",
+    "price": 237000000,
+    "unit": "USD",
+    "note": "Budget di produzione ufficialmente dichiarato, film del 2009 (Box Office Mojo)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-minecraft-il-film-2025",
+    "category": "cinema",
+    "title": "Incasso mondiale di Minecraft - Il film (2025)",
+    "subtitle": null,
+    "price": 960387780,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo (Box Office Mojo, 2025)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-oppenheimer-2023",
+    "category": "cinema",
+    "title": "Incasso mondiale di Oppenheimer (2023)",
+    "subtitle": "Il film di Christopher Nolan",
+    "price": 975811333,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo, riedizioni comprese (Box Office Mojo, 2023-2024)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-lilo-stitch-2025",
+    "category": "cinema",
+    "title": "Incasso mondiale di Lilo & Stitch (2025)",
+    "subtitle": "Il remake in live action",
+    "price": 1038027526,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo (Box Office Mojo, 2025)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-joker-2019",
+    "category": "cinema",
+    "title": "Incasso mondiale di Joker (2019)",
+    "subtitle": "Con Joaquin Phoenix",
+    "price": 1078958629,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo (Box Office Mojo, 2019)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-super-mario-bros-il-film-2023",
+    "category": "cinema",
+    "title": "Incasso mondiale di Super Mario Bros. - Il film (2023)",
+    "subtitle": null,
+    "price": 1360783214,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo (Box Office Mojo, 2023)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-barbie-2023",
+    "category": "cinema",
+    "title": "Incasso mondiale di Barbie (2023)",
+    "subtitle": "Il film di Greta Gerwig",
+    "price": 1447138421,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo (Box Office Mojo, 2023)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-top-gun-maverick-2022",
+    "category": "cinema",
+    "title": "Incasso mondiale di Top Gun: Maverick (2022)",
+    "subtitle": null,
+    "price": 1503260455,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo (Box Office Mojo, 2022)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-inside-out-2-2024",
+    "category": "cinema",
+    "title": "Incasso mondiale di Inside Out 2 (2024)",
+    "subtitle": null,
+    "price": 1698863816,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo (Box Office Mojo, 2024)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-zootropolis-2-2025",
+    "category": "cinema",
+    "title": "Incasso mondiale di Zootropolis 2 (2025)",
+    "subtitle": null,
+    "price": 1870309291,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo dell'uscita di novembre 2025 (Box Office Mojo, dato 2026)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-spider-man-no-way-home-2021",
+    "category": "cinema",
+    "title": "Incasso mondiale di Spider-Man: No Way Home (2021)",
+    "subtitle": null,
+    "price": 1921426073,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo, riedizioni comprese (Box Office Mojo, dato 2026)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-titanic-1997",
+    "category": "cinema",
+    "title": "Incasso mondiale di Titanic (1997)",
+    "subtitle": "Riedizioni 3D comprese",
+    "price": 2264812968,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo, riedizioni 3D del 2012 e del 2023 comprese (Box Office Mojo, 2024)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-ne-zha-2-2025",
+    "category": "cinema",
+    "title": "Incasso mondiale di Ne Zha 2 (2025)",
+    "subtitle": "Il film d'animazione cinese dei record",
+    "price": 2270700370,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo, di cui circa il 97% in Cina; film d'animazione con l'incasso più alto di sempre (Box Office Mojo, 2025)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-avatar-la-via-dell-acqua-2022",
+    "category": "cinema",
+    "title": "Incasso mondiale di Avatar: La via dell'acqua (2022)",
+    "subtitle": null,
+    "price": 2334484620,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo (Box Office Mojo, dato 2026)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-avengers-endgame-2019",
+    "category": "cinema",
+    "title": "Incasso mondiale di Avengers: Endgame (2019)",
+    "subtitle": "Solo la prima uscita, senza la riedizione del 2026",
+    "price": 2799439100,
+    "unit": "USD",
+    "note": "Incasso mondiale della sola uscita originale del 2019, esclusa la riedizione 'Encore' del 2026 (Box Office Mojo)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "cinema-incasso-mondiale-di-avatar-2009",
+    "category": "cinema",
+    "title": "Incasso mondiale di Avatar (2009)",
+    "subtitle": "Il film di James Cameron, riedizioni comprese",
+    "price": 2923710708,
+    "unit": "USD",
+    "note": "Incasso mondiale complessivo, riedizioni comprese fino al 2025 (Box Office Mojo, dato ottobre 2026)",
+    "source": "Box Office Mojo"
+  },
+  {
+    "id": "aste-la-chitarra-di-kurt-cobain-del-mtv-unplugged",
+    "category": "aste",
+    "title": "La chitarra di Kurt Cobain del MTV Unplugged",
+    "subtitle": "Martin D-18E del 1959, Julien's Auctions, 2020",
+    "price": 6010000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Julien's Auctions, 20 giugno 2020",
+    "source": "Julien's Auctions"
+  },
+  {
+    "id": "aste-comedian-la-banana-di-maurizio-cattelan",
+    "category": "aste",
+    "title": "Comedian, la banana di Maurizio Cattelan",
+    "subtitle": "Una banana attaccata al muro con lo scotch, Sotheby's, 2024",
+    "price": 6240000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Sotheby's New York, 20 novembre 2024",
+    "source": "Sotheby's"
+  },
+  {
+    "id": "aste-sue-lo-scheletro-di-t-rex",
+    "category": "aste",
+    "title": "Sue, lo scheletro di T-rex",
+    "subtitle": "Comprato dal Field Museum di Chicago, Sotheby's, 1997",
+    "price": 8362500,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Sotheby's New York, 4 ottobre 1997",
+    "source": "Sotheby's"
+  },
+  {
+    "id": "aste-una-copia-di-superman-numero-1-del-1939",
+    "category": "aste",
+    "title": "Una copia di Superman numero 1 del 1939",
+    "subtitle": "Voto CGC 9.0, trovata in una soffitta, Heritage, 2025",
+    "price": 9120000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Heritage Auctions, novembre 2025: fumetto più caro di sempre",
+    "source": "Heritage Auctions / CGC"
+  },
+  {
+    "id": "aste-la-maglia-di-michael-jordan-della-finale-nba-1998",
+    "category": "aste",
+    "title": "La maglia di Michael Jordan della finale NBA 1998",
+    "subtitle": "Gara 1 delle Finals, Sotheby's, 2022",
+    "price": 10091000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Sotheby's New York, settembre 2022",
+    "source": "Sotheby's"
+  },
+  {
+    "id": "aste-il-violino-stradivari-joachim-ma-del-1714",
+    "category": "aste",
+    "title": "Il violino Stradivari Joachim-Ma del 1714",
+    "subtitle": "Sotheby's New York, 2025",
+    "price": 11250000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Sotheby's New York, 7 febbraio 2025",
+    "source": "Sotheby's"
+  },
+  {
+    "id": "aste-america-il-water-d-oro-di-maurizio-cattelan",
+    "category": "aste",
+    "title": "America, il water d'oro di Maurizio Cattelan",
+    "subtitle": "Circa 101 kg di oro a 18 carati, Sotheby's New York, 2025",
+    "price": 12100000,
+    "unit": "USD",
+    "note": "Prezzo finale (arrotondato), Sotheby's New York, 18 novembre 2025; unica offerta, di Ripley's Believe It or Not!",
+    "source": "Sotheby's"
+  },
+  {
+    "id": "aste-figurina-topps-di-mickey-mantle-del-1952",
+    "category": "aste",
+    "title": "Figurina Topps di Mickey Mantle del 1952",
+    "subtitle": "Heritage Auctions, 2022",
+    "price": 12600000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Heritage Auctions, 28 agosto 2022",
+    "source": "Heritage Auctions"
+  },
+  {
+    "id": "aste-il-rolex-daytona-di-paul-newman",
+    "category": "aste",
+    "title": "Il Rolex Daytona di Paul Newman",
+    "subtitle": "Phillips New York, 2017",
+    "price": 17752500,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Phillips New York, 26 ottobre 2017",
+    "source": "Phillips"
+  },
+  {
+    "id": "aste-la-maglia-di-babe-ruth-del-called-shot",
+    "category": "aste",
+    "title": "La maglia di Babe Ruth del called shot",
+    "subtitle": "World Series 1932, Heritage Auctions, 2024",
+    "price": 24120000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Heritage Auctions, agosto 2024: record per un cimelio sportivo",
+    "source": "Heritage Auctions"
+  },
+  {
+    "id": "aste-il-codice-leicester-di-leonardo-da-vinci",
+    "category": "aste",
+    "title": "Il Codice Leicester di Leonardo da Vinci",
+    "subtitle": "Comprato da Bill Gates, Christie's New York, 1994",
+    "price": 30802500,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Christie's New York, 11 novembre 1994",
+    "source": "Christie's"
+  },
+  {
+    "id": "aste-ferrari-335-sport-scaglietti-del-1957",
+    "category": "aste",
+    "title": "Ferrari 335 Sport Scaglietti del 1957",
+    "subtitle": "Collezione Bardinon, Artcurial a Parigi, 2016",
+    "price": 32075200,
+    "unit": "EUR",
+    "note": "Prezzo finale con commissioni, Artcurial a Parigi (Rétromobile), 5 febbraio 2016",
+    "source": "Artcurial"
+  },
+  {
+    "id": "aste-lo-scheletro-di-stegosauro-apex",
+    "category": "aste",
+    "title": "Lo scheletro di stegosauro Apex",
+    "subtitle": "Sotheby's New York, 2024",
+    "price": 44600000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni (arrotondato), Sotheby's New York, 17 luglio 2024: record per un fossile",
+    "source": "Sotheby's"
+  },
+  {
+    "id": "aste-ferrari-250-gto-del-1962",
+    "category": "aste",
+    "title": "Ferrari 250 GTO del 1962",
+    "subtitle": "Telaio 3765, RM Sotheby's New York, 2023",
+    "price": 51705000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, RM Sotheby's New York, 13 novembre 2023: Ferrari più cara mai venduta all'asta",
+    "source": "RM Sotheby's"
+  },
+  {
+    "id": "aste-everydays-the-first-5000-days-di-beeple",
+    "category": "aste",
+    "title": "Everydays: The First 5000 Days di Beeple",
+    "subtitle": "Un'opera digitale venduta come NFT, Christie's, 2021",
+    "price": 69346250,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, asta online Christie's, 11 marzo 2021",
+    "source": "Christie's"
+  },
+  {
+    "id": "aste-il-diamante-pink-star",
+    "category": "aste",
+    "title": "Il diamante Pink Star",
+    "subtitle": "59,60 carati, Sotheby's Hong Kong, 2017",
+    "price": 71200000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni (553 milioni di dollari di Hong Kong), Sotheby's Hong Kong, 4 aprile 2017",
+    "source": "Sotheby's"
+  },
+  {
+    "id": "aste-rabbit-il-coniglio-d-acciaio-di-jeff-koons",
+    "category": "aste",
+    "title": "Rabbit, il coniglio d'acciaio di Jeff Koons",
+    "subtitle": "Christie's New York, 2019",
+    "price": 91075000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Christie's New York, 15 maggio 2019: record per un artista vivente all'epoca",
+    "source": "Christie's"
+  },
+  {
+    "id": "aste-giovane-con-medaglione-di-sandro-botticelli",
+    "category": "aste",
+    "title": "Giovane con medaglione di Sandro Botticelli",
+    "subtitle": "Sotheby's New York, 2021",
+    "price": 92184000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Sotheby's New York, 28 gennaio 2021: record per Botticelli",
+    "source": "Sotheby's"
+  },
+  {
+    "id": "aste-un-teschio-senza-titolo-di-jean-michel-basquiat",
+    "category": "aste",
+    "title": "Un teschio senza titolo di Jean-Michel Basquiat",
+    "subtitle": "Comprato da Yusaku Maezawa, Sotheby's New York, 2017",
+    "price": 110487500,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Sotheby's New York, 18 maggio 2017 (Untitled, 1982)",
+    "source": "Sotheby's"
+  },
+  {
+    "id": "aste-meules-di-claude-monet",
+    "category": "aste",
+    "title": "Meules di Claude Monet",
+    "subtitle": "Uno dei Covoni, Sotheby's New York, 2019",
+    "price": 110747000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Sotheby's New York, 14 maggio 2019",
+    "source": "Sotheby's"
+  },
+  {
+    "id": "aste-l-empire-des-lumieres-di-rene-magritte",
+    "category": "aste",
+    "title": "L'empire des lumières di René Magritte",
+    "subtitle": "Christie's New York, 2024",
+    "price": 121160000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Christie's New York, 19 novembre 2024: record per Magritte",
+    "source": "Christie's"
+  },
+  {
+    "id": "aste-mercedes-benz-300-slr-uhlenhaut-coupe-del-1955",
+    "category": "aste",
+    "title": "Mercedes-Benz 300 SLR Uhlenhaut Coupé del 1955",
+    "subtitle": "Asta a inviti al Museo Mercedes di Stoccarda, 2022",
+    "price": 135000000,
+    "unit": "EUR",
+    "note": "Prezzo finale, asta RM Sotheby's a Stoccarda, 5 maggio 2022: auto più cara mai venduta all'asta",
+    "source": "RM Sotheby's"
+  },
+  {
+    "id": "aste-nu-couche-di-amedeo-modigliani",
+    "category": "aste",
+    "title": "Nu couché di Amedeo Modigliani",
+    "subtitle": "Christie's New York, 2015",
+    "price": 170405000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Christie's New York, 9 novembre 2015: record per un artista italiano",
+    "source": "Christie's"
+  },
+  {
+    "id": "aste-les-femmes-d-alger-version-o-di-pablo-picasso",
+    "category": "aste",
+    "title": "Les Femmes d'Alger (Version O) di Pablo Picasso",
+    "subtitle": "Christie's New York, 2015",
+    "price": 179365000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Christie's New York, 11 maggio 2015",
+    "source": "Christie's"
+  },
+  {
+    "id": "aste-number-7a-1948-di-jackson-pollock",
+    "category": "aste",
+    "title": "Number 7A, 1948 di Jackson Pollock",
+    "subtitle": "Collezione Newhouse, Christie's New York, 2026",
+    "price": 181200000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Christie's New York, maggio 2026: record per Pollock",
+    "source": "Christie's (via ARTnews e Artribune)"
+  },
+  {
+    "id": "aste-shot-sage-blue-marilyn-di-andy-warhol",
+    "category": "aste",
+    "title": "Shot Sage Blue Marilyn di Andy Warhol",
+    "subtitle": "Christie's New York, 2022",
+    "price": 195040000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Christie's New York, 9 maggio 2022",
+    "source": "Christie's"
+  },
+  {
+    "id": "aste-ritratto-di-elisabeth-lederer-di-gustav-klimt",
+    "category": "aste",
+    "title": "Ritratto di Elisabeth Lederer di Gustav Klimt",
+    "subtitle": "Sotheby's New York, 2025",
+    "price": 236360000,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni, Sotheby's New York, 18 novembre 2025 (aggiudicazione 205 milioni): seconda opera più cara di sempre all'asta",
+    "source": "Sotheby's"
+  },
+  {
+    "id": "aste-salvator-mundi-di-leonardo-da-vinci",
+    "category": "aste",
+    "title": "Salvator Mundi di Leonardo da Vinci",
+    "subtitle": "Christie's New York, 2017",
+    "price": 450312500,
+    "unit": "USD",
+    "note": "Prezzo finale con commissioni d'asta, Christie's New York, 15 novembre 2017: record assoluto per un'opera d'arte",
+    "source": "Christie's"
+  }
+]

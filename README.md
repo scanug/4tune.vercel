@@ -5,12 +5,17 @@ Giochi da festa gratuiti, senza registrazione.
 - **GTS – Guess the Song**: quiz musicale online. L'host sceglie una playlist Deezer, crea una stanza e condivide un codice a 4 lettere. Le clip partono sincronizzate, il server tiene la risposta corretta e calcola i punti.
 - **Indovina l'Anno**: quiz online sugli anni. Ogni round esce una carta ("Nasce Vasco Rossi", "Esce al cinema Titanic") e ognuno sceglie l'anno dal suo telefono con uno slider: chi si avvicina di più vince il round. Sette categorie (personaggi, storia, invenzioni, film/serie/videogiochi, musica, sport, attualità) e quasi 1300 carte, ogni anno verificato su Wikidata.
 - **L'Anno del Giorno**: la versione single player in stile Wordle. Ogni giorno (da mezzanotte, ora italiana) escono 10 carte uguali per tutti, una per categoria più tre extra; si gioca col proprio nickname riservato e si entra nella classifica del giorno e in quella di sempre. Si può rigiocare per allenarsi, ma conta solo il primo tentativo.
+- **Quanto costa?**: quiz online sui prezzi, con lo stesso meccanismo di Indovina l'Anno. Ogni round esce una carta ("Un caffè al banco", "iPhone 16 al lancio", "Il PSG compra Neymar") e ognuno sceglie il prezzo con uno slider in scala logaritmica: vince chi si avvicina di più in proporzione. Sette categorie (spesa, tecnologia, vita quotidiana, calciomercato, affari miliardari, cinema, aste da record), 183 carte, ognuna con la nota su cosa indica il prezzo e la fonte.
 - **Impostore**: gioco dal vivo con un solo telefono che passa di mano. Non usa il server.
-- **Passa la Bomba**: anche questo con un solo telefono e senza server. Esce una categoria o una sillaba, ognuno dice una parola e passa il telefono; la miccia dura un tempo casuale nascosto e chi ha in mano la bomba quando scoppia perde il round. I nomi dei giocatori sono facoltativi e servono solo per contare le esplosioni.
+- **Passa la Bomba**: anche questo con un solo telefono e senza server. Esce una categoria o una sillaba, ognuno dice una parola e passa il telefono; la miccia dura un tempo casuale nascosto e chi ha in mano la bomba quando scoppia perde il round. I nomi dei giocatori sono facoltativi e servono solo per contare le esplosioni. Si possono scrivere categorie o sillabe proprie, da usare insieme a quelle incluse o al loro posto.
 
 Dalla home, il tasto in basso a destra apre la **Sala 3D** (`/sala`): una stanza in three.js con un cabinato arcade per ogni gioco, ognuno con il suo modellino voxel (l'icona del gioco in 3D) e le statistiche personali di chi gioca. Con ◀ ▶, le frecce da tastiera o un tocco sul cabinato la camera vola da un gioco all'altro. three.js si carica solo quando si apre la Sala.
 
 Le **statistiche personali** ([lib/stats.js](lib/stats.js)) restano nel browser, senza account: le pagine dei giochi le salvano a fine partita (podio di GTS e Indovina l'Anno, sfida completata dell'Anno del Giorno, round e partite di Impostore, esplosioni della Bomba) e una partita conta una volta sola anche se si ricarica la pagina.
+
+I **trofei** ([lib/trophies.js](lib/trophies.js)) sono 4 per gioco (bronzo, argento, oro) e si calcolano dalle statistiche: quando se ne sblocca uno compare un avviso con fanfara, e nella Sala le coppe girano intorno al modellino del cabinato.
+
+La **sveglia del server** ([lib/serverWake.js](lib/serverWake.js)): il piano gratuito di Render spegne il server dopo 15 minuti senza traffico. La home e le pagine online lo chiamano in anticipo su `/health`; se non risponde entro un secondo e mezzo compare una schermata (un banner nelle pagine di menu) che spiega l'attesa con una barra di caricamento.
 
 La **musica 16-bit** ([lib/chiptune.js](lib/chiptune.js)) è generata con WebAudio, senza file audio: un brano per home e menu, uno per la Sala. Parte al primo tocco (i browser non permettono l'autoplay), tace dentro le partite e si silenzia con il tasto in basso a sinistra; il tasto muto vale anche per gli effetti della Bomba e la scelta resta salvata.
 
@@ -56,6 +61,15 @@ npm run deck            # verifica tutto e rigenera cards.json
 ```
 
 Foto e descrizioni arrivano da Wikidata e Wikimedia Commons; la foto si vede solo al reveal e rimanda alla sua pagina su Commons (autore e licenza).
+
+## Mazzo di Quanto costa?
+
+Le carte si scrivono a mano in `server/data/prezzo/source/<categoria>.json`. I prezzi non si possono verificare in automatico come gli anni: ogni carta ha una `note` (cosa indica il prezzo e quando) e una `source` (dove controllarlo). Lo script controlla campi, valute (EUR o USD), id e titoli unici, poi genera `server/data/prezzo/cards.json`, che va committato.
+
+```bash
+cd server
+npm run deck:prezzo
+```
 
 ## Deploy
 

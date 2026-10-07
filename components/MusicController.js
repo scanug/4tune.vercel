@@ -10,6 +10,7 @@ const MENU_ROUTES = new Set([
   '/', '/gts', '/gts/categories', '/gts/host', '/gts/join',
   '/anno', '/anno/host', '/anno/join',
   '/impostore', '/impostore/setup', '/bomba',
+  '/prezzo', '/prezzo/host', '/prezzo/join',
 ]);
 
 function trackFor(pathname) {

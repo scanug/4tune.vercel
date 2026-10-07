@@ -1,17 +1,19 @@
 // Layer Socket.IO: traduce gli eventi dei client in chiamate al RoomManager e
 // ritrasmette lo stato pubblico della stanza a chi ci sta dentro. Ogni gioco
-// ha il suo namespace (GTS su "/", Indovina l'Anno su "/anno") con gli stessi eventi.
+// ha il suo namespace (GTS su "/", Indovina l'Anno su "/anno", Quanto costa?
+// su "/prezzo") con gli stessi eventi.
 //
 // Eventi client → server (tutti con ack `{ ok, ...}` oppure `{ ok:false, error }`):
 //   time:sync    (clientSent)                                  → { clientSent, serverNow }
 //   room:create  GTS:  ({ name, playlistId, maxRounds, roundMs, prepMs }) → { code, playerId, state }
-//                Anno: ({ name, categories, maxRounds, roundMs })
+//                Anno, Prezzo: ({ name, categories, maxRounds, roundMs })
 //   room:join    ({ code, name?, playerId? })                  → { code, playerId, state, rejoined }
 //   room:leave   ()          esce davvero dalla stanza
 //   room:detach  ()          stacca il socket ma tiene il posto (cambio pagina)
 //   game:start   ()          solo host
 //   game:restart ()          solo host, a partita finita
 //   game:answer  ({ choice })  GTS: indice dell'opzione · Anno: anno scelto
+//                              · Prezzo: prezzo scelto (dentro l'intervallo del round)
 // Eventi server → client:
 //   room:state   (state)     ad ogni cambiamento
 
@@ -24,7 +26,7 @@ function fail(ack, err) {
 }
 
 // `loadRoomInput(payload)`: dati specifici del gioco per createRoom
-// (il GTS scarica la playlist da Deezer, l'Anno non ha bisogno di nulla).
+// (il GTS scarica la playlist da Deezer, Anno e Prezzo non hanno bisogno di nulla).
 export function attachSockets(io, manager, { loadRoomInput = async () => ({}) } = {}) {
   manager.emit = (room) => io.to(room.code).emit('room:state', manager.publicState(room));
 
