@@ -1,59 +1,53 @@
 import Link from 'next/link';
-
-const GAMES = [
-  {
-    href: '/gts',
-    emoji: '🎵',
-    title: 'GTS – Guess the Song',
-    description: 'Indovina il brano prima degli altri con clip sincronizzate. Online, con codice stanza.',
-    background: '#fdf4ff',
-  },
-  {
-    href: '/anno',
-    emoji: '📅',
-    title: "Indovina l'Anno",
-    description: 'Quando è nato Vasco? In che anno è uscito Titanic? Chi si avvicina di più vince. Online, con codice stanza.',
-    background: '#fefce8',
-  },
-  {
-    href: '/anno/giorno',
-    emoji: '🗓️',
-    title: "L'Anno del Giorno",
-    description: 'Da solo, 10 carte al giorno uguali per tutti. Indovina gli anni e scala la classifica.',
-    background: '#ecfdf5',
-  },
-  {
-    href: '/impostore',
-    emoji: '🕵️',
-    title: 'Impostore',
-    description: 'Scopri chi sta bluffando tra i tuoi amici. Un solo telefono, si gioca dal vivo.',
-    background: '#f0f9ff',
-  },
-];
+import PixelIcon from '../components/PixelIcon';
+import { GAMES } from '../lib/games';
 
 export default function HomePage() {
   return (
-    <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-      <div style={{ width: 'min(800px, 94vw)', textAlign: 'center', border: '2px solid #111827', borderRadius: 12, background: 'rgba(255,255,255,0.9)', boxShadow: '0 12px 0 #111827, 0 12px 24px rgba(0,0,0,0.2)', padding: 32 }}>
-        <h1 style={{ margin: '0 0 12px', letterSpacing: 2, textTransform: 'uppercase', color: '#111827', fontSize: '2.2rem' }}>
-          🎲 4Tune 🎵
+    <main className="home">
+      <header className="home-hero">
+        <p className="home-kicker"><span className="blink">★</span> INSERT COIN <span className="blink">★</span></p>
+        <h1 className="home-logo" aria-label="4Tune">
+          <span className="home-logo-4">4</span>TUNE
         </h1>
-        <p style={{ margin: '0 0 24px', color: '#111827', opacity: 0.85 }}>
-          Party game gratuiti, senza registrazione. Scegli e gioca.
-        </p>
+        <p className="home-sub">Party game gratis · niente registrazione</p>
+      </header>
 
-        <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gap: 12, textAlign: 'left' }}>
-          {GAMES.map((game) => (
-            <li key={game.href} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: 12, border: '1px solid rgba(17,24,39,0.2)', borderRadius: 10, padding: '12px 14px', background: game.background }}>
-              <div>
-                <div style={{ fontWeight: 800, color: '#111827' }}>{game.emoji} {game.title}</div>
-                <div style={{ fontSize: 13, opacity: 0.85, color: '#111827', marginTop: 4 }}>{game.description}</div>
-              </div>
-              <Link href={game.href} className="btn-3d" style={{ textDecoration: 'none', flexShrink: 0 }}>Gioca</Link>
+      <nav aria-label="Giochi">
+        <ul className="home-grid">
+          {GAMES.map((game, i) => (
+            <li key={game.id} style={{ '--i': i }}>
+              <Link href={game.href} className="game-card" style={{ '--accent': game.accent }}>
+                <span className="game-icon">
+                  <PixelIcon name={game.icon} size={48} />
+                </span>
+                <span className="game-body">
+                  <span className="game-title">
+                    {game.title}
+                    {game.isNew && <span className="game-new">NEW</span>}
+                  </span>
+                  <span className="game-desc">{game.description}</span>
+                  <span className="game-tags">
+                    {game.tags.map((t) => <span key={t}>{t}</span>)}
+                  </span>
+                </span>
+                <span className="game-play" aria-hidden="true">▶</span>
+              </Link>
             </li>
           ))}
         </ul>
-      </div>
+      </nav>
+
+      <footer className="home-foot">
+        <span>{GAMES.length} giochi</span>
+        <span aria-hidden="true">·</span>
+        <span>free to play</span>
+      </footer>
+
+      <Link href="/sala" className="room-fab" aria-label="Apri la Sala Trofei 3D">
+        <PixelIcon name="trophy" size={28} />
+        <span>Sala 3D</span>
+      </Link>
     </main>
   );
 }

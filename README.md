@@ -6,6 +6,11 @@ Giochi da festa gratuiti, senza registrazione.
 - **Indovina l'Anno**: quiz online sugli anni. Ogni round esce una carta ("Nasce Vasco Rossi", "Esce al cinema Titanic") e ognuno sceglie l'anno dal suo telefono con uno slider: chi si avvicina di più vince il round. Sette categorie (personaggi, storia, invenzioni, film/serie/videogiochi, musica, sport, attualità) e quasi 1300 carte, ogni anno verificato su Wikidata.
 - **L'Anno del Giorno**: la versione single player in stile Wordle. Ogni giorno (da mezzanotte, ora italiana) escono 10 carte uguali per tutti, una per categoria più tre extra; si gioca col proprio nickname riservato e si entra nella classifica del giorno e in quella di sempre. Si può rigiocare per allenarsi, ma conta solo il primo tentativo.
 - **Impostore**: gioco dal vivo con un solo telefono che passa di mano. Non usa il server.
+- **Passa la Bomba**: anche questo con un solo telefono e senza server. Esce una categoria o una sillaba, ognuno dice una parola e passa il telefono; la miccia dura un tempo casuale nascosto e chi ha in mano la bomba quando scoppia perde il round. I nomi dei giocatori sono facoltativi e servono solo per contare le esplosioni.
+
+Dalla home, il tasto in basso a destra apre la **Sala 3D** (`/sala`): una stanza in three.js con il modellino di un cabinato e un pannello di statistiche, per ora segnaposto. three.js si carica solo quando si apre la Sala.
+
+Il catalogo dei giochi (titolo, descrizione breve, icona, colore) sta in [lib/games.js](lib/games.js); le icone pixel art 16x16 in [components/PixelIcon.js](components/PixelIcon.js).
 
 ## Struttura
 

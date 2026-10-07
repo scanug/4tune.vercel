@@ -8,7 +8,7 @@ export default function GTSLandingPage() {
 
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20, position: 'relative' }}>
-      <div style={{ width: 'min(900px, 94vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 18, background: 'rgba(255,255,255,0.92)', boxShadow: '0 20px 50px rgba(0,0,0,0.2)', padding: 32 }}>
+      <div className="panel" style={{ width: 'min(900px, 94vw)', padding: 32 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <Link href="/" className="btn-3d" style={{ textDecoration: 'none' }}>Hub Giochi</Link>
           <h1 style={{ margin: 0, color: '#111827' }}>GTS – Guess The Song</h1>

@@ -37,7 +37,7 @@ export default function AnnoJoinPage() {
 
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-      <div style={{ width: 'min(520px, 92vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 16, background: 'rgba(255,255,255,0.92)', padding: 28, boxShadow: '0 16px 40px rgba(0,0,0,0.2)' }}>
+      <div className="panel" style={{ width: 'min(520px, 92vw)', padding: 28 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 10 }}>
           <Link href="/anno" className="btn-3d" style={{ textDecoration: 'none' }}>Indietro</Link>
           <h1 style={{ margin: 0, color: '#111827' }}>Entra in stanza</h1>

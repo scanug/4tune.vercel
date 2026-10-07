@@ -194,7 +194,7 @@ export default function ImpostorePlayPage() {
 
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-      <div style={{ width: 'min(600px, 96vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 18, background: 'rgba(255,255,255,0.92)', padding: 28, boxShadow: '0 20px 50px rgba(0,0,0,0.25)', textAlign: 'center' }}>
+      <div className="panel" style={{ width: 'min(600px, 96vw)', padding: 28, textAlign: 'center' }}>
 
         {/* Header */}
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>

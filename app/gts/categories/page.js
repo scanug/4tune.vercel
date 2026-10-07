@@ -46,7 +46,7 @@ export default function CategoriesPage() {
 
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-      <div style={{ width: 'min(980px, 96vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 18, background: 'rgba(255,255,255,0.92)', boxShadow: '0 20px 40px rgba(0,0,0,0.3)', padding: 28 }}>
+      <div className="panel" style={{ width: 'min(980px, 96vw)', padding: 28 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
           <Link href="/gts" className="btn-3d" style={{ textDecoration: 'none' }}>Torna</Link>
           <h1 style={{ margin: 0, color: '#111827' }}>Scegli la playlist</h1>

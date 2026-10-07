@@ -246,7 +246,7 @@ export default function GTSGamePage() {
   if (phase === 'need-name') {
     return (
       <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-        <form onSubmit={submitName} style={{ width: 'min(420px, 92vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 16, padding: 24, background: 'rgba(255,255,255,0.95)', display: 'grid', gap: 12 }}>
+        <form onSubmit={submitName} className="panel" style={{ width: 'min(420px, 92vw)', padding: 24, display: 'grid', gap: 12 }}>
           <h1 style={{ margin: 0, color: '#111827', fontSize: '1.3rem' }}>Stanza {roomCode}</h1>
           <p style={{ margin: 0, color: '#6b7280' }}>Come ti chiami?</p>
           <input className="input-modern" autoFocus maxLength={20} value={nameInput} onChange={(e) => setNameInput(e.target.value)} placeholder="Nickname" />
@@ -279,7 +279,7 @@ export default function GTSGamePage() {
 
   return (
     <main style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-      <div style={{ width: 'min(1100px, 98vw)', border: '2px solid rgba(17,24,39,0.2)', borderRadius: 18, background: 'rgba(255,255,255,0.92)', padding: 24, boxShadow: '0 20px 50px rgba(0,0,0,0.25)' }}>
+      <div className="panel" style={{ width: 'min(1100px, 98vw)', padding: 24 }}>
 
         {!online && (
           <div style={{ marginBottom: 12, padding: '8px 12px', borderRadius: 10, background: 'rgba(234,179,8,0.2)', color: '#92400e', fontSize: 13 }}>
