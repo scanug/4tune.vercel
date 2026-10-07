@@ -160,7 +160,7 @@ export default function ImpostorePlayPage() {
     setScores(newScores);
 
     setCliffhangerStep(1);
-    recordImpostoreRound();
+    recordImpostoreRound({ caught: caughtImpostors.length > 0, players: config.players.length });
   }
 
   function handleNextRound() {

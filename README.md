@@ -13,7 +13,7 @@ Dalla home, il tasto in basso a destra apre la **Sala 3D** (`/sala`): una stanza
 
 Le **statistiche personali** ([lib/stats.js](lib/stats.js)) restano nel browser, senza account: le pagine dei giochi le salvano a fine partita (podio di GTS e Indovina l'Anno, sfida completata dell'Anno del Giorno, round e partite di Impostore, esplosioni della Bomba) e una partita conta una volta sola anche se si ricarica la pagina.
 
-I **trofei** ([lib/trophies.js](lib/trophies.js)) sono 4 per gioco (bronzo, argento, oro) e si calcolano dalle statistiche: quando se ne sblocca uno compare un avviso con fanfara, e nella Sala le coppe girano intorno al modellino del cabinato.
+I **trofei** ([lib/trophies.js](lib/trophies.js)) sono 10 per gioco (bronzo, argento, oro, platino), ognuno legato a una statistica e a una soglia (es. "Vinci 5 partite di fila"). Quando se ne sblocca uno compare un avviso con fanfara e l'obiettivo raggiunto; nella Sala le coppe girano intorno al modellino del cabinato e il pannello mostra, per ogni trofeo, l'obiettivo e la data di sblocco oppure a che punto si è. Gli id dei trofei già esistenti non vanno cambiati, altrimenti chi li ha sbloccati li perde.
 
 La **sveglia del server** ([lib/serverWake.js](lib/serverWake.js)): il piano gratuito di Render spegne il server dopo 15 minuti senza traffico. La home e le pagine online lo chiamano in anticipo su `/health`; se non risponde entro un secondo e mezzo compare una schermata (un banner nelle pagine di menu) che spiega l'attesa con una barra di caricamento.
 

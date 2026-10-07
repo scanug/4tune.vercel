@@ -117,6 +117,7 @@ export default function BombaPage() {
   const [custom, setCustom] = useState({ categorie: '', sillabe: '' }); // testo scritto dall'utente
   const [customOnly, setCustomOnly] = useState(false);
   const [startError, setStartError] = useState('');
+  const roundRef = useRef({}); // dati del round in corso per le statistiche
 
   const bagRef = useRef({ pool: null, order: [] });
   const { unlock, tick, boom } = useBombaAudio();
@@ -176,7 +177,7 @@ export default function BombaPage() {
     loop();
     const boomTimer = setTimeout(() => {
       boom();
-      recordBombaRound({ fuseSeconds: total / 1000 });
+      recordBombaRound({ fuseSeconds: total / 1000, fuse, ...roundRef.current });
       try { navigator.vibrate?.([400, 80, 300]); } catch { /* ignora */ }
       setPhase('boom');
     }, total);
@@ -211,7 +212,9 @@ export default function BombaPage() {
     setStartError('');
     unlock();
     setLoser(null);
-    setPrompt(nextPrompt());
+    const next = nextPrompt();
+    roundRef.current = { mode, custom: mine.includes(next), players: players.length };
+    setPrompt(next);
     setPhase('ticking');
   }
 

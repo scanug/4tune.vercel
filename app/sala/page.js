@@ -8,7 +8,7 @@ import PixelIcon from '@/components/PixelIcon';
 import { MuteButton } from '@/components/MusicController';
 import { GAMES } from '@/lib/games';
 import { readStats, statRows } from '@/lib/stats';
-import { TIERS, TROPHY_EVENT, cupColors, readUnlocked, trophiesFor } from '@/lib/trophies';
+import { TIERS, TROPHY_EVENT, cupColors, formatUnlockedAt, progressOf, readUnlocked, trophiesFor } from '@/lib/trophies';
 
 export default function SalaPage() {
   const router = useRouter();
@@ -90,19 +90,33 @@ export default function SalaPage() {
                   type="button"
                   className={`sala-cup${shown?.id === t.id ? ' picked' : ''}`}
                   onClick={() => setPicked(t.id)}
-                  aria-label={`${t.title}, ${TIERS[t.tier].label}, ${on ? 'sbloccato' : `da sbloccare: ${t.hint}`}`}
+                  aria-label={`${t.title}, ${TIERS[t.tier].label}, ${on ? 'sbloccato' : 'da sbloccare'}`}
                 >
-                  <PixelIcon name="trophy" size={28} colors={cupColors(t.tier, on)} />
+                  <PixelIcon name="trophy" size={22} colors={cupColors(t.tier, on)} />
                 </button>
               );
             })}
           </div>
-          {shown && (
-            <p className="sala-trophy-info">
-              <strong style={{ color: unlocked[shown.id] ? TIERS[shown.tier].color : undefined }}>{shown.title}</strong>
-              {' · '}{unlocked[shown.id] ? 'Sbloccato!' : shown.hint}
-            </p>
-          )}
+          {shown && (() => {
+            const at = unlocked[shown.id];
+            const [value, target] = progressOf(shown, stats[game.id]);
+            return (
+              <div className="sala-trophy-info">
+                <div className="sala-trophy-name" style={{ color: at ? TIERS[shown.tier].color : undefined }}>
+                  {shown.title} <span>· {TIERS[shown.tier].label}</span>
+                </div>
+                <div>Obiettivo: {shown.goal}</div>
+                {at
+                  ? <div className="sala-trophy-when">Sbloccato il {formatUnlockedAt(at)}</div>
+                  : (
+                    <div className="sala-trophy-progress">
+                      <span className="bar" aria-hidden="true"><span style={{ width: `${(value / target) * 100}%` }} /></span>
+                      {value.toLocaleString('it-IT')}/{target.toLocaleString('it-IT')}
+                    </div>
+                  )}
+              </div>
+            );
+          })()}
         </div>
         <div className="sala-card-foot">
           <span className="sala-dots" aria-hidden="true">

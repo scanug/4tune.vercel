@@ -51,6 +51,7 @@ export default function TrophyToast() {
       <div>
         <div className="trophy-toast-kicker">{more ? `${more + 1} trofei sbloccati!` : 'Trofeo sbloccato!'}</div>
         <div className="trophy-toast-title">{trophy.title}{more ? ` e altri ${more}` : ''}</div>
+        {!more && <div className="trophy-toast-goal">{trophy.goal}</div>}
         <div className="trophy-toast-game">{gameTitle(trophy.game)} · {TIERS[trophy.tier].label}</div>
       </div>
     </div>

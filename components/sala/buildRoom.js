@@ -269,8 +269,8 @@ export function buildRoom(THREE, OrbitControls, host, { reducedMotion, onSelect 
     const cups = trophiesFor(game.id).map((trophy, i, list) => {
       const a = (i / list.length) * Math.PI * 2;
       const cup = new THREE.Mesh(cupGeo, lockedCup);
-      cup.position.set(Math.cos(a) * 0.75, 0, Math.sin(a) * 0.75);
-      cup.scale.setScalar(0.9);
+      cup.position.set(Math.cos(a) * 0.85, 0, Math.sin(a) * 0.85);
+      cup.scale.setScalar(0.65);
       cupRing.add(cup);
       return { trophy, cup };
     });

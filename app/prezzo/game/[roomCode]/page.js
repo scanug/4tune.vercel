@@ -200,10 +200,10 @@ export default function PrezzoGamePage() {
     if (!finished || !playerId || !state) return;
     const mine = state.players.find((p) => p.id === playerId);
     if (!mine) return;
-    const top = Math.max(...state.players.map((p) => p.score));
+    const rank = 1 + state.players.filter((p) => p.score > mine.score).length;
     // startAt a fine partita è null: la partita si riconosce da stanza + punteggi finali
     const finalScores = state.players.map((p) => `${p.id}=${p.score}`).sort().join(',');
-    recordOnlineMatch('prezzo', { matchKey: `${state.code}:${finalScores}`, score: mine.score, won: mine.score === top });
+    recordOnlineMatch('prezzo', { matchKey: `${state.code}:${finalScores}`, score: mine.score, rank, players: state.players.length });
   }, [finished, playerId, state]);
   const connectedCount = state?.players.filter((p) => p.connected).length || 0;
   const answeredCount = state?.players.filter((p) => p.connected && p.answered).length || 0;
