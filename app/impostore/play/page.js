@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { pickRandomWord } from '@/lib/impostoreWords';
+import { recordImpostoreMatch, recordImpostoreRound } from '@/lib/stats';
 
 function shuffle(arr) {
   const a = [...arr];
@@ -159,6 +160,7 @@ export default function ImpostorePlayPage() {
     setScores(newScores);
 
     setCliffhangerStep(1);
+    recordImpostoreRound();
   }
 
   function handleNextRound() {
@@ -166,6 +168,7 @@ export default function ImpostorePlayPage() {
   }
 
   function handleEndGame() {
+    recordImpostoreMatch();
     setPhase('finished');
   }
 

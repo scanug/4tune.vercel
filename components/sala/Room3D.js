@@ -3,14 +3,16 @@
 import { useEffect, useRef } from 'react';
 
 // three.js si carica solo qui, quando si apre la Sala, e non pesa sul resto del sito.
-export default function Room3D({ onReady, onError }) {
+export default function Room3D({ index, onSelect, onReady, onError }) {
   const hostRef = useRef(null);
-  const callbacks = useRef({ onReady, onError });
-  callbacks.current = { onReady, onError };
+  const apiRef = useRef(null);
+  const indexRef = useRef(index);
+  const callbacks = useRef({ onSelect, onReady, onError });
+  callbacks.current = { onSelect, onReady, onError };
+  indexRef.current = index;
 
   useEffect(() => {
     let disposed = false;
-    let cleanup = () => {};
     (async () => {
       const [THREE, { OrbitControls }, { buildRoom }] = await Promise.all([
         import('three'),
@@ -19,14 +21,26 @@ export default function Room3D({ onReady, onError }) {
       ]);
       if (disposed || !hostRef.current) return;
       const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      cleanup = buildRoom(THREE, OrbitControls, hostRef.current, { reducedMotion });
+      apiRef.current = buildRoom(THREE, OrbitControls, hostRef.current, {
+        reducedMotion,
+        onSelect: (i) => callbacks.current.onSelect?.(i),
+      });
+      apiRef.current.select(indexRef.current);
       callbacks.current.onReady?.();
     })().catch((err) => {
       console.error('Sala 3D non disponibile', err);
       if (!disposed) callbacks.current.onError?.(err);
     });
-    return () => { disposed = true; cleanup(); };
+    return () => {
+      disposed = true;
+      apiRef.current?.dispose();
+      apiRef.current = null;
+    };
   }, []);
+
+  useEffect(() => {
+    apiRef.current?.select(index);
+  }, [index]);
 
   return <div ref={hostRef} className="sala-canvas" />;
 }

@@ -7,6 +7,7 @@ import {
   emitAck, getNickname, getSocket, getStoredPlayer, setNickname, storePlayer, syncClock,
 } from '@/lib/gameClient';
 import { createSyncedAudio } from '@/lib/syncedAudio';
+import { recordOnlineMatch } from '@/lib/stats';
 
 const STATUS_LABEL = {
   lobby: 'In attesa',
@@ -223,6 +224,18 @@ export default function GTSGamePage() {
     () => [...(state?.players || [])].sort((a, b) => b.score - a.score || a.name.localeCompare(b.name)),
     [state],
   );
+
+  // A fine partita salva le statistiche personali (una volta per partita)
+  const finished = state?.status === 'finished';
+  useEffect(() => {
+    if (!finished || !playerId || !state) return;
+    const mine = state.players.find((p) => p.id === playerId);
+    if (!mine) return;
+    const top = Math.max(...state.players.map((p) => p.score));
+    // startAt a fine partita è null: la partita si riconosce da stanza + punteggi finali
+    const finalScores = state.players.map((p) => `${p.id}=${p.score}`).sort().join(',');
+    recordOnlineMatch('gts', { matchKey: `${state.code}:${finalScores}`, score: mine.score, won: mine.score === top });
+  }, [finished, playerId, state]);
   const connectedCount = state?.players.filter((p) => p.connected).length || 0;
   const answeredCount = state?.players.filter((p) => p.connected && p.answered).length || 0;
   const phaseLeftMs = state?.phaseEndsAt ? state.phaseEndsAt - serverNow : 0;

@@ -6,6 +6,7 @@ import Link from 'next/link';
 import { gameChannel, getNickname, setNickname } from '@/lib/gameClient';
 import YearPicker from '@/components/anno/YearPicker';
 import RevealTimeline from '@/components/anno/RevealTimeline';
+import { recordOnlineMatch } from '@/lib/stats';
 
 const { emitAck, getSocket, getStoredPlayer, storePlayer, syncClock } = gameChannel('anno');
 
@@ -190,6 +191,18 @@ export default function AnnoGamePage() {
     () => [...(state?.players || [])].sort((a, b) => b.score - a.score || a.name.localeCompare(b.name)),
     [state],
   );
+
+  // A fine partita salva le statistiche personali (una volta per partita)
+  const finished = state?.status === 'finished';
+  useEffect(() => {
+    if (!finished || !playerId || !state) return;
+    const mine = state.players.find((p) => p.id === playerId);
+    if (!mine) return;
+    const top = Math.max(...state.players.map((p) => p.score));
+    // startAt a fine partita è null: la partita si riconosce da stanza + punteggi finali
+    const finalScores = state.players.map((p) => `${p.id}=${p.score}`).sort().join(',');
+    recordOnlineMatch('anno', { matchKey: `${state.code}:${finalScores}`, score: mine.score, won: mine.score === top });
+  }, [finished, playerId, state]);
   const connectedCount = state?.players.filter((p) => p.connected).length || 0;
   const answeredCount = state?.players.filter((p) => p.connected && p.answered).length || 0;
   const phaseLeftMs = phaseEndsAt ? phaseEndsAt - serverNow : 0;

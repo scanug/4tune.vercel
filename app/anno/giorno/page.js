@@ -6,6 +6,7 @@ import { daily, getDailyIdentity, getNickname, setDailyIdentity, setNickname } f
 import YearPicker from '@/components/anno/YearPicker';
 import RevealTimeline from '@/components/anno/RevealTimeline';
 import DailyDashboard from '@/components/anno/DailyDashboard';
+import { recordDaily } from '@/lib/stats';
 
 const CATEGORY = {
   personaggi: { label: 'Personaggi', emoji: '🎂' },
@@ -238,6 +239,13 @@ export default function AnnoDelGiornoPage() {
   }, [info, nextAtLeft, view, loadToday]);
 
   const me = info?.me;
+
+  // Sfida di oggi completata: entra nelle statistiche personali (una volta al giorno)
+  const doneDay = me?.status === 'done' ? info.day : null;
+  const doneScore = me?.score;
+  useEffect(() => {
+    if (doneDay) recordDaily({ day: doneDay, score: doneScore });
+  }, [doneDay, doneScore]);
   const playing = view === 'play' || view === 'practice';
 
   // ---------- render ----------

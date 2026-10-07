@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import PixelIcon from '@/components/PixelIcon';
 import { BOMBA_CATEGORIES, BOMBA_SYLLABLES, BOMBA_FUSES } from '@/lib/bombaPrompts';
+import { isAudioMuted } from '@/lib/chiptune';
+import { recordBombaRound } from '@/lib/stats';
+import { useMusicSuppressed } from '@/components/MusicController';
 
 const STORAGE_KEY = 'bomba_config';
 
@@ -40,7 +43,7 @@ function useBombaAudio() {
 
   const tick = useCallback((urgent) => {
     const ctx = ctxRef.current;
-    if (!ctx) return;
+    if (!ctx || isAudioMuted()) return;
     const osc = ctx.createOscillator();
     const gain = ctx.createGain();
     osc.type = 'square';
@@ -54,7 +57,7 @@ function useBombaAudio() {
 
   const boom = useCallback(() => {
     const ctx = ctxRef.current;
-    if (!ctx) return;
+    if (!ctx || isAudioMuted()) return;
     const t = ctx.currentTime;
     const len = Math.floor(ctx.sampleRate * 1.4);
     const buffer = ctx.createBuffer(1, len, ctx.sampleRate);
@@ -104,6 +107,7 @@ export default function BombaPage() {
 
   const bagsRef = useRef({ categorie: [], sillabe: [] });
   const { unlock, tick, boom } = useBombaAudio();
+  useMusicSuppressed(phase !== 'setup');
 
   useEffect(() => {
     try {
@@ -146,6 +150,7 @@ export default function BombaPage() {
     loop();
     const boomTimer = setTimeout(() => {
       boom();
+      recordBombaRound({ fuseSeconds: total / 1000 });
       try { navigator.vibrate?.([400, 80, 300]); } catch { /* ignora */ }
       setPhase('boom');
     }, total);

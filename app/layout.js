@@ -1,5 +1,6 @@
 import { Rubik, JetBrains_Mono, Press_Start_2P, Pixelify_Sans } from "next/font/google";
 import "./globals.css";
+import MusicController from "../components/MusicController";
 
 const geistSans = Rubik({
   variable: "--font-geist-sans",
@@ -48,6 +49,7 @@ export default function RootLayout({ children }) {
           <div className="arcade-grid" />
         </div>
         {children}
+        <MusicController />
       </body>
     </html>
   );

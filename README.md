@@ -8,7 +8,11 @@ Giochi da festa gratuiti, senza registrazione.
 - **Impostore**: gioco dal vivo con un solo telefono che passa di mano. Non usa il server.
 - **Passa la Bomba**: anche questo con un solo telefono e senza server. Esce una categoria o una sillaba, ognuno dice una parola e passa il telefono; la miccia dura un tempo casuale nascosto e chi ha in mano la bomba quando scoppia perde il round. I nomi dei giocatori sono facoltativi e servono solo per contare le esplosioni.
 
-Dalla home, il tasto in basso a destra apre la **Sala 3D** (`/sala`): una stanza in three.js con il modellino di un cabinato e un pannello di statistiche, per ora segnaposto. three.js si carica solo quando si apre la Sala.
+Dalla home, il tasto in basso a destra apre la **Sala 3D** (`/sala`): una stanza in three.js con un cabinato arcade per ogni gioco, ognuno con il suo modellino voxel (l'icona del gioco in 3D) e le statistiche personali di chi gioca. Con ◀ ▶, le frecce da tastiera o un tocco sul cabinato la camera vola da un gioco all'altro. three.js si carica solo quando si apre la Sala.
+
+Le **statistiche personali** ([lib/stats.js](lib/stats.js)) restano nel browser, senza account: le pagine dei giochi le salvano a fine partita (podio di GTS e Indovina l'Anno, sfida completata dell'Anno del Giorno, round e partite di Impostore, esplosioni della Bomba) e una partita conta una volta sola anche se si ricarica la pagina.
+
+La **musica 16-bit** ([lib/chiptune.js](lib/chiptune.js)) è generata con WebAudio, senza file audio: un brano per home e menu, uno per la Sala. Parte al primo tocco (i browser non permettono l'autoplay), tace dentro le partite e si silenzia con il tasto in basso a sinistra; il tasto muto vale anche per gli effetti della Bomba e la scelta resta salvata.
 
 Il catalogo dei giochi (titolo, descrizione breve, icona, colore) sta in [lib/games.js](lib/games.js); le icone pixel art 16x16 in [components/PixelIcon.js](components/PixelIcon.js).
 
