@@ -4,10 +4,12 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useState } from 'react';
 import Room3D from '@/components/sala/Room3D';
+import ProfilePanel from '@/components/sala/ProfilePanel';
 import PixelIcon from '@/components/PixelIcon';
 import { MuteButton } from '@/components/MusicController';
 import { GAMES } from '@/lib/games';
 import { readStats, statRows } from '@/lib/stats';
+import { PROFILE_EVENT } from '@/lib/profile';
 import { TIERS, TROPHY_EVENT, cupColors, formatUnlockedAt, progressOf, readUnlocked, trophiesFor } from '@/lib/trophies';
 
 export default function SalaPage() {
@@ -17,19 +19,36 @@ export default function SalaPage() {
   const [stats, setStats] = useState({});
   const [unlocked, setUnlocked] = useState({});
   const [picked, setPicked] = useState(null); // trofeo di cui mostrare i dettagli
+  const [profileOpen, setProfileOpen] = useState(false);
+  const [linkCode, setLinkCode] = useState(''); // dal QR: /sala?collega=CODICE
 
   useEffect(() => {
     const refresh = () => { setStats(readStats()); setUnlocked(readUnlocked()); };
     refresh();
     window.addEventListener(TROPHY_EVENT, refresh);
-    return () => window.removeEventListener(TROPHY_EVENT, refresh);
+    window.addEventListener(PROFILE_EVENT, refresh);
+    return () => {
+      window.removeEventListener(TROPHY_EVENT, refresh);
+      window.removeEventListener(PROFILE_EVENT, refresh);
+    };
   }, []);
+
+  useEffect(() => {
+    const code = new URLSearchParams(window.location.search).get('collega');
+    if (!code) return;
+    setLinkCode(code);
+    setProfileOpen(true);
+    window.history.replaceState(null, '', '/sala');
+  }, []);
+
+  const closeProfile = useCallback(() => { setProfileOpen(false); setLinkCode(''); }, []);
 
   useEffect(() => { setPicked(null); }, [index]);
 
   const go = useCallback((delta) => setIndex((i) => (i + delta + GAMES.length) % GAMES.length), []);
 
   useEffect(() => {
+    if (profileOpen) return undefined; // i tasti li gestisce il pannello
     const onKey = (e) => {
       if (e.key === 'Escape') router.push('/');
       else if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1); }
@@ -37,7 +56,7 @@ export default function SalaPage() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [router, go]);
+  }, [router, go, profileOpen]);
 
   const game = GAMES[index];
   const rows = statRows(game.id, stats[game.id]);
@@ -59,7 +78,10 @@ export default function SalaPage() {
 
       <header className="sala-hud">
         <Link href="/" className="btn-3d" style={{ textDecoration: 'none' }}>← Esci</Link>
-        <MuteButton />
+        <div className="sala-hud-right">
+          <button type="button" className="btn-3d" onClick={() => setProfileOpen(true)}>Profilo</button>
+          <MuteButton />
+        </div>
       </header>
 
       <section className="sala-card" aria-label={`Statistiche di ${game.title}`} aria-live="polite" style={{ '--accent': game.accent }}>
@@ -125,6 +147,8 @@ export default function SalaPage() {
           <Link href={game.href} className="btn-3d" style={{ textDecoration: 'none', background: game.accent, color: '#120b2e' }}>Gioca ▶</Link>
         </div>
       </section>
+
+      {profileOpen && <ProfilePanel initialCode={linkCode} onClose={closeProfile} />}
 
       <p className="sala-help">◀ ▶ per cambiare cabinato · trascina per girare · Esc per uscire</p>
     </main>

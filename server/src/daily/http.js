@@ -18,13 +18,13 @@ const STATUS = { auth: 401, taken: 409, rate: 429, dup: 409, done: 409 };
 const REGISTER_LIMIT = 5;
 const REGISTER_WINDOW_MS = 10 * 60_000;
 
-function clientIp(req) {
+export function clientIp(req) {
   // Render mette l'IP reale del client in testa a X-Forwarded-For.
   const fwd = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim();
   return fwd || req.socket.remoteAddress || 'unknown';
 }
 
-function bearer(req) {
+export function bearer(req) {
   const h = String(req.headers.authorization || '');
   return h.startsWith('Bearer ') ? h.slice(7).trim() : null;
 }

@@ -42,9 +42,16 @@ const SCHEMA = [
     PRIMARY KEY (player_id, day)
   )`,
   `CREATE INDEX IF NOT EXISTS daily_attempts_day_score ON daily_attempts (day, score DESC) WHERE completed_at IS NOT NULL`,
+  // Token in più per lo stesso nickname: uno per ogni dispositivo collegato
+  // dopo il primo (vedi src/profile/service.js).
+  `CREATE TABLE IF NOT EXISTS daily_tokens (
+    token_hash text PRIMARY KEY,
+    player_id uuid NOT NULL REFERENCES daily_players(id) ON DELETE CASCADE,
+    created_at timestamptz NOT NULL DEFAULT now()
+  )`,
 ];
 
-function hashToken(token) {
+export function hashToken(token) {
   return createHash('sha256').update(String(token)).digest('hex');
 }
 
@@ -144,7 +151,12 @@ export function createDailyService({ db, deck, now = Date.now, rng = Math.random
 
   async function auth(token) {
     if (!token) throw new GameError('Serve un nickname per giocare', 'auth');
-    const { rows } = await db.query('SELECT id, name FROM daily_players WHERE token_hash = $1', [hashToken(token)]);
+    const { rows } = await db.query(
+      `SELECT p.id, p.name FROM daily_players p
+        WHERE p.token_hash = $1
+           OR p.id = (SELECT player_id FROM daily_tokens WHERE token_hash = $1)`,
+      [hashToken(token)],
+    );
     if (!rows[0]) throw new GameError('Nickname non riconosciuto su questo dispositivo', 'auth');
     return rows[0];
   }

@@ -3,6 +3,7 @@ import "./globals.css";
 import MusicController from "../components/MusicController";
 import TrophyToast from "../components/TrophyToast";
 import ServerWake from "../components/ServerWake";
+import ProfileSync from "../components/ProfileSync";
 
 const geistSans = Rubik({
   variable: "--font-geist-sans",
@@ -54,6 +55,7 @@ export default function RootLayout({ children }) {
         <MusicController />
         <TrophyToast />
         <ServerWake />
+        <ProfileSync />
       </body>
     </html>
   );

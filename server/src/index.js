@@ -2,13 +2,13 @@
 // Anno del Giorno e health check; Socket.IO per le stanze (GTS sul namespace
 // "/", Indovina l'Anno su "/anno", Quanto costa? su "/prezzo"). Le stanze
 // vivono in memoria finché dura la partita (un redeploy le azzera); solo
-// l'Anno del Giorno salva su Postgres.
+// l'Anno del Giorno e il profilo condiviso tra dispositivi salvano su Postgres.
 //
 // Variabili d'ambiente:
 //   PORT            porta di ascolto (Render e Railway la impostano da soli)
 //   CLIENT_ORIGIN   origin ammessi, separati da virgola (es. https://4tune.vercel.app,http://localhost:3000)
 //                   se assente accetta qualsiasi origin (comodo in sviluppo)
-//   DATABASE_URL    Postgres per l'Anno del Giorno (Neon). Se assente, in sviluppo
+//   DATABASE_URL    Postgres per l'Anno del Giorno e i profili (Neon). Se assente, in sviluppo
 //                   si usa un database in memoria.
 
 import http from 'node:http';
@@ -24,6 +24,8 @@ import { categorySummary as prezzoCategorySummary, createPrezzoGame, loadDeck as
 import { connectDailyDb } from './daily/db.js';
 import { createDailyService } from './daily/service.js';
 import { createDailyRoutes } from './daily/http.js';
+import { createProfileService } from './profile/service.js';
+import { createProfileRoutes } from './profile/http.js';
 
 const annoDeck = loadDeck(fileURLToPath(new URL('../data/anno/cards.json', import.meta.url)));
 const prezzoDeck = loadPrezzoDeck(fileURLToPath(new URL('../data/prezzo/cards.json', import.meta.url)));
@@ -69,8 +71,11 @@ function readJsonBody(req) {
 
 // L'Anno del Giorno parte appena il database risponde; se non risponde
 // (Neon in avvio, rete) si riprova ogni 30 secondi e intanto le sue rotte danno 503.
+// Il profilo condiviso usa lo stesso database e la stessa identità.
 let dailyService = null;
+let profileService = null;
 const dailyRoutes = createDailyRoutes(() => dailyService);
+const profileRoutes = createProfileRoutes(() => profileService);
 
 async function startDaily() {
   try {
@@ -78,7 +83,10 @@ async function startDaily() {
     if (!conn) { console.warn('[daily] nessun database configurato: Anno del Giorno disattivato'); return; }
     const service = createDailyService({ db: conn.db, deck: annoDeck });
     await service.init();
+    const profiles = createProfileService({ db: conn.db, auth: service.auth });
+    await profiles.init();
     dailyService = service;
+    profileService = profiles;
     console.log(`[daily] pronto (${conn.kind})`);
   } catch (err) {
     console.error('[daily] database non raggiungibile, riprovo tra 30s:', err.message);
@@ -100,10 +108,11 @@ async function handleHttp(req, res) {
     return res.end();
   }
 
-  if (url.pathname.startsWith('/daily/')) {
+  if (url.pathname.startsWith('/daily/') || url.pathname.startsWith('/profile/')) {
     try {
       const body = req.method === 'POST' ? await readJsonBody(req) : null;
-      const { status, payload } = await dailyRoutes(req, url, body);
+      const routes = url.pathname.startsWith('/daily/') ? dailyRoutes : profileRoutes;
+      const { status, payload } = await routes(req, url, body);
       return sendJson(req, res, status, payload, { 'Cache-Control': 'no-store' });
     } catch (err) {
       return sendJson(req, res, 400, { error: err instanceof GameError ? err.message : 'Richiesta non valida' });
