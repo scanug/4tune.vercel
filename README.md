@@ -6,6 +6,7 @@ Giochi da festa gratuiti, senza registrazione.
 - **Indovina l'Anno**: quiz online sugli anni. Ogni round esce una carta ("Nasce Vasco Rossi", "Esce al cinema Titanic") e ognuno sceglie l'anno dal suo telefono con uno slider: chi si avvicina di più vince il round. Sette categorie (personaggi, storia, invenzioni, film/serie/videogiochi, musica, sport, attualità) e quasi 1300 carte, ogni anno verificato su Wikidata.
 - **L'Anno del Giorno**: la versione single player in stile Wordle. Ogni giorno (da mezzanotte, ora italiana) escono 10 carte uguali per tutti, una per categoria più tre extra; si gioca col proprio nickname riservato e si entra nella classifica del giorno e in quella di sempre. Si può rigiocare per allenarsi, ma conta solo il primo tentativo.
 - **Quanto costa?**: quiz online sui prezzi, con lo stesso meccanismo di Indovina l'Anno. Ogni round esce una carta ("Un caffè al banco", "iPhone 16 al lancio", "Il PSG compra Neymar") e ognuno sceglie il prezzo con uno slider in scala logaritmica: vince chi si avvicina di più in proporzione. Sette categorie (spesa, tecnologia, vita quotidiana, calciomercato, affari miliardari, cinema, aste da record), 183 carte, ognuna con la nota su cosa indica il prezzo e la fonte.
+- **Completa la barra**: quiz musicale online sui testi. Tutti ascoltano lo stesso frammento di una canzone (player YouTube ufficiale, visibile); la musica si ferma prima della frase successiva e ognuno scrive come continua. 100 punti per risposta esatta, bonus velocità facoltativo fino a +20 a scaglioni. Le risposte si confrontano dopo una normalizzazione prevedibile (maiuscole, punteggiatura, apostrofi, Unicode) con la soluzione e le varianti accettate: niente somiglianze approssimative. Il catalogo (brani, sfide, artisti, generi, raccolte) si gestisce da `/barra/admin`. Dettagli più sotto.
 - **Impostore**: gioco dal vivo con un solo telefono che passa di mano. Non usa il server.
 - **Passa la Bomba**: anche questo con un solo telefono e senza server. Esce una categoria o una sillaba, ognuno dice una parola e passa il telefono; la miccia dura un tempo casuale nascosto e chi ha in mano la bomba quando scoppia perde il round. I nomi dei giocatori sono facoltativi e servono solo per contare le esplosioni. Si possono scrivere categorie o sillabe proprie, da usare insieme a quelle incluse o al loro posto.
 
@@ -71,6 +72,30 @@ cd server
 npm run deck:prezzo
 ```
 
+## Completa la barra
+
+Il gioco gira sul namespace Socket.IO `/barra` con un `BarraRoomManager` ([server/src/barra/rooms.js](server/src/barra/rooms.js)) che estende il gestore comune. Ogni round passa per `preparing` (il server sceglie la sfida, i telefoni caricano il video e rispondono "pronto"), `countdown`, `listening`, `answering` e `reveal`. La soluzione resta nella memoria del server e compare nello stato pubblico solo al reveal. Il bonus velocità usa il tempo di ricezione del server.
+
+Il catalogo sta su Postgres, nello stesso database dell'Anno del Giorno; le tabelle `barra_*` le crea il server all'avvio. In locale, senza `DATABASE_URL`, il catalogo è in memoria e si azzera al riavvio. In gioco entrano solo le sfide **verificate e pubblicate** di brani pubblicati, con audio associato e non segnati come non disponibili. Modificare tempi, risposta o varianti di una sfida toglie verifica e pubblicazione.
+
+**Gestione** (`/barra/admin`): si entra con il codice `ADMIN_TOKEN` impostato sul server. Senza `ADMIN_TOKEN` la gestione è spenta. Per il primo brano:
+
+1. scheda "Artisti, generi, raccolte": aggiungi artista, genere e, se vuoi, una raccolta;
+2. "+ Nuovo brano": titolo, artista, link YouTube (premi **Verifica**), provenienza e autorizzazione (obbligatoria per pubblicare), "Brano pubblicato", **Salva brano**;
+3. "Nuova sfida": inizio e interruzione (`m:ss.cc`, ±0,25 s o "dal player"), **Prova esattamente il frammento** finché il taglio è giusto, poi continuazione corretta, varianti (una per riga) e difficoltà;
+4. **Aggiungi sfida**, **Segna verificata**, **Pubblica**.
+
+**Sorgenti audio**:
+- **YouTube** (predefinita): player ufficiale incorporato e sempre visibile, con il taglio fatto dal client (circa 50 ms di precisione, non garantita). La disponibilità si controlla con oEmbed, senza chiave: rileva i video rimossi o non incorporabili, non i blocchi regionali.
+- **Deezer**: la preview è di 30 secondi, scelta da Deezer, e l'API non dice da che punto del brano parte. Con Deezer i tempi delle sfide sono quindi relativi alla preview.
+
+**Musixmatch** (facoltativo, `MUSIXMATCH_API_KEY`): ricerca brano, testo e testo sincronizzato nella gestione, solo lato server. Il pannello distingue "predisposta" da "attiva" con una chiamata reale. Il testo sincronizzato suggerisce i tempi, ma vanno sempre provati sul video. I testi non vengono salvati.
+
+```bash
+cd server
+SERVER=http://localhost:4000 ADMIN_TOKEN=... npm run smoke:barra   # partita di prova end-to-end (crea e cancella un brano)
+```
+
 ## Deploy
 
 **Server su Render (gratuito)**: da Render scegli *New → Blueprint* e seleziona il repo: [render.yaml](render.yaml) crea il servizio con root `server`, health check su `/health` e piano free. Poi imposta la variabile:
@@ -78,7 +103,9 @@ npm run deck:prezzo
 | Variabile | Valore |
 |---|---|
 | `CLIENT_ORIGIN` | origin del frontend, separati da virgola (es. `https://4tune.vercel.app`) |
-| `DATABASE_URL` | stringa di connessione Postgres di Neon (Vercel → Storage → il database → `.env.local`/Quickstart), serve all'Anno del Giorno |
+| `DATABASE_URL` | stringa di connessione Postgres di Neon (Vercel → Storage → il database → `.env.local`/Quickstart), serve all'Anno del Giorno e al catalogo di Completa la barra |
+| `ADMIN_TOKEN` | codice lungo e casuale per la gestione del catalogo di Completa la barra (vuoto = gestione spenta) |
+| `MUSIXMATCH_API_KEY` | facoltativa, ricerca testi nella gestione di Completa la barra |
 
 Il piano free si spegne dopo 15 minuti senza traffico e il primo che entra aspetta circa un minuto. Per tenerlo sempre acceso basta un ping gratuito ogni 10 minuti a `/health` (es. cron-job.org): le 750 ore mensili gratuite coprono un servizio acceso tutto il mese.
 

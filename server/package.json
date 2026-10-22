@@ -13,7 +13,8 @@
     "smoke": "node scripts/smoke.mjs",
     "deck": "node scripts/build-anno-deck.mjs",
     "smoke:anno": "node scripts/smoke-anno.mjs",
-    "deck:prezzo": "node scripts/build-prezzo-deck.mjs"
+    "deck:prezzo": "node scripts/build-prezzo-deck.mjs",
+    "smoke:barra": "node scripts/smoke-barra.mjs"
   },
   "dependencies": {
     "pg": "^8.23.1",

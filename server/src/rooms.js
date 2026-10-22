@@ -308,10 +308,14 @@ export class RoomManager {
     room.cleanupTimer = this.setTimer(() => {
       room.cleanupTimer = null;
       const connected = [...room.players.values()].some((p) => p.connected);
-      const inGame = ['countdown', 'playing', 'reveal'].includes(room.status);
-      if (!connected || !inGame) this._removeRoom(room);
+      if (!connected || !this._inGame(room)) this._removeRoom(room);
       else this._scheduleCleanup(room);
     }, ttl);
+  }
+
+  // Fasi in cui una stanza con gente connessa non va mai eliminata.
+  _inGame(room) {
+    return ['countdown', 'playing', 'reveal'].includes(room.status);
   }
 
   _removeRoom(room) {

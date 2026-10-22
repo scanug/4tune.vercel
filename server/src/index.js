@@ -8,8 +8,10 @@
 //   PORT            porta di ascolto (Render e Railway la impostano da soli)
 //   CLIENT_ORIGIN   origin ammessi, separati da virgola (es. https://4tune.vercel.app,http://localhost:3000)
 //                   se assente accetta qualsiasi origin (comodo in sviluppo)
-//   DATABASE_URL    Postgres per l'Anno del Giorno e i profili (Neon). Se assente, in sviluppo
-//                   si usa un database in memoria.
+//   DATABASE_URL    Postgres per l'Anno del Giorno, i profili e il catalogo di Completa la barra
+//                   (Neon). Se assente, in sviluppo si usa un database in memoria.
+//   ADMIN_TOKEN     codice per la gestione del catalogo di Completa la barra (assente = gestione spenta)
+//   MUSIXMATCH_API_KEY  facoltativa: ricerca testi nella gestione di Completa la barra
 
 import http from 'node:http';
 import { fileURLToPath } from 'node:url';
@@ -26,6 +28,11 @@ import { createDailyService } from './daily/service.js';
 import { createDailyRoutes } from './daily/http.js';
 import { createProfileService } from './profile/service.js';
 import { createProfileRoutes } from './profile/http.js';
+import { BarraRoomManager, barraEvents } from './barra/rooms.js';
+import { createCatalog } from './barra/catalog.js';
+import { createProviders } from './barra/providers.js';
+import { createMusixmatch } from './barra/musixmatch.js';
+import { createBarraRoutes } from './barra/http.js';
 
 const annoDeck = loadDeck(fileURLToPath(new URL('../data/anno/cards.json', import.meta.url)));
 const prezzoDeck = loadPrezzoDeck(fileURLToPath(new URL('../data/prezzo/cards.json', import.meta.url)));
@@ -77,6 +84,15 @@ let profileService = null;
 const dailyRoutes = createDailyRoutes(() => dailyService);
 const profileRoutes = createProfileRoutes(() => profileService);
 
+// Catalogo di Completa la barra: stesso database, disponibile quando risponde.
+let barraCatalog = null;
+const barraProviders = createProviders();
+const barraRoutes = createBarraRoutes({
+  getCatalog: () => barraCatalog,
+  providers: barraProviders,
+  musixmatch: createMusixmatch(),
+});
+
 async function startDaily() {
   try {
     const conn = await connectDailyDb();
@@ -85,8 +101,11 @@ async function startDaily() {
     await service.init();
     const profiles = createProfileService({ db: conn.db, auth: service.auth });
     await profiles.init();
+    const catalog = createCatalog({ db: conn.db });
+    await catalog.init();
     dailyService = service;
     profileService = profiles;
+    barraCatalog = catalog;
     console.log(`[daily] pronto (${conn.kind})`);
   } catch (err) {
     console.error('[daily] database non raggiungibile, riprovo tra 30s:', err.message);
@@ -119,16 +138,27 @@ async function handleHttp(req, res) {
     }
   }
 
+  if (url.pathname.startsWith('/barra/')) {
+    try {
+      const body = req.method === 'POST' ? await readJsonBody(req) : null;
+      const { status, payload } = await barraRoutes(req, url, body);
+      return sendJson(req, res, status, payload, { 'Cache-Control': 'no-store' });
+    } catch (err) {
+      return sendJson(req, res, 400, { error: err instanceof GameError ? err.message : 'Richiesta non valida' });
+    }
+  }
+
   if (req.method !== 'GET') return sendJson(req, res, 405, { error: 'Metodo non consentito' });
 
   try {
     if (url.pathname === '/health') {
       return sendJson(req, res, 200, {
         ok: true,
-        rooms: manager.rooms.size + annoManager.rooms.size + prezzoManager.rooms.size,
+        rooms: manager.rooms.size + annoManager.rooms.size + prezzoManager.rooms.size + barraManager.rooms.size,
         annoCards: annoDeck.length,
         prezzoCards: prezzoDeck.length,
         daily: !!dailyService,
+        barra: !!barraCatalog,
         uptime: process.uptime(),
       });
     }
@@ -169,6 +199,12 @@ const prezzoManager = new RoomManager({
   onRoomRemoved: (room) => console.log(`[prezzo] chiusa ${room.code}`),
 });
 
+const barraManager = new BarraRoomManager({
+  getCatalog: () => barraCatalog,
+  providers: barraProviders,
+  onRoomRemoved: (room) => console.log(`[barra] chiusa ${room.code}`),
+});
+
 const server = http.createServer(handleHttp);
 const io = new Server(server, {
   cors: {
@@ -181,6 +217,7 @@ attachSockets(io, manager, {
 });
 attachSockets(io.of('/anno'), annoManager);
 attachSockets(io.of('/prezzo'), prezzoManager);
+attachSockets(io.of('/barra'), barraManager, { extraEvents: barraEvents });
 
 server.listen(port, () => {
   console.log(`4Tune server in ascolto su :${port}` + (allowedOrigins.length ? ` (origin: ${allowedOrigins.join(', ')})` : ' (origin: tutti)'));

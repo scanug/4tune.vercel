@@ -27,7 +27,9 @@ function fail(ack, err) {
 
 // `loadRoomInput(payload)`: dati specifici del gioco per createRoom
 // (il GTS scarica la playlist da Deezer, Anno e Prezzo non hanno bisogno di nulla).
-export function attachSockets(io, manager, { loadRoomInput = async () => ({}) } = {}) {
+// `extraEvents`: eventi in più di un singolo gioco, { nome: (manager, { code, playerId }, payload) → risultato }.
+// Il risultato (anche una Promise) finisce nell'ack insieme a ok:true.
+export function attachSockets(io, manager, { loadRoomInput = async () => ({}), extraEvents = {} } = {}) {
   manager.emit = (room) => io.to(room.code).emit('room:state', manager.publicState(room));
 
   // Quale socket "possiede" ogni giocatore. Con un refresh della pagina il
@@ -113,9 +115,9 @@ export function attachSockets(io, manager, { loadRoomInput = async () => ({}) } 
       } catch (err) { fail(ack, err); }
     });
 
-    socket.on('game:start', (_payload, ack) => {
+    socket.on('game:start', async (payload, ack) => {
       try {
-        manager.startGame(socket.data.code, socket.data.playerId);
+        await manager.startGame(socket.data.code, socket.data.playerId, payload || {});
         ack?.({ ok: true });
       } catch (err) { fail(ack, err); }
     });
@@ -133,6 +135,17 @@ export function attachSockets(io, manager, { loadRoomInput = async () => ({}) } 
         ack?.({ ok: true, ...result });
       } catch (err) { fail(ack, err); }
     });
+
+    for (const [event, handler] of Object.entries(extraEvents)) {
+      socket.on(event, async (payload, ack) => {
+        try {
+          const { code, playerId } = socket.data;
+          if (!code) throw new GameError('Non sei in una stanza', 'room');
+          const result = await handler(manager, { code, playerId }, payload || {});
+          ack?.({ ok: true, ...(result || {}) });
+        } catch (err) { fail(ack, err); }
+      });
+    }
 
     // Il client cambia pagina senza uscire dalla stanza: resta come giocatore
     // disconnesso e può rientrare con lo stesso playerId.

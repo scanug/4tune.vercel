@@ -6,9 +6,9 @@ import { getWakeState, subscribeWake, wakeServer } from '@/lib/serverWake';
 
 // Pagine che usano il server: la home lo sveglia in anticipo, così quando si
 // crea una stanza è già pronto.
-const ONLINE_PREFIXES = ['/gts', '/anno', '/prezzo'];
+const ONLINE_PREFIXES = ['/gts', '/anno', '/prezzo', '/barra'];
 // In queste pagine senza server non si fa nulla: schermata intera.
-const BLOCKING = [/^\/gts\/game\//, /^\/anno\/game\//, /^\/prezzo\/game\//, /^\/anno\/giorno$/];
+const BLOCKING = [/^\/gts\/game\//, /^\/anno\/game\//, /^\/prezzo\/game\//, /^\/barra\/game\//, /^\/anno\/giorno$/];
 
 const EXPECTED_MS = 60000; // durata tipica del risveglio su Render gratuito
 const SEGMENTS = 20;
