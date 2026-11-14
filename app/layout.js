@@ -33,7 +33,7 @@ const pixelBody = Pixelify_Sans({
 
 export const metadata = {
   title: "4Tune – Party Games",
-  description: "Party game gratuiti senza registrazione: GTS, Indovina l'Anno, Impostore, Passa la Bomba e altro",
+  description: "Party game gratuiti senza registrazione: GTS, Indovina l'Anno, Abisso, Impostore, Passa la Bomba e altro",
 };
 
 export const viewport = {

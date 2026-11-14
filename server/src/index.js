@@ -1,14 +1,14 @@
 // Server di gioco 4Tune: HTTP per Deezer, mazzi dell'Anno e di Quanto costa?,
-// Anno del Giorno e health check; Socket.IO per le stanze (GTS sul namespace
+// Anno del Giorno, Abisso e health check; Socket.IO per le stanze (GTS sul namespace
 // "/", Indovina l'Anno su "/anno", Quanto costa? su "/prezzo"). Le stanze
-// vivono in memoria finché dura la partita (un redeploy le azzera); solo
-// l'Anno del Giorno e il profilo condiviso tra dispositivi salvano su Postgres.
+// vivono in memoria finché dura la partita (un redeploy le azzera); Anno del
+// Giorno, Abisso, profilo e catalogo di Completa la barra salvano su Postgres.
 //
 // Variabili d'ambiente:
 //   PORT            porta di ascolto (Render e Railway la impostano da soli)
 //   CLIENT_ORIGIN   origin ammessi, separati da virgola (es. https://4tune.vercel.app,http://localhost:3000)
 //                   se assente accetta qualsiasi origin (comodo in sviluppo)
-//   DATABASE_URL    Postgres per l'Anno del Giorno, i profili e il catalogo di Completa la barra
+//   DATABASE_URL    Postgres per i giochi quotidiani, i profili e il catalogo di Completa la barra
 //                   (Neon). Se assente, in sviluppo si usa un database in memoria.
 //   ADMIN_TOKEN     codice per la gestione del catalogo di Completa la barra (assente = gestione spenta)
 //   MUSIXMATCH_API_KEY  facoltativa: ricerca testi nella gestione di Completa la barra
@@ -26,6 +26,8 @@ import { categorySummary as prezzoCategorySummary, createPrezzoGame, loadDeck as
 import { connectDailyDb } from './daily/db.js';
 import { createDailyService } from './daily/service.js';
 import { createDailyRoutes } from './daily/http.js';
+import { createAbissoService, loadAbissoPrompts } from './abisso/service.js';
+import { createAbissoRoutes } from './abisso/http.js';
 import { createProfileService } from './profile/service.js';
 import { createProfileRoutes } from './profile/http.js';
 import { BarraRoomManager, barraEvents } from './barra/rooms.js';
@@ -36,6 +38,7 @@ import { createBarraRoutes } from './barra/http.js';
 
 const annoDeck = loadDeck(fileURLToPath(new URL('../data/anno/cards.json', import.meta.url)));
 const prezzoDeck = loadPrezzoDeck(fileURLToPath(new URL('../data/prezzo/cards.json', import.meta.url)));
+const abissoPrompts = loadAbissoPrompts(fileURLToPath(new URL('../data/abisso/prompts.json', import.meta.url)));
 
 const port = Number(process.env.PORT || 4000);
 const allowedOrigins = (process.env.CLIENT_ORIGIN || '')
@@ -78,11 +81,13 @@ function readJsonBody(req) {
 
 // L'Anno del Giorno parte appena il database risponde; se non risponde
 // (Neon in avvio, rete) si riprova ogni 30 secondi e intanto le sue rotte danno 503.
-// Il profilo condiviso usa lo stesso database e la stessa identità.
+// Il profilo condiviso e Abisso usano lo stesso database e la stessa identità.
 let dailyService = null;
 let profileService = null;
+let abissoService = null;
 const dailyRoutes = createDailyRoutes(() => dailyService);
 const profileRoutes = createProfileRoutes(() => profileService);
+const abissoRoutes = createAbissoRoutes(() => abissoService);
 
 // Catalogo di Completa la barra: stesso database, disponibile quando risponde.
 let barraCatalog = null;
@@ -99,12 +104,15 @@ async function startDaily() {
     if (!conn) { console.warn('[daily] nessun database configurato: Anno del Giorno disattivato'); return; }
     const service = createDailyService({ db: conn.db, deck: annoDeck });
     await service.init();
+    const abisso = createAbissoService({ db: conn.db, prompts: abissoPrompts, auth: service.auth });
+    await abisso.init();
     const profiles = createProfileService({ db: conn.db, auth: service.auth });
     await profiles.init();
     const catalog = createCatalog({ db: conn.db });
     await catalog.init();
     dailyService = service;
     profileService = profiles;
+    abissoService = abisso;
     barraCatalog = catalog;
     console.log(`[daily] pronto (${conn.kind})`);
   } catch (err) {
@@ -138,10 +146,11 @@ async function handleHttp(req, res) {
     }
   }
 
-  if (url.pathname.startsWith('/barra/')) {
+  if (url.pathname.startsWith('/barra/') || url.pathname.startsWith('/abisso/')) {
     try {
       const body = req.method === 'POST' ? await readJsonBody(req) : null;
-      const { status, payload } = await barraRoutes(req, url, body);
+      const routes = url.pathname.startsWith('/barra/') ? barraRoutes : abissoRoutes;
+      const { status, payload } = await routes(req, url, body);
       return sendJson(req, res, status, payload, { 'Cache-Control': 'no-store' });
     } catch (err) {
       return sendJson(req, res, 400, { error: err instanceof GameError ? err.message : 'Richiesta non valida' });
@@ -157,7 +166,9 @@ async function handleHttp(req, res) {
         rooms: manager.rooms.size + annoManager.rooms.size + prezzoManager.rooms.size + barraManager.rooms.size,
         annoCards: annoDeck.length,
         prezzoCards: prezzoDeck.length,
+        abissoPrompts: abissoPrompts.length,
         daily: !!dailyService,
+        abisso: !!abissoService,
         barra: !!barraCatalog,
         uptime: process.uptime(),
       });

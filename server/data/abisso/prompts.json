@@ -1,0 +1,212 @@
+[
+  {
+    "id": "oggetto-cucina",
+    "question": "Nomina un oggetto che si trova in cucina.",
+    "answers": ["coltello", "forchetta", "cucchiaio", "padella", "pentola", "tagliere", "frigorifero", "forno", {"answer": "forno a microonde", "aliases": ["microonde"]}, "frullatore", "bilancia", "grattugia", "scolapasta", "coperchio", "tostapane", "caffettiera"]
+  },
+  {
+    "id": "in-valigia",
+    "question": "Nomina qualcosa che metteresti in valigia.",
+    "answers": ["maglietta", "pantaloni", "mutande", "calzini", "scarpe", "spazzolino", "dentifricio", "deodorante", "spazzola", "pigiama", "costume", "asciugamano", "caricabatterie", "libro", "medicine", "occhiali"]
+  },
+  {
+    "id": "frutto-giallo",
+    "question": "Nomina un frutto giallo.",
+    "answers": ["banana", "limone", "ananas", "mela", "pera", "pesca", "albicocca", "mango", "melone", "prugna", "uva", "carambola", "kiwi", "pompelmo", "cedro", "nispero"]
+  },
+  {
+    "id": "animale-acqua",
+    "question": "Nomina un animale che vive in acqua.",
+    "answers": ["pesce", "squalo", "balena", "delfino", "polpo", "piovra", "medusa", "stella marina", "granchio", "aragosta", "gambero", "tonno", "salmone", "anguilla", "cavalluccio marino", "manta", "orca", "trigone", "spugna", "riccio di mare"]
+  },
+  {
+    "id": "citta-mare",
+    "question": "Nomina una città italiana sul mare.",
+    "answers": ["Napoli", "Genova", "Venezia", "Bari", "Palermo", "Catania", "Trieste", "Livorno", "La Spezia", "Salerno", "Rimini", "Pescara", "Cagliari", "Taranto", "Ancona", "Siracusa", "Messina", "Reggio Calabria", "Viareggio", "Ostia"]
+  },
+  {
+    "id": "nella-borsa",
+    "question": "Nomina qualcosa che potresti trovare in una borsa.",
+    "answers": ["portafoglio", "chiavi", "telefono", "fazzoletti", "documenti", "occhiali", "trucchi", "burrocacao", "penna", "agenda", "caramelle", "bottiglia", "auricolari", "medicine", "pettine", "power bank"]
+  },
+  {
+    "id": "materia-scolastica",
+    "question": "Nomina una materia che si studia a scuola.",
+    "answers": ["italiano", "matematica", "storia", "geografia", "inglese", "scienze", "arte", "musica", {"answer": "educazione fisica", "aliases": ["ginnastica"]}, "informatica", "filosofia", "fisica", "chimica", "biologia", "latino", "greco", "diritto", "economia"]
+  },
+  {
+    "id": "strumento-musicale",
+    "question": "Nomina uno strumento musicale.",
+    "answers": ["chitarra", "pianoforte", "batteria", "violino", "flauto", "tromba", "saxofono", "basso", "tastiera", "ukulele", "armonica", "violoncello", "contrabbasso", "clarinetto", "oboe", "fisarmonica", "arpa", "banjo", "xilofono", "tamburello"]
+  },
+  {
+    "id": "oggetto-bagno",
+    "question": "Nomina un oggetto che si trova in bagno.",
+    "answers": ["sapone", "shampoo", "spazzolino", "dentifricio", "asciugamano", "accappatoio", "doccia", "vasca", "lavandino", "specchio", "pettine", "spazzola", "rasoio", "phon", "bilancia", "tappetino"]
+  },
+  {
+    "id": "sport-palla",
+    "question": "Nomina uno sport in cui si usa una palla.",
+    "answers": ["calcio", "basket", "pallavolo", "tennis", "rugby", "pallanuoto", "pallamano", "golf", "baseball", "ping pong", "beach volley", "calcetto", "biliardo", "bowling", "hockey", "padel"]
+  },
+  {
+    "id": "mestiere-divisa",
+    "question": "Nomina un mestiere in cui spesso si indossa una divisa.",
+    "answers": ["poliziotto", "carabiniere", "vigile del fuoco", "medico", "infermiere", "pilota", "hostess", "militare", "guardia giurata", "cuoco", "cameriere", "maresciallo", "marinaio", "magistrato", "corriere", "addetto alle pulizie"]
+  },
+  {
+    "id": "in-spiaggia",
+    "question": "Nomina qualcosa che vedi in spiaggia.",
+    "answers": ["ombrellone", "sdraio", "lettino", "asciugamano", "castello di sabbia", "secchiello", "paletta", "conchiglia", "bagnino", "pedalò", "barca", "ciabatte", "crema solare", "pallone", "racchettoni", "cabina"]
+  },
+  {
+    "id": "verdura-verde",
+    "question": "Nomina una verdura verde.",
+    "answers": ["insalata", "spinaci", "zucchine", "broccoli", "cetriolo", "piselli", "fagiolini", "asparagi", "carciofi", "cavolo", "verza", "lattuga", "rucola", "sedano", "peperone", "bietole"]
+  },
+  {
+    "id": "animale-fattoria",
+    "question": "Nomina un animale della fattoria.",
+    "answers": ["mucca", "gallina", "maiale", "cavallo", "pecora", "capra", "asino", "coniglio", "anatra", "oca", "tacchino", "gallo", "toro", "vitello", "maialino", "mulo"]
+  },
+  {
+    "id": "in-auto",
+    "question": "Nomina un oggetto o una parte che trovi in un'automobile.",
+    "answers": ["volante", "clacson", "sedile", "cintura", "specchietto", "pedale", "freno", "acceleratore", "cambio", "cruscotto", "radio", "navigatore", "airbag", "tappetino", "ruota", "ruota di scorta"]
+  },
+  {
+    "id": "vestito-inverno",
+    "question": "Nomina un capo d'abbigliamento adatto all'inverno.",
+    "answers": ["cappotto", "giubbotto", "maglione", "sciarpa", "cappello", "guanti", "stivali", "piumino", "felpa", "calzamaglia", "berretto", "paraorecchie", "giacca", "cardigan", "calze", "imbottito"]
+  },
+  {
+    "id": "mobile-casa",
+    "question": "Nomina un mobile che può esserci in una casa.",
+    "answers": ["tavolo", "sedia", "divano", "armadio", "letto", "comodino", "credenza", "libreria", "scrivania", "cassettiera", "poltrona", "sgabello", "mensola", "mobiletto", "dispensa", "panca"]
+  },
+  {
+    "id": "dolce-italiano",
+    "question": "Nomina un dolce italiano.",
+    "answers": ["tiramisù", "cannolo", "panna cotta", "sfogliatella", "cassata", "panettone", "pandoro", "colomba", "pastiera", "crostata", "zuppa inglese", "babà", "cannoncino", "diplomatica", "zabaglione", "struffoli"]
+  },
+  {
+    "id": "bevanda-calda",
+    "question": "Nomina una bevanda che si beve calda.",
+    "answers": ["caffè", "tè", "tisana", "camomilla", "cappuccino", "cioccolata", "latte", "orzo", "ginseng", "infuso", "decaffeinato", "espresso", "macchiato", "vin brulé", "brodo", "mate"]
+  },
+  {
+    "id": "oggetto-scuola",
+    "question": "Nomina un oggetto che si usa a scuola.",
+    "answers": ["matita", "penna", "quaderno", "libro", "gomma", "righello", "astuccio", "zaino", "temperino", "evidenziatore", "compasso", "squadra", "calcolatrice", "lavagna", "gesso", "colla"]
+  },
+  {
+    "id": "animale-notturno",
+    "question": "Nomina un animale prevalentemente notturno.",
+    "answers": ["gufo", "civetta", "pipistrello", "volpe", "istrice", "tasso", "riccio", "lupo", "procione", "criceto", "geco", "rospo", "falena", "scorpione", "gatto", "lemure"]
+  },
+  {
+    "id": "ingrediente-pizza",
+    "question": "Nomina un ingrediente che può finire su una pizza.",
+    "answers": ["mozzarella", "pomodoro", "basilico", "funghi", "prosciutto", "salame", "acciughe", "olive", "carciofi", "salsiccia", "peperoni", "gorgonzola", "parmigiano", "rucola", "cipolla", "mais"]
+  },
+  {
+    "id": "mezzo-trasporto",
+    "question": "Nomina un mezzo di trasporto.",
+    "answers": ["automobile", "treno", "autobus", "aereo", "bicicletta", "moto", "scooter", "nave", "traghetto", "tram", "metropolitana", "monopattino", "camion", "taxi", "elicottero", "funivia"]
+  },
+  {
+    "id": "fiore",
+    "question": "Nomina un fiore.",
+    "answers": ["rosa", "margherita", "tulipano", "girasole", "orchidea", "giglio", "viola", "geranio", "papavero", "garofano", "azalea", "camelia", "magnolia", "peonia", "iris", "narciso"]
+  },
+  {
+    "id": "in-giardino",
+    "question": "Nomina qualcosa che puoi trovare in un giardino.",
+    "answers": ["albero", "fiore", "siepe", "prato", "panchina", "fontana", "vialetto", "altalena", "scivolo", "vaso", "annaffiatoio", "rastrello", "pala", "insetto", "lumaca", "statua"]
+  },
+  {
+    "id": "strumento-medico",
+    "question": "Nomina uno strumento usato da un medico.",
+    "answers": ["stetoscopio", "siringa", "termometro", "bisturi", "otoscopio", "martelletto", "cerotto", "garza", "guanti", "pinzetta", "misuratore di pressione", "fonendoscopio", "defibrillatore", "ecografo", "laringoscopio", "benda"]
+  },
+  {
+    "id": "in-campeggio",
+    "question": "Nomina qualcosa di utile in campeggio.",
+    "answers": ["tenda", "sacco a pelo", "materassino", "torcia", "fornello", "pentolino", "coltello", "bussola", "zaino", "kit di pronto soccorso", "repellente", "amaca", "corda", "accendino", "gavetta"]
+  },
+  {
+    "id": "cibo-colazione",
+    "question": "Nomina un cibo che mangeresti a colazione.",
+    "answers": ["brioche", "cornetto", "biscotti", "pane", "fette biscottate", "cereali", "yogurt", "marmellata", "miele", "frutta", "torta", "toast", "pancake", "waffle", "burro", "spremuta"]
+  },
+  {
+    "id": "animale-ali",
+    "question": "Nomina un animale con le ali.",
+    "answers": ["aquila", "piccione", "passero", "gabbiano", "pappagallo", "farfalla", "ape", "mosca", "zanzara", "libellula", "pipistrello", "cigno", "airone", "falco", "corvo", "calabrone"]
+  },
+  {
+    "id": "oggetto-tecnologico",
+    "question": "Nomina un oggetto tecnologico di uso quotidiano.",
+    "answers": ["smartphone", "computer", "televisore", "tablet", "auricolari", "cuffie", "caricabatterie", "smartwatch", "stampante", "mouse", "tastiera", "router", "console", "fotocamera", "speaker", "chiavetta"]
+  },
+  {
+    "id": "ingrediente-dolci",
+    "question": "Nomina un ingrediente usato per preparare dolci.",
+    "answers": ["farina", "zucchero", "uova", "burro", "latte", "lievito", "cioccolato", "vaniglia", "cacao", "panna", "miele", "mandorle", "nocciole", "ricotta", "mascarpone", "scorza di limone"]
+  },
+  {
+    "id": "sotto-letto",
+    "question": "Nomina qualcosa che potresti trovare sotto un letto.",
+    "answers": ["polvere", "scatola", "scarpe", "calzino", "gatto", "pallina", "libro", "valigia", "peluche", "coperta", "cassetto", "contenitore", "pantofola", "giocattolo", "ragnatela", "mostro"]
+  },
+  {
+    "id": "attrezzo-giardinaggio",
+    "question": "Nomina un attrezzo da giardinaggio.",
+    "answers": ["rastrello", "pala", "vanga", "annaffiatoio", "forbici", "cesoie", "zappa", "carriola", "guanti", "tagliaerba", "soffiatore", "motosega", "trapiantatore", "tubo", "potatore", "estirpatore"]
+  },
+  {
+    "id": "pesce",
+    "question": "Nomina un tipo di pesce.",
+    "answers": ["salmone", "tonno", "orata", "branzino", "spigola", "trota", "sogliola", "merluzzo", "sardina", "acciuga", "sgombro", "pesce spada", "carpa", "persico", "rombo", "nasello"]
+  },
+  {
+    "id": "in-stazione",
+    "question": "Nomina qualcosa che vedi in una stazione ferroviaria.",
+    "answers": ["treno", "binario", "biglietto", "tabellone", "panchina", "orologio", "tornello", "valigia", "viaggiatore", "controllore", "pensilina", "sottopassaggio", "altoparlante", "edicola", "bar", "sala d'attesa"]
+  },
+  {
+    "id": "gioiello-accessorio",
+    "question": "Nomina un gioiello o un accessorio da indossare.",
+    "answers": ["anello", "collana", "bracciale", "orecchini", "orologio", "spilla", "cintura", "cravatta", "foulard", "cappello", "occhiali", "piercing", "cavigliera", "gemelli", "fermaglio", "diadema"]
+  },
+  {
+    "id": "materiale-costruzione",
+    "question": "Nomina un materiale usato nelle costruzioni.",
+    "answers": ["cemento", "mattoni", "legno", "acciaio", "ferro", "vetro", "pietra", "marmo", "calce", "sabbia", "ghiaia", "intonaco", "piastrelle", "alluminio", "calcestruzzo", "cartongesso"]
+  },
+  {
+    "id": "in-biblioteca",
+    "question": "Nomina qualcosa che trovi in biblioteca.",
+    "answers": ["libro", "scaffale", "tavolo", "sedia", "bibliotecario", "tessera", "catalogo", "computer", "lampada", "rivista", "enciclopedia", "dizionario", "scaletta", "segnalibro", "zaino", "silenzio"]
+  },
+  {
+    "id": "animale-bosco",
+    "question": "Nomina un animale che può vivere nel bosco.",
+    "answers": ["volpe", "lupo", "cervo", "cinghiale", "capriolo", "scoiattolo", "riccio", "tasso", "istrice", "gufo", "picchio", "daina", "ghiandaia", "salamandra", "martora", "muflone"]
+  },
+  {
+    "id": "in-cantina",
+    "question": "Nomina qualcosa che potresti trovare in cantina.",
+    "answers": ["vino", "bottiglie", "scatoloni", "attrezzi", "bicicletta", "scala", "barattoli", "marmellata", "patate", "cipolle", "legna", "polvere", "ragnatele", "vecchi mobili", "valigie", "conserve"]
+  },
+  {
+    "id": "in-palestra",
+    "question": "Nomina un attrezzo che trovi in palestra.",
+    "answers": ["pesi", "manubri", "bilanciere", "tapis roulant", "cyclette", "panca", "tappetino", "corda", "kettlebell", "ellittica", "vogatore", "sbarra", "fitness ball", "elastico", "step", "lat machine"]
+  },
+  {
+    "id": "puo-galleggiare",
+    "question": "Nomina un oggetto che può galleggiare sull'acqua.",
+    "answers": ["barca", "ciambella", "materassino", "tappo", "sughero", "legno", "foglia", "pallone", "boa", "salvagente", "paperella", "tronco", "bottiglia", "canotto", "tavola da surf", "giubbotto di salvataggio"]
+  }
+]
