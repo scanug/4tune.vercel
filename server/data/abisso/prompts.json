@@ -2,211 +2,211 @@
   {
     "id": "oggetto-cucina",
     "question": "Nomina un oggetto che si trova in cucina.",
-    "answers": ["coltello", "forchetta", "cucchiaio", "padella", "pentola", "tagliere", "frigorifero", "forno", {"answer": "forno a microonde", "aliases": ["microonde"]}, "frullatore", "bilancia", "grattugia", "scolapasta", "coperchio", "tostapane", "caffettiera"]
+    "answers": ["coltello", "forchetta", "cucchiaio", "padella", "pentola", "piatto", "bicchiere", "tazza", "tagliere", {"answer": "frigorifero", "aliases": ["frigo"]}, "congelatore", "forno", {"answer": "forno a microonde", "aliases": ["microonde"]}, "frullatore", "bilancia", "grattugia", "scolapasta", "coperchio", "tostapane", {"answer": "caffettiera", "aliases": ["moka"]}, "bollitore", "lavastoviglie", "lavello", "spremiagrumi", "pelapatate", "apriscatole", "mattarello", {"answer": "frullatore a immersione", "aliases": ["minipimer"]}, "robot da cucina", "passaverdure", "imbuto", "mestolo", "schiumarola"]
   },
   {
     "id": "in-valigia",
     "question": "Nomina qualcosa che metteresti in valigia.",
-    "answers": ["maglietta", "pantaloni", "mutande", "calzini", "scarpe", "spazzolino", "dentifricio", "deodorante", "spazzola", "pigiama", "costume", "asciugamano", "caricabatterie", "libro", "medicine", "occhiali"]
+    "answers": [{"answer": "maglietta", "aliases": ["t-shirt"]}, "pantaloni", "mutande", "calzini", "scarpe", "spazzolino", "dentifricio", "deodorante", "spazzola", "pettine", "pigiama", "costume", "asciugamano", "caricabatterie", "libro", {"answer": "medicine", "aliases": ["medicinali"]}, "occhiali", "felpa", "maglione", "giacca", "camicia", "vestito", "gonna", "beauty case", "sapone", "shampoo", "crema solare", "cuffie", "documenti", "portafoglio", "ciabatte", "berretto", "ombrello", "adattatore"]
   },
   {
     "id": "frutto-giallo",
     "question": "Nomina un frutto giallo.",
-    "answers": ["banana", "limone", "ananas", "mela", "pera", "pesca", "albicocca", "mango", "melone", "prugna", "uva", "carambola", "kiwi", "pompelmo", "cedro", "nispero"]
+    "answers": ["banana", "limone", "ananas", {"answer": "mela", "aliases": ["mela gialla", "mela golden"]}, {"answer": "pera", "aliases": ["pera gialla", "pera williams"]}, "pesca", "pesca noce", "albicocca", "susina", "mango", "melone", "prugna", "uva", "fico", "papaya", "carambola", {"answer": "kiwi giallo", "aliases": ["kiwi gold"]}, "pompelmo", "pomelo", "cedro", "bergamotto", {"answer": "nispero", "aliases": ["nespola", "nespolo"]}, "maracuja", "durian"]
   },
   {
     "id": "animale-acqua",
     "question": "Nomina un animale che vive in acqua.",
-    "answers": ["pesce", "squalo", "balena", "delfino", "polpo", "piovra", "medusa", "stella marina", "granchio", "aragosta", "gambero", "tonno", "salmone", "anguilla", "cavalluccio marino", "manta", "orca", "trigone", "spugna", "riccio di mare"]
+    "answers": ["pesce", "squalo", "balena", "delfino", {"answer": "polpo", "aliases": ["piovra", "polipo"]}, "medusa", "stella marina", "granchio", "aragosta", "gambero", "tonno", "salmone", "anguilla", "cavalluccio marino", "manta", "orca", "trigone", "spugna", "riccio di mare", "seppia", "calamaro", "nautilus", "tartaruga marina", "foca", "tricheco", "ippopotamo", "coccodrillo", "lontra", "castoro", "capodoglio", "narvalo", "beluga", "dugongo", "lamantino", "murena", "cernia", "pesce pagliaccio", "pesce chirurgo", "pesce luna"]
   },
   {
     "id": "citta-mare",
     "question": "Nomina una città italiana sul mare.",
-    "answers": ["Napoli", "Genova", "Venezia", "Bari", "Palermo", "Catania", "Trieste", "Livorno", "La Spezia", "Salerno", "Rimini", "Pescara", "Cagliari", "Taranto", "Ancona", "Siracusa", "Messina", "Reggio Calabria", "Viareggio", "Ostia"]
+    "answers": ["Napoli", "Genova", "Venezia", "Bari", "Palermo", "Catania", "Trieste", "Livorno", "La Spezia", "Salerno", "Rimini", "Pescara", "Cagliari", "Taranto", "Ancona", "Siracusa", "Messina", "Reggio Calabria", "Viareggio", "Ostia", "Savona", "Civitavecchia", "Crotone", "Brindisi", "Fiumicino", "Gaeta", "Terracina", "Formia", "Pozzuoli", "Castellammare di Stabia", "Amalfi", "Sorrento", "Cefalù", "Trapani", "Marsala", "Chioggia", "Caorle", "Grado", "Monfalcone", "Molfetta", "Monopoli", "Otranto", "Gallipoli", "Alghero", "Olbia", "Porto Torres", "La Maddalena"]
   },
   {
     "id": "nella-borsa",
     "question": "Nomina qualcosa che potresti trovare in una borsa.",
-    "answers": ["portafoglio", "chiavi", "telefono", "fazzoletti", "documenti", "occhiali", "trucchi", "burrocacao", "penna", "agenda", "caramelle", "bottiglia", "auricolari", "medicine", "pettine", "power bank"]
+    "answers": [{"answer": "portafoglio", "aliases": ["portafogli"]}, "chiavi", {"answer": "telefono", "aliases": ["cellulare", "smartphone"]}, "fazzoletti", "documenti", "occhiali", "trucchi", "burrocacao", "penna", "agenda", "caramelle", "bottiglia", "auricolari", "medicine", "pettine", "power bank", "monete", "carte di credito", "specchietto", "rossetto", "profumo", "crema mani", "gel igienizzante", "salviette", "cuffie", "ombrello", "bottiglietta", "snack", "chewing gum", "scontrini", "chiavetta", "taccuino"]
   },
   {
     "id": "materia-scolastica",
     "question": "Nomina una materia che si studia a scuola.",
-    "answers": ["italiano", "matematica", "storia", "geografia", "inglese", "scienze", "arte", "musica", {"answer": "educazione fisica", "aliases": ["ginnastica"]}, "informatica", "filosofia", "fisica", "chimica", "biologia", "latino", "greco", "diritto", "economia"]
+    "answers": ["italiano", "matematica", "storia", "geografia", "inglese", "scienze", "arte", "musica", {"answer": "educazione fisica", "aliases": ["ginnastica", "scienze motorie"]}, "informatica", "filosofia", "fisica", "chimica", "biologia", "latino", "greco", "diritto", "economia", "spagnolo", "francese", "tedesco", "tecnologia", "religione", "educazione civica", "geometria", "letteratura", "grammatica", "disegno", "storia dell'arte", "astronomia", "ecologia", "statistica", "psicologia", "sociologia", "anatomia", "meccanica", "elettronica", "ragioneria"]
   },
   {
     "id": "strumento-musicale",
     "question": "Nomina uno strumento musicale.",
-    "answers": ["chitarra", "pianoforte", "batteria", "violino", "flauto", "tromba", "saxofono", "basso", "tastiera", "ukulele", "armonica", "violoncello", "contrabbasso", "clarinetto", "oboe", "fisarmonica", "arpa", "banjo", "xilofono", "tamburello"]
+    "answers": ["chitarra", {"answer": "pianoforte", "aliases": ["piano"]}, "batteria", "violino", "flauto", "tromba", {"answer": "saxofono", "aliases": ["sax"]}, "basso", "tastiera", "ukulele", "armonica", "violoncello", "contrabbasso", "clarinetto", "oboe", "fisarmonica", "arpa", "banjo", "xilofono", "tamburello", "chitarra elettrica", "chitarra classica", "basso elettrico", "trombone", "tuba", "corno", "fagotto", "flauto traverso", "flauto dolce", "ottavino", "mandolino", "sitar", "liuto", "oud", "balalaika", "cajon", "bonghi", "congas", "maracas", "triangolo", "vibrafono", "marimba", "organo", "clavicembalo", "sintetizzatore", "theremin", "cornamusa"]
   },
   {
     "id": "oggetto-bagno",
     "question": "Nomina un oggetto che si trova in bagno.",
-    "answers": ["sapone", "shampoo", "spazzolino", "dentifricio", "asciugamano", "accappatoio", "doccia", "vasca", "lavandino", "specchio", "pettine", "spazzola", "rasoio", "phon", "bilancia", "tappetino"]
+    "answers": ["sapone", "shampoo", "spazzolino", "dentifricio", "asciugamano", "accappatoio", "doccia", "vasca", "lavandino", {"answer": "water", "aliases": ["wc", "toilette", "gabinetto"]}, "bidet", "specchio", "pettine", "spazzola", "rasoio", "phon", "bilancia", "tappetino", "scopino", "portasapone", "portaspazzolino", "collutorio", "filo interdentale", "bagnoschiuma", "salviette", "carta igienica", "cotton fioc", "dischetti struccanti", "crema", "deodorante", "profumo", "termosifone", "scaldasalviette", "cestino", "pantofole"]
   },
   {
     "id": "sport-palla",
     "question": "Nomina uno sport in cui si usa una palla.",
-    "answers": ["calcio", "basket", "pallavolo", "tennis", "rugby", "pallanuoto", "pallamano", "golf", "baseball", "ping pong", "beach volley", "calcetto", "biliardo", "bowling", "hockey", "padel"]
+    "answers": ["calcio", {"answer": "basket", "aliases": ["pallacanestro"]}, {"answer": "pallavolo", "aliases": ["volley", "palla a volo"]}, "tennis", "rugby", "pallanuoto", "pallamano", "golf", "baseball", {"answer": "ping pong", "aliases": ["tennis da tavolo", "tennistavolo"]}, "beach volley", {"answer": "calcetto", "aliases": ["calcio a 5"]}, "biliardo", "bowling", "hockey", "padel", "football americano", "football australiano", "softball", "cricket", "squash", "racquetball", "beach tennis", "pallapugno", "tamburello", "palla basca", "bocce", "pétanque", "croquet", "polo", "floorball", "kin-ball", {"answer": "palla avvelenata", "aliases": ["dodgeball"]}, "netball", "sepak takraw", "korfball", "calcio tennis", "footvolley"]
   },
   {
     "id": "mestiere-divisa",
     "question": "Nomina un mestiere in cui spesso si indossa una divisa.",
-    "answers": ["poliziotto", "carabiniere", "vigile del fuoco", "medico", "infermiere", "pilota", "hostess", "militare", "guardia giurata", "cuoco", "cameriere", "maresciallo", "marinaio", "magistrato", "corriere", "addetto alle pulizie"]
+    "answers": [{"answer": "poliziotto", "aliases": ["agente di polizia"]}, {"answer": "carabiniere", "aliases": ["maresciallo"]}, {"answer": "vigile del fuoco", "aliases": ["pompiere"]}, "medico", "infermiere", "pilota", {"answer": "assistente di volo", "aliases": ["hostess", "steward"]}, {"answer": "militare", "aliases": ["soldato"]}, "guardia giurata", {"answer": "cuoco", "aliases": ["chef"]}, "cameriere", "marinaio", "magistrato", "corriere", "addetto alle pulizie", "finanziere", "vigile urbano", "agente penitenziario", "capotreno", "controllore", "macchinista", "autista", "paramedico", "soccorritore", "chirurgo", "dentista", "farmacista", "veterinario", "receptionist", "portiere d'albergo", "portinaio", "guardia notturna", "pizzaiolo", "pasticcere", {"answer": "operatore ecologico", "aliases": ["netturbino"]}, "postino"]
   },
   {
     "id": "in-spiaggia",
     "question": "Nomina qualcosa che vedi in spiaggia.",
-    "answers": ["ombrellone", "sdraio", "lettino", "asciugamano", "castello di sabbia", "secchiello", "paletta", "conchiglia", "bagnino", "pedalò", "barca", "ciabatte", "crema solare", "pallone", "racchettoni", "cabina"]
+    "answers": ["ombrellone", "sdraio", "lettino", "asciugamano", "sabbia", "mare", "castello di sabbia", "secchiello", "paletta", "conchiglia", "bagnino", "pedalò", "barca", {"answer": "ciabatte", "aliases": ["infradito"]}, "crema solare", "pallone", "racchettoni", "cabina", "onde", "dune", "scogli", "alghe", "legnetti", "costume", "occhiali da sole", "cappello", "cappellino", "borsa frigo", "aquilone", "tavola da surf", "windsurf", "kayak", "canoa", "gommone", "molo", "doccia", "cestino", "bandiera", "salvagente", "cane", "venditore ambulante"]
   },
   {
     "id": "verdura-verde",
     "question": "Nomina una verdura verde.",
-    "answers": ["insalata", "spinaci", "zucchine", "broccoli", "cetriolo", "piselli", "fagiolini", "asparagi", "carciofi", "cavolo", "verza", "lattuga", "rucola", "sedano", "peperone", "bietole"]
+    "answers": [{"answer": "insalata", "aliases": ["lattuga"]}, "spinaci", "zucchine", "broccoli", "cetriolo", "piselli", "fagiolini", "asparagi", "carciofi", "cavolo", "verza", "rucola", "sedano", "peperone", "bietole", "cavolo riccio", "cavolfiore romanesco", "broccoletti", "cime di rapa", "friarielli", "catalogna", "cicoria", "indivia", "scarola", "valeriana", "songino", "coste", "erbette", "porro", "cipollotto", "zucchina romanesca", "agretti", "fagiolo fresco", "edamame"]
   },
   {
     "id": "animale-fattoria",
     "question": "Nomina un animale della fattoria.",
-    "answers": ["mucca", "gallina", "maiale", "cavallo", "pecora", "capra", "asino", "coniglio", "anatra", "oca", "tacchino", "gallo", "toro", "vitello", "maialino", "mulo"]
+    "answers": ["mucca", "gallina", "maiale", "cavallo", "pecora", "capra", "asino", "coniglio", "anatra", "oca", "tacchino", "gallo", "toro", "vitello", "maialino", "mulo", "pollo", "cappone", "pulcino", "faraona", "piccione", "quaglia", "agnello", "ariete", "capretto", "bufalo", "alpaca", "lama", "cane", "gatto", "cane da pastore", "ape"]
   },
   {
     "id": "in-auto",
     "question": "Nomina un oggetto o una parte che trovi in un'automobile.",
-    "answers": ["volante", "clacson", "sedile", "cintura", "specchietto", "pedale", "freno", "acceleratore", "cambio", "cruscotto", "radio", "navigatore", "airbag", "tappetino", "ruota", "ruota di scorta"]
+    "answers": ["volante", "clacson", "sedile", {"answer": "cintura di sicurezza", "aliases": ["cintura"]}, {"answer": "specchietto retrovisore", "aliases": ["specchietto"]}, "pedale", "freno", "acceleratore", "cambio", "cruscotto", "radio", "navigatore", "airbag", "tappetino", "ruota", "ruota di scorta", "portiera", "finestrino", "parabrezza", "lunotto", "paraurti", "motore", "batteria", "bagagliaio", "cofano", "fari", "indicatori di direzione", "tergicristallo", "frizione", "freno a mano", "pomello del cambio", "bracciolo", "accendisigari", "presa USB", "computer di bordo", "head-up display"]
   },
   {
     "id": "vestito-inverno",
     "question": "Nomina un capo d'abbigliamento adatto all'inverno.",
-    "answers": ["cappotto", "giubbotto", "maglione", "sciarpa", "cappello", "guanti", "stivali", "piumino", "felpa", "calzamaglia", "berretto", "paraorecchie", "giacca", "cardigan", "calze", "imbottito"]
+    "answers": ["cappotto", "giubbotto", "maglione", "sciarpa", "cappello", "guanti", "stivali", "piumino", "felpa", "calzamaglia", "berretto", "paraorecchie", "giacca", "cardigan", "calze", "gilet", "scaldacollo", "passamontagna", "muffole", "calzettoni", "collant", "leggings", "maglia termica", "pantaloni termici", "tuta", "poncho", "mantella", "pelliccia", "pashmina", "stola", "doposci", "scarponi", "scarpe da neve", "salopette"]
   },
   {
     "id": "mobile-casa",
     "question": "Nomina un mobile che può esserci in una casa.",
-    "answers": ["tavolo", "sedia", "divano", "armadio", "letto", "comodino", "credenza", "libreria", "scrivania", "cassettiera", "poltrona", "sgabello", "mensola", "mobiletto", "dispensa", "panca"]
+    "answers": ["tavolo", "sedia", "divano", "armadio", "letto", "comodino", "credenza", "libreria", "scrivania", "cassettiera", "poltrona", "sgabello", "mensola", "mobiletto", "dispensa", "panca", "tavolino", "consolle", "madia", "vitrina", "buffet", "cantinetta", "scarpiera", {"answer": "appendiabiti", "aliases": ["attaccapanni"]}, "guardaroba", "cabina armadio", "toeletta", "cassapanca", "baule", "pouf", "dormeuse", "chaise longue", "lettino", "culla", "futon", "scaffale"]
   },
   {
     "id": "dolce-italiano",
     "question": "Nomina un dolce italiano.",
-    "answers": ["tiramisù", "cannolo", "panna cotta", "sfogliatella", "cassata", "panettone", "pandoro", "colomba", "pastiera", "crostata", "zuppa inglese", "babà", "cannoncino", "diplomatica", "zabaglione", "struffoli"]
+    "answers": ["tiramisù", {"answer": "cannolo", "aliases": ["cannoli"]}, "panna cotta", "sfogliatella", "cassata", "panettone", "pandoro", "colomba", "pastiera", "crostata", "zuppa inglese", "babà", "cannoncino", "diplomatica", "zabaglione", "struffoli", "gelato", "semifreddo", "sorbetto", "granita", "millefoglie", {"answer": "cantucci", "aliases": ["biscotti di Prato"]}, "amaretti", "brutti ma buoni", "baci di dama", "krumiri", "torrone", "croccante", "gianduiotto", "bonet", "pesche dolci", "ciambella", "maritozzo", "cartellate", {"answer": "chiacchiere", "aliases": ["frappe", "crostoli", "bugie"]}, "sanguinaccio", "seadas", "montebianco", "zuccotto", "pizzelle", "mostaccioli", "panforte", "ricciarelli", "cubbaita"]
   },
   {
     "id": "bevanda-calda",
     "question": "Nomina una bevanda che si beve calda.",
-    "answers": ["caffè", "tè", "tisana", "camomilla", "cappuccino", "cioccolata", "latte", "orzo", "ginseng", "infuso", "decaffeinato", "espresso", "macchiato", "vin brulé", "brodo", "mate"]
+    "answers": ["caffè", "tè", "tisana", "camomilla", "cappuccino", {"answer": "cioccolata calda", "aliases": ["cioccolata"]}, "latte", "orzo", "ginseng", "infuso", "decaffeinato", "espresso", {"answer": "caffè macchiato", "aliases": ["macchiato"]}, "vin brulé", "brodo", "mate", "caffellatte", "latte macchiato", "marocchino", {"answer": "mocaccino", "aliases": ["mocha"]}, "caffè americano", "tè verde", "tè nero", "matcha", "tè alla menta", "chai", "cacao", "consommé", "dashi", "punch", "grog", "sidro caldo", "sake", "latte e miele", "golden milk"]
   },
   {
     "id": "oggetto-scuola",
     "question": "Nomina un oggetto che si usa a scuola.",
-    "answers": ["matita", "penna", "quaderno", "libro", "gomma", "righello", "astuccio", "zaino", "temperino", "evidenziatore", "compasso", "squadra", "calcolatrice", "lavagna", "gesso", "colla"]
+    "answers": ["matita", "penna", "quaderno", "libro", "gomma", {"answer": "righello", "aliases": ["riga"]}, "astuccio", "zaino", "temperino", "evidenziatore", "compasso", "squadra", "calcolatrice", "lavagna", "gesso", "colla", "foglio", "diario", "registro", "cartella", "pastelli", "colori", "pennarelli", "penna cancellabile", "cancellino", {"answer": "correttore", "aliases": ["bianchetto"]}, {"answer": "nastro adesivo", "aliases": ["scotch"]}, "forbici", "puntine", "graffette", "pinzatrice", "perforatore", "goniometro", "atlante", "mappamondo", "microscopio", "computer", "tablet", "LIM", "proiettore", "banco"]
   },
   {
     "id": "animale-notturno",
     "question": "Nomina un animale prevalentemente notturno.",
-    "answers": ["gufo", "civetta", "pipistrello", "volpe", "istrice", "tasso", "riccio", "lupo", "procione", "criceto", "geco", "rospo", "falena", "scorpione", "gatto", "lemure"]
+    "answers": ["gufo", "civetta", "pipistrello", "volpe", "istrice", "tasso", "riccio", "lupo", "procione", "criceto", "geco", "rospo", "falena", "scorpione", "gatto", "lemure", "barbagianni", "allocco", "assiolo", "succiacapre", "ratto", "topo", "ghiro", "donnola", "faina", "puzzola", "mustiola", "toporagno", "serval", "ocelot", "leopardo", "iena", "sciacallo", "coyote", "ornitorinco", "kiwi", "kakapo", "ragno", "tarantola", "lucciola", "rana", "tritone", "salamandra"]
   },
   {
     "id": "ingrediente-pizza",
     "question": "Nomina un ingrediente che può finire su una pizza.",
-    "answers": ["mozzarella", "pomodoro", "basilico", "funghi", "prosciutto", "salame", "acciughe", "olive", "carciofi", "salsiccia", "peperoni", "gorgonzola", "parmigiano", "rucola", "cipolla", "mais"]
+    "answers": ["mozzarella", "pomodoro", "basilico", "funghi", "prosciutto", "salame", "acciughe", "olive", "carciofi", "salsiccia", "peperoni", "gorgonzola", "parmigiano", "rucola", "cipolla", "mais", "fior di latte", "olio", "origano", "pepe", "peperoncino", "aglio", "melanzane", "zucchine", "spinaci", "broccoli", "friarielli", "nduja", "speck", "bresaola", "wurstel", "uova", "tonno", "gamberi", "frutti di mare", "capperi", "pomodorini", "pesto", "besciamella", "scamorza", "provola", "pecorino", "ricotta", "stracchino", "taleggio", "miele", "noci", "ananas", "patate", "tartufo"]
   },
   {
     "id": "mezzo-trasporto",
     "question": "Nomina un mezzo di trasporto.",
-    "answers": ["automobile", "treno", "autobus", "aereo", "bicicletta", "moto", "scooter", "nave", "traghetto", "tram", "metropolitana", "monopattino", "camion", "taxi", "elicottero", "funivia"]
+    "answers": [{"answer": "automobile", "aliases": ["auto", "macchina"]}, "treno", {"answer": "autobus", "aliases": ["bus", "pullman"]}, "aereo", {"answer": "bicicletta", "aliases": ["bici"]}, {"answer": "moto", "aliases": ["motocicletta"]}, "scooter", "nave", "traghetto", "tram", {"answer": "metropolitana", "aliases": ["metro"]}, "monopattino", "camion", "taxi", "elicottero", "funivia", "veliero", "barca", "canoa", "kayak", "gondola", "yacht", "nave da crociera", "aliscafo", "hovercraft", "sottomarino", "mongolfiera", "dirigibile", "deltaplano", "parapendio", "risciò", "carrozza", "carro", "slitta", "motoslitta", "quad", "furgone", "pulmino", "funicolare", "teleferica", "ascensore", "scala mobile"]
   },
   {
     "id": "fiore",
     "question": "Nomina un fiore.",
-    "answers": ["rosa", "margherita", "tulipano", "girasole", "orchidea", "giglio", "viola", "geranio", "papavero", "garofano", "azalea", "camelia", "magnolia", "peonia", "iris", "narciso"]
+    "answers": ["rosa", "margherita", "tulipano", "girasole", "orchidea", "giglio", "viola", "geranio", "papavero", "garofano", "azalea", "camelia", "magnolia", "peonia", "iris", "narciso", "bucaneve", "ciclamino", "primula", "violetta", "viola del pensiero", "anemone", "ranuncolo", "fresia", "gladiolo", "dalia", "crisantemo", "aster", "zinnia", "petunia", "surfinia", "begonia", "impatiens", "ibisco", "calla", "nontiscordardimé", "lavanda", "gelsomino", "ginestra", "lupino", "digitale", "aquilegia", "elleboro", "amarillide", "agapanto", "strelitzia", "loto", "ninfea", "fiordaliso", "cosmea", "tagete", "bocca di leone", "malva"]
   },
   {
     "id": "in-giardino",
     "question": "Nomina qualcosa che puoi trovare in un giardino.",
-    "answers": ["albero", "fiore", "siepe", "prato", "panchina", "fontana", "vialetto", "altalena", "scivolo", "vaso", "annaffiatoio", "rastrello", "pala", "insetto", "lumaca", "statua"]
+    "answers": ["albero", "fiore", "siepe", "prato", "panchina", "fontana", "vialetto", "altalena", "scivolo", "vaso", "annaffiatoio", "rastrello", "pala", "insetto", "lumaca", "statua", "cespuglio", "erbaccia", "muschio", "terra", "ghiaia", "sassi", "rocce", "stagno", "laghetto", "gazebo", "pergola", "tavolo", "sedie", "barbecue", "ombrellone", "amaca", "piscina", "tubo", "carriola", "tagliaerba", "uccello", "farfalla", "lucertola", "formica", "ragno", "compost", "concime", "orto"]
   },
   {
     "id": "strumento-medico",
     "question": "Nomina uno strumento usato da un medico.",
-    "answers": ["stetoscopio", "siringa", "termometro", "bisturi", "otoscopio", "martelletto", "cerotto", "garza", "guanti", "pinzetta", "misuratore di pressione", "fonendoscopio", "defibrillatore", "ecografo", "laringoscopio", "benda"]
+    "answers": ["stetoscopio", "siringa", "termometro", "bisturi", "otoscopio", "martelletto", "cerotto", "garza", "guanti", "pinzetta", {"answer": "misuratore di pressione", "aliases": ["sfigmomanometro"]}, "fonendoscopio", "defibrillatore", "ecografo", "laringoscopio", "benda", {"answer": "laccio emostatico", "aliases": ["tourniquet"]}, "abbassalingua", "torcia", {"answer": "pulsiossimetro", "aliases": ["saturometro"]}, "elettrocardiografo", "elettrodi", "forcipe", "pinza emostatica", "porta aghi", "divaricatore", "speculum", "lettino", "bilancia", "metro", "radiografo", "TAC", "risonanza magnetica", "respiratore", {"answer": "aerosol", "aliases": ["nebulizzatore"]}, "gesso", "tutore", "stampelle", "microscopio", "centrifuga", "provette", "tamponi", "ago", "fiala"]
   },
   {
     "id": "in-campeggio",
     "question": "Nomina qualcosa di utile in campeggio.",
-    "answers": ["tenda", "sacco a pelo", "materassino", "torcia", "fornello", "pentolino", "coltello", "bussola", "zaino", "kit di pronto soccorso", "repellente", "amaca", "corda", "accendino", "gavetta"]
+    "answers": ["tenda", "sacco a pelo", "materassino", "torcia", "fornello", "pentolino", "coltello", "bussola", "zaino", "kit di pronto soccorso", "repellente", "amaca", "corda", "accendino", "gavetta", "sedia pieghevole", "tavolino", "cuscino", "cappello", "acqua", "tanica", "cibo", "piatti", "bicchieri", "posate", "tazza", "fiammiferi", "barbecue", "borsa frigo", "power bank", "pannello solare", "caricabatterie", "telone", "telo impermeabile", "picchetti", "martello", "moschettoni", "saponetta", "asciugamano", "carta igienica", "sacchetti", "coltellino svizzero"]
   },
   {
     "id": "cibo-colazione",
-    "question": "Nomina un cibo che mangeresti a colazione.",
-    "answers": ["brioche", "cornetto", "biscotti", "pane", "fette biscottate", "cereali", "yogurt", "marmellata", "miele", "frutta", "torta", "toast", "pancake", "waffle", "burro", "spremuta"]
+    "question": "Nomina qualcosa che mangeresti o berresti a colazione.",
+    "answers": [{"answer": "cornetto", "aliases": ["brioche", "croissant"]}, "biscotti", "pane", "fette biscottate", "cereali", "yogurt", "marmellata", "miele", "frutta", "torta", "toast", "pancake", "waffle", "burro", "spremuta", "latte", "caffè", "cappuccino", "cioccolata", "crema di nocciole", "saccottino", "ciambella", "muffin", "plumcake", "ciambellone", "porridge", "avena", "muesli", "granola", "frullato", "smoothie", "banana", "mela", "uova", "uova strapazzate", "bacon", "avocado toast", "bagel", "french toast"]
   },
   {
     "id": "animale-ali",
     "question": "Nomina un animale con le ali.",
-    "answers": ["aquila", "piccione", "passero", "gabbiano", "pappagallo", "farfalla", "ape", "mosca", "zanzara", "libellula", "pipistrello", "cigno", "airone", "falco", "corvo", "calabrone"]
+    "answers": ["aquila", "piccione", "passero", "gabbiano", "pappagallo", "farfalla", "ape", "mosca", "zanzara", "libellula", "pipistrello", "cigno", "airone", "falco", "corvo", "calabrone", "gallina", "pollo", "anatra", "oca", "tacchino", "struzzo", "emu", "kiwi", "pinguino", "albatros", "pellicano", "poiana", "nibbio", "condor", "avvoltoio", "gufo", "civetta", "colibrì", "rondine", "rondone", "merlo", "canarino", "cinciallegra", "upupa", "martin pescatore", "fagiano", "gru", "fenicottero", "vespa", "moscerino", "scarabeo", "coccinella", "mantide", "grillo", "cavalletta", "falena"]
   },
   {
     "id": "oggetto-tecnologico",
     "question": "Nomina un oggetto tecnologico di uso quotidiano.",
-    "answers": ["smartphone", "computer", "televisore", "tablet", "auricolari", "cuffie", "caricabatterie", "smartwatch", "stampante", "mouse", "tastiera", "router", "console", "fotocamera", "speaker", "chiavetta"]
+    "answers": [{"answer": "smartphone", "aliases": ["cellulare", "telefono"]}, "computer", "televisore", "tablet", "auricolari", "cuffie", "caricabatterie", "smartwatch", "stampante", "mouse", "tastiera", "router", "console", "fotocamera", "speaker", {"answer": "chiavetta USB", "aliases": ["chiavetta", "pennetta"]}, "telecomando", "hard disk", "SSD", "monitor", "webcam", "microfono", "casse", "assistente vocale", "smart TV", "decoder", "drone", "e-reader", "videocamera", "action cam", "smart band", "navigatore GPS", "modem", "ripetitore", "adattatore", "power bank", "spazzolino elettrico", "rasoio elettrico", "robot aspirapolvere", "friggitrice ad aria", "microonde", "macchina del caffè"]
   },
   {
     "id": "ingrediente-dolci",
     "question": "Nomina un ingrediente usato per preparare dolci.",
-    "answers": ["farina", "zucchero", "uova", "burro", "latte", "lievito", "cioccolato", "vaniglia", "cacao", "panna", "miele", "mandorle", "nocciole", "ricotta", "mascarpone", "scorza di limone"]
+    "answers": ["farina", "zucchero", "uova", "burro", "latte", "lievito", "cioccolato", "vaniglia", "cacao", "panna", "miele", "mandorle", "nocciole", "ricotta", "mascarpone", "scorza di limone", "sale", "acqua", "olio", "strutto", "margarina", "amido", {"answer": "fecola di patate", "aliases": ["fecola"]}, "maizena", "farina di riso", "farina di mandorle", "pangrattato", "biscotti", "caffè", "marsala", "rum", "liquore", "limone", "arancia", "cannella", "noce moscata", "chiodi di garofano", "zenzero", "lievito di birra", "bicarbonato", {"answer": "gelatina", "aliases": ["colla di pesce"]}, "agar agar", "frutta", "frutta secca", "pistacchi", "pinoli", "cocco", "gocce di cioccolato", "caramello", "zucchero a velo", "zucchero di canna", "sciroppo"]
   },
   {
     "id": "sotto-letto",
     "question": "Nomina qualcosa che potresti trovare sotto un letto.",
-    "answers": ["polvere", "scatola", "scarpe", "calzino", "gatto", "pallina", "libro", "valigia", "peluche", "coperta", "cassetto", "contenitore", "pantofola", "giocattolo", "ragnatela", "mostro"]
+    "answers": ["polvere", {"answer": "scatola", "aliases": ["scatole"]}, "scarpe", {"answer": "calzino", "aliases": ["calzini", "calzino spaiato"]}, "gatto", "pallina", "libro", "valigia", "peluche", "coperta", "cassetto", "contenitore", {"answer": "pantofola", "aliases": ["pantofole", "ciabatte"]}, "giocattolo", "ragnatela", "mostro", "pallone", "macchinina", "diario", "fumetto", "rivista", "cuscino", "lenzuolo", "piumone", "maglione", "maglietta", "borsa", "zaino", "computer", "telefono", "caricabatterie", "moneta", "soldi", "briciola", "molletta", "pelo", "capelli", "acaro", "ragno", "topo", "cane"]
   },
   {
     "id": "attrezzo-giardinaggio",
     "question": "Nomina un attrezzo da giardinaggio.",
-    "answers": ["rastrello", "pala", "vanga", "annaffiatoio", "forbici", "cesoie", "zappa", "carriola", "guanti", "tagliaerba", "soffiatore", "motosega", "trapiantatore", "tubo", "potatore", "estirpatore"]
+    "answers": ["rastrello", {"answer": "pala", "aliases": ["badile"]}, "vanga", "annaffiatoio", "forbici", "cesoie", "zappa", "carriola", "guanti", {"answer": "tagliaerba", "aliases": ["tosaerba"]}, "soffiatore", "motosega", "trapiantatore", "tubo", "potatore", "estirpatore", "forbici da potatura", "svettatoio", "seghetto", "ascia", "zappetta", "forca", "forcone", "scopa da giardino", "piccone", "mazza", "cazzuola", "sarchiatore", "falcetto", "decespugliatore", "tagliasiepi", "tagliabordi", "arieggiatore", "irrigatore", "nebulizzatore", "pompa", "carrello", "secchio", "setaccio"]
   },
   {
     "id": "pesce",
     "question": "Nomina un tipo di pesce.",
-    "answers": ["salmone", "tonno", "orata", "branzino", "spigola", "trota", "sogliola", "merluzzo", "sardina", "acciuga", "sgombro", "pesce spada", "carpa", "persico", "rombo", "nasello"]
+    "answers": ["salmone", "tonno", "orata", {"answer": "branzino", "aliases": ["spigola"]}, "trota", "sogliola", "merluzzo", "sardina", {"answer": "acciuga", "aliases": ["alice"]}, "sgombro", "pesce spada", "carpa", "persico", "rombo", "nasello", "pesce gatto", "luccio", "lucioperca", "tinca", "cavedano", "alborella", "storione", "aringa", "spratto", "palombo", "gattuccio", "squalo", "cernia", "dentice", "pagro", "pagello", "triglia", "scorfano", "pesce San Pietro", "passera", "platessa", "lampuga", "ricciola", "leccia", "serra", "barracuda", "murena", "ghiozzo", "aguglia", "luvaro", "pesce luna", "pesce pagliaccio", "guppy", "scalare", "pesce rosso", "betta", "corydoras"]
   },
   {
     "id": "in-stazione",
     "question": "Nomina qualcosa che vedi in una stazione ferroviaria.",
-    "answers": ["treno", "binario", "biglietto", "tabellone", "panchina", "orologio", "tornello", "valigia", "viaggiatore", "controllore", "pensilina", "sottopassaggio", "altoparlante", "edicola", "bar", "sala d'attesa"]
+    "answers": ["treno", "binario", "biglietto", "tabellone", "panchina", "orologio", "tornello", "valigia", "viaggiatore", "controllore", "pensilina", "sottopassaggio", "altoparlante", "edicola", "bar", "sala d'attesa", "banchina", "cartello", "segnale", "semaforo", "scambi", "rotaie", "locomotiva", "vagone", "carrozza", "macchinista", "capotreno", "facchino", "polizia ferroviaria", "biglietteria", "distributore automatico", "validatrice", "obliteratrice", "deposito bagagli", "scale mobili", "ascensore", "monitor", "cestino", "lampioni", "bagni", "tabaccaio"]
   },
   {
     "id": "gioiello-accessorio",
     "question": "Nomina un gioiello o un accessorio da indossare.",
-    "answers": ["anello", "collana", "bracciale", "orecchini", "orologio", "spilla", "cintura", "cravatta", "foulard", "cappello", "occhiali", "piercing", "cavigliera", "gemelli", "fermaglio", "diadema"]
+    "answers": [{"answer": "anello", "aliases": ["anelli", "fede", "solitario"]}, {"answer": "collana", "aliases": ["collane", "collier"]}, {"answer": "bracciale", "aliases": ["braccialetto", "braccialetti"]}, {"answer": "orecchini", "aliases": ["orecchino"]}, "orologio", "spilla", {"answer": "cintura", "aliases": ["cinta"]}, "cravatta", "foulard", "cappello", "occhiali", "piercing", "cavigliera", "gemelli", "fermaglio", "diadema", "choker", "sciarpa", "stola", "guanti", "berretto", "basco", "papillon", "fascia", "cerchietto", "molletta", "elastico per capelli", "spillone", "orologio da tasca", "catena", "parure"]
   },
   {
     "id": "materiale-costruzione",
     "question": "Nomina un materiale usato nelle costruzioni.",
-    "answers": ["cemento", "mattoni", "legno", "acciaio", "ferro", "vetro", "pietra", "marmo", "calce", "sabbia", "ghiaia", "intonaco", "piastrelle", "alluminio", "calcestruzzo", "cartongesso"]
+    "answers": ["cemento", "mattoni", "legno", "acciaio", "ferro", "vetro", "pietra", "marmo", "calce", "sabbia", "ghiaia", "intonaco", "piastrelle", "alluminio", {"answer": "calcestruzzo", "aliases": ["cls"]}, "cartongesso", "cemento armato", "laterizio", "blocchi di cemento", "tufo", "granito", "basalto", "travertino", "ardesia", "clinker", "ceramica", "gres", "bitume", "asfalto", "rame", "zinco", "piombo", "ottone", "polistirolo", "lana di roccia", "lana di vetro", "sughero", "fibra di legno", "argilla", "terra cruda", "paglia", "bambù", "canapa", "gesso", "malta", "resina", "silicone", "PVC", "policarbonato", "plexiglass"]
   },
   {
     "id": "in-biblioteca",
     "question": "Nomina qualcosa che trovi in biblioteca.",
-    "answers": ["libro", "scaffale", "tavolo", "sedia", "bibliotecario", "tessera", "catalogo", "computer", "lampada", "rivista", "enciclopedia", "dizionario", "scaletta", "segnalibro", "zaino", "silenzio"]
+    "answers": [{"answer": "libro", "aliases": ["libri"]}, "scaffale", "tavolo", "sedia", "bibliotecario", "tessera", "catalogo", "computer", "lampada", "rivista", "enciclopedia", "dizionario", "scaletta", "segnalibro", "zaino", "silenzio", "romanzi", "fumetti", "manga", "giornali", "quotidiani", "mappe", "atlanti", "manoscritti", "incunaboli", "CD", "DVD", "audiolibri", "ebook", "e-reader", "postazione", "fotocopiatrice", "stampante", "scanner", "divano", "poltrona", "archivio", "schedario", "matita", "penna", "timbro", "ascensore", "studente", "lettore"]
   },
   {
     "id": "animale-bosco",
     "question": "Nomina un animale che può vivere nel bosco.",
-    "answers": ["volpe", "lupo", "cervo", "cinghiale", "capriolo", "scoiattolo", "riccio", "tasso", "istrice", "gufo", "picchio", "daina", "ghiandaia", "salamandra", "martora", "muflone"]
+    "answers": ["volpe", "lupo", "cervo", "cinghiale", "capriolo", "scoiattolo", "riccio", "tasso", "istrice", "gufo", "picchio", {"answer": "daino", "aliases": ["daina"]}, "ghiandaia", "salamandra", "martora", "muflone", "orso", "camoscio", "stambecco", "faina", "donnola", "puzzola", "ermellino", "lepre", "coniglio selvatico", "topo", "ratto", "arvicola", "toporagno", "ghiro", "moscardino", "pipistrello", "allocco", "civetta", "barbagianni", "poiana", "astore", "sparviero", "cincia", "fringuello", "merlo", "tordo", "gallo cedrone", "gallo forcello", "pernice", "lumaca", "ragno", "lucertola", "vipera", "serpente", "biscia", "rana", "rospo", "tritone"]
   },
   {
     "id": "in-cantina",
     "question": "Nomina qualcosa che potresti trovare in cantina.",
-    "answers": ["vino", "bottiglie", "scatoloni", "attrezzi", "bicicletta", "scala", "barattoli", "marmellata", "patate", "cipolle", "legna", "polvere", "ragnatele", "vecchi mobili", "valigie", "conserve"]
+    "answers": ["vino", "bottiglie", "scatoloni", "attrezzi", "bicicletta", "scala", "barattoli", "marmellata", "patate", "cipolle", "legna", "polvere", "ragnatele", "vecchi mobili", "valigie", "conserve", "damigiane", "botti", "tino", "torchio", "tappi", "cavatappi", "cantinetta", "scaffali", "mensole", "frigorifero", "congelatore", "lavatrice", "caldaia", "contatore", "interruttore", "imballaggi", "giornali", "sedie", "tavoli", "sci", "attrezzatura sportiva", "pneumatici", "olio", "aceto", "salumi", "formaggi", "sottaceti", "funghi secchi", "farina", "acqua di riserva"]
   },
   {
     "id": "in-palestra",
     "question": "Nomina un attrezzo che trovi in palestra.",
-    "answers": ["pesi", "manubri", "bilanciere", "tapis roulant", "cyclette", "panca", "tappetino", "corda", "kettlebell", "ellittica", "vogatore", "sbarra", "fitness ball", "elastico", "step", "lat machine"]
+    "answers": ["pesi", "manubri", "bilanciere", "tapis roulant", "cyclette", "panca", "tappetino", "corda", "kettlebell", "ellittica", "vogatore", "sbarra", "fitness ball", {"answer": "elastico", "aliases": ["banda elastica"]}, "step", "lat machine", "panca piana", "panca inclinata", "rack", "power rack", "multipower", "chest press", "leg press", "leg extension", "leg curl", "pec fly", "shoulder press", "cavi", "parallele", "anelli", "sacco da boxe", {"answer": "palla medica", "aliases": ["medicine ball"]}, "slam ball", "bosu", "balance board", {"answer": "ruota addominali", "aliases": ["ab wheel"]}, "dischi", "spin bike", "stepper", "climber", "trampolino"]
   },
   {
     "id": "puo-galleggiare",
     "question": "Nomina un oggetto che può galleggiare sull'acqua.",
-    "answers": ["barca", "ciambella", "materassino", "tappo", "sughero", "legno", "foglia", "pallone", "boa", "salvagente", "paperella", "tronco", "bottiglia", "canotto", "tavola da surf", "giubbotto di salvataggio"]
+    "answers": ["barca", "ciambella", "materassino", "tappo", "sughero", "legno", "foglia", "pallone", "boa", "salvagente", "paperella", "tronco", "bottiglia", "canotto", {"answer": "tavola da surf", "aliases": ["surf"]}, "giubbotto di salvataggio", "zattera", "zattera di salvataggio", "piattaforma", "pontile", "pontone", "camera d'aria", "braccioli", "tavola", "SUP", "kayak", "canoa", "gommone", "pedalò", "bottiglia di plastica", "contenitore", "polistirolo", "plastica", "cartone", "noce di cocco", "cocco", "ghiaccio", "iceberg", "paglia", "piuma", "carta"]
   }
 ]

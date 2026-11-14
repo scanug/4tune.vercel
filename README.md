@@ -35,7 +35,7 @@ Il server è l'unica autorità sul gioco: stanze in memoria, timer dei round, pu
 
 ## Abisso
 
-Il mazzo sta in `server/data/abisso/prompts.json`: ogni domanda ha risposte canoniche ed eventuali alias. Il server normalizza maiuscole, accenti, spazi e punteggiatura e accetta solo risposte presenti nell'elenco. Le sette domande del giorno si scelgono una volta sola e non si ripetono finché il mazzo contiene domande nuove.
+Il mazzo sta in `server/data/abisso/prompts.json`: le 42 domande contengono 1.719 risposte canoniche (da 24 a 54 per domanda) e oltre 100 alias. Il server normalizza maiuscole, accenti, spazi e punteggiatura e accetta solo risposte presenti nell'elenco. Le sette domande del giorno si scelgono una volta sola e non si ripetono finché il mazzo contiene domande nuove.
 
 Il motore ([server/src/abisso/service.js](server/src/abisso/service.js)) conserva la scadenza della domanda: ricaricare o uscire non regala tempo. Le risposte in ogni domanda sono ordinate dalla più prevedibile alla più originale: il classificatore trasforma quest'ordine in una distribuzione iniziale, così anche il primo giocatore ottiene punteggi diversi. La stima equivale a 60 giocatori e viene corretta progressivamente dalle risposte reali del giorno. I punti già assegnati non cambiano quando arrivano nuove risposte. Rotte: `/abisso/today`, `/abisso/start`, `/abisso/answer`, `/abisso/review`, `/abisso/leaderboard` e `/abisso/stats`.
 

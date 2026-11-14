@@ -57,11 +57,16 @@ test('normalizzazione, classificatore e fasce di rarità', () => {
   assert.equal(tierForShare(shares.at(-1)).points, 100);
 });
 
-test('il mazzo reale è valido e contiene 42 domande', () => {
+test('il mazzo reale è valido e contiene 42 domande con un vocabolario ampio', () => {
   const path = fileURLToPath(new URL('../data/abisso/prompts.json', import.meta.url));
   const prompts = loadAbissoPrompts(path);
   assert.equal(prompts.length, 42);
-  assert.ok(prompts.every((prompt) => prompt.answers.length >= 10));
+  assert.ok(prompts.every((prompt) => prompt.answers.length >= 24));
+  const kitchen = prompts.find((prompt) => prompt.id === 'oggetto-cucina');
+  assert.ok(kitchen.answers.some((item) => item.aliases?.includes('frigo')));
+  const fish = prompts.find((prompt) => prompt.id === 'pesce');
+  assert.ok(fish.answers.some((item) => item.aliases?.includes('spigola')));
+  assert.ok(!fish.answers.some((item) => item.answer === 'spigola'));
 });
 
 test('le sette domande sono uguali per tutti, senza risposte o alias esposti', async () => {
