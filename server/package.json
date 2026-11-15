@@ -14,7 +14,8 @@
     "deck": "node scripts/build-anno-deck.mjs",
     "smoke:anno": "node scripts/smoke-anno.mjs",
     "deck:prezzo": "node scripts/build-prezzo-deck.mjs",
-    "smoke:barra": "node scripts/smoke-barra.mjs"
+    "smoke:barra": "node scripts/smoke-barra.mjs",
+    "import:barra": "node scripts/import-barra-top500.mjs"
   },
   "dependencies": {
     "pg": "^8.23.1",

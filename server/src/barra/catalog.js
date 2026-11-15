@@ -8,6 +8,7 @@
 import { randomUUID } from 'node:crypto';
 import { GameError } from '../engine.js';
 import { DEEZER_PREVIEW_MS, parseYouTubeId } from './providers.js';
+import { seedBarraCatalog } from './seed.js';
 
 const SCHEMA = [
   `CREATE TABLE IF NOT EXISTS barra_artists (
@@ -130,6 +131,10 @@ export function createCatalog({ db }) {
 
   async function init() {
     for (const sql of SCHEMA) await q(sql);
+  }
+
+  async function seed(entries) {
+    return seedBarraCatalog(db, entries);
   }
 
   // ---------- gioco ----------
@@ -426,6 +431,7 @@ export function createCatalog({ db }) {
 
   return {
     init,
+    seed,
     listCandidates,
     filterOptions,
     getChallenge,

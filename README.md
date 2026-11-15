@@ -85,6 +85,8 @@ Il gioco gira sul namespace Socket.IO `/barra` con un `BarraRoomManager` ([serve
 
 Il catalogo sta su Postgres, nello stesso database dell'Anno del Giorno; le tabelle `barra_*` le crea il server all'avvio. In locale, senza `DATABASE_URL`, il catalogo è in memoria e si azzera al riavvio. In gioco entrano solo le sfide **verificate e pubblicate** di brani pubblicati, con audio associato e non segnati come non disponibili. Modificare tempi, risposta o varianti di una sfida toglie verifica e pubblicazione.
 
+Il catalogo iniziale `server/data/barra/top500.json` segue la classifica Newsic delle 500 hit italiane 2010-2019, con hit integrative dello stesso decennio se manca un testo sincronizzato utilizzabile. `npm --prefix server run import:barra` recupera i testi sincronizzati da LRCLIB e cerca video YouTube con artista, titolo e durata compatibili, verificando oEmbed prima di creare ogni sfida. Il file viene salvato progressivamente e rilanciare il comando salta i brani già importati. All'avvio il server inserisce le sfide una sola volta, senza sovrascrivere le modifiche successive. I controlli automatici non sostituiscono l'ascolto del frammento nella gestione.
+
 **Gestione** (`/barra/admin`): si entra con il codice `ADMIN_TOKEN` impostato sul server. Senza `ADMIN_TOKEN` la gestione è spenta. Per il primo brano:
 
 1. scheda "Artisti, generi, raccolte": aggiungi artista, genere e, se vuoi, una raccolta;

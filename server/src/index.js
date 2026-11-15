@@ -14,6 +14,7 @@
 //   MUSIXMATCH_API_KEY  facoltativa: ricerca testi nella gestione di Completa la barra
 
 import http from 'node:http';
+import { readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { Server } from 'socket.io';
 
@@ -39,6 +40,7 @@ import { createBarraRoutes } from './barra/http.js';
 const annoDeck = loadDeck(fileURLToPath(new URL('../data/anno/cards.json', import.meta.url)));
 const prezzoDeck = loadPrezzoDeck(fileURLToPath(new URL('../data/prezzo/cards.json', import.meta.url)));
 const abissoPrompts = loadAbissoPrompts(fileURLToPath(new URL('../data/abisso/prompts.json', import.meta.url)));
+const barraSeed = JSON.parse(readFileSync(fileURLToPath(new URL('../data/barra/top500.json', import.meta.url)), 'utf8'));
 
 const port = Number(process.env.PORT || 4000);
 const allowedOrigins = (process.env.CLIENT_ORIGIN || '')
@@ -110,6 +112,7 @@ async function startDaily() {
     await profiles.init();
     const catalog = createCatalog({ db: conn.db });
     await catalog.init();
+    await catalog.seed(barraSeed);
     dailyService = service;
     profileService = profiles;
     abissoService = abisso;
